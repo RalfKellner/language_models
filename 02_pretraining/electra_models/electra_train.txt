@@ -8,3 +8,4 @@
 2024-08-02 09:46:05,802 : INFO : ----------------------------------------------------------------------------------------------------
 2024-08-02 09:46:06,408 : INFO : Starting with training...
 2024-08-02 09:46:06,408 : INFO : Starting to retrieve sequences from database.
+2024-08-02 09:59:22,778 : INFO : Sequences have been retrieved from database.
