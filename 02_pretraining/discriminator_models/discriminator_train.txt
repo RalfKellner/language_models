@@ -1,0 +1,2519 @@
+2024-08-01 09:18:16,136 : INFO : Counting the number of sequences in the database...
+2024-08-01 09:18:37,237 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 09:18:37,238 : INFO : The database includes 4 sheets with the following names and number of sequences:
+2024-08-01 09:18:37,238 : INFO : form_tenk: 33316659
+2024-08-01 09:18:37,238 : INFO : form_eightk: 13139781
+2024-08-01 09:18:37,238 : INFO : earning_calls: 5706841
+2024-08-01 09:18:37,238 : INFO : tr_news: 21717556
+2024-08-01 09:18:37,238 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 09:18:37,773 : INFO : Starting with training...
+2024-08-01 09:18:37,773 : INFO : Starting to retrieve sequences from database.
+2024-08-01 09:26:31,376 : INFO : Sequences have been retrieved from database.
+2024-08-01 09:26:56,324 : INFO : Starting to tokenize the sequences.
+2024-08-01 10:12:55,462 : INFO : Tokenization is finished.
+2024-08-01 10:12:56,122 : INFO : Results after 0.0000% iterations of epoch 1:
+2024-08-01 10:12:56,122 : INFO : Discriminator loss: 0.6880
+2024-08-01 10:12:56,122 : INFO : Gradient norm: 0.9123
+2024-08-01 10:12:56,122 : INFO : Current learning rate: 1.0000000000000001e-07
+2024-08-01 10:12:56,122 : INFO : Accuracy for replacement task: 0.5903
+2024-08-01 10:12:56,122 : INFO : Precision for replacement task: 0.1879
+2024-08-01 10:12:56,122 : INFO : Recall for replacement task: 0.3202
+2024-08-01 10:12:56,122 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:13:14,711 : INFO : Results after 0.3200% iterations of epoch 1:
+2024-08-01 10:13:14,711 : INFO : Discriminator loss: 0.5075
+2024-08-01 10:13:14,711 : INFO : Gradient norm: 0.3600
+2024-08-01 10:13:14,711 : INFO : Current learning rate: 1.0100000000000002e-05
+2024-08-01 10:13:14,711 : INFO : Accuracy for replacement task: 0.8006
+2024-08-01 10:13:14,711 : INFO : Precision for replacement task: 0.0000
+2024-08-01 10:13:14,711 : INFO : Recall for replacement task: 0.0000
+2024-08-01 10:13:14,711 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:13:33,382 : INFO : Results after 0.6400% iterations of epoch 1:
+2024-08-01 10:13:33,382 : INFO : Discriminator loss: 0.4841
+2024-08-01 10:13:33,382 : INFO : Gradient norm: 0.1656
+2024-08-01 10:13:33,382 : INFO : Current learning rate: 2.01e-05
+2024-08-01 10:13:33,382 : INFO : Accuracy for replacement task: 0.8058
+2024-08-01 10:13:33,382 : INFO : Precision for replacement task: 0.0000
+2024-08-01 10:13:33,382 : INFO : Recall for replacement task: 0.0000
+2024-08-01 10:13:33,382 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:13:52,081 : INFO : Results after 0.9600% iterations of epoch 1:
+2024-08-01 10:13:52,081 : INFO : Discriminator loss: 0.2110
+2024-08-01 10:13:52,081 : INFO : Gradient norm: 0.2867
+2024-08-01 10:13:52,081 : INFO : Current learning rate: 3.01e-05
+2024-08-01 10:13:52,081 : INFO : Accuracy for replacement task: 0.9191
+2024-08-01 10:13:52,081 : INFO : Precision for replacement task: 0.7580
+2024-08-01 10:13:52,081 : INFO : Recall for replacement task: 0.8686
+2024-08-01 10:13:52,081 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:14:10,789 : INFO : Results after 1.2800% iterations of epoch 1:
+2024-08-01 10:14:10,789 : INFO : Discriminator loss: 0.1826
+2024-08-01 10:14:10,789 : INFO : Gradient norm: 0.2988
+2024-08-01 10:14:10,789 : INFO : Current learning rate: 4.0100000000000006e-05
+2024-08-01 10:14:10,789 : INFO : Accuracy for replacement task: 0.9304
+2024-08-01 10:14:10,789 : INFO : Precision for replacement task: 0.7996
+2024-08-01 10:14:10,789 : INFO : Recall for replacement task: 0.8630
+2024-08-01 10:14:10,789 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:14:29,509 : INFO : Results after 1.6000% iterations of epoch 1:
+2024-08-01 10:14:29,509 : INFO : Discriminator loss: 0.1536
+2024-08-01 10:14:29,509 : INFO : Gradient norm: 0.1312
+2024-08-01 10:14:29,509 : INFO : Current learning rate: 5.0100000000000005e-05
+2024-08-01 10:14:29,509 : INFO : Accuracy for replacement task: 0.9419
+2024-08-01 10:14:29,509 : INFO : Precision for replacement task: 0.8593
+2024-08-01 10:14:29,509 : INFO : Recall for replacement task: 0.8456
+2024-08-01 10:14:29,509 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:14:48,238 : INFO : Results after 1.9200% iterations of epoch 1:
+2024-08-01 10:14:48,238 : INFO : Discriminator loss: 0.1568
+2024-08-01 10:14:48,238 : INFO : Gradient norm: 0.1600
+2024-08-01 10:14:48,238 : INFO : Current learning rate: 6.0100000000000004e-05
+2024-08-01 10:14:48,238 : INFO : Accuracy for replacement task: 0.9375
+2024-08-01 10:14:48,238 : INFO : Precision for replacement task: 0.8411
+2024-08-01 10:14:48,238 : INFO : Recall for replacement task: 0.8457
+2024-08-01 10:14:48,238 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:15:06,976 : INFO : Results after 2.2400% iterations of epoch 1:
+2024-08-01 10:15:06,976 : INFO : Discriminator loss: 0.1524
+2024-08-01 10:15:06,976 : INFO : Gradient norm: 0.1682
+2024-08-01 10:15:06,976 : INFO : Current learning rate: 7.01e-05
+2024-08-01 10:15:06,976 : INFO : Accuracy for replacement task: 0.9408
+2024-08-01 10:15:06,976 : INFO : Precision for replacement task: 0.8533
+2024-08-01 10:15:06,976 : INFO : Recall for replacement task: 0.8478
+2024-08-01 10:15:06,976 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:15:25,717 : INFO : Results after 2.5600% iterations of epoch 1:
+2024-08-01 10:15:25,718 : INFO : Discriminator loss: 0.1508
+2024-08-01 10:15:25,718 : INFO : Gradient norm: 0.2566
+2024-08-01 10:15:25,718 : INFO : Current learning rate: 8.010000000000001e-05
+2024-08-01 10:15:25,718 : INFO : Accuracy for replacement task: 0.9408
+2024-08-01 10:15:25,718 : INFO : Precision for replacement task: 0.8431
+2024-08-01 10:15:25,718 : INFO : Recall for replacement task: 0.8631
+2024-08-01 10:15:25,718 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:15:44,460 : INFO : Results after 2.8800% iterations of epoch 1:
+2024-08-01 10:15:44,460 : INFO : Discriminator loss: 0.1453
+2024-08-01 10:15:44,460 : INFO : Gradient norm: 0.1171
+2024-08-01 10:15:44,461 : INFO : Current learning rate: 9.010000000000001e-05
+2024-08-01 10:15:44,461 : INFO : Accuracy for replacement task: 0.9425
+2024-08-01 10:15:44,461 : INFO : Precision for replacement task: 0.8589
+2024-08-01 10:15:44,461 : INFO : Recall for replacement task: 0.8448
+2024-08-01 10:15:44,461 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:16:03,183 : INFO : Results after 3.2000% iterations of epoch 1:
+2024-08-01 10:16:03,183 : INFO : Discriminator loss: 0.1561
+2024-08-01 10:16:03,183 : INFO : Gradient norm: 0.4550
+2024-08-01 10:16:03,183 : INFO : Current learning rate: 9.999669421487604e-05
+2024-08-01 10:16:03,184 : INFO : Accuracy for replacement task: 0.9363
+2024-08-01 10:16:03,184 : INFO : Precision for replacement task: 0.8251
+2024-08-01 10:16:03,184 : INFO : Recall for replacement task: 0.8569
+2024-08-01 10:16:03,184 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:16:21,927 : INFO : Results after 3.5200% iterations of epoch 1:
+2024-08-01 10:16:21,927 : INFO : Discriminator loss: 0.1497
+2024-08-01 10:16:21,927 : INFO : Gradient norm: 0.0946
+2024-08-01 10:16:21,927 : INFO : Current learning rate: 9.966611570247934e-05
+2024-08-01 10:16:21,927 : INFO : Accuracy for replacement task: 0.9382
+2024-08-01 10:16:21,927 : INFO : Precision for replacement task: 0.8544
+2024-08-01 10:16:21,927 : INFO : Recall for replacement task: 0.8248
+2024-08-01 10:16:21,928 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:16:40,673 : INFO : Results after 3.8400% iterations of epoch 1:
+2024-08-01 10:16:40,673 : INFO : Discriminator loss: 0.1531
+2024-08-01 10:16:40,673 : INFO : Gradient norm: 0.0839
+2024-08-01 10:16:40,673 : INFO : Current learning rate: 9.933553719008266e-05
+2024-08-01 10:16:40,673 : INFO : Accuracy for replacement task: 0.9367
+2024-08-01 10:16:40,673 : INFO : Precision for replacement task: 0.8532
+2024-08-01 10:16:40,673 : INFO : Recall for replacement task: 0.8247
+2024-08-01 10:16:40,673 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:16:59,418 : INFO : Results after 4.1600% iterations of epoch 1:
+2024-08-01 10:16:59,419 : INFO : Discriminator loss: 0.1380
+2024-08-01 10:16:59,419 : INFO : Gradient norm: 0.1536
+2024-08-01 10:16:59,419 : INFO : Current learning rate: 9.900495867768596e-05
+2024-08-01 10:16:59,419 : INFO : Accuracy for replacement task: 0.9456
+2024-08-01 10:16:59,419 : INFO : Precision for replacement task: 0.8834
+2024-08-01 10:16:59,419 : INFO : Recall for replacement task: 0.8364
+2024-08-01 10:16:59,419 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:17:18,164 : INFO : Results after 4.4800% iterations of epoch 1:
+2024-08-01 10:17:18,164 : INFO : Discriminator loss: 0.1399
+2024-08-01 10:17:18,164 : INFO : Gradient norm: 0.1519
+2024-08-01 10:17:18,165 : INFO : Current learning rate: 9.867438016528926e-05
+2024-08-01 10:17:18,165 : INFO : Accuracy for replacement task: 0.9438
+2024-08-01 10:17:18,165 : INFO : Precision for replacement task: 0.8572
+2024-08-01 10:17:18,165 : INFO : Recall for replacement task: 0.8549
+2024-08-01 10:17:18,165 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:17:36,910 : INFO : Results after 4.8000% iterations of epoch 1:
+2024-08-01 10:17:36,911 : INFO : Discriminator loss: 0.1386
+2024-08-01 10:17:36,911 : INFO : Gradient norm: 0.1153
+2024-08-01 10:17:36,911 : INFO : Current learning rate: 9.834380165289256e-05
+2024-08-01 10:17:36,911 : INFO : Accuracy for replacement task: 0.9447
+2024-08-01 10:17:36,911 : INFO : Precision for replacement task: 0.8691
+2024-08-01 10:17:36,911 : INFO : Recall for replacement task: 0.8484
+2024-08-01 10:17:36,911 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:17:55,660 : INFO : Results after 5.1200% iterations of epoch 1:
+2024-08-01 10:17:55,660 : INFO : Discriminator loss: 0.1400
+2024-08-01 10:17:55,660 : INFO : Gradient norm: 0.0975
+2024-08-01 10:17:55,660 : INFO : Current learning rate: 9.801322314049587e-05
+2024-08-01 10:17:55,660 : INFO : Accuracy for replacement task: 0.9439
+2024-08-01 10:17:55,660 : INFO : Precision for replacement task: 0.8684
+2024-08-01 10:17:55,660 : INFO : Recall for replacement task: 0.8459
+2024-08-01 10:17:55,660 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:18:14,405 : INFO : Results after 5.4400% iterations of epoch 1:
+2024-08-01 10:18:14,405 : INFO : Discriminator loss: 0.1361
+2024-08-01 10:18:14,405 : INFO : Gradient norm: 0.1078
+2024-08-01 10:18:14,405 : INFO : Current learning rate: 9.768264462809917e-05
+2024-08-01 10:18:14,405 : INFO : Accuracy for replacement task: 0.9434
+2024-08-01 10:18:14,405 : INFO : Precision for replacement task: 0.8598
+2024-08-01 10:18:14,405 : INFO : Recall for replacement task: 0.8468
+2024-08-01 10:18:14,405 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:18:33,134 : INFO : Results after 5.7600% iterations of epoch 1:
+2024-08-01 10:18:33,134 : INFO : Discriminator loss: 0.1406
+2024-08-01 10:18:33,134 : INFO : Gradient norm: 0.0970
+2024-08-01 10:18:33,134 : INFO : Current learning rate: 9.735206611570248e-05
+2024-08-01 10:18:33,134 : INFO : Accuracy for replacement task: 0.9425
+2024-08-01 10:18:33,134 : INFO : Precision for replacement task: 0.8708
+2024-08-01 10:18:33,134 : INFO : Recall for replacement task: 0.8324
+2024-08-01 10:18:33,134 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:18:51,854 : INFO : Results after 6.0800% iterations of epoch 1:
+2024-08-01 10:18:51,854 : INFO : Discriminator loss: 0.1518
+2024-08-01 10:18:51,855 : INFO : Gradient norm: 0.1468
+2024-08-01 10:18:51,855 : INFO : Current learning rate: 9.70214876033058e-05
+2024-08-01 10:18:51,855 : INFO : Accuracy for replacement task: 0.9374
+2024-08-01 10:18:51,855 : INFO : Precision for replacement task: 0.8558
+2024-08-01 10:18:51,855 : INFO : Recall for replacement task: 0.8233
+2024-08-01 10:18:51,855 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:19:10,578 : INFO : Results after 6.4000% iterations of epoch 1:
+2024-08-01 10:19:10,578 : INFO : Discriminator loss: 0.1300
+2024-08-01 10:19:10,578 : INFO : Gradient norm: 0.0905
+2024-08-01 10:19:10,578 : INFO : Current learning rate: 9.66909090909091e-05
+2024-08-01 10:19:10,578 : INFO : Accuracy for replacement task: 0.9477
+2024-08-01 10:19:10,578 : INFO : Precision for replacement task: 0.8760
+2024-08-01 10:19:10,578 : INFO : Recall for replacement task: 0.8567
+2024-08-01 10:19:10,578 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:19:29,301 : INFO : Results after 6.7200% iterations of epoch 1:
+2024-08-01 10:19:29,301 : INFO : Discriminator loss: 0.1341
+2024-08-01 10:19:29,301 : INFO : Gradient norm: 0.1462
+2024-08-01 10:19:29,301 : INFO : Current learning rate: 9.63603305785124e-05
+2024-08-01 10:19:29,301 : INFO : Accuracy for replacement task: 0.9453
+2024-08-01 10:19:29,301 : INFO : Precision for replacement task: 0.8657
+2024-08-01 10:19:29,301 : INFO : Recall for replacement task: 0.8590
+2024-08-01 10:19:29,301 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:19:48,025 : INFO : Results after 7.0400% iterations of epoch 1:
+2024-08-01 10:19:48,025 : INFO : Discriminator loss: 0.1257
+2024-08-01 10:19:48,025 : INFO : Gradient norm: 0.2273
+2024-08-01 10:19:48,025 : INFO : Current learning rate: 9.602975206611571e-05
+2024-08-01 10:19:48,025 : INFO : Accuracy for replacement task: 0.9483
+2024-08-01 10:19:48,025 : INFO : Precision for replacement task: 0.8584
+2024-08-01 10:19:48,025 : INFO : Recall for replacement task: 0.8820
+2024-08-01 10:19:48,025 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:20:06,754 : INFO : Results after 7.3600% iterations of epoch 1:
+2024-08-01 10:20:06,754 : INFO : Discriminator loss: 0.1306
+2024-08-01 10:20:06,754 : INFO : Gradient norm: 0.0755
+2024-08-01 10:20:06,754 : INFO : Current learning rate: 9.569917355371901e-05
+2024-08-01 10:20:06,754 : INFO : Accuracy for replacement task: 0.9460
+2024-08-01 10:20:06,754 : INFO : Precision for replacement task: 0.8651
+2024-08-01 10:20:06,754 : INFO : Recall for replacement task: 0.8647
+2024-08-01 10:20:06,754 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:20:25,483 : INFO : Results after 7.6800% iterations of epoch 1:
+2024-08-01 10:20:25,483 : INFO : Discriminator loss: 0.1249
+2024-08-01 10:20:25,483 : INFO : Gradient norm: 0.1726
+2024-08-01 10:20:25,483 : INFO : Current learning rate: 9.536859504132231e-05
+2024-08-01 10:20:25,483 : INFO : Accuracy for replacement task: 0.9500
+2024-08-01 10:20:25,483 : INFO : Precision for replacement task: 0.8698
+2024-08-01 10:20:25,483 : INFO : Recall for replacement task: 0.8765
+2024-08-01 10:20:25,483 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:20:44,211 : INFO : Results after 8.0000% iterations of epoch 1:
+2024-08-01 10:20:44,211 : INFO : Discriminator loss: 0.1219
+2024-08-01 10:20:44,211 : INFO : Gradient norm: 0.1512
+2024-08-01 10:20:44,211 : INFO : Current learning rate: 9.503801652892563e-05
+2024-08-01 10:20:44,211 : INFO : Accuracy for replacement task: 0.9515
+2024-08-01 10:20:44,211 : INFO : Precision for replacement task: 0.8732
+2024-08-01 10:20:44,211 : INFO : Recall for replacement task: 0.8777
+2024-08-01 10:20:44,211 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:21:02,955 : INFO : Results after 8.3200% iterations of epoch 1:
+2024-08-01 10:21:02,955 : INFO : Discriminator loss: 0.1185
+2024-08-01 10:21:02,955 : INFO : Gradient norm: 0.1773
+2024-08-01 10:21:02,956 : INFO : Current learning rate: 9.470743801652893e-05
+2024-08-01 10:21:02,956 : INFO : Accuracy for replacement task: 0.9534
+2024-08-01 10:21:02,956 : INFO : Precision for replacement task: 0.9000
+2024-08-01 10:21:02,956 : INFO : Recall for replacement task: 0.8611
+2024-08-01 10:21:02,956 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:21:21,711 : INFO : Results after 8.6400% iterations of epoch 1:
+2024-08-01 10:21:21,712 : INFO : Discriminator loss: 0.1202
+2024-08-01 10:21:21,712 : INFO : Gradient norm: 0.1512
+2024-08-01 10:21:21,712 : INFO : Current learning rate: 9.437685950413223e-05
+2024-08-01 10:21:21,712 : INFO : Accuracy for replacement task: 0.9513
+2024-08-01 10:21:21,712 : INFO : Precision for replacement task: 0.8889
+2024-08-01 10:21:21,712 : INFO : Recall for replacement task: 0.8667
+2024-08-01 10:21:21,712 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:21:40,460 : INFO : Results after 8.9600% iterations of epoch 1:
+2024-08-01 10:21:40,460 : INFO : Discriminator loss: 0.1264
+2024-08-01 10:21:40,460 : INFO : Gradient norm: 0.1130
+2024-08-01 10:21:40,460 : INFO : Current learning rate: 9.404628099173555e-05
+2024-08-01 10:21:40,460 : INFO : Accuracy for replacement task: 0.9485
+2024-08-01 10:21:40,460 : INFO : Precision for replacement task: 0.8769
+2024-08-01 10:21:40,460 : INFO : Recall for replacement task: 0.8583
+2024-08-01 10:21:40,460 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:21:59,213 : INFO : Results after 9.2800% iterations of epoch 1:
+2024-08-01 10:21:59,213 : INFO : Discriminator loss: 0.1254
+2024-08-01 10:21:59,213 : INFO : Gradient norm: 0.1146
+2024-08-01 10:21:59,213 : INFO : Current learning rate: 9.371570247933885e-05
+2024-08-01 10:21:59,213 : INFO : Accuracy for replacement task: 0.9496
+2024-08-01 10:21:59,213 : INFO : Precision for replacement task: 0.8770
+2024-08-01 10:21:59,213 : INFO : Recall for replacement task: 0.8644
+2024-08-01 10:21:59,213 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:22:17,941 : INFO : Results after 9.6000% iterations of epoch 1:
+2024-08-01 10:22:17,941 : INFO : Discriminator loss: 0.1102
+2024-08-01 10:22:17,941 : INFO : Gradient norm: 0.2207
+2024-08-01 10:22:17,941 : INFO : Current learning rate: 9.338512396694215e-05
+2024-08-01 10:22:17,941 : INFO : Accuracy for replacement task: 0.9566
+2024-08-01 10:22:17,941 : INFO : Precision for replacement task: 0.9105
+2024-08-01 10:22:17,942 : INFO : Recall for replacement task: 0.8652
+2024-08-01 10:22:17,942 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:22:36,674 : INFO : Results after 9.9200% iterations of epoch 1:
+2024-08-01 10:22:36,674 : INFO : Discriminator loss: 0.1219
+2024-08-01 10:22:36,674 : INFO : Gradient norm: 0.1756
+2024-08-01 10:22:36,674 : INFO : Current learning rate: 9.305454545454546e-05
+2024-08-01 10:22:36,674 : INFO : Accuracy for replacement task: 0.9513
+2024-08-01 10:22:36,674 : INFO : Precision for replacement task: 0.8673
+2024-08-01 10:22:36,674 : INFO : Recall for replacement task: 0.8853
+2024-08-01 10:22:36,674 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:22:55,405 : INFO : Results after 10.2400% iterations of epoch 1:
+2024-08-01 10:22:55,406 : INFO : Discriminator loss: 0.1206
+2024-08-01 10:22:55,406 : INFO : Gradient norm: 0.1319
+2024-08-01 10:22:55,406 : INFO : Current learning rate: 9.272396694214876e-05
+2024-08-01 10:22:55,406 : INFO : Accuracy for replacement task: 0.9508
+2024-08-01 10:22:55,406 : INFO : Precision for replacement task: 0.8774
+2024-08-01 10:22:55,406 : INFO : Recall for replacement task: 0.8747
+2024-08-01 10:22:55,406 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:23:14,143 : INFO : Results after 10.5600% iterations of epoch 1:
+2024-08-01 10:23:14,143 : INFO : Discriminator loss: 0.1231
+2024-08-01 10:23:14,143 : INFO : Gradient norm: 0.0894
+2024-08-01 10:23:14,143 : INFO : Current learning rate: 9.239338842975208e-05
+2024-08-01 10:23:14,143 : INFO : Accuracy for replacement task: 0.9512
+2024-08-01 10:23:14,143 : INFO : Precision for replacement task: 0.8858
+2024-08-01 10:23:14,143 : INFO : Recall for replacement task: 0.8671
+2024-08-01 10:23:14,143 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:23:32,888 : INFO : Results after 10.8800% iterations of epoch 1:
+2024-08-01 10:23:32,888 : INFO : Discriminator loss: 0.1253
+2024-08-01 10:23:32,888 : INFO : Gradient norm: 0.0941
+2024-08-01 10:23:32,888 : INFO : Current learning rate: 9.206280991735538e-05
+2024-08-01 10:23:32,888 : INFO : Accuracy for replacement task: 0.9491
+2024-08-01 10:23:32,888 : INFO : Precision for replacement task: 0.8838
+2024-08-01 10:23:32,888 : INFO : Recall for replacement task: 0.8587
+2024-08-01 10:23:32,888 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:23:51,633 : INFO : Results after 11.2000% iterations of epoch 1:
+2024-08-01 10:23:51,633 : INFO : Discriminator loss: 0.1230
+2024-08-01 10:23:51,633 : INFO : Gradient norm: 0.1144
+2024-08-01 10:23:51,633 : INFO : Current learning rate: 9.173223140495868e-05
+2024-08-01 10:23:51,633 : INFO : Accuracy for replacement task: 0.9508
+2024-08-01 10:23:51,633 : INFO : Precision for replacement task: 0.8949
+2024-08-01 10:23:51,633 : INFO : Recall for replacement task: 0.8564
+2024-08-01 10:23:51,633 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:24:10,386 : INFO : Results after 11.5200% iterations of epoch 1:
+2024-08-01 10:24:10,386 : INFO : Discriminator loss: 0.1216
+2024-08-01 10:24:10,386 : INFO : Gradient norm: 0.0936
+2024-08-01 10:24:10,386 : INFO : Current learning rate: 9.140165289256198e-05
+2024-08-01 10:24:10,386 : INFO : Accuracy for replacement task: 0.9510
+2024-08-01 10:24:10,386 : INFO : Precision for replacement task: 0.8799
+2024-08-01 10:24:10,386 : INFO : Recall for replacement task: 0.8668
+2024-08-01 10:24:10,386 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:24:29,137 : INFO : Results after 11.8400% iterations of epoch 1:
+2024-08-01 10:24:29,137 : INFO : Discriminator loss: 0.1227
+2024-08-01 10:24:29,137 : INFO : Gradient norm: 0.1457
+2024-08-01 10:24:29,137 : INFO : Current learning rate: 9.107107438016529e-05
+2024-08-01 10:24:29,137 : INFO : Accuracy for replacement task: 0.9511
+2024-08-01 10:24:29,137 : INFO : Precision for replacement task: 0.8954
+2024-08-01 10:24:29,137 : INFO : Recall for replacement task: 0.8536
+2024-08-01 10:24:29,137 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:24:47,890 : INFO : Results after 12.1600% iterations of epoch 1:
+2024-08-01 10:24:47,890 : INFO : Discriminator loss: 0.1221
+2024-08-01 10:24:47,890 : INFO : Gradient norm: 0.1173
+2024-08-01 10:24:47,890 : INFO : Current learning rate: 9.07404958677686e-05
+2024-08-01 10:24:47,890 : INFO : Accuracy for replacement task: 0.9515
+2024-08-01 10:24:47,890 : INFO : Precision for replacement task: 0.8927
+2024-08-01 10:24:47,890 : INFO : Recall for replacement task: 0.8604
+2024-08-01 10:24:47,890 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:25:06,786 : INFO : Results after 12.4800% iterations of epoch 1:
+2024-08-01 10:25:06,786 : INFO : Discriminator loss: 0.1119
+2024-08-01 10:25:06,786 : INFO : Gradient norm: 0.1061
+2024-08-01 10:25:06,786 : INFO : Current learning rate: 9.04099173553719e-05
+2024-08-01 10:25:06,786 : INFO : Accuracy for replacement task: 0.9551
+2024-08-01 10:25:06,786 : INFO : Precision for replacement task: 0.8907
+2024-08-01 10:25:06,787 : INFO : Recall for replacement task: 0.8805
+2024-08-01 10:25:06,787 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:25:25,523 : INFO : Results after 12.8000% iterations of epoch 1:
+2024-08-01 10:25:25,523 : INFO : Discriminator loss: 0.1263
+2024-08-01 10:25:25,523 : INFO : Gradient norm: 0.1013
+2024-08-01 10:25:25,523 : INFO : Current learning rate: 9.007933884297522e-05
+2024-08-01 10:25:25,523 : INFO : Accuracy for replacement task: 0.9496
+2024-08-01 10:25:25,523 : INFO : Precision for replacement task: 0.8843
+2024-08-01 10:25:25,523 : INFO : Recall for replacement task: 0.8603
+2024-08-01 10:25:25,523 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:25:44,256 : INFO : Results after 13.1200% iterations of epoch 1:
+2024-08-01 10:25:44,256 : INFO : Discriminator loss: 0.1185
+2024-08-01 10:25:44,256 : INFO : Gradient norm: 0.0903
+2024-08-01 10:25:44,256 : INFO : Current learning rate: 8.974876033057852e-05
+2024-08-01 10:25:44,256 : INFO : Accuracy for replacement task: 0.9531
+2024-08-01 10:25:44,256 : INFO : Precision for replacement task: 0.8913
+2024-08-01 10:25:44,256 : INFO : Recall for replacement task: 0.8602
+2024-08-01 10:25:44,256 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:26:02,992 : INFO : Results after 13.4400% iterations of epoch 1:
+2024-08-01 10:26:02,992 : INFO : Discriminator loss: 0.1195
+2024-08-01 10:26:02,992 : INFO : Gradient norm: 0.1030
+2024-08-01 10:26:02,992 : INFO : Current learning rate: 8.941818181818182e-05
+2024-08-01 10:26:02,992 : INFO : Accuracy for replacement task: 0.9514
+2024-08-01 10:26:02,992 : INFO : Precision for replacement task: 0.8951
+2024-08-01 10:26:02,992 : INFO : Recall for replacement task: 0.8540
+2024-08-01 10:26:02,992 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:26:21,725 : INFO : Results after 13.7600% iterations of epoch 1:
+2024-08-01 10:26:21,725 : INFO : Discriminator loss: 0.1246
+2024-08-01 10:26:21,725 : INFO : Gradient norm: 0.1128
+2024-08-01 10:26:21,725 : INFO : Current learning rate: 8.908760330578513e-05
+2024-08-01 10:26:21,725 : INFO : Accuracy for replacement task: 0.9491
+2024-08-01 10:26:21,725 : INFO : Precision for replacement task: 0.8874
+2024-08-01 10:26:21,725 : INFO : Recall for replacement task: 0.8515
+2024-08-01 10:26:21,725 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:26:40,455 : INFO : Results after 14.0800% iterations of epoch 1:
+2024-08-01 10:26:40,456 : INFO : Discriminator loss: 0.1193
+2024-08-01 10:26:40,456 : INFO : Gradient norm: 0.1248
+2024-08-01 10:26:40,456 : INFO : Current learning rate: 8.875702479338843e-05
+2024-08-01 10:26:40,456 : INFO : Accuracy for replacement task: 0.9529
+2024-08-01 10:26:40,456 : INFO : Precision for replacement task: 0.8914
+2024-08-01 10:26:40,456 : INFO : Recall for replacement task: 0.8654
+2024-08-01 10:26:40,456 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:26:59,188 : INFO : Results after 14.4000% iterations of epoch 1:
+2024-08-01 10:26:59,188 : INFO : Discriminator loss: 0.1219
+2024-08-01 10:26:59,188 : INFO : Gradient norm: 0.0868
+2024-08-01 10:26:59,188 : INFO : Current learning rate: 8.842644628099173e-05
+2024-08-01 10:26:59,188 : INFO : Accuracy for replacement task: 0.9523
+2024-08-01 10:26:59,188 : INFO : Precision for replacement task: 0.8920
+2024-08-01 10:26:59,188 : INFO : Recall for replacement task: 0.8692
+2024-08-01 10:26:59,188 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:27:17,920 : INFO : Results after 14.7200% iterations of epoch 1:
+2024-08-01 10:27:17,920 : INFO : Discriminator loss: 0.1158
+2024-08-01 10:27:17,920 : INFO : Gradient norm: 0.0869
+2024-08-01 10:27:17,920 : INFO : Current learning rate: 8.809586776859505e-05
+2024-08-01 10:27:17,920 : INFO : Accuracy for replacement task: 0.9557
+2024-08-01 10:27:17,920 : INFO : Precision for replacement task: 0.9014
+2024-08-01 10:27:17,920 : INFO : Recall for replacement task: 0.8753
+2024-08-01 10:27:17,920 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:27:36,657 : INFO : Results after 15.0400% iterations of epoch 1:
+2024-08-01 10:27:36,657 : INFO : Discriminator loss: 0.1177
+2024-08-01 10:27:36,657 : INFO : Gradient norm: 0.1302
+2024-08-01 10:27:36,657 : INFO : Current learning rate: 8.776528925619835e-05
+2024-08-01 10:27:36,657 : INFO : Accuracy for replacement task: 0.9527
+2024-08-01 10:27:36,657 : INFO : Precision for replacement task: 0.8905
+2024-08-01 10:27:36,657 : INFO : Recall for replacement task: 0.8658
+2024-08-01 10:27:36,657 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:27:55,395 : INFO : Results after 15.3600% iterations of epoch 1:
+2024-08-01 10:27:55,395 : INFO : Discriminator loss: 0.1122
+2024-08-01 10:27:55,396 : INFO : Gradient norm: 0.1113
+2024-08-01 10:27:55,396 : INFO : Current learning rate: 8.743471074380167e-05
+2024-08-01 10:27:55,396 : INFO : Accuracy for replacement task: 0.9556
+2024-08-01 10:27:55,396 : INFO : Precision for replacement task: 0.8942
+2024-08-01 10:27:55,396 : INFO : Recall for replacement task: 0.8844
+2024-08-01 10:27:55,396 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:28:14,142 : INFO : Results after 15.6800% iterations of epoch 1:
+2024-08-01 10:28:14,142 : INFO : Discriminator loss: 0.1138
+2024-08-01 10:28:14,142 : INFO : Gradient norm: 0.0984
+2024-08-01 10:28:14,142 : INFO : Current learning rate: 8.710413223140497e-05
+2024-08-01 10:28:14,142 : INFO : Accuracy for replacement task: 0.9554
+2024-08-01 10:28:14,142 : INFO : Precision for replacement task: 0.8923
+2024-08-01 10:28:14,142 : INFO : Recall for replacement task: 0.8729
+2024-08-01 10:28:14,142 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:28:32,872 : INFO : Results after 16.0000% iterations of epoch 1:
+2024-08-01 10:28:32,872 : INFO : Discriminator loss: 0.1143
+2024-08-01 10:28:32,872 : INFO : Gradient norm: 0.1764
+2024-08-01 10:28:32,872 : INFO : Current learning rate: 8.677355371900827e-05
+2024-08-01 10:28:32,872 : INFO : Accuracy for replacement task: 0.9551
+2024-08-01 10:28:32,872 : INFO : Precision for replacement task: 0.8835
+2024-08-01 10:28:32,872 : INFO : Recall for replacement task: 0.8913
+2024-08-01 10:28:32,872 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:28:51,605 : INFO : Results after 16.3200% iterations of epoch 1:
+2024-08-01 10:28:51,606 : INFO : Discriminator loss: 0.1131
+2024-08-01 10:28:51,606 : INFO : Gradient norm: 0.1249
+2024-08-01 10:28:51,606 : INFO : Current learning rate: 8.644297520661157e-05
+2024-08-01 10:28:51,606 : INFO : Accuracy for replacement task: 0.9565
+2024-08-01 10:28:51,606 : INFO : Precision for replacement task: 0.9029
+2024-08-01 10:28:51,606 : INFO : Recall for replacement task: 0.8768
+2024-08-01 10:28:51,606 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:29:10,335 : INFO : Results after 16.6400% iterations of epoch 1:
+2024-08-01 10:29:10,336 : INFO : Discriminator loss: 0.1152
+2024-08-01 10:29:10,336 : INFO : Gradient norm: 0.1299
+2024-08-01 10:29:10,336 : INFO : Current learning rate: 8.611239669421488e-05
+2024-08-01 10:29:10,336 : INFO : Accuracy for replacement task: 0.9542
+2024-08-01 10:29:10,336 : INFO : Precision for replacement task: 0.9024
+2024-08-01 10:29:10,336 : INFO : Recall for replacement task: 0.8689
+2024-08-01 10:29:10,336 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:29:29,065 : INFO : Results after 16.9600% iterations of epoch 1:
+2024-08-01 10:29:29,065 : INFO : Discriminator loss: 0.1054
+2024-08-01 10:29:29,065 : INFO : Gradient norm: 0.1024
+2024-08-01 10:29:29,065 : INFO : Current learning rate: 8.578181818181819e-05
+2024-08-01 10:29:29,065 : INFO : Accuracy for replacement task: 0.9594
+2024-08-01 10:29:29,065 : INFO : Precision for replacement task: 0.9064
+2024-08-01 10:29:29,065 : INFO : Recall for replacement task: 0.8899
+2024-08-01 10:29:29,065 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:29:47,808 : INFO : Results after 17.2800% iterations of epoch 1:
+2024-08-01 10:29:47,808 : INFO : Discriminator loss: 0.1116
+2024-08-01 10:29:47,808 : INFO : Gradient norm: 0.0948
+2024-08-01 10:29:47,808 : INFO : Current learning rate: 8.54512396694215e-05
+2024-08-01 10:29:47,808 : INFO : Accuracy for replacement task: 0.9555
+2024-08-01 10:29:47,808 : INFO : Precision for replacement task: 0.8994
+2024-08-01 10:29:47,808 : INFO : Recall for replacement task: 0.8745
+2024-08-01 10:29:47,808 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:30:06,562 : INFO : Results after 17.6000% iterations of epoch 1:
+2024-08-01 10:30:06,563 : INFO : Discriminator loss: 0.1125
+2024-08-01 10:30:06,563 : INFO : Gradient norm: 0.1652
+2024-08-01 10:30:06,563 : INFO : Current learning rate: 8.51206611570248e-05
+2024-08-01 10:30:06,563 : INFO : Accuracy for replacement task: 0.9566
+2024-08-01 10:30:06,563 : INFO : Precision for replacement task: 0.9019
+2024-08-01 10:30:06,563 : INFO : Recall for replacement task: 0.8771
+2024-08-01 10:30:06,563 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:30:25,294 : INFO : Results after 17.9200% iterations of epoch 1:
+2024-08-01 10:30:25,294 : INFO : Discriminator loss: 0.1078
+2024-08-01 10:30:25,294 : INFO : Gradient norm: 0.1123
+2024-08-01 10:30:25,294 : INFO : Current learning rate: 8.47900826446281e-05
+2024-08-01 10:30:25,294 : INFO : Accuracy for replacement task: 0.9572
+2024-08-01 10:30:25,294 : INFO : Precision for replacement task: 0.9045
+2024-08-01 10:30:25,294 : INFO : Recall for replacement task: 0.8768
+2024-08-01 10:30:25,295 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:30:44,024 : INFO : Results after 18.2400% iterations of epoch 1:
+2024-08-01 10:30:44,024 : INFO : Discriminator loss: 0.1013
+2024-08-01 10:30:44,024 : INFO : Gradient norm: 0.1118
+2024-08-01 10:30:44,024 : INFO : Current learning rate: 8.44595041322314e-05
+2024-08-01 10:30:44,024 : INFO : Accuracy for replacement task: 0.9606
+2024-08-01 10:30:44,024 : INFO : Precision for replacement task: 0.9084
+2024-08-01 10:30:44,024 : INFO : Recall for replacement task: 0.8858
+2024-08-01 10:30:44,024 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:31:02,750 : INFO : Results after 18.5600% iterations of epoch 1:
+2024-08-01 10:31:02,750 : INFO : Discriminator loss: 0.1020
+2024-08-01 10:31:02,750 : INFO : Gradient norm: 0.1485
+2024-08-01 10:31:02,750 : INFO : Current learning rate: 8.412892561983472e-05
+2024-08-01 10:31:02,750 : INFO : Accuracy for replacement task: 0.9614
+2024-08-01 10:31:02,751 : INFO : Precision for replacement task: 0.9053
+2024-08-01 10:31:02,751 : INFO : Recall for replacement task: 0.9002
+2024-08-01 10:31:02,751 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:31:21,476 : INFO : Results after 18.8800% iterations of epoch 1:
+2024-08-01 10:31:21,476 : INFO : Discriminator loss: 0.1102
+2024-08-01 10:31:21,476 : INFO : Gradient norm: 0.1018
+2024-08-01 10:31:21,476 : INFO : Current learning rate: 8.379834710743802e-05
+2024-08-01 10:31:21,476 : INFO : Accuracy for replacement task: 0.9580
+2024-08-01 10:31:21,476 : INFO : Precision for replacement task: 0.9045
+2024-08-01 10:31:21,476 : INFO : Recall for replacement task: 0.8799
+2024-08-01 10:31:21,476 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:31:40,217 : INFO : Results after 19.2000% iterations of epoch 1:
+2024-08-01 10:31:40,218 : INFO : Discriminator loss: 0.1072
+2024-08-01 10:31:40,218 : INFO : Gradient norm: 0.1021
+2024-08-01 10:31:40,218 : INFO : Current learning rate: 8.346776859504132e-05
+2024-08-01 10:31:40,218 : INFO : Accuracy for replacement task: 0.9579
+2024-08-01 10:31:40,218 : INFO : Precision for replacement task: 0.9065
+2024-08-01 10:31:40,218 : INFO : Recall for replacement task: 0.8784
+2024-08-01 10:31:40,218 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:31:58,973 : INFO : Results after 19.5200% iterations of epoch 1:
+2024-08-01 10:31:58,974 : INFO : Discriminator loss: 0.1030
+2024-08-01 10:31:58,974 : INFO : Gradient norm: 0.1302
+2024-08-01 10:31:58,974 : INFO : Current learning rate: 8.313719008264464e-05
+2024-08-01 10:31:58,974 : INFO : Accuracy for replacement task: 0.9599
+2024-08-01 10:31:58,974 : INFO : Precision for replacement task: 0.9127
+2024-08-01 10:31:58,974 : INFO : Recall for replacement task: 0.8775
+2024-08-01 10:31:58,974 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:32:17,741 : INFO : Results after 19.8400% iterations of epoch 1:
+2024-08-01 10:32:17,742 : INFO : Discriminator loss: 0.0989
+2024-08-01 10:32:17,742 : INFO : Gradient norm: 0.1035
+2024-08-01 10:32:17,742 : INFO : Current learning rate: 8.280661157024794e-05
+2024-08-01 10:32:17,742 : INFO : Accuracy for replacement task: 0.9617
+2024-08-01 10:32:17,742 : INFO : Precision for replacement task: 0.9144
+2024-08-01 10:32:17,742 : INFO : Recall for replacement task: 0.8916
+2024-08-01 10:32:17,742 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:32:36,508 : INFO : Results after 20.1600% iterations of epoch 1:
+2024-08-01 10:32:36,508 : INFO : Discriminator loss: 0.1055
+2024-08-01 10:32:36,508 : INFO : Gradient norm: 0.1425
+2024-08-01 10:32:36,508 : INFO : Current learning rate: 8.247603305785124e-05
+2024-08-01 10:32:36,508 : INFO : Accuracy for replacement task: 0.9589
+2024-08-01 10:32:36,508 : INFO : Precision for replacement task: 0.9006
+2024-08-01 10:32:36,508 : INFO : Recall for replacement task: 0.8909
+2024-08-01 10:32:36,508 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:32:55,381 : INFO : Results after 20.4800% iterations of epoch 1:
+2024-08-01 10:32:55,382 : INFO : Discriminator loss: 0.0993
+2024-08-01 10:32:55,382 : INFO : Gradient norm: 0.1368
+2024-08-01 10:32:55,382 : INFO : Current learning rate: 8.214545454545455e-05
+2024-08-01 10:32:55,382 : INFO : Accuracy for replacement task: 0.9612
+2024-08-01 10:32:55,382 : INFO : Precision for replacement task: 0.9101
+2024-08-01 10:32:55,382 : INFO : Recall for replacement task: 0.8923
+2024-08-01 10:32:55,382 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:33:14,130 : INFO : Results after 20.8000% iterations of epoch 1:
+2024-08-01 10:33:14,130 : INFO : Discriminator loss: 0.1086
+2024-08-01 10:33:14,131 : INFO : Gradient norm: 0.1976
+2024-08-01 10:33:14,131 : INFO : Current learning rate: 8.181487603305785e-05
+2024-08-01 10:33:14,131 : INFO : Accuracy for replacement task: 0.9569
+2024-08-01 10:33:14,131 : INFO : Precision for replacement task: 0.9009
+2024-08-01 10:33:14,131 : INFO : Recall for replacement task: 0.8839
+2024-08-01 10:33:14,131 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:33:32,976 : INFO : Results after 21.1200% iterations of epoch 1:
+2024-08-01 10:33:32,976 : INFO : Discriminator loss: 0.1064
+2024-08-01 10:33:32,976 : INFO : Gradient norm: 0.1806
+2024-08-01 10:33:32,976 : INFO : Current learning rate: 8.148429752066115e-05
+2024-08-01 10:33:32,976 : INFO : Accuracy for replacement task: 0.9569
+2024-08-01 10:33:32,976 : INFO : Precision for replacement task: 0.9102
+2024-08-01 10:33:32,977 : INFO : Recall for replacement task: 0.8665
+2024-08-01 10:33:32,977 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:33:51,723 : INFO : Results after 21.4400% iterations of epoch 1:
+2024-08-01 10:33:51,724 : INFO : Discriminator loss: 0.0980
+2024-08-01 10:33:51,724 : INFO : Gradient norm: 0.1149
+2024-08-01 10:33:51,724 : INFO : Current learning rate: 8.115371900826447e-05
+2024-08-01 10:33:51,724 : INFO : Accuracy for replacement task: 0.9616
+2024-08-01 10:33:51,724 : INFO : Precision for replacement task: 0.9017
+2024-08-01 10:33:51,724 : INFO : Recall for replacement task: 0.9085
+2024-08-01 10:33:51,724 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:34:10,565 : INFO : Results after 21.7600% iterations of epoch 1:
+2024-08-01 10:34:10,565 : INFO : Discriminator loss: 0.0967
+2024-08-01 10:34:10,565 : INFO : Gradient norm: 0.1044
+2024-08-01 10:34:10,565 : INFO : Current learning rate: 8.082314049586778e-05
+2024-08-01 10:34:10,565 : INFO : Accuracy for replacement task: 0.9647
+2024-08-01 10:34:10,565 : INFO : Precision for replacement task: 0.9188
+2024-08-01 10:34:10,565 : INFO : Recall for replacement task: 0.8983
+2024-08-01 10:34:10,565 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:34:29,310 : INFO : Results after 22.0800% iterations of epoch 1:
+2024-08-01 10:34:29,310 : INFO : Discriminator loss: 0.0956
+2024-08-01 10:34:29,310 : INFO : Gradient norm: 0.0914
+2024-08-01 10:34:29,310 : INFO : Current learning rate: 8.049256198347109e-05
+2024-08-01 10:34:29,310 : INFO : Accuracy for replacement task: 0.9631
+2024-08-01 10:34:29,310 : INFO : Precision for replacement task: 0.9177
+2024-08-01 10:34:29,310 : INFO : Recall for replacement task: 0.8952
+2024-08-01 10:34:29,310 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:34:48,054 : INFO : Results after 22.4000% iterations of epoch 1:
+2024-08-01 10:34:48,055 : INFO : Discriminator loss: 0.1073
+2024-08-01 10:34:48,055 : INFO : Gradient norm: 0.1686
+2024-08-01 10:34:48,055 : INFO : Current learning rate: 8.016198347107439e-05
+2024-08-01 10:34:48,055 : INFO : Accuracy for replacement task: 0.9579
+2024-08-01 10:34:48,055 : INFO : Precision for replacement task: 0.9186
+2024-08-01 10:34:48,055 : INFO : Recall for replacement task: 0.8685
+2024-08-01 10:34:48,055 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:35:06,796 : INFO : Results after 22.7200% iterations of epoch 1:
+2024-08-01 10:35:06,796 : INFO : Discriminator loss: 0.1010
+2024-08-01 10:35:06,796 : INFO : Gradient norm: 0.1560
+2024-08-01 10:35:06,796 : INFO : Current learning rate: 7.983140495867769e-05
+2024-08-01 10:35:06,796 : INFO : Accuracy for replacement task: 0.9615
+2024-08-01 10:35:06,796 : INFO : Precision for replacement task: 0.9053
+2024-08-01 10:35:06,796 : INFO : Recall for replacement task: 0.8986
+2024-08-01 10:35:06,796 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:35:25,539 : INFO : Results after 23.0400% iterations of epoch 1:
+2024-08-01 10:35:25,539 : INFO : Discriminator loss: 0.1005
+2024-08-01 10:35:25,539 : INFO : Gradient norm: 0.1161
+2024-08-01 10:35:25,539 : INFO : Current learning rate: 7.950082644628099e-05
+2024-08-01 10:35:25,539 : INFO : Accuracy for replacement task: 0.9620
+2024-08-01 10:35:25,539 : INFO : Precision for replacement task: 0.9197
+2024-08-01 10:35:25,539 : INFO : Recall for replacement task: 0.8843
+2024-08-01 10:35:25,539 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:35:44,280 : INFO : Results after 23.3600% iterations of epoch 1:
+2024-08-01 10:35:44,280 : INFO : Discriminator loss: 0.1048
+2024-08-01 10:35:44,280 : INFO : Gradient norm: 0.1495
+2024-08-01 10:35:44,280 : INFO : Current learning rate: 7.91702479338843e-05
+2024-08-01 10:35:44,280 : INFO : Accuracy for replacement task: 0.9603
+2024-08-01 10:35:44,280 : INFO : Precision for replacement task: 0.9135
+2024-08-01 10:35:44,280 : INFO : Recall for replacement task: 0.8831
+2024-08-01 10:35:44,280 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:36:03,018 : INFO : Results after 23.6800% iterations of epoch 1:
+2024-08-01 10:36:03,018 : INFO : Discriminator loss: 0.0956
+2024-08-01 10:36:03,018 : INFO : Gradient norm: 0.1880
+2024-08-01 10:36:03,018 : INFO : Current learning rate: 7.883966942148761e-05
+2024-08-01 10:36:03,018 : INFO : Accuracy for replacement task: 0.9635
+2024-08-01 10:36:03,018 : INFO : Precision for replacement task: 0.9139
+2024-08-01 10:36:03,018 : INFO : Recall for replacement task: 0.9057
+2024-08-01 10:36:03,018 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:36:21,758 : INFO : Results after 24.0000% iterations of epoch 1:
+2024-08-01 10:36:21,758 : INFO : Discriminator loss: 0.0931
+2024-08-01 10:36:21,758 : INFO : Gradient norm: 0.1332
+2024-08-01 10:36:21,758 : INFO : Current learning rate: 7.850909090909091e-05
+2024-08-01 10:36:21,758 : INFO : Accuracy for replacement task: 0.9633
+2024-08-01 10:36:21,758 : INFO : Precision for replacement task: 0.9192
+2024-08-01 10:36:21,758 : INFO : Recall for replacement task: 0.8896
+2024-08-01 10:36:21,758 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:36:40,500 : INFO : Results after 24.3200% iterations of epoch 1:
+2024-08-01 10:36:40,500 : INFO : Discriminator loss: 0.1048
+2024-08-01 10:36:40,500 : INFO : Gradient norm: 0.1040
+2024-08-01 10:36:40,500 : INFO : Current learning rate: 7.817851239669422e-05
+2024-08-01 10:36:40,500 : INFO : Accuracy for replacement task: 0.9595
+2024-08-01 10:36:40,500 : INFO : Precision for replacement task: 0.9088
+2024-08-01 10:36:40,500 : INFO : Recall for replacement task: 0.8864
+2024-08-01 10:36:40,500 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:36:59,235 : INFO : Results after 24.6400% iterations of epoch 1:
+2024-08-01 10:36:59,236 : INFO : Discriminator loss: 0.0973
+2024-08-01 10:36:59,236 : INFO : Gradient norm: 0.1300
+2024-08-01 10:36:59,236 : INFO : Current learning rate: 7.784793388429752e-05
+2024-08-01 10:36:59,236 : INFO : Accuracy for replacement task: 0.9633
+2024-08-01 10:36:59,236 : INFO : Precision for replacement task: 0.9190
+2024-08-01 10:36:59,236 : INFO : Recall for replacement task: 0.8973
+2024-08-01 10:36:59,236 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:37:17,980 : INFO : Results after 24.9600% iterations of epoch 1:
+2024-08-01 10:37:17,980 : INFO : Discriminator loss: 0.0875
+2024-08-01 10:37:17,980 : INFO : Gradient norm: 0.1048
+2024-08-01 10:37:17,980 : INFO : Current learning rate: 7.751735537190083e-05
+2024-08-01 10:37:17,980 : INFO : Accuracy for replacement task: 0.9670
+2024-08-01 10:37:17,980 : INFO : Precision for replacement task: 0.9293
+2024-08-01 10:37:17,980 : INFO : Recall for replacement task: 0.8996
+2024-08-01 10:37:17,980 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:37:36,755 : INFO : Results after 25.2800% iterations of epoch 1:
+2024-08-01 10:37:36,756 : INFO : Discriminator loss: 0.0936
+2024-08-01 10:37:36,756 : INFO : Gradient norm: 0.1172
+2024-08-01 10:37:36,756 : INFO : Current learning rate: 7.718677685950414e-05
+2024-08-01 10:37:36,756 : INFO : Accuracy for replacement task: 0.9640
+2024-08-01 10:37:36,756 : INFO : Precision for replacement task: 0.9204
+2024-08-01 10:37:36,756 : INFO : Recall for replacement task: 0.8954
+2024-08-01 10:37:36,756 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:37:55,499 : INFO : Results after 25.6000% iterations of epoch 1:
+2024-08-01 10:37:55,500 : INFO : Discriminator loss: 0.0981
+2024-08-01 10:37:55,500 : INFO : Gradient norm: 0.1202
+2024-08-01 10:37:55,500 : INFO : Current learning rate: 7.685619834710744e-05
+2024-08-01 10:37:55,500 : INFO : Accuracy for replacement task: 0.9625
+2024-08-01 10:37:55,500 : INFO : Precision for replacement task: 0.9194
+2024-08-01 10:37:55,500 : INFO : Recall for replacement task: 0.8903
+2024-08-01 10:37:55,500 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:38:14,242 : INFO : Results after 25.9200% iterations of epoch 1:
+2024-08-01 10:38:14,243 : INFO : Discriminator loss: 0.0916
+2024-08-01 10:38:14,243 : INFO : Gradient norm: 0.1236
+2024-08-01 10:38:14,243 : INFO : Current learning rate: 7.652561983471074e-05
+2024-08-01 10:38:14,243 : INFO : Accuracy for replacement task: 0.9657
+2024-08-01 10:38:14,243 : INFO : Precision for replacement task: 0.9214
+2024-08-01 10:38:14,243 : INFO : Recall for replacement task: 0.9034
+2024-08-01 10:38:14,243 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:38:33,015 : INFO : Results after 26.2400% iterations of epoch 1:
+2024-08-01 10:38:33,015 : INFO : Discriminator loss: 0.0907
+2024-08-01 10:38:33,015 : INFO : Gradient norm: 0.1039
+2024-08-01 10:38:33,015 : INFO : Current learning rate: 7.619504132231406e-05
+2024-08-01 10:38:33,015 : INFO : Accuracy for replacement task: 0.9642
+2024-08-01 10:38:33,015 : INFO : Precision for replacement task: 0.9182
+2024-08-01 10:38:33,015 : INFO : Recall for replacement task: 0.9017
+2024-08-01 10:38:33,015 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:38:51,772 : INFO : Results after 26.5600% iterations of epoch 1:
+2024-08-01 10:38:51,772 : INFO : Discriminator loss: 0.0983
+2024-08-01 10:38:51,772 : INFO : Gradient norm: 0.1368
+2024-08-01 10:38:51,772 : INFO : Current learning rate: 7.586446280991736e-05
+2024-08-01 10:38:51,772 : INFO : Accuracy for replacement task: 0.9617
+2024-08-01 10:38:51,772 : INFO : Precision for replacement task: 0.9135
+2024-08-01 10:38:51,772 : INFO : Recall for replacement task: 0.8903
+2024-08-01 10:38:51,772 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:39:10,518 : INFO : Results after 26.8800% iterations of epoch 1:
+2024-08-01 10:39:10,518 : INFO : Discriminator loss: 0.0960
+2024-08-01 10:39:10,518 : INFO : Gradient norm: 0.1112
+2024-08-01 10:39:10,518 : INFO : Current learning rate: 7.553388429752066e-05
+2024-08-01 10:39:10,518 : INFO : Accuracy for replacement task: 0.9649
+2024-08-01 10:39:10,518 : INFO : Precision for replacement task: 0.9276
+2024-08-01 10:39:10,518 : INFO : Recall for replacement task: 0.8964
+2024-08-01 10:39:10,518 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:39:29,264 : INFO : Results after 27.2000% iterations of epoch 1:
+2024-08-01 10:39:29,264 : INFO : Discriminator loss: 0.0908
+2024-08-01 10:39:29,264 : INFO : Gradient norm: 0.1162
+2024-08-01 10:39:29,264 : INFO : Current learning rate: 7.520330578512397e-05
+2024-08-01 10:39:29,264 : INFO : Accuracy for replacement task: 0.9640
+2024-08-01 10:39:29,264 : INFO : Precision for replacement task: 0.9215
+2024-08-01 10:39:29,264 : INFO : Recall for replacement task: 0.8950
+2024-08-01 10:39:29,264 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:39:48,010 : INFO : Results after 27.5200% iterations of epoch 1:
+2024-08-01 10:39:48,010 : INFO : Discriminator loss: 0.0868
+2024-08-01 10:39:48,010 : INFO : Gradient norm: 0.1002
+2024-08-01 10:39:48,010 : INFO : Current learning rate: 7.487272727272727e-05
+2024-08-01 10:39:48,010 : INFO : Accuracy for replacement task: 0.9676
+2024-08-01 10:39:48,010 : INFO : Precision for replacement task: 0.9331
+2024-08-01 10:39:48,010 : INFO : Recall for replacement task: 0.9020
+2024-08-01 10:39:48,010 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:40:06,753 : INFO : Results after 27.8400% iterations of epoch 1:
+2024-08-01 10:40:06,753 : INFO : Discriminator loss: 0.0907
+2024-08-01 10:40:06,753 : INFO : Gradient norm: 0.1662
+2024-08-01 10:40:06,753 : INFO : Current learning rate: 7.454214876033057e-05
+2024-08-01 10:40:06,753 : INFO : Accuracy for replacement task: 0.9654
+2024-08-01 10:40:06,753 : INFO : Precision for replacement task: 0.9321
+2024-08-01 10:40:06,753 : INFO : Recall for replacement task: 0.8913
+2024-08-01 10:40:06,753 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:40:25,494 : INFO : Results after 28.1600% iterations of epoch 1:
+2024-08-01 10:40:25,495 : INFO : Discriminator loss: 0.0852
+2024-08-01 10:40:25,495 : INFO : Gradient norm: 0.1119
+2024-08-01 10:40:25,495 : INFO : Current learning rate: 7.421157024793389e-05
+2024-08-01 10:40:25,495 : INFO : Accuracy for replacement task: 0.9679
+2024-08-01 10:40:25,495 : INFO : Precision for replacement task: 0.9305
+2024-08-01 10:40:25,495 : INFO : Recall for replacement task: 0.9048
+2024-08-01 10:40:25,495 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:40:44,236 : INFO : Results after 28.4800% iterations of epoch 1:
+2024-08-01 10:40:44,236 : INFO : Discriminator loss: 0.0974
+2024-08-01 10:40:44,236 : INFO : Gradient norm: 0.1094
+2024-08-01 10:40:44,236 : INFO : Current learning rate: 7.38809917355372e-05
+2024-08-01 10:40:44,236 : INFO : Accuracy for replacement task: 0.9636
+2024-08-01 10:40:44,236 : INFO : Precision for replacement task: 0.9261
+2024-08-01 10:40:44,236 : INFO : Recall for replacement task: 0.8864
+2024-08-01 10:40:44,236 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:41:03,140 : INFO : Results after 28.8000% iterations of epoch 1:
+2024-08-01 10:41:03,140 : INFO : Discriminator loss: 0.0942
+2024-08-01 10:41:03,140 : INFO : Gradient norm: 0.1025
+2024-08-01 10:41:03,140 : INFO : Current learning rate: 7.35504132231405e-05
+2024-08-01 10:41:03,140 : INFO : Accuracy for replacement task: 0.9660
+2024-08-01 10:41:03,140 : INFO : Precision for replacement task: 0.9234
+2024-08-01 10:41:03,140 : INFO : Recall for replacement task: 0.9033
+2024-08-01 10:41:03,140 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:41:21,889 : INFO : Results after 29.1200% iterations of epoch 1:
+2024-08-01 10:41:21,889 : INFO : Discriminator loss: 0.0922
+2024-08-01 10:41:21,889 : INFO : Gradient norm: 0.1460
+2024-08-01 10:41:21,890 : INFO : Current learning rate: 7.321983471074381e-05
+2024-08-01 10:41:21,890 : INFO : Accuracy for replacement task: 0.9645
+2024-08-01 10:41:21,890 : INFO : Precision for replacement task: 0.9174
+2024-08-01 10:41:21,890 : INFO : Recall for replacement task: 0.9026
+2024-08-01 10:41:21,890 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:41:40,639 : INFO : Results after 29.4400% iterations of epoch 1:
+2024-08-01 10:41:40,639 : INFO : Discriminator loss: 0.0866
+2024-08-01 10:41:40,639 : INFO : Gradient norm: 0.1074
+2024-08-01 10:41:40,639 : INFO : Current learning rate: 7.288925619834711e-05
+2024-08-01 10:41:40,639 : INFO : Accuracy for replacement task: 0.9667
+2024-08-01 10:41:40,639 : INFO : Precision for replacement task: 0.9242
+2024-08-01 10:41:40,639 : INFO : Recall for replacement task: 0.9034
+2024-08-01 10:41:40,639 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:41:59,392 : INFO : Results after 29.7600% iterations of epoch 1:
+2024-08-01 10:41:59,392 : INFO : Discriminator loss: 0.0967
+2024-08-01 10:41:59,392 : INFO : Gradient norm: 0.1418
+2024-08-01 10:41:59,392 : INFO : Current learning rate: 7.255867768595041e-05
+2024-08-01 10:41:59,392 : INFO : Accuracy for replacement task: 0.9619
+2024-08-01 10:41:59,392 : INFO : Precision for replacement task: 0.9093
+2024-08-01 10:41:59,392 : INFO : Recall for replacement task: 0.8955
+2024-08-01 10:41:59,392 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:42:18,145 : INFO : Results after 30.0800% iterations of epoch 1:
+2024-08-01 10:42:18,145 : INFO : Discriminator loss: 0.0947
+2024-08-01 10:42:18,145 : INFO : Gradient norm: 0.1288
+2024-08-01 10:42:18,145 : INFO : Current learning rate: 7.222809917355371e-05
+2024-08-01 10:42:18,145 : INFO : Accuracy for replacement task: 0.9642
+2024-08-01 10:42:18,145 : INFO : Precision for replacement task: 0.9169
+2024-08-01 10:42:18,146 : INFO : Recall for replacement task: 0.8980
+2024-08-01 10:42:18,146 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:42:36,896 : INFO : Results after 30.4000% iterations of epoch 1:
+2024-08-01 10:42:36,896 : INFO : Discriminator loss: 0.0860
+2024-08-01 10:42:36,896 : INFO : Gradient norm: 0.1444
+2024-08-01 10:42:36,897 : INFO : Current learning rate: 7.189752066115703e-05
+2024-08-01 10:42:36,897 : INFO : Accuracy for replacement task: 0.9674
+2024-08-01 10:42:36,897 : INFO : Precision for replacement task: 0.9358
+2024-08-01 10:42:36,897 : INFO : Recall for replacement task: 0.8979
+2024-08-01 10:42:36,897 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:42:55,642 : INFO : Results after 30.7200% iterations of epoch 1:
+2024-08-01 10:42:55,642 : INFO : Discriminator loss: 0.0832
+2024-08-01 10:42:55,642 : INFO : Gradient norm: 0.1007
+2024-08-01 10:42:55,642 : INFO : Current learning rate: 7.156694214876033e-05
+2024-08-01 10:42:55,642 : INFO : Accuracy for replacement task: 0.9679
+2024-08-01 10:42:55,642 : INFO : Precision for replacement task: 0.9297
+2024-08-01 10:42:55,642 : INFO : Recall for replacement task: 0.9042
+2024-08-01 10:42:55,642 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:43:14,391 : INFO : Results after 31.0400% iterations of epoch 1:
+2024-08-01 10:43:14,391 : INFO : Discriminator loss: 0.0811
+2024-08-01 10:43:14,391 : INFO : Gradient norm: 0.1556
+2024-08-01 10:43:14,391 : INFO : Current learning rate: 7.123636363636364e-05
+2024-08-01 10:43:14,391 : INFO : Accuracy for replacement task: 0.9704
+2024-08-01 10:43:14,391 : INFO : Precision for replacement task: 0.9269
+2024-08-01 10:43:14,391 : INFO : Recall for replacement task: 0.9213
+2024-08-01 10:43:14,391 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:43:33,144 : INFO : Results after 31.3600% iterations of epoch 1:
+2024-08-01 10:43:33,144 : INFO : Discriminator loss: 0.0876
+2024-08-01 10:43:33,144 : INFO : Gradient norm: 0.2056
+2024-08-01 10:43:33,144 : INFO : Current learning rate: 7.090578512396695e-05
+2024-08-01 10:43:33,144 : INFO : Accuracy for replacement task: 0.9665
+2024-08-01 10:43:33,145 : INFO : Precision for replacement task: 0.9385
+2024-08-01 10:43:33,145 : INFO : Recall for replacement task: 0.8935
+2024-08-01 10:43:33,145 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:43:51,896 : INFO : Results after 31.6800% iterations of epoch 1:
+2024-08-01 10:43:51,896 : INFO : Discriminator loss: 0.0861
+2024-08-01 10:43:51,896 : INFO : Gradient norm: 0.1336
+2024-08-01 10:43:51,896 : INFO : Current learning rate: 7.057520661157025e-05
+2024-08-01 10:43:51,896 : INFO : Accuracy for replacement task: 0.9674
+2024-08-01 10:43:51,896 : INFO : Precision for replacement task: 0.9244
+2024-08-01 10:43:51,896 : INFO : Recall for replacement task: 0.9110
+2024-08-01 10:43:51,896 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:44:10,646 : INFO : Results after 32.0000% iterations of epoch 1:
+2024-08-01 10:44:10,646 : INFO : Discriminator loss: 0.0879
+2024-08-01 10:44:10,646 : INFO : Gradient norm: 0.1123
+2024-08-01 10:44:10,646 : INFO : Current learning rate: 7.024462809917356e-05
+2024-08-01 10:44:10,646 : INFO : Accuracy for replacement task: 0.9672
+2024-08-01 10:44:10,646 : INFO : Precision for replacement task: 0.9279
+2024-08-01 10:44:10,646 : INFO : Recall for replacement task: 0.9068
+2024-08-01 10:44:10,646 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:44:29,398 : INFO : Results after 32.3200% iterations of epoch 1:
+2024-08-01 10:44:29,398 : INFO : Discriminator loss: 0.0788
+2024-08-01 10:44:29,398 : INFO : Gradient norm: 0.1108
+2024-08-01 10:44:29,398 : INFO : Current learning rate: 6.991404958677686e-05
+2024-08-01 10:44:29,398 : INFO : Accuracy for replacement task: 0.9703
+2024-08-01 10:44:29,398 : INFO : Precision for replacement task: 0.9388
+2024-08-01 10:44:29,398 : INFO : Recall for replacement task: 0.9071
+2024-08-01 10:44:29,398 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:44:48,148 : INFO : Results after 32.6400% iterations of epoch 1:
+2024-08-01 10:44:48,149 : INFO : Discriminator loss: 0.0864
+2024-08-01 10:44:48,149 : INFO : Gradient norm: 0.1221
+2024-08-01 10:44:48,149 : INFO : Current learning rate: 6.958347107438018e-05
+2024-08-01 10:44:48,149 : INFO : Accuracy for replacement task: 0.9679
+2024-08-01 10:44:48,149 : INFO : Precision for replacement task: 0.9287
+2024-08-01 10:44:48,149 : INFO : Recall for replacement task: 0.9078
+2024-08-01 10:44:48,149 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:45:06,904 : INFO : Results after 32.9600% iterations of epoch 1:
+2024-08-01 10:45:06,904 : INFO : Discriminator loss: 0.0773
+2024-08-01 10:45:06,904 : INFO : Gradient norm: 0.1003
+2024-08-01 10:45:06,904 : INFO : Current learning rate: 6.925289256198348e-05
+2024-08-01 10:45:06,904 : INFO : Accuracy for replacement task: 0.9714
+2024-08-01 10:45:06,904 : INFO : Precision for replacement task: 0.9420
+2024-08-01 10:45:06,904 : INFO : Recall for replacement task: 0.9134
+2024-08-01 10:45:06,904 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:45:25,658 : INFO : Results after 33.2800% iterations of epoch 1:
+2024-08-01 10:45:25,658 : INFO : Discriminator loss: 0.0841
+2024-08-01 10:45:25,658 : INFO : Gradient norm: 0.1055
+2024-08-01 10:45:25,658 : INFO : Current learning rate: 6.892231404958678e-05
+2024-08-01 10:45:25,658 : INFO : Accuracy for replacement task: 0.9693
+2024-08-01 10:45:25,658 : INFO : Precision for replacement task: 0.9297
+2024-08-01 10:45:25,658 : INFO : Recall for replacement task: 0.9127
+2024-08-01 10:45:25,658 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:45:44,409 : INFO : Results after 33.6000% iterations of epoch 1:
+2024-08-01 10:45:44,410 : INFO : Discriminator loss: 0.0799
+2024-08-01 10:45:44,410 : INFO : Gradient norm: 0.1223
+2024-08-01 10:45:44,410 : INFO : Current learning rate: 6.859173553719008e-05
+2024-08-01 10:45:44,410 : INFO : Accuracy for replacement task: 0.9697
+2024-08-01 10:45:44,410 : INFO : Precision for replacement task: 0.9387
+2024-08-01 10:45:44,410 : INFO : Recall for replacement task: 0.9068
+2024-08-01 10:45:44,410 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:46:03,163 : INFO : Results after 33.9200% iterations of epoch 1:
+2024-08-01 10:46:03,163 : INFO : Discriminator loss: 0.0859
+2024-08-01 10:46:03,163 : INFO : Gradient norm: 0.1517
+2024-08-01 10:46:03,163 : INFO : Current learning rate: 6.826115702479338e-05
+2024-08-01 10:46:03,163 : INFO : Accuracy for replacement task: 0.9689
+2024-08-01 10:46:03,163 : INFO : Precision for replacement task: 0.9419
+2024-08-01 10:46:03,163 : INFO : Recall for replacement task: 0.8993
+2024-08-01 10:46:03,163 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:46:21,923 : INFO : Results after 34.2400% iterations of epoch 1:
+2024-08-01 10:46:21,923 : INFO : Discriminator loss: 0.0831
+2024-08-01 10:46:21,923 : INFO : Gradient norm: 0.1115
+2024-08-01 10:46:21,923 : INFO : Current learning rate: 6.793057851239669e-05
+2024-08-01 10:46:21,923 : INFO : Accuracy for replacement task: 0.9688
+2024-08-01 10:46:21,923 : INFO : Precision for replacement task: 0.9366
+2024-08-01 10:46:21,923 : INFO : Recall for replacement task: 0.9012
+2024-08-01 10:46:21,923 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:46:40,704 : INFO : Results after 34.5600% iterations of epoch 1:
+2024-08-01 10:46:40,704 : INFO : Discriminator loss: 0.0830
+2024-08-01 10:46:40,704 : INFO : Gradient norm: 0.1087
+2024-08-01 10:46:40,704 : INFO : Current learning rate: 6.76e-05
+2024-08-01 10:46:40,705 : INFO : Accuracy for replacement task: 0.9693
+2024-08-01 10:46:40,705 : INFO : Precision for replacement task: 0.9346
+2024-08-01 10:46:40,705 : INFO : Recall for replacement task: 0.9094
+2024-08-01 10:46:40,705 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:46:59,462 : INFO : Results after 34.8800% iterations of epoch 1:
+2024-08-01 10:46:59,462 : INFO : Discriminator loss: 0.0867
+2024-08-01 10:46:59,462 : INFO : Gradient norm: 0.1391
+2024-08-01 10:46:59,462 : INFO : Current learning rate: 6.72694214876033e-05
+2024-08-01 10:46:59,462 : INFO : Accuracy for replacement task: 0.9675
+2024-08-01 10:46:59,462 : INFO : Precision for replacement task: 0.9262
+2024-08-01 10:46:59,462 : INFO : Recall for replacement task: 0.9072
+2024-08-01 10:46:59,462 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:47:18,218 : INFO : Results after 35.2000% iterations of epoch 1:
+2024-08-01 10:47:18,218 : INFO : Discriminator loss: 0.0847
+2024-08-01 10:47:18,218 : INFO : Gradient norm: 0.1311
+2024-08-01 10:47:18,218 : INFO : Current learning rate: 6.693884297520662e-05
+2024-08-01 10:47:18,218 : INFO : Accuracy for replacement task: 0.9678
+2024-08-01 10:47:18,218 : INFO : Precision for replacement task: 0.9286
+2024-08-01 10:47:18,218 : INFO : Recall for replacement task: 0.9033
+2024-08-01 10:47:18,218 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:47:36,973 : INFO : Results after 35.5200% iterations of epoch 1:
+2024-08-01 10:47:36,974 : INFO : Discriminator loss: 0.0848
+2024-08-01 10:47:36,974 : INFO : Gradient norm: 0.1450
+2024-08-01 10:47:36,974 : INFO : Current learning rate: 6.660826446280992e-05
+2024-08-01 10:47:36,974 : INFO : Accuracy for replacement task: 0.9684
+2024-08-01 10:47:36,974 : INFO : Precision for replacement task: 0.9277
+2024-08-01 10:47:36,974 : INFO : Recall for replacement task: 0.9090
+2024-08-01 10:47:36,974 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:47:55,766 : INFO : Results after 35.8400% iterations of epoch 1:
+2024-08-01 10:47:55,767 : INFO : Discriminator loss: 0.0829
+2024-08-01 10:47:55,767 : INFO : Gradient norm: 0.1430
+2024-08-01 10:47:55,767 : INFO : Current learning rate: 6.627768595041323e-05
+2024-08-01 10:47:55,767 : INFO : Accuracy for replacement task: 0.9685
+2024-08-01 10:47:55,767 : INFO : Precision for replacement task: 0.9373
+2024-08-01 10:47:55,767 : INFO : Recall for replacement task: 0.9029
+2024-08-01 10:47:55,767 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:48:14,526 : INFO : Results after 36.1600% iterations of epoch 1:
+2024-08-01 10:48:14,526 : INFO : Discriminator loss: 0.0822
+2024-08-01 10:48:14,527 : INFO : Gradient norm: 0.1222
+2024-08-01 10:48:14,527 : INFO : Current learning rate: 6.594710743801653e-05
+2024-08-01 10:48:14,527 : INFO : Accuracy for replacement task: 0.9691
+2024-08-01 10:48:14,527 : INFO : Precision for replacement task: 0.9329
+2024-08-01 10:48:14,527 : INFO : Recall for replacement task: 0.9078
+2024-08-01 10:48:14,527 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:48:33,327 : INFO : Results after 36.4800% iterations of epoch 1:
+2024-08-01 10:48:33,327 : INFO : Discriminator loss: 0.0831
+2024-08-01 10:48:33,327 : INFO : Gradient norm: 0.1214
+2024-08-01 10:48:33,327 : INFO : Current learning rate: 6.561652892561983e-05
+2024-08-01 10:48:33,327 : INFO : Accuracy for replacement task: 0.9699
+2024-08-01 10:48:33,327 : INFO : Precision for replacement task: 0.9330
+2024-08-01 10:48:33,327 : INFO : Recall for replacement task: 0.9134
+2024-08-01 10:48:33,327 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:48:52,085 : INFO : Results after 36.8000% iterations of epoch 1:
+2024-08-01 10:48:52,085 : INFO : Discriminator loss: 0.0805
+2024-08-01 10:48:52,085 : INFO : Gradient norm: 0.1403
+2024-08-01 10:48:52,085 : INFO : Current learning rate: 6.528595041322313e-05
+2024-08-01 10:48:52,085 : INFO : Accuracy for replacement task: 0.9692
+2024-08-01 10:48:52,085 : INFO : Precision for replacement task: 0.9374
+2024-08-01 10:48:52,085 : INFO : Recall for replacement task: 0.9061
+2024-08-01 10:48:52,085 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:49:10,843 : INFO : Results after 37.1200% iterations of epoch 1:
+2024-08-01 10:49:10,843 : INFO : Discriminator loss: 0.0781
+2024-08-01 10:49:10,843 : INFO : Gradient norm: 0.1365
+2024-08-01 10:49:10,843 : INFO : Current learning rate: 6.495537190082645e-05
+2024-08-01 10:49:10,843 : INFO : Accuracy for replacement task: 0.9713
+2024-08-01 10:49:10,843 : INFO : Precision for replacement task: 0.9351
+2024-08-01 10:49:10,843 : INFO : Recall for replacement task: 0.9211
+2024-08-01 10:49:10,843 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:49:29,598 : INFO : Results after 37.4400% iterations of epoch 1:
+2024-08-01 10:49:29,599 : INFO : Discriminator loss: 0.0734
+2024-08-01 10:49:29,599 : INFO : Gradient norm: 0.1041
+2024-08-01 10:49:29,599 : INFO : Current learning rate: 6.462479338842975e-05
+2024-08-01 10:49:29,599 : INFO : Accuracy for replacement task: 0.9728
+2024-08-01 10:49:29,599 : INFO : Precision for replacement task: 0.9442
+2024-08-01 10:49:29,599 : INFO : Recall for replacement task: 0.9207
+2024-08-01 10:49:29,599 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:49:48,353 : INFO : Results after 37.7600% iterations of epoch 1:
+2024-08-01 10:49:48,353 : INFO : Discriminator loss: 0.0744
+2024-08-01 10:49:48,353 : INFO : Gradient norm: 0.1389
+2024-08-01 10:49:48,353 : INFO : Current learning rate: 6.429421487603307e-05
+2024-08-01 10:49:48,353 : INFO : Accuracy for replacement task: 0.9726
+2024-08-01 10:49:48,353 : INFO : Precision for replacement task: 0.9423
+2024-08-01 10:49:48,353 : INFO : Recall for replacement task: 0.9157
+2024-08-01 10:49:48,353 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:50:07,115 : INFO : Results after 38.0800% iterations of epoch 1:
+2024-08-01 10:50:07,116 : INFO : Discriminator loss: 0.0777
+2024-08-01 10:50:07,116 : INFO : Gradient norm: 0.1262
+2024-08-01 10:50:07,116 : INFO : Current learning rate: 6.396363636363637e-05
+2024-08-01 10:50:07,116 : INFO : Accuracy for replacement task: 0.9716
+2024-08-01 10:50:07,116 : INFO : Precision for replacement task: 0.9439
+2024-08-01 10:50:07,116 : INFO : Recall for replacement task: 0.9128
+2024-08-01 10:50:07,116 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:50:25,870 : INFO : Results after 38.4000% iterations of epoch 1:
+2024-08-01 10:50:25,870 : INFO : Discriminator loss: 0.0806
+2024-08-01 10:50:25,870 : INFO : Gradient norm: 0.1143
+2024-08-01 10:50:25,870 : INFO : Current learning rate: 6.363305785123967e-05
+2024-08-01 10:50:25,870 : INFO : Accuracy for replacement task: 0.9700
+2024-08-01 10:50:25,870 : INFO : Precision for replacement task: 0.9386
+2024-08-01 10:50:25,870 : INFO : Recall for replacement task: 0.9115
+2024-08-01 10:50:25,870 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:50:44,624 : INFO : Results after 38.7200% iterations of epoch 1:
+2024-08-01 10:50:44,624 : INFO : Discriminator loss: 0.0714
+2024-08-01 10:50:44,624 : INFO : Gradient norm: 0.1069
+2024-08-01 10:50:44,624 : INFO : Current learning rate: 6.330247933884298e-05
+2024-08-01 10:50:44,624 : INFO : Accuracy for replacement task: 0.9723
+2024-08-01 10:50:44,624 : INFO : Precision for replacement task: 0.9430
+2024-08-01 10:50:44,624 : INFO : Recall for replacement task: 0.9148
+2024-08-01 10:50:44,624 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:51:03,380 : INFO : Results after 39.0400% iterations of epoch 1:
+2024-08-01 10:51:03,380 : INFO : Discriminator loss: 0.0769
+2024-08-01 10:51:03,380 : INFO : Gradient norm: 0.1182
+2024-08-01 10:51:03,380 : INFO : Current learning rate: 6.297190082644628e-05
+2024-08-01 10:51:03,380 : INFO : Accuracy for replacement task: 0.9704
+2024-08-01 10:51:03,381 : INFO : Precision for replacement task: 0.9387
+2024-08-01 10:51:03,381 : INFO : Recall for replacement task: 0.9132
+2024-08-01 10:51:03,381 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:51:22,133 : INFO : Results after 39.3600% iterations of epoch 1:
+2024-08-01 10:51:22,133 : INFO : Discriminator loss: 0.0832
+2024-08-01 10:51:22,134 : INFO : Gradient norm: 0.1239
+2024-08-01 10:51:22,134 : INFO : Current learning rate: 6.26413223140496e-05
+2024-08-01 10:51:22,134 : INFO : Accuracy for replacement task: 0.9683
+2024-08-01 10:51:22,134 : INFO : Precision for replacement task: 0.9394
+2024-08-01 10:51:22,134 : INFO : Recall for replacement task: 0.8996
+2024-08-01 10:51:22,134 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:51:40,887 : INFO : Results after 39.6800% iterations of epoch 1:
+2024-08-01 10:51:40,887 : INFO : Discriminator loss: 0.0708
+2024-08-01 10:51:40,887 : INFO : Gradient norm: 0.1145
+2024-08-01 10:51:40,887 : INFO : Current learning rate: 6.23107438016529e-05
+2024-08-01 10:51:40,887 : INFO : Accuracy for replacement task: 0.9740
+2024-08-01 10:51:40,887 : INFO : Precision for replacement task: 0.9486
+2024-08-01 10:51:40,887 : INFO : Recall for replacement task: 0.9176
+2024-08-01 10:51:40,887 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:51:59,647 : INFO : Results after 40.0000% iterations of epoch 1:
+2024-08-01 10:51:59,647 : INFO : Discriminator loss: 0.0731
+2024-08-01 10:51:59,647 : INFO : Gradient norm: 0.1202
+2024-08-01 10:51:59,647 : INFO : Current learning rate: 6.19801652892562e-05
+2024-08-01 10:51:59,647 : INFO : Accuracy for replacement task: 0.9727
+2024-08-01 10:51:59,647 : INFO : Precision for replacement task: 0.9379
+2024-08-01 10:51:59,647 : INFO : Recall for replacement task: 0.9227
+2024-08-01 10:51:59,647 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:52:18,404 : INFO : Results after 40.3200% iterations of epoch 1:
+2024-08-01 10:52:18,404 : INFO : Discriminator loss: 0.0832
+2024-08-01 10:52:18,404 : INFO : Gradient norm: 0.0993
+2024-08-01 10:52:18,404 : INFO : Current learning rate: 6.16495867768595e-05
+2024-08-01 10:52:18,404 : INFO : Accuracy for replacement task: 0.9685
+2024-08-01 10:52:18,404 : INFO : Precision for replacement task: 0.9348
+2024-08-01 10:52:18,404 : INFO : Recall for replacement task: 0.9080
+2024-08-01 10:52:18,404 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:52:37,163 : INFO : Results after 40.6400% iterations of epoch 1:
+2024-08-01 10:52:37,163 : INFO : Discriminator loss: 0.0799
+2024-08-01 10:52:37,163 : INFO : Gradient norm: 0.1175
+2024-08-01 10:52:37,163 : INFO : Current learning rate: 6.131900826446282e-05
+2024-08-01 10:52:37,163 : INFO : Accuracy for replacement task: 0.9700
+2024-08-01 10:52:37,163 : INFO : Precision for replacement task: 0.9389
+2024-08-01 10:52:37,163 : INFO : Recall for replacement task: 0.9059
+2024-08-01 10:52:37,163 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:52:55,926 : INFO : Results after 40.9600% iterations of epoch 1:
+2024-08-01 10:52:55,926 : INFO : Discriminator loss: 0.0734
+2024-08-01 10:52:55,926 : INFO : Gradient norm: 0.1166
+2024-08-01 10:52:55,926 : INFO : Current learning rate: 6.098842975206612e-05
+2024-08-01 10:52:55,926 : INFO : Accuracy for replacement task: 0.9736
+2024-08-01 10:52:55,926 : INFO : Precision for replacement task: 0.9504
+2024-08-01 10:52:55,926 : INFO : Recall for replacement task: 0.9128
+2024-08-01 10:52:55,926 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:53:14,683 : INFO : Results after 41.2800% iterations of epoch 1:
+2024-08-01 10:53:14,683 : INFO : Discriminator loss: 0.0807
+2024-08-01 10:53:14,683 : INFO : Gradient norm: 0.1115
+2024-08-01 10:53:14,683 : INFO : Current learning rate: 6.065785123966943e-05
+2024-08-01 10:53:14,683 : INFO : Accuracy for replacement task: 0.9712
+2024-08-01 10:53:14,683 : INFO : Precision for replacement task: 0.9434
+2024-08-01 10:53:14,683 : INFO : Recall for replacement task: 0.9084
+2024-08-01 10:53:14,683 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:53:33,440 : INFO : Results after 41.6000% iterations of epoch 1:
+2024-08-01 10:53:33,440 : INFO : Discriminator loss: 0.0840
+2024-08-01 10:53:33,440 : INFO : Gradient norm: 0.1150
+2024-08-01 10:53:33,440 : INFO : Current learning rate: 6.032727272727273e-05
+2024-08-01 10:53:33,440 : INFO : Accuracy for replacement task: 0.9686
+2024-08-01 10:53:33,440 : INFO : Precision for replacement task: 0.9355
+2024-08-01 10:53:33,440 : INFO : Recall for replacement task: 0.9014
+2024-08-01 10:53:33,440 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:53:52,195 : INFO : Results after 41.9200% iterations of epoch 1:
+2024-08-01 10:53:52,195 : INFO : Discriminator loss: 0.0760
+2024-08-01 10:53:52,195 : INFO : Gradient norm: 0.1126
+2024-08-01 10:53:52,195 : INFO : Current learning rate: 5.9996694214876034e-05
+2024-08-01 10:53:52,195 : INFO : Accuracy for replacement task: 0.9724
+2024-08-01 10:53:52,195 : INFO : Precision for replacement task: 0.9446
+2024-08-01 10:53:52,195 : INFO : Recall for replacement task: 0.9133
+2024-08-01 10:53:52,195 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:54:10,957 : INFO : Results after 42.2400% iterations of epoch 1:
+2024-08-01 10:54:10,957 : INFO : Discriminator loss: 0.0810
+2024-08-01 10:54:10,957 : INFO : Gradient norm: 0.1273
+2024-08-01 10:54:10,957 : INFO : Current learning rate: 5.9666115702479344e-05
+2024-08-01 10:54:10,957 : INFO : Accuracy for replacement task: 0.9703
+2024-08-01 10:54:10,957 : INFO : Precision for replacement task: 0.9416
+2024-08-01 10:54:10,957 : INFO : Recall for replacement task: 0.9064
+2024-08-01 10:54:10,957 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:54:29,693 : INFO : Results after 42.5600% iterations of epoch 1:
+2024-08-01 10:54:29,693 : INFO : Discriminator loss: 0.0780
+2024-08-01 10:54:29,693 : INFO : Gradient norm: 0.1087
+2024-08-01 10:54:29,693 : INFO : Current learning rate: 5.9335537190082646e-05
+2024-08-01 10:54:29,693 : INFO : Accuracy for replacement task: 0.9708
+2024-08-01 10:54:29,693 : INFO : Precision for replacement task: 0.9390
+2024-08-01 10:54:29,693 : INFO : Recall for replacement task: 0.9124
+2024-08-01 10:54:29,693 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:54:48,420 : INFO : Results after 42.8800% iterations of epoch 1:
+2024-08-01 10:54:48,420 : INFO : Discriminator loss: 0.0716
+2024-08-01 10:54:48,420 : INFO : Gradient norm: 0.1149
+2024-08-01 10:54:48,420 : INFO : Current learning rate: 5.900495867768595e-05
+2024-08-01 10:54:48,420 : INFO : Accuracy for replacement task: 0.9733
+2024-08-01 10:54:48,420 : INFO : Precision for replacement task: 0.9394
+2024-08-01 10:54:48,420 : INFO : Recall for replacement task: 0.9255
+2024-08-01 10:54:48,420 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:55:07,151 : INFO : Results after 43.2000% iterations of epoch 1:
+2024-08-01 10:55:07,151 : INFO : Discriminator loss: 0.0750
+2024-08-01 10:55:07,151 : INFO : Gradient norm: 0.1082
+2024-08-01 10:55:07,151 : INFO : Current learning rate: 5.867438016528926e-05
+2024-08-01 10:55:07,151 : INFO : Accuracy for replacement task: 0.9738
+2024-08-01 10:55:07,151 : INFO : Precision for replacement task: 0.9459
+2024-08-01 10:55:07,151 : INFO : Recall for replacement task: 0.9227
+2024-08-01 10:55:07,151 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:55:25,880 : INFO : Results after 43.5200% iterations of epoch 1:
+2024-08-01 10:55:25,881 : INFO : Discriminator loss: 0.0762
+2024-08-01 10:55:25,881 : INFO : Gradient norm: 0.1034
+2024-08-01 10:55:25,881 : INFO : Current learning rate: 5.834380165289256e-05
+2024-08-01 10:55:25,881 : INFO : Accuracy for replacement task: 0.9716
+2024-08-01 10:55:25,881 : INFO : Precision for replacement task: 0.9407
+2024-08-01 10:55:25,881 : INFO : Recall for replacement task: 0.9158
+2024-08-01 10:55:25,881 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:55:44,612 : INFO : Results after 43.8400% iterations of epoch 1:
+2024-08-01 10:55:44,612 : INFO : Discriminator loss: 0.0789
+2024-08-01 10:55:44,612 : INFO : Gradient norm: 0.1454
+2024-08-01 10:55:44,612 : INFO : Current learning rate: 5.8013223140495876e-05
+2024-08-01 10:55:44,612 : INFO : Accuracy for replacement task: 0.9713
+2024-08-01 10:55:44,612 : INFO : Precision for replacement task: 0.9490
+2024-08-01 10:55:44,612 : INFO : Recall for replacement task: 0.9049
+2024-08-01 10:55:44,612 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:56:03,335 : INFO : Results after 44.1600% iterations of epoch 1:
+2024-08-01 10:56:03,335 : INFO : Discriminator loss: 0.0743
+2024-08-01 10:56:03,335 : INFO : Gradient norm: 0.1064
+2024-08-01 10:56:03,335 : INFO : Current learning rate: 5.768264462809918e-05
+2024-08-01 10:56:03,335 : INFO : Accuracy for replacement task: 0.9735
+2024-08-01 10:56:03,335 : INFO : Precision for replacement task: 0.9451
+2024-08-01 10:56:03,335 : INFO : Recall for replacement task: 0.9185
+2024-08-01 10:56:03,335 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:56:22,063 : INFO : Results after 44.4800% iterations of epoch 1:
+2024-08-01 10:56:22,064 : INFO : Discriminator loss: 0.0748
+2024-08-01 10:56:22,064 : INFO : Gradient norm: 0.1258
+2024-08-01 10:56:22,064 : INFO : Current learning rate: 5.735206611570249e-05
+2024-08-01 10:56:22,064 : INFO : Accuracy for replacement task: 0.9724
+2024-08-01 10:56:22,064 : INFO : Precision for replacement task: 0.9355
+2024-08-01 10:56:22,064 : INFO : Recall for replacement task: 0.9226
+2024-08-01 10:56:22,064 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:56:40,793 : INFO : Results after 44.8000% iterations of epoch 1:
+2024-08-01 10:56:40,794 : INFO : Discriminator loss: 0.0754
+2024-08-01 10:56:40,794 : INFO : Gradient norm: 0.1397
+2024-08-01 10:56:40,794 : INFO : Current learning rate: 5.702148760330579e-05
+2024-08-01 10:56:40,794 : INFO : Accuracy for replacement task: 0.9720
+2024-08-01 10:56:40,794 : INFO : Precision for replacement task: 0.9368
+2024-08-01 10:56:40,794 : INFO : Recall for replacement task: 0.9180
+2024-08-01 10:56:40,794 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:56:59,680 : INFO : Results after 45.1200% iterations of epoch 1:
+2024-08-01 10:56:59,681 : INFO : Discriminator loss: 0.0691
+2024-08-01 10:56:59,681 : INFO : Gradient norm: 0.1298
+2024-08-01 10:56:59,681 : INFO : Current learning rate: 5.669090909090909e-05
+2024-08-01 10:56:59,681 : INFO : Accuracy for replacement task: 0.9747
+2024-08-01 10:56:59,681 : INFO : Precision for replacement task: 0.9404
+2024-08-01 10:56:59,681 : INFO : Recall for replacement task: 0.9299
+2024-08-01 10:56:59,681 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:57:18,413 : INFO : Results after 45.4400% iterations of epoch 1:
+2024-08-01 10:57:18,413 : INFO : Discriminator loss: 0.0749
+2024-08-01 10:57:18,413 : INFO : Gradient norm: 0.0952
+2024-08-01 10:57:18,413 : INFO : Current learning rate: 5.63603305785124e-05
+2024-08-01 10:57:18,413 : INFO : Accuracy for replacement task: 0.9724
+2024-08-01 10:57:18,413 : INFO : Precision for replacement task: 0.9454
+2024-08-01 10:57:18,413 : INFO : Recall for replacement task: 0.9145
+2024-08-01 10:57:18,413 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:57:37,167 : INFO : Results after 45.7600% iterations of epoch 1:
+2024-08-01 10:57:37,168 : INFO : Discriminator loss: 0.0746
+2024-08-01 10:57:37,168 : INFO : Gradient norm: 0.1181
+2024-08-01 10:57:37,168 : INFO : Current learning rate: 5.6029752066115704e-05
+2024-08-01 10:57:37,168 : INFO : Accuracy for replacement task: 0.9718
+2024-08-01 10:57:37,168 : INFO : Precision for replacement task: 0.9407
+2024-08-01 10:57:37,168 : INFO : Recall for replacement task: 0.9146
+2024-08-01 10:57:37,168 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:57:55,901 : INFO : Results after 46.0800% iterations of epoch 1:
+2024-08-01 10:57:55,901 : INFO : Discriminator loss: 0.0779
+2024-08-01 10:57:55,901 : INFO : Gradient norm: 0.1055
+2024-08-01 10:57:55,901 : INFO : Current learning rate: 5.569917355371901e-05
+2024-08-01 10:57:55,901 : INFO : Accuracy for replacement task: 0.9713
+2024-08-01 10:57:55,901 : INFO : Precision for replacement task: 0.9370
+2024-08-01 10:57:55,901 : INFO : Recall for replacement task: 0.9166
+2024-08-01 10:57:55,901 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:58:14,669 : INFO : Results after 46.4000% iterations of epoch 1:
+2024-08-01 10:58:14,669 : INFO : Discriminator loss: 0.0732
+2024-08-01 10:58:14,669 : INFO : Gradient norm: 0.0999
+2024-08-01 10:58:14,670 : INFO : Current learning rate: 5.5368595041322316e-05
+2024-08-01 10:58:14,670 : INFO : Accuracy for replacement task: 0.9741
+2024-08-01 10:58:14,670 : INFO : Precision for replacement task: 0.9435
+2024-08-01 10:58:14,670 : INFO : Recall for replacement task: 0.9239
+2024-08-01 10:58:14,670 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:58:33,421 : INFO : Results after 46.7200% iterations of epoch 1:
+2024-08-01 10:58:33,422 : INFO : Discriminator loss: 0.0763
+2024-08-01 10:58:33,422 : INFO : Gradient norm: 0.1436
+2024-08-01 10:58:33,422 : INFO : Current learning rate: 5.503801652892562e-05
+2024-08-01 10:58:33,422 : INFO : Accuracy for replacement task: 0.9719
+2024-08-01 10:58:33,422 : INFO : Precision for replacement task: 0.9497
+2024-08-01 10:58:33,422 : INFO : Recall for replacement task: 0.9084
+2024-08-01 10:58:33,422 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:58:52,191 : INFO : Results after 47.0400% iterations of epoch 1:
+2024-08-01 10:58:52,191 : INFO : Discriminator loss: 0.0763
+2024-08-01 10:58:52,191 : INFO : Gradient norm: 0.1153
+2024-08-01 10:58:52,191 : INFO : Current learning rate: 5.4707438016528935e-05
+2024-08-01 10:58:52,191 : INFO : Accuracy for replacement task: 0.9708
+2024-08-01 10:58:52,191 : INFO : Precision for replacement task: 0.9411
+2024-08-01 10:58:52,191 : INFO : Recall for replacement task: 0.9091
+2024-08-01 10:58:52,191 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:59:10,953 : INFO : Results after 47.3600% iterations of epoch 1:
+2024-08-01 10:59:10,953 : INFO : Discriminator loss: 0.0678
+2024-08-01 10:59:10,953 : INFO : Gradient norm: 0.1167
+2024-08-01 10:59:10,953 : INFO : Current learning rate: 5.437685950413224e-05
+2024-08-01 10:59:10,953 : INFO : Accuracy for replacement task: 0.9749
+2024-08-01 10:59:10,953 : INFO : Precision for replacement task: 0.9512
+2024-08-01 10:59:10,953 : INFO : Recall for replacement task: 0.9217
+2024-08-01 10:59:10,953 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:59:29,704 : INFO : Results after 47.6800% iterations of epoch 1:
+2024-08-01 10:59:29,704 : INFO : Discriminator loss: 0.0724
+2024-08-01 10:59:29,704 : INFO : Gradient norm: 0.1257
+2024-08-01 10:59:29,704 : INFO : Current learning rate: 5.4046280991735546e-05
+2024-08-01 10:59:29,704 : INFO : Accuracy for replacement task: 0.9729
+2024-08-01 10:59:29,704 : INFO : Precision for replacement task: 0.9488
+2024-08-01 10:59:29,704 : INFO : Recall for replacement task: 0.9122
+2024-08-01 10:59:29,704 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 10:59:48,439 : INFO : Results after 48.0000% iterations of epoch 1:
+2024-08-01 10:59:48,439 : INFO : Discriminator loss: 0.0697
+2024-08-01 10:59:48,439 : INFO : Gradient norm: 0.1093
+2024-08-01 10:59:48,439 : INFO : Current learning rate: 5.371570247933885e-05
+2024-08-01 10:59:48,439 : INFO : Accuracy for replacement task: 0.9759
+2024-08-01 10:59:48,439 : INFO : Precision for replacement task: 0.9517
+2024-08-01 10:59:48,439 : INFO : Recall for replacement task: 0.9257
+2024-08-01 10:59:48,439 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:00:07,182 : INFO : Results after 48.3200% iterations of epoch 1:
+2024-08-01 11:00:07,183 : INFO : Discriminator loss: 0.0719
+2024-08-01 11:00:07,183 : INFO : Gradient norm: 0.1136
+2024-08-01 11:00:07,183 : INFO : Current learning rate: 5.338512396694215e-05
+2024-08-01 11:00:07,183 : INFO : Accuracy for replacement task: 0.9737
+2024-08-01 11:00:07,183 : INFO : Precision for replacement task: 0.9400
+2024-08-01 11:00:07,183 : INFO : Recall for replacement task: 0.9236
+2024-08-01 11:00:07,183 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:00:25,914 : INFO : Results after 48.6400% iterations of epoch 1:
+2024-08-01 11:00:25,914 : INFO : Discriminator loss: 0.0761
+2024-08-01 11:00:25,914 : INFO : Gradient norm: 0.1107
+2024-08-01 11:00:25,914 : INFO : Current learning rate: 5.3054545454545454e-05
+2024-08-01 11:00:25,914 : INFO : Accuracy for replacement task: 0.9721
+2024-08-01 11:00:25,914 : INFO : Precision for replacement task: 0.9450
+2024-08-01 11:00:25,914 : INFO : Recall for replacement task: 0.9117
+2024-08-01 11:00:25,914 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:00:44,648 : INFO : Results after 48.9600% iterations of epoch 1:
+2024-08-01 11:00:44,648 : INFO : Discriminator loss: 0.0781
+2024-08-01 11:00:44,648 : INFO : Gradient norm: 0.1119
+2024-08-01 11:00:44,648 : INFO : Current learning rate: 5.272396694214876e-05
+2024-08-01 11:00:44,648 : INFO : Accuracy for replacement task: 0.9704
+2024-08-01 11:00:44,648 : INFO : Precision for replacement task: 0.9415
+2024-08-01 11:00:44,648 : INFO : Recall for replacement task: 0.9076
+2024-08-01 11:00:44,648 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:01:03,389 : INFO : Results after 49.2800% iterations of epoch 1:
+2024-08-01 11:01:03,389 : INFO : Discriminator loss: 0.0725
+2024-08-01 11:01:03,389 : INFO : Gradient norm: 0.1383
+2024-08-01 11:01:03,389 : INFO : Current learning rate: 5.2393388429752065e-05
+2024-08-01 11:01:03,389 : INFO : Accuracy for replacement task: 0.9734
+2024-08-01 11:01:03,389 : INFO : Precision for replacement task: 0.9384
+2024-08-01 11:01:03,389 : INFO : Recall for replacement task: 0.9283
+2024-08-01 11:01:03,389 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:01:22,132 : INFO : Results after 49.6000% iterations of epoch 1:
+2024-08-01 11:01:22,132 : INFO : Discriminator loss: 0.0723
+2024-08-01 11:01:22,132 : INFO : Gradient norm: 0.1387
+2024-08-01 11:01:22,132 : INFO : Current learning rate: 5.206280991735537e-05
+2024-08-01 11:01:22,132 : INFO : Accuracy for replacement task: 0.9730
+2024-08-01 11:01:22,132 : INFO : Precision for replacement task: 0.9500
+2024-08-01 11:01:22,132 : INFO : Recall for replacement task: 0.9127
+2024-08-01 11:01:22,132 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:01:40,866 : INFO : Results after 49.9200% iterations of epoch 1:
+2024-08-01 11:01:40,867 : INFO : Discriminator loss: 0.0695
+2024-08-01 11:01:40,867 : INFO : Gradient norm: 0.1021
+2024-08-01 11:01:40,867 : INFO : Current learning rate: 5.173223140495868e-05
+2024-08-01 11:01:40,867 : INFO : Accuracy for replacement task: 0.9744
+2024-08-01 11:01:40,867 : INFO : Precision for replacement task: 0.9469
+2024-08-01 11:01:40,867 : INFO : Recall for replacement task: 0.9242
+2024-08-01 11:01:40,867 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:01:59,601 : INFO : Results after 50.2400% iterations of epoch 1:
+2024-08-01 11:01:59,601 : INFO : Discriminator loss: 0.0676
+2024-08-01 11:01:59,601 : INFO : Gradient norm: 0.1037
+2024-08-01 11:01:59,601 : INFO : Current learning rate: 5.140165289256199e-05
+2024-08-01 11:01:59,601 : INFO : Accuracy for replacement task: 0.9753
+2024-08-01 11:01:59,601 : INFO : Precision for replacement task: 0.9489
+2024-08-01 11:01:59,601 : INFO : Recall for replacement task: 0.9219
+2024-08-01 11:01:59,601 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:02:18,336 : INFO : Results after 50.5600% iterations of epoch 1:
+2024-08-01 11:02:18,336 : INFO : Discriminator loss: 0.0785
+2024-08-01 11:02:18,336 : INFO : Gradient norm: 0.1600
+2024-08-01 11:02:18,336 : INFO : Current learning rate: 5.1071074380165295e-05
+2024-08-01 11:02:18,336 : INFO : Accuracy for replacement task: 0.9708
+2024-08-01 11:02:18,336 : INFO : Precision for replacement task: 0.9461
+2024-08-01 11:02:18,336 : INFO : Recall for replacement task: 0.9052
+2024-08-01 11:02:18,336 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:02:37,072 : INFO : Results after 50.8800% iterations of epoch 1:
+2024-08-01 11:02:37,072 : INFO : Discriminator loss: 0.0767
+2024-08-01 11:02:37,072 : INFO : Gradient norm: 0.1101
+2024-08-01 11:02:37,072 : INFO : Current learning rate: 5.07404958677686e-05
+2024-08-01 11:02:37,072 : INFO : Accuracy for replacement task: 0.9710
+2024-08-01 11:02:37,072 : INFO : Precision for replacement task: 0.9449
+2024-08-01 11:02:37,072 : INFO : Recall for replacement task: 0.9098
+2024-08-01 11:02:37,072 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:02:55,805 : INFO : Results after 51.2000% iterations of epoch 1:
+2024-08-01 11:02:55,805 : INFO : Discriminator loss: 0.0748
+2024-08-01 11:02:55,805 : INFO : Gradient norm: 0.1187
+2024-08-01 11:02:55,805 : INFO : Current learning rate: 5.040991735537191e-05
+2024-08-01 11:02:55,805 : INFO : Accuracy for replacement task: 0.9728
+2024-08-01 11:02:55,805 : INFO : Precision for replacement task: 0.9398
+2024-08-01 11:02:55,805 : INFO : Recall for replacement task: 0.9226
+2024-08-01 11:02:55,805 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:03:14,562 : INFO : Results after 51.5200% iterations of epoch 1:
+2024-08-01 11:03:14,562 : INFO : Discriminator loss: 0.0682
+2024-08-01 11:03:14,562 : INFO : Gradient norm: 0.1236
+2024-08-01 11:03:14,562 : INFO : Current learning rate: 5.007933884297521e-05
+2024-08-01 11:03:14,562 : INFO : Accuracy for replacement task: 0.9749
+2024-08-01 11:03:14,562 : INFO : Precision for replacement task: 0.9475
+2024-08-01 11:03:14,562 : INFO : Recall for replacement task: 0.9249
+2024-08-01 11:03:14,562 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:03:33,313 : INFO : Results after 51.8400% iterations of epoch 1:
+2024-08-01 11:03:33,313 : INFO : Discriminator loss: 0.0696
+2024-08-01 11:03:33,313 : INFO : Gradient norm: 0.1319
+2024-08-01 11:03:33,314 : INFO : Current learning rate: 4.974876033057851e-05
+2024-08-01 11:03:33,314 : INFO : Accuracy for replacement task: 0.9747
+2024-08-01 11:03:33,314 : INFO : Precision for replacement task: 0.9425
+2024-08-01 11:03:33,314 : INFO : Recall for replacement task: 0.9281
+2024-08-01 11:03:33,314 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:03:52,066 : INFO : Results after 52.1600% iterations of epoch 1:
+2024-08-01 11:03:52,066 : INFO : Discriminator loss: 0.0729
+2024-08-01 11:03:52,066 : INFO : Gradient norm: 0.1099
+2024-08-01 11:03:52,066 : INFO : Current learning rate: 4.941818181818182e-05
+2024-08-01 11:03:52,066 : INFO : Accuracy for replacement task: 0.9726
+2024-08-01 11:03:52,066 : INFO : Precision for replacement task: 0.9485
+2024-08-01 11:03:52,066 : INFO : Recall for replacement task: 0.9122
+2024-08-01 11:03:52,066 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:04:10,827 : INFO : Results after 52.4800% iterations of epoch 1:
+2024-08-01 11:04:10,827 : INFO : Discriminator loss: 0.0697
+2024-08-01 11:04:10,827 : INFO : Gradient norm: 0.1135
+2024-08-01 11:04:10,827 : INFO : Current learning rate: 4.9087603305785124e-05
+2024-08-01 11:04:10,827 : INFO : Accuracy for replacement task: 0.9738
+2024-08-01 11:04:10,827 : INFO : Precision for replacement task: 0.9444
+2024-08-01 11:04:10,827 : INFO : Recall for replacement task: 0.9226
+2024-08-01 11:04:10,827 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:04:29,589 : INFO : Results after 52.8000% iterations of epoch 1:
+2024-08-01 11:04:29,590 : INFO : Discriminator loss: 0.0771
+2024-08-01 11:04:29,590 : INFO : Gradient norm: 0.1203
+2024-08-01 11:04:29,590 : INFO : Current learning rate: 4.875702479338843e-05
+2024-08-01 11:04:29,590 : INFO : Accuracy for replacement task: 0.9712
+2024-08-01 11:04:29,590 : INFO : Precision for replacement task: 0.9393
+2024-08-01 11:04:29,590 : INFO : Recall for replacement task: 0.9120
+2024-08-01 11:04:29,590 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:04:48,349 : INFO : Results after 53.1200% iterations of epoch 1:
+2024-08-01 11:04:48,349 : INFO : Discriminator loss: 0.0740
+2024-08-01 11:04:48,349 : INFO : Gradient norm: 0.1266
+2024-08-01 11:04:48,349 : INFO : Current learning rate: 4.8426446280991735e-05
+2024-08-01 11:04:48,349 : INFO : Accuracy for replacement task: 0.9732
+2024-08-01 11:04:48,349 : INFO : Precision for replacement task: 0.9488
+2024-08-01 11:04:48,349 : INFO : Recall for replacement task: 0.9152
+2024-08-01 11:04:48,349 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:05:07,109 : INFO : Results after 53.4400% iterations of epoch 1:
+2024-08-01 11:05:07,109 : INFO : Discriminator loss: 0.0672
+2024-08-01 11:05:07,109 : INFO : Gradient norm: 0.0994
+2024-08-01 11:05:07,109 : INFO : Current learning rate: 4.8095867768595045e-05
+2024-08-01 11:05:07,109 : INFO : Accuracy for replacement task: 0.9759
+2024-08-01 11:05:07,109 : INFO : Precision for replacement task: 0.9482
+2024-08-01 11:05:07,109 : INFO : Recall for replacement task: 0.9264
+2024-08-01 11:05:07,109 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:05:25,864 : INFO : Results after 53.7600% iterations of epoch 1:
+2024-08-01 11:05:25,865 : INFO : Discriminator loss: 0.0652
+2024-08-01 11:05:25,865 : INFO : Gradient norm: 0.1060
+2024-08-01 11:05:25,865 : INFO : Current learning rate: 4.776528925619835e-05
+2024-08-01 11:05:25,865 : INFO : Accuracy for replacement task: 0.9767
+2024-08-01 11:05:25,865 : INFO : Precision for replacement task: 0.9471
+2024-08-01 11:05:25,865 : INFO : Recall for replacement task: 0.9315
+2024-08-01 11:05:25,865 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:05:44,624 : INFO : Results after 54.0800% iterations of epoch 1:
+2024-08-01 11:05:44,625 : INFO : Discriminator loss: 0.0707
+2024-08-01 11:05:44,625 : INFO : Gradient norm: 0.1580
+2024-08-01 11:05:44,625 : INFO : Current learning rate: 4.743471074380165e-05
+2024-08-01 11:05:44,625 : INFO : Accuracy for replacement task: 0.9739
+2024-08-01 11:05:44,625 : INFO : Precision for replacement task: 0.9401
+2024-08-01 11:05:44,625 : INFO : Recall for replacement task: 0.9269
+2024-08-01 11:05:44,625 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:06:03,386 : INFO : Results after 54.4000% iterations of epoch 1:
+2024-08-01 11:06:03,386 : INFO : Discriminator loss: 0.0698
+2024-08-01 11:06:03,386 : INFO : Gradient norm: 0.1509
+2024-08-01 11:06:03,387 : INFO : Current learning rate: 4.7104132231404966e-05
+2024-08-01 11:06:03,387 : INFO : Accuracy for replacement task: 0.9743
+2024-08-01 11:06:03,387 : INFO : Precision for replacement task: 0.9496
+2024-08-01 11:06:03,387 : INFO : Recall for replacement task: 0.9196
+2024-08-01 11:06:03,387 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:06:22,149 : INFO : Results after 54.7200% iterations of epoch 1:
+2024-08-01 11:06:22,149 : INFO : Discriminator loss: 0.0683
+2024-08-01 11:06:22,149 : INFO : Gradient norm: 0.1061
+2024-08-01 11:06:22,149 : INFO : Current learning rate: 4.677355371900827e-05
+2024-08-01 11:06:22,149 : INFO : Accuracy for replacement task: 0.9753
+2024-08-01 11:06:22,149 : INFO : Precision for replacement task: 0.9496
+2024-08-01 11:06:22,149 : INFO : Recall for replacement task: 0.9252
+2024-08-01 11:06:22,149 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:06:40,907 : INFO : Results after 55.0400% iterations of epoch 1:
+2024-08-01 11:06:40,907 : INFO : Discriminator loss: 0.0738
+2024-08-01 11:06:40,907 : INFO : Gradient norm: 0.1214
+2024-08-01 11:06:40,908 : INFO : Current learning rate: 4.644297520661157e-05
+2024-08-01 11:06:40,908 : INFO : Accuracy for replacement task: 0.9723
+2024-08-01 11:06:40,908 : INFO : Precision for replacement task: 0.9450
+2024-08-01 11:06:40,908 : INFO : Recall for replacement task: 0.9117
+2024-08-01 11:06:40,908 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:06:59,673 : INFO : Results after 55.3600% iterations of epoch 1:
+2024-08-01 11:06:59,673 : INFO : Discriminator loss: 0.0670
+2024-08-01 11:06:59,673 : INFO : Gradient norm: 0.1585
+2024-08-01 11:06:59,673 : INFO : Current learning rate: 4.611239669421488e-05
+2024-08-01 11:06:59,673 : INFO : Accuracy for replacement task: 0.9751
+2024-08-01 11:06:59,673 : INFO : Precision for replacement task: 0.9536
+2024-08-01 11:06:59,673 : INFO : Recall for replacement task: 0.9184
+2024-08-01 11:06:59,673 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:07:18,437 : INFO : Results after 55.6800% iterations of epoch 1:
+2024-08-01 11:07:18,437 : INFO : Discriminator loss: 0.0730
+2024-08-01 11:07:18,437 : INFO : Gradient norm: 0.1071
+2024-08-01 11:07:18,437 : INFO : Current learning rate: 4.578181818181818e-05
+2024-08-01 11:07:18,437 : INFO : Accuracy for replacement task: 0.9728
+2024-08-01 11:07:18,437 : INFO : Precision for replacement task: 0.9454
+2024-08-01 11:07:18,437 : INFO : Recall for replacement task: 0.9171
+2024-08-01 11:07:18,437 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:07:37,201 : INFO : Results after 56.0000% iterations of epoch 1:
+2024-08-01 11:07:37,201 : INFO : Discriminator loss: 0.0667
+2024-08-01 11:07:37,201 : INFO : Gradient norm: 0.0994
+2024-08-01 11:07:37,201 : INFO : Current learning rate: 4.545123966942149e-05
+2024-08-01 11:07:37,201 : INFO : Accuracy for replacement task: 0.9749
+2024-08-01 11:07:37,201 : INFO : Precision for replacement task: 0.9502
+2024-08-01 11:07:37,201 : INFO : Recall for replacement task: 0.9211
+2024-08-01 11:07:37,201 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:07:55,966 : INFO : Results after 56.3200% iterations of epoch 1:
+2024-08-01 11:07:55,967 : INFO : Discriminator loss: 0.0746
+2024-08-01 11:07:55,967 : INFO : Gradient norm: 0.1145
+2024-08-01 11:07:55,967 : INFO : Current learning rate: 4.5120661157024794e-05
+2024-08-01 11:07:55,967 : INFO : Accuracy for replacement task: 0.9722
+2024-08-01 11:07:55,967 : INFO : Precision for replacement task: 0.9458
+2024-08-01 11:07:55,967 : INFO : Recall for replacement task: 0.9136
+2024-08-01 11:07:55,967 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:08:14,736 : INFO : Results after 56.6400% iterations of epoch 1:
+2024-08-01 11:08:14,737 : INFO : Discriminator loss: 0.0703
+2024-08-01 11:08:14,737 : INFO : Gradient norm: 0.1012
+2024-08-01 11:08:14,737 : INFO : Current learning rate: 4.47900826446281e-05
+2024-08-01 11:08:14,737 : INFO : Accuracy for replacement task: 0.9747
+2024-08-01 11:08:14,737 : INFO : Precision for replacement task: 0.9472
+2024-08-01 11:08:14,737 : INFO : Recall for replacement task: 0.9235
+2024-08-01 11:08:14,737 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:08:33,511 : INFO : Results after 56.9600% iterations of epoch 1:
+2024-08-01 11:08:33,511 : INFO : Discriminator loss: 0.0663
+2024-08-01 11:08:33,511 : INFO : Gradient norm: 0.1472
+2024-08-01 11:08:33,511 : INFO : Current learning rate: 4.4459504132231405e-05
+2024-08-01 11:08:33,511 : INFO : Accuracy for replacement task: 0.9749
+2024-08-01 11:08:33,511 : INFO : Precision for replacement task: 0.9551
+2024-08-01 11:08:33,511 : INFO : Recall for replacement task: 0.9183
+2024-08-01 11:08:33,511 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:08:52,284 : INFO : Results after 57.2800% iterations of epoch 1:
+2024-08-01 11:08:52,284 : INFO : Discriminator loss: 0.0754
+2024-08-01 11:08:52,284 : INFO : Gradient norm: 0.1186
+2024-08-01 11:08:52,284 : INFO : Current learning rate: 4.4128925619834715e-05
+2024-08-01 11:08:52,284 : INFO : Accuracy for replacement task: 0.9708
+2024-08-01 11:08:52,284 : INFO : Precision for replacement task: 0.9424
+2024-08-01 11:08:52,284 : INFO : Recall for replacement task: 0.9060
+2024-08-01 11:08:52,284 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:09:11,061 : INFO : Results after 57.6000% iterations of epoch 1:
+2024-08-01 11:09:11,061 : INFO : Discriminator loss: 0.0678
+2024-08-01 11:09:11,061 : INFO : Gradient norm: 0.1036
+2024-08-01 11:09:11,061 : INFO : Current learning rate: 4.379834710743802e-05
+2024-08-01 11:09:11,061 : INFO : Accuracy for replacement task: 0.9751
+2024-08-01 11:09:11,061 : INFO : Precision for replacement task: 0.9497
+2024-08-01 11:09:11,061 : INFO : Recall for replacement task: 0.9208
+2024-08-01 11:09:11,061 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:09:29,840 : INFO : Results after 57.9200% iterations of epoch 1:
+2024-08-01 11:09:29,840 : INFO : Discriminator loss: 0.0672
+2024-08-01 11:09:29,840 : INFO : Gradient norm: 0.1286
+2024-08-01 11:09:29,840 : INFO : Current learning rate: 4.3467768595041326e-05
+2024-08-01 11:09:29,841 : INFO : Accuracy for replacement task: 0.9751
+2024-08-01 11:09:29,841 : INFO : Precision for replacement task: 0.9528
+2024-08-01 11:09:29,841 : INFO : Recall for replacement task: 0.9205
+2024-08-01 11:09:29,841 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:09:48,617 : INFO : Results after 58.2400% iterations of epoch 1:
+2024-08-01 11:09:48,618 : INFO : Discriminator loss: 0.0717
+2024-08-01 11:09:48,618 : INFO : Gradient norm: 0.1143
+2024-08-01 11:09:48,618 : INFO : Current learning rate: 4.313719008264463e-05
+2024-08-01 11:09:48,618 : INFO : Accuracy for replacement task: 0.9742
+2024-08-01 11:09:48,618 : INFO : Precision for replacement task: 0.9461
+2024-08-01 11:09:48,618 : INFO : Recall for replacement task: 0.9240
+2024-08-01 11:09:48,618 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:10:07,390 : INFO : Results after 58.5600% iterations of epoch 1:
+2024-08-01 11:10:07,391 : INFO : Discriminator loss: 0.0715
+2024-08-01 11:10:07,391 : INFO : Gradient norm: 0.1425
+2024-08-01 11:10:07,391 : INFO : Current learning rate: 4.280661157024793e-05
+2024-08-01 11:10:07,391 : INFO : Accuracy for replacement task: 0.9741
+2024-08-01 11:10:07,391 : INFO : Precision for replacement task: 0.9437
+2024-08-01 11:10:07,391 : INFO : Recall for replacement task: 0.9240
+2024-08-01 11:10:07,391 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:10:26,165 : INFO : Results after 58.8800% iterations of epoch 1:
+2024-08-01 11:10:26,165 : INFO : Discriminator loss: 0.0700
+2024-08-01 11:10:26,165 : INFO : Gradient norm: 0.1254
+2024-08-01 11:10:26,165 : INFO : Current learning rate: 4.247603305785125e-05
+2024-08-01 11:10:26,165 : INFO : Accuracy for replacement task: 0.9730
+2024-08-01 11:10:26,165 : INFO : Precision for replacement task: 0.9469
+2024-08-01 11:10:26,165 : INFO : Recall for replacement task: 0.9147
+2024-08-01 11:10:26,165 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:10:44,935 : INFO : Results after 59.2000% iterations of epoch 1:
+2024-08-01 11:10:44,935 : INFO : Discriminator loss: 0.0697
+2024-08-01 11:10:44,935 : INFO : Gradient norm: 0.1486
+2024-08-01 11:10:44,935 : INFO : Current learning rate: 4.214545454545455e-05
+2024-08-01 11:10:44,935 : INFO : Accuracy for replacement task: 0.9739
+2024-08-01 11:10:44,935 : INFO : Precision for replacement task: 0.9518
+2024-08-01 11:10:44,935 : INFO : Recall for replacement task: 0.9119
+2024-08-01 11:10:44,935 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:11:03,684 : INFO : Results after 59.5200% iterations of epoch 1:
+2024-08-01 11:11:03,684 : INFO : Discriminator loss: 0.0770
+2024-08-01 11:11:03,684 : INFO : Gradient norm: 0.1108
+2024-08-01 11:11:03,684 : INFO : Current learning rate: 4.181487603305785e-05
+2024-08-01 11:11:03,684 : INFO : Accuracy for replacement task: 0.9708
+2024-08-01 11:11:03,684 : INFO : Precision for replacement task: 0.9389
+2024-08-01 11:11:03,684 : INFO : Recall for replacement task: 0.9144
+2024-08-01 11:11:03,684 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:11:22,429 : INFO : Results after 59.8400% iterations of epoch 1:
+2024-08-01 11:11:22,429 : INFO : Discriminator loss: 0.0623
+2024-08-01 11:11:22,429 : INFO : Gradient norm: 0.1012
+2024-08-01 11:11:22,430 : INFO : Current learning rate: 4.148429752066116e-05
+2024-08-01 11:11:22,430 : INFO : Accuracy for replacement task: 0.9768
+2024-08-01 11:11:22,430 : INFO : Precision for replacement task: 0.9520
+2024-08-01 11:11:22,430 : INFO : Recall for replacement task: 0.9296
+2024-08-01 11:11:22,430 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:11:41,181 : INFO : Results after 60.1600% iterations of epoch 1:
+2024-08-01 11:11:41,181 : INFO : Discriminator loss: 0.0741
+2024-08-01 11:11:41,181 : INFO : Gradient norm: 0.1224
+2024-08-01 11:11:41,181 : INFO : Current learning rate: 4.1153719008264464e-05
+2024-08-01 11:11:41,181 : INFO : Accuracy for replacement task: 0.9726
+2024-08-01 11:11:41,181 : INFO : Precision for replacement task: 0.9423
+2024-08-01 11:11:41,181 : INFO : Recall for replacement task: 0.9170
+2024-08-01 11:11:41,181 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:11:59,950 : INFO : Results after 60.4800% iterations of epoch 1:
+2024-08-01 11:11:59,950 : INFO : Discriminator loss: 0.0703
+2024-08-01 11:11:59,950 : INFO : Gradient norm: 0.1249
+2024-08-01 11:11:59,950 : INFO : Current learning rate: 4.082314049586777e-05
+2024-08-01 11:11:59,950 : INFO : Accuracy for replacement task: 0.9743
+2024-08-01 11:11:59,950 : INFO : Precision for replacement task: 0.9507
+2024-08-01 11:11:59,950 : INFO : Recall for replacement task: 0.9198
+2024-08-01 11:11:59,950 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:12:18,719 : INFO : Results after 60.8000% iterations of epoch 1:
+2024-08-01 11:12:18,720 : INFO : Discriminator loss: 0.0659
+2024-08-01 11:12:18,720 : INFO : Gradient norm: 0.1074
+2024-08-01 11:12:18,720 : INFO : Current learning rate: 4.0492561983471076e-05
+2024-08-01 11:12:18,720 : INFO : Accuracy for replacement task: 0.9765
+2024-08-01 11:12:18,720 : INFO : Precision for replacement task: 0.9524
+2024-08-01 11:12:18,720 : INFO : Recall for replacement task: 0.9251
+2024-08-01 11:12:18,720 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:12:37,484 : INFO : Results after 61.1200% iterations of epoch 1:
+2024-08-01 11:12:37,485 : INFO : Discriminator loss: 0.0694
+2024-08-01 11:12:37,485 : INFO : Gradient norm: 0.1158
+2024-08-01 11:12:37,485 : INFO : Current learning rate: 4.0161983471074385e-05
+2024-08-01 11:12:37,485 : INFO : Accuracy for replacement task: 0.9746
+2024-08-01 11:12:37,485 : INFO : Precision for replacement task: 0.9456
+2024-08-01 11:12:37,485 : INFO : Recall for replacement task: 0.9269
+2024-08-01 11:12:37,485 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:12:56,404 : INFO : Results after 61.4400% iterations of epoch 1:
+2024-08-01 11:12:56,405 : INFO : Discriminator loss: 0.0716
+2024-08-01 11:12:56,405 : INFO : Gradient norm: 0.1145
+2024-08-01 11:12:56,405 : INFO : Current learning rate: 3.983140495867769e-05
+2024-08-01 11:12:56,405 : INFO : Accuracy for replacement task: 0.9738
+2024-08-01 11:12:56,405 : INFO : Precision for replacement task: 0.9416
+2024-08-01 11:12:56,405 : INFO : Recall for replacement task: 0.9237
+2024-08-01 11:12:56,405 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:13:15,169 : INFO : Results after 61.7600% iterations of epoch 1:
+2024-08-01 11:13:15,169 : INFO : Discriminator loss: 0.0685
+2024-08-01 11:13:15,169 : INFO : Gradient norm: 0.1115
+2024-08-01 11:13:15,169 : INFO : Current learning rate: 3.950082644628099e-05
+2024-08-01 11:13:15,169 : INFO : Accuracy for replacement task: 0.9752
+2024-08-01 11:13:15,169 : INFO : Precision for replacement task: 0.9448
+2024-08-01 11:13:15,169 : INFO : Recall for replacement task: 0.9274
+2024-08-01 11:13:15,169 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:13:33,934 : INFO : Results after 62.0800% iterations of epoch 1:
+2024-08-01 11:13:33,934 : INFO : Discriminator loss: 0.0707
+2024-08-01 11:13:33,934 : INFO : Gradient norm: 0.1399
+2024-08-01 11:13:33,934 : INFO : Current learning rate: 3.91702479338843e-05
+2024-08-01 11:13:33,934 : INFO : Accuracy for replacement task: 0.9752
+2024-08-01 11:13:33,934 : INFO : Precision for replacement task: 0.9494
+2024-08-01 11:13:33,934 : INFO : Recall for replacement task: 0.9239
+2024-08-01 11:13:33,934 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:13:52,703 : INFO : Results after 62.4000% iterations of epoch 1:
+2024-08-01 11:13:52,703 : INFO : Discriminator loss: 0.0726
+2024-08-01 11:13:52,703 : INFO : Gradient norm: 0.1236
+2024-08-01 11:13:52,703 : INFO : Current learning rate: 3.883966942148761e-05
+2024-08-01 11:13:52,703 : INFO : Accuracy for replacement task: 0.9730
+2024-08-01 11:13:52,703 : INFO : Precision for replacement task: 0.9399
+2024-08-01 11:13:52,703 : INFO : Recall for replacement task: 0.9225
+2024-08-01 11:13:52,703 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:14:11,469 : INFO : Results after 62.7200% iterations of epoch 1:
+2024-08-01 11:14:11,470 : INFO : Discriminator loss: 0.0723
+2024-08-01 11:14:11,470 : INFO : Gradient norm: 0.1070
+2024-08-01 11:14:11,470 : INFO : Current learning rate: 3.850909090909091e-05
+2024-08-01 11:14:11,470 : INFO : Accuracy for replacement task: 0.9729
+2024-08-01 11:14:11,470 : INFO : Precision for replacement task: 0.9460
+2024-08-01 11:14:11,470 : INFO : Recall for replacement task: 0.9167
+2024-08-01 11:14:11,470 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:14:30,237 : INFO : Results after 63.0400% iterations of epoch 1:
+2024-08-01 11:14:30,238 : INFO : Discriminator loss: 0.0679
+2024-08-01 11:14:30,238 : INFO : Gradient norm: 0.1320
+2024-08-01 11:14:30,238 : INFO : Current learning rate: 3.817851239669421e-05
+2024-08-01 11:14:30,238 : INFO : Accuracy for replacement task: 0.9739
+2024-08-01 11:14:30,238 : INFO : Precision for replacement task: 0.9427
+2024-08-01 11:14:30,238 : INFO : Recall for replacement task: 0.9251
+2024-08-01 11:14:30,238 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:14:49,007 : INFO : Results after 63.3600% iterations of epoch 1:
+2024-08-01 11:14:49,007 : INFO : Discriminator loss: 0.0656
+2024-08-01 11:14:49,007 : INFO : Gradient norm: 0.1147
+2024-08-01 11:14:49,007 : INFO : Current learning rate: 3.784793388429752e-05
+2024-08-01 11:14:49,007 : INFO : Accuracy for replacement task: 0.9754
+2024-08-01 11:14:49,007 : INFO : Precision for replacement task: 0.9474
+2024-08-01 11:14:49,007 : INFO : Recall for replacement task: 0.9253
+2024-08-01 11:14:49,007 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:15:07,779 : INFO : Results after 63.6800% iterations of epoch 1:
+2024-08-01 11:15:07,779 : INFO : Discriminator loss: 0.0732
+2024-08-01 11:15:07,779 : INFO : Gradient norm: 0.1264
+2024-08-01 11:15:07,779 : INFO : Current learning rate: 3.751735537190083e-05
+2024-08-01 11:15:07,779 : INFO : Accuracy for replacement task: 0.9736
+2024-08-01 11:15:07,779 : INFO : Precision for replacement task: 0.9501
+2024-08-01 11:15:07,779 : INFO : Recall for replacement task: 0.9148
+2024-08-01 11:15:07,779 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:15:26,537 : INFO : Results after 64.0000% iterations of epoch 1:
+2024-08-01 11:15:26,537 : INFO : Discriminator loss: 0.0653
+2024-08-01 11:15:26,537 : INFO : Gradient norm: 0.1399
+2024-08-01 11:15:26,537 : INFO : Current learning rate: 3.7186776859504134e-05
+2024-08-01 11:15:26,537 : INFO : Accuracy for replacement task: 0.9746
+2024-08-01 11:15:26,537 : INFO : Precision for replacement task: 0.9515
+2024-08-01 11:15:26,537 : INFO : Recall for replacement task: 0.9158
+2024-08-01 11:15:26,537 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:15:45,302 : INFO : Results after 64.3200% iterations of epoch 1:
+2024-08-01 11:15:45,302 : INFO : Discriminator loss: 0.0694
+2024-08-01 11:15:45,302 : INFO : Gradient norm: 0.1356
+2024-08-01 11:15:45,302 : INFO : Current learning rate: 3.685619834710744e-05
+2024-08-01 11:15:45,303 : INFO : Accuracy for replacement task: 0.9745
+2024-08-01 11:15:45,303 : INFO : Precision for replacement task: 0.9509
+2024-08-01 11:15:45,303 : INFO : Recall for replacement task: 0.9196
+2024-08-01 11:15:45,303 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:16:04,061 : INFO : Results after 64.6400% iterations of epoch 1:
+2024-08-01 11:16:04,061 : INFO : Discriminator loss: 0.0662
+2024-08-01 11:16:04,061 : INFO : Gradient norm: 0.1108
+2024-08-01 11:16:04,061 : INFO : Current learning rate: 3.6525619834710746e-05
+2024-08-01 11:16:04,061 : INFO : Accuracy for replacement task: 0.9756
+2024-08-01 11:16:04,061 : INFO : Precision for replacement task: 0.9513
+2024-08-01 11:16:04,061 : INFO : Recall for replacement task: 0.9268
+2024-08-01 11:16:04,061 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:16:22,816 : INFO : Results after 64.9600% iterations of epoch 1:
+2024-08-01 11:16:22,817 : INFO : Discriminator loss: 0.0669
+2024-08-01 11:16:22,817 : INFO : Gradient norm: 0.1023
+2024-08-01 11:16:22,817 : INFO : Current learning rate: 3.619504132231405e-05
+2024-08-01 11:16:22,817 : INFO : Accuracy for replacement task: 0.9755
+2024-08-01 11:16:22,817 : INFO : Precision for replacement task: 0.9503
+2024-08-01 11:16:22,817 : INFO : Recall for replacement task: 0.9287
+2024-08-01 11:16:22,817 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:16:41,582 : INFO : Results after 65.2800% iterations of epoch 1:
+2024-08-01 11:16:41,583 : INFO : Discriminator loss: 0.0634
+2024-08-01 11:16:41,583 : INFO : Gradient norm: 0.1134
+2024-08-01 11:16:41,583 : INFO : Current learning rate: 3.586446280991736e-05
+2024-08-01 11:16:41,583 : INFO : Accuracy for replacement task: 0.9758
+2024-08-01 11:16:41,583 : INFO : Precision for replacement task: 0.9462
+2024-08-01 11:16:41,583 : INFO : Recall for replacement task: 0.9291
+2024-08-01 11:16:41,583 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:17:00,368 : INFO : Results after 65.6000% iterations of epoch 1:
+2024-08-01 11:17:00,368 : INFO : Discriminator loss: 0.0697
+2024-08-01 11:17:00,368 : INFO : Gradient norm: 0.1189
+2024-08-01 11:17:00,368 : INFO : Current learning rate: 3.5533884297520667e-05
+2024-08-01 11:17:00,368 : INFO : Accuracy for replacement task: 0.9740
+2024-08-01 11:17:00,368 : INFO : Precision for replacement task: 0.9490
+2024-08-01 11:17:00,368 : INFO : Recall for replacement task: 0.9208
+2024-08-01 11:17:00,368 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:17:19,150 : INFO : Results after 65.9200% iterations of epoch 1:
+2024-08-01 11:17:19,150 : INFO : Discriminator loss: 0.0712
+2024-08-01 11:17:19,150 : INFO : Gradient norm: 0.1082
+2024-08-01 11:17:19,150 : INFO : Current learning rate: 3.520330578512397e-05
+2024-08-01 11:17:19,150 : INFO : Accuracy for replacement task: 0.9736
+2024-08-01 11:17:19,150 : INFO : Precision for replacement task: 0.9475
+2024-08-01 11:17:19,150 : INFO : Recall for replacement task: 0.9209
+2024-08-01 11:17:19,150 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:17:37,930 : INFO : Results after 66.2400% iterations of epoch 1:
+2024-08-01 11:17:37,930 : INFO : Discriminator loss: 0.0655
+2024-08-01 11:17:37,930 : INFO : Gradient norm: 0.1110
+2024-08-01 11:17:37,930 : INFO : Current learning rate: 3.487272727272727e-05
+2024-08-01 11:17:37,930 : INFO : Accuracy for replacement task: 0.9761
+2024-08-01 11:17:37,930 : INFO : Precision for replacement task: 0.9562
+2024-08-01 11:17:37,930 : INFO : Recall for replacement task: 0.9205
+2024-08-01 11:17:37,930 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:17:56,710 : INFO : Results after 66.5600% iterations of epoch 1:
+2024-08-01 11:17:56,711 : INFO : Discriminator loss: 0.0650
+2024-08-01 11:17:56,711 : INFO : Gradient norm: 0.1071
+2024-08-01 11:17:56,711 : INFO : Current learning rate: 3.454214876033058e-05
+2024-08-01 11:17:56,711 : INFO : Accuracy for replacement task: 0.9766
+2024-08-01 11:17:56,711 : INFO : Precision for replacement task: 0.9522
+2024-08-01 11:17:56,711 : INFO : Recall for replacement task: 0.9287
+2024-08-01 11:17:56,711 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:18:15,466 : INFO : Results after 66.8800% iterations of epoch 1:
+2024-08-01 11:18:15,466 : INFO : Discriminator loss: 0.0671
+2024-08-01 11:18:15,466 : INFO : Gradient norm: 0.1762
+2024-08-01 11:18:15,466 : INFO : Current learning rate: 3.421157024793389e-05
+2024-08-01 11:18:15,466 : INFO : Accuracy for replacement task: 0.9753
+2024-08-01 11:18:15,466 : INFO : Precision for replacement task: 0.9568
+2024-08-01 11:18:15,466 : INFO : Recall for replacement task: 0.9207
+2024-08-01 11:18:15,466 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:18:34,223 : INFO : Results after 67.2000% iterations of epoch 1:
+2024-08-01 11:18:34,224 : INFO : Discriminator loss: 0.0617
+2024-08-01 11:18:34,224 : INFO : Gradient norm: 0.0992
+2024-08-01 11:18:34,224 : INFO : Current learning rate: 3.388099173553719e-05
+2024-08-01 11:18:34,224 : INFO : Accuracy for replacement task: 0.9777
+2024-08-01 11:18:34,224 : INFO : Precision for replacement task: 0.9564
+2024-08-01 11:18:34,224 : INFO : Recall for replacement task: 0.9297
+2024-08-01 11:18:34,224 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:18:52,975 : INFO : Results after 67.5200% iterations of epoch 1:
+2024-08-01 11:18:52,976 : INFO : Discriminator loss: 0.0747
+2024-08-01 11:18:52,976 : INFO : Gradient norm: 0.1242
+2024-08-01 11:18:52,976 : INFO : Current learning rate: 3.3550413223140495e-05
+2024-08-01 11:18:52,976 : INFO : Accuracy for replacement task: 0.9723
+2024-08-01 11:18:52,976 : INFO : Precision for replacement task: 0.9401
+2024-08-01 11:18:52,976 : INFO : Recall for replacement task: 0.9196
+2024-08-01 11:18:52,976 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:19:11,724 : INFO : Results after 67.8400% iterations of epoch 1:
+2024-08-01 11:19:11,725 : INFO : Discriminator loss: 0.0660
+2024-08-01 11:19:11,725 : INFO : Gradient norm: 0.1038
+2024-08-01 11:19:11,725 : INFO : Current learning rate: 3.3219834710743804e-05
+2024-08-01 11:19:11,725 : INFO : Accuracy for replacement task: 0.9761
+2024-08-01 11:19:11,725 : INFO : Precision for replacement task: 0.9536
+2024-08-01 11:19:11,725 : INFO : Recall for replacement task: 0.9265
+2024-08-01 11:19:11,725 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:19:30,469 : INFO : Results after 68.1600% iterations of epoch 1:
+2024-08-01 11:19:30,469 : INFO : Discriminator loss: 0.0641
+2024-08-01 11:19:30,469 : INFO : Gradient norm: 0.0862
+2024-08-01 11:19:30,469 : INFO : Current learning rate: 3.2889256198347107e-05
+2024-08-01 11:19:30,469 : INFO : Accuracy for replacement task: 0.9769
+2024-08-01 11:19:30,470 : INFO : Precision for replacement task: 0.9532
+2024-08-01 11:19:30,470 : INFO : Recall for replacement task: 0.9287
+2024-08-01 11:19:30,470 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:19:49,218 : INFO : Results after 68.4800% iterations of epoch 1:
+2024-08-01 11:19:49,218 : INFO : Discriminator loss: 0.0676
+2024-08-01 11:19:49,218 : INFO : Gradient norm: 0.1077
+2024-08-01 11:19:49,218 : INFO : Current learning rate: 3.2558677685950416e-05
+2024-08-01 11:19:49,218 : INFO : Accuracy for replacement task: 0.9749
+2024-08-01 11:19:49,218 : INFO : Precision for replacement task: 0.9495
+2024-08-01 11:19:49,218 : INFO : Recall for replacement task: 0.9223
+2024-08-01 11:19:49,218 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:20:07,968 : INFO : Results after 68.8000% iterations of epoch 1:
+2024-08-01 11:20:07,968 : INFO : Discriminator loss: 0.0689
+2024-08-01 11:20:07,968 : INFO : Gradient norm: 0.1042
+2024-08-01 11:20:07,968 : INFO : Current learning rate: 3.2228099173553725e-05
+2024-08-01 11:20:07,968 : INFO : Accuracy for replacement task: 0.9747
+2024-08-01 11:20:07,968 : INFO : Precision for replacement task: 0.9508
+2024-08-01 11:20:07,968 : INFO : Recall for replacement task: 0.9193
+2024-08-01 11:20:07,968 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:20:26,721 : INFO : Results after 69.1200% iterations of epoch 1:
+2024-08-01 11:20:26,721 : INFO : Discriminator loss: 0.0625
+2024-08-01 11:20:26,721 : INFO : Gradient norm: 0.0986
+2024-08-01 11:20:26,721 : INFO : Current learning rate: 3.189752066115703e-05
+2024-08-01 11:20:26,721 : INFO : Accuracy for replacement task: 0.9759
+2024-08-01 11:20:26,721 : INFO : Precision for replacement task: 0.9539
+2024-08-01 11:20:26,721 : INFO : Recall for replacement task: 0.9229
+2024-08-01 11:20:26,721 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:20:45,494 : INFO : Results after 69.4400% iterations of epoch 1:
+2024-08-01 11:20:45,495 : INFO : Discriminator loss: 0.0593
+2024-08-01 11:20:45,495 : INFO : Gradient norm: 0.0964
+2024-08-01 11:20:45,495 : INFO : Current learning rate: 3.156694214876033e-05
+2024-08-01 11:20:45,495 : INFO : Accuracy for replacement task: 0.9789
+2024-08-01 11:20:45,495 : INFO : Precision for replacement task: 0.9593
+2024-08-01 11:20:45,495 : INFO : Recall for replacement task: 0.9338
+2024-08-01 11:20:45,495 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:21:04,273 : INFO : Results after 69.7600% iterations of epoch 1:
+2024-08-01 11:21:04,273 : INFO : Discriminator loss: 0.0639
+2024-08-01 11:21:04,273 : INFO : Gradient norm: 0.1197
+2024-08-01 11:21:04,273 : INFO : Current learning rate: 3.123636363636364e-05
+2024-08-01 11:21:04,273 : INFO : Accuracy for replacement task: 0.9761
+2024-08-01 11:21:04,273 : INFO : Precision for replacement task: 0.9530
+2024-08-01 11:21:04,273 : INFO : Recall for replacement task: 0.9249
+2024-08-01 11:21:04,273 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:21:23,042 : INFO : Results after 70.0800% iterations of epoch 1:
+2024-08-01 11:21:23,042 : INFO : Discriminator loss: 0.0627
+2024-08-01 11:21:23,042 : INFO : Gradient norm: 0.1120
+2024-08-01 11:21:23,042 : INFO : Current learning rate: 3.090578512396695e-05
+2024-08-01 11:21:23,042 : INFO : Accuracy for replacement task: 0.9771
+2024-08-01 11:21:23,042 : INFO : Precision for replacement task: 0.9551
+2024-08-01 11:21:23,042 : INFO : Recall for replacement task: 0.9310
+2024-08-01 11:21:23,042 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:21:41,795 : INFO : Results after 70.4000% iterations of epoch 1:
+2024-08-01 11:21:41,796 : INFO : Discriminator loss: 0.0699
+2024-08-01 11:21:41,796 : INFO : Gradient norm: 0.1035
+2024-08-01 11:21:41,796 : INFO : Current learning rate: 3.057520661157025e-05
+2024-08-01 11:21:41,796 : INFO : Accuracy for replacement task: 0.9743
+2024-08-01 11:21:41,796 : INFO : Precision for replacement task: 0.9480
+2024-08-01 11:21:41,796 : INFO : Recall for replacement task: 0.9228
+2024-08-01 11:21:41,796 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:22:00,542 : INFO : Results after 70.7200% iterations of epoch 1:
+2024-08-01 11:22:00,543 : INFO : Discriminator loss: 0.0663
+2024-08-01 11:22:00,543 : INFO : Gradient norm: 0.1015
+2024-08-01 11:22:00,543 : INFO : Current learning rate: 3.0244628099173557e-05
+2024-08-01 11:22:00,543 : INFO : Accuracy for replacement task: 0.9760
+2024-08-01 11:22:00,543 : INFO : Precision for replacement task: 0.9541
+2024-08-01 11:22:00,543 : INFO : Recall for replacement task: 0.9221
+2024-08-01 11:22:00,543 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:22:19,292 : INFO : Results after 71.0400% iterations of epoch 1:
+2024-08-01 11:22:19,292 : INFO : Discriminator loss: 0.0596
+2024-08-01 11:22:19,292 : INFO : Gradient norm: 0.0995
+2024-08-01 11:22:19,292 : INFO : Current learning rate: 2.991404958677686e-05
+2024-08-01 11:22:19,292 : INFO : Accuracy for replacement task: 0.9790
+2024-08-01 11:22:19,292 : INFO : Precision for replacement task: 0.9551
+2024-08-01 11:22:19,292 : INFO : Recall for replacement task: 0.9384
+2024-08-01 11:22:19,292 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:22:38,061 : INFO : Results after 71.3600% iterations of epoch 1:
+2024-08-01 11:22:38,061 : INFO : Discriminator loss: 0.0670
+2024-08-01 11:22:38,061 : INFO : Gradient norm: 0.1247
+2024-08-01 11:22:38,061 : INFO : Current learning rate: 2.9583471074380165e-05
+2024-08-01 11:22:38,061 : INFO : Accuracy for replacement task: 0.9752
+2024-08-01 11:22:38,061 : INFO : Precision for replacement task: 0.9545
+2024-08-01 11:22:38,061 : INFO : Recall for replacement task: 0.9165
+2024-08-01 11:22:38,061 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:22:56,815 : INFO : Results after 71.6800% iterations of epoch 1:
+2024-08-01 11:22:56,815 : INFO : Discriminator loss: 0.0657
+2024-08-01 11:22:56,815 : INFO : Gradient norm: 0.1129
+2024-08-01 11:22:56,815 : INFO : Current learning rate: 2.9252892561983474e-05
+2024-08-01 11:22:56,815 : INFO : Accuracy for replacement task: 0.9762
+2024-08-01 11:22:56,815 : INFO : Precision for replacement task: 0.9522
+2024-08-01 11:22:56,815 : INFO : Recall for replacement task: 0.9268
+2024-08-01 11:22:56,815 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:23:15,562 : INFO : Results after 72.0000% iterations of epoch 1:
+2024-08-01 11:23:15,562 : INFO : Discriminator loss: 0.0675
+2024-08-01 11:23:15,562 : INFO : Gradient norm: 0.1088
+2024-08-01 11:23:15,562 : INFO : Current learning rate: 2.892231404958678e-05
+2024-08-01 11:23:15,562 : INFO : Accuracy for replacement task: 0.9754
+2024-08-01 11:23:15,562 : INFO : Precision for replacement task: 0.9525
+2024-08-01 11:23:15,562 : INFO : Recall for replacement task: 0.9243
+2024-08-01 11:23:15,562 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:23:34,302 : INFO : Results after 72.3200% iterations of epoch 1:
+2024-08-01 11:23:34,303 : INFO : Discriminator loss: 0.0598
+2024-08-01 11:23:34,303 : INFO : Gradient norm: 0.1089
+2024-08-01 11:23:34,303 : INFO : Current learning rate: 2.8591735537190082e-05
+2024-08-01 11:23:34,303 : INFO : Accuracy for replacement task: 0.9784
+2024-08-01 11:23:34,303 : INFO : Precision for replacement task: 0.9605
+2024-08-01 11:23:34,303 : INFO : Recall for replacement task: 0.9307
+2024-08-01 11:23:34,303 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:23:53,048 : INFO : Results after 72.6400% iterations of epoch 1:
+2024-08-01 11:23:53,048 : INFO : Discriminator loss: 0.0676
+2024-08-01 11:23:53,048 : INFO : Gradient norm: 0.1153
+2024-08-01 11:23:53,048 : INFO : Current learning rate: 2.826115702479339e-05
+2024-08-01 11:23:53,048 : INFO : Accuracy for replacement task: 0.9753
+2024-08-01 11:23:53,048 : INFO : Precision for replacement task: 0.9557
+2024-08-01 11:23:53,048 : INFO : Recall for replacement task: 0.9191
+2024-08-01 11:23:53,048 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:24:11,813 : INFO : Results after 72.9600% iterations of epoch 1:
+2024-08-01 11:24:11,813 : INFO : Discriminator loss: 0.0666
+2024-08-01 11:24:11,814 : INFO : Gradient norm: 0.1048
+2024-08-01 11:24:11,814 : INFO : Current learning rate: 2.7930578512396694e-05
+2024-08-01 11:24:11,814 : INFO : Accuracy for replacement task: 0.9751
+2024-08-01 11:24:11,814 : INFO : Precision for replacement task: 0.9495
+2024-08-01 11:24:11,814 : INFO : Recall for replacement task: 0.9235
+2024-08-01 11:24:11,814 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:24:30,555 : INFO : Results after 73.2800% iterations of epoch 1:
+2024-08-01 11:24:30,556 : INFO : Discriminator loss: 0.0630
+2024-08-01 11:24:30,556 : INFO : Gradient norm: 0.1074
+2024-08-01 11:24:30,556 : INFO : Current learning rate: 2.7600000000000003e-05
+2024-08-01 11:24:30,556 : INFO : Accuracy for replacement task: 0.9766
+2024-08-01 11:24:30,556 : INFO : Precision for replacement task: 0.9480
+2024-08-01 11:24:30,556 : INFO : Recall for replacement task: 0.9332
+2024-08-01 11:24:30,556 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:24:49,327 : INFO : Results after 73.6000% iterations of epoch 1:
+2024-08-01 11:24:49,327 : INFO : Discriminator loss: 0.0676
+2024-08-01 11:24:49,327 : INFO : Gradient norm: 0.1010
+2024-08-01 11:24:49,327 : INFO : Current learning rate: 2.726942148760331e-05
+2024-08-01 11:24:49,327 : INFO : Accuracy for replacement task: 0.9753
+2024-08-01 11:24:49,327 : INFO : Precision for replacement task: 0.9467
+2024-08-01 11:24:49,327 : INFO : Recall for replacement task: 0.9288
+2024-08-01 11:24:49,327 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:25:08,095 : INFO : Results after 73.9200% iterations of epoch 1:
+2024-08-01 11:25:08,095 : INFO : Discriminator loss: 0.0676
+2024-08-01 11:25:08,095 : INFO : Gradient norm: 0.1031
+2024-08-01 11:25:08,095 : INFO : Current learning rate: 2.6938842975206612e-05
+2024-08-01 11:25:08,095 : INFO : Accuracy for replacement task: 0.9755
+2024-08-01 11:25:08,095 : INFO : Precision for replacement task: 0.9523
+2024-08-01 11:25:08,095 : INFO : Recall for replacement task: 0.9237
+2024-08-01 11:25:08,095 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:25:26,864 : INFO : Results after 74.2400% iterations of epoch 1:
+2024-08-01 11:25:26,864 : INFO : Discriminator loss: 0.0668
+2024-08-01 11:25:26,864 : INFO : Gradient norm: 0.1050
+2024-08-01 11:25:26,864 : INFO : Current learning rate: 2.6608264462809918e-05
+2024-08-01 11:25:26,864 : INFO : Accuracy for replacement task: 0.9749
+2024-08-01 11:25:26,864 : INFO : Precision for replacement task: 0.9468
+2024-08-01 11:25:26,864 : INFO : Recall for replacement task: 0.9240
+2024-08-01 11:25:26,864 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:25:45,635 : INFO : Results after 74.5600% iterations of epoch 1:
+2024-08-01 11:25:45,635 : INFO : Discriminator loss: 0.0671
+2024-08-01 11:25:45,635 : INFO : Gradient norm: 0.1342
+2024-08-01 11:25:45,635 : INFO : Current learning rate: 2.6277685950413223e-05
+2024-08-01 11:25:45,635 : INFO : Accuracy for replacement task: 0.9755
+2024-08-01 11:25:45,635 : INFO : Precision for replacement task: 0.9522
+2024-08-01 11:25:45,635 : INFO : Recall for replacement task: 0.9235
+2024-08-01 11:25:45,635 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:26:04,411 : INFO : Results after 74.8800% iterations of epoch 1:
+2024-08-01 11:26:04,411 : INFO : Discriminator loss: 0.0677
+2024-08-01 11:26:04,411 : INFO : Gradient norm: 0.1051
+2024-08-01 11:26:04,411 : INFO : Current learning rate: 2.5947107438016533e-05
+2024-08-01 11:26:04,411 : INFO : Accuracy for replacement task: 0.9747
+2024-08-01 11:26:04,411 : INFO : Precision for replacement task: 0.9448
+2024-08-01 11:26:04,411 : INFO : Recall for replacement task: 0.9278
+2024-08-01 11:26:04,411 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:26:23,185 : INFO : Results after 75.2000% iterations of epoch 1:
+2024-08-01 11:26:23,185 : INFO : Discriminator loss: 0.0614
+2024-08-01 11:26:23,185 : INFO : Gradient norm: 0.0986
+2024-08-01 11:26:23,185 : INFO : Current learning rate: 2.561652892561984e-05
+2024-08-01 11:26:23,185 : INFO : Accuracy for replacement task: 0.9778
+2024-08-01 11:26:23,185 : INFO : Precision for replacement task: 0.9529
+2024-08-01 11:26:23,185 : INFO : Recall for replacement task: 0.9335
+2024-08-01 11:26:23,185 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:26:41,958 : INFO : Results after 75.5200% iterations of epoch 1:
+2024-08-01 11:26:41,958 : INFO : Discriminator loss: 0.0674
+2024-08-01 11:26:41,958 : INFO : Gradient norm: 0.1224
+2024-08-01 11:26:41,958 : INFO : Current learning rate: 2.528595041322314e-05
+2024-08-01 11:26:41,958 : INFO : Accuracy for replacement task: 0.9759
+2024-08-01 11:26:41,958 : INFO : Precision for replacement task: 0.9470
+2024-08-01 11:26:41,958 : INFO : Recall for replacement task: 0.9322
+2024-08-01 11:26:41,958 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:27:00,733 : INFO : Results after 75.8400% iterations of epoch 1:
+2024-08-01 11:27:00,734 : INFO : Discriminator loss: 0.0646
+2024-08-01 11:27:00,734 : INFO : Gradient norm: 0.1252
+2024-08-01 11:27:00,734 : INFO : Current learning rate: 2.4955371900826447e-05
+2024-08-01 11:27:00,734 : INFO : Accuracy for replacement task: 0.9764
+2024-08-01 11:27:00,734 : INFO : Precision for replacement task: 0.9554
+2024-08-01 11:27:00,734 : INFO : Recall for replacement task: 0.9232
+2024-08-01 11:27:00,734 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:27:19,473 : INFO : Results after 76.1600% iterations of epoch 1:
+2024-08-01 11:27:19,473 : INFO : Discriminator loss: 0.0669
+2024-08-01 11:27:19,473 : INFO : Gradient norm: 0.1025
+2024-08-01 11:27:19,473 : INFO : Current learning rate: 2.4624793388429753e-05
+2024-08-01 11:27:19,473 : INFO : Accuracy for replacement task: 0.9761
+2024-08-01 11:27:19,473 : INFO : Precision for replacement task: 0.9552
+2024-08-01 11:27:19,473 : INFO : Recall for replacement task: 0.9212
+2024-08-01 11:27:19,473 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:27:38,244 : INFO : Results after 76.4800% iterations of epoch 1:
+2024-08-01 11:27:38,244 : INFO : Discriminator loss: 0.0660
+2024-08-01 11:27:38,244 : INFO : Gradient norm: 0.1147
+2024-08-01 11:27:38,244 : INFO : Current learning rate: 2.429421487603306e-05
+2024-08-01 11:27:38,244 : INFO : Accuracy for replacement task: 0.9759
+2024-08-01 11:27:38,244 : INFO : Precision for replacement task: 0.9543
+2024-08-01 11:27:38,244 : INFO : Recall for replacement task: 0.9251
+2024-08-01 11:27:38,244 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:27:57,008 : INFO : Results after 76.8000% iterations of epoch 1:
+2024-08-01 11:27:57,008 : INFO : Discriminator loss: 0.0629
+2024-08-01 11:27:57,008 : INFO : Gradient norm: 0.1035
+2024-08-01 11:27:57,008 : INFO : Current learning rate: 2.3963636363636364e-05
+2024-08-01 11:27:57,008 : INFO : Accuracy for replacement task: 0.9769
+2024-08-01 11:27:57,008 : INFO : Precision for replacement task: 0.9520
+2024-08-01 11:27:57,008 : INFO : Recall for replacement task: 0.9307
+2024-08-01 11:27:57,008 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:28:15,786 : INFO : Results after 77.1200% iterations of epoch 1:
+2024-08-01 11:28:15,786 : INFO : Discriminator loss: 0.0576
+2024-08-01 11:28:15,786 : INFO : Gradient norm: 0.1178
+2024-08-01 11:28:15,786 : INFO : Current learning rate: 2.363305785123967e-05
+2024-08-01 11:28:15,786 : INFO : Accuracy for replacement task: 0.9785
+2024-08-01 11:28:15,786 : INFO : Precision for replacement task: 0.9567
+2024-08-01 11:28:15,786 : INFO : Recall for replacement task: 0.9329
+2024-08-01 11:28:15,786 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:28:34,565 : INFO : Results after 77.4400% iterations of epoch 1:
+2024-08-01 11:28:34,565 : INFO : Discriminator loss: 0.0639
+2024-08-01 11:28:34,565 : INFO : Gradient norm: 0.1036
+2024-08-01 11:28:34,565 : INFO : Current learning rate: 2.3302479338842976e-05
+2024-08-01 11:28:34,565 : INFO : Accuracy for replacement task: 0.9770
+2024-08-01 11:28:34,566 : INFO : Precision for replacement task: 0.9520
+2024-08-01 11:28:34,566 : INFO : Recall for replacement task: 0.9283
+2024-08-01 11:28:34,566 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:28:53,517 : INFO : Results after 77.7600% iterations of epoch 1:
+2024-08-01 11:28:53,518 : INFO : Discriminator loss: 0.0615
+2024-08-01 11:28:53,518 : INFO : Gradient norm: 0.1381
+2024-08-01 11:28:53,518 : INFO : Current learning rate: 2.2971900826446282e-05
+2024-08-01 11:28:53,518 : INFO : Accuracy for replacement task: 0.9774
+2024-08-01 11:28:53,518 : INFO : Precision for replacement task: 0.9514
+2024-08-01 11:28:53,518 : INFO : Recall for replacement task: 0.9341
+2024-08-01 11:28:53,518 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:29:12,289 : INFO : Results after 78.0800% iterations of epoch 1:
+2024-08-01 11:29:12,289 : INFO : Discriminator loss: 0.0658
+2024-08-01 11:29:12,289 : INFO : Gradient norm: 0.1096
+2024-08-01 11:29:12,289 : INFO : Current learning rate: 2.2641322314049588e-05
+2024-08-01 11:29:12,289 : INFO : Accuracy for replacement task: 0.9756
+2024-08-01 11:29:12,289 : INFO : Precision for replacement task: 0.9514
+2024-08-01 11:29:12,289 : INFO : Recall for replacement task: 0.9276
+2024-08-01 11:29:12,289 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:29:31,068 : INFO : Results after 78.4000% iterations of epoch 1:
+2024-08-01 11:29:31,068 : INFO : Discriminator loss: 0.0641
+2024-08-01 11:29:31,068 : INFO : Gradient norm: 0.1151
+2024-08-01 11:29:31,068 : INFO : Current learning rate: 2.2310743801652893e-05
+2024-08-01 11:29:31,068 : INFO : Accuracy for replacement task: 0.9775
+2024-08-01 11:29:31,068 : INFO : Precision for replacement task: 0.9536
+2024-08-01 11:29:31,068 : INFO : Recall for replacement task: 0.9341
+2024-08-01 11:29:31,068 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:29:49,857 : INFO : Results after 78.7200% iterations of epoch 1:
+2024-08-01 11:29:49,858 : INFO : Discriminator loss: 0.0707
+2024-08-01 11:29:49,858 : INFO : Gradient norm: 0.1150
+2024-08-01 11:29:49,858 : INFO : Current learning rate: 2.19801652892562e-05
+2024-08-01 11:29:49,858 : INFO : Accuracy for replacement task: 0.9742
+2024-08-01 11:29:49,858 : INFO : Precision for replacement task: 0.9455
+2024-08-01 11:29:49,858 : INFO : Recall for replacement task: 0.9245
+2024-08-01 11:29:49,858 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:30:08,599 : INFO : Results after 79.0400% iterations of epoch 1:
+2024-08-01 11:30:08,599 : INFO : Discriminator loss: 0.0698
+2024-08-01 11:30:08,599 : INFO : Gradient norm: 0.1086
+2024-08-01 11:30:08,599 : INFO : Current learning rate: 2.1649586776859505e-05
+2024-08-01 11:30:08,599 : INFO : Accuracy for replacement task: 0.9742
+2024-08-01 11:30:08,599 : INFO : Precision for replacement task: 0.9472
+2024-08-01 11:30:08,599 : INFO : Recall for replacement task: 0.9213
+2024-08-01 11:30:08,599 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:30:27,370 : INFO : Results after 79.3600% iterations of epoch 1:
+2024-08-01 11:30:27,370 : INFO : Discriminator loss: 0.0639
+2024-08-01 11:30:27,370 : INFO : Gradient norm: 0.0940
+2024-08-01 11:30:27,370 : INFO : Current learning rate: 2.131900826446281e-05
+2024-08-01 11:30:27,370 : INFO : Accuracy for replacement task: 0.9762
+2024-08-01 11:30:27,370 : INFO : Precision for replacement task: 0.9520
+2024-08-01 11:30:27,371 : INFO : Recall for replacement task: 0.9273
+2024-08-01 11:30:27,371 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:30:47,024 : INFO : Results after 79.6800% iterations of epoch 1:
+2024-08-01 11:30:47,024 : INFO : Discriminator loss: 0.0646
+2024-08-01 11:30:47,025 : INFO : Gradient norm: 0.1234
+2024-08-01 11:30:47,025 : INFO : Current learning rate: 2.0988429752066117e-05
+2024-08-01 11:30:47,025 : INFO : Accuracy for replacement task: 0.9766
+2024-08-01 11:30:47,025 : INFO : Precision for replacement task: 0.9482
+2024-08-01 11:30:47,025 : INFO : Recall for replacement task: 0.9318
+2024-08-01 11:30:47,025 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:31:05,794 : INFO : Results after 80.0000% iterations of epoch 1:
+2024-08-01 11:31:05,795 : INFO : Discriminator loss: 0.0670
+2024-08-01 11:31:05,795 : INFO : Gradient norm: 0.1061
+2024-08-01 11:31:05,795 : INFO : Current learning rate: 2.0657851239669423e-05
+2024-08-01 11:31:05,795 : INFO : Accuracy for replacement task: 0.9758
+2024-08-01 11:31:05,795 : INFO : Precision for replacement task: 0.9488
+2024-08-01 11:31:05,795 : INFO : Recall for replacement task: 0.9279
+2024-08-01 11:31:05,795 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:31:24,536 : INFO : Results after 80.3200% iterations of epoch 1:
+2024-08-01 11:31:24,536 : INFO : Discriminator loss: 0.0584
+2024-08-01 11:31:24,536 : INFO : Gradient norm: 0.1763
+2024-08-01 11:31:24,536 : INFO : Current learning rate: 2.032727272727273e-05
+2024-08-01 11:31:24,536 : INFO : Accuracy for replacement task: 0.9787
+2024-08-01 11:31:24,536 : INFO : Precision for replacement task: 0.9639
+2024-08-01 11:31:24,536 : INFO : Recall for replacement task: 0.9270
+2024-08-01 11:31:24,536 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:31:44,150 : INFO : Results after 80.6400% iterations of epoch 1:
+2024-08-01 11:31:44,151 : INFO : Discriminator loss: 0.0619
+2024-08-01 11:31:44,151 : INFO : Gradient norm: 0.1421
+2024-08-01 11:31:44,151 : INFO : Current learning rate: 1.9996694214876034e-05
+2024-08-01 11:31:44,151 : INFO : Accuracy for replacement task: 0.9775
+2024-08-01 11:31:44,151 : INFO : Precision for replacement task: 0.9607
+2024-08-01 11:31:44,151 : INFO : Recall for replacement task: 0.9242
+2024-08-01 11:31:44,151 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:32:02,905 : INFO : Results after 80.9600% iterations of epoch 1:
+2024-08-01 11:32:02,905 : INFO : Discriminator loss: 0.0634
+2024-08-01 11:32:02,905 : INFO : Gradient norm: 0.1149
+2024-08-01 11:32:02,905 : INFO : Current learning rate: 1.966611570247934e-05
+2024-08-01 11:32:02,905 : INFO : Accuracy for replacement task: 0.9764
+2024-08-01 11:32:02,905 : INFO : Precision for replacement task: 0.9538
+2024-08-01 11:32:02,905 : INFO : Recall for replacement task: 0.9254
+2024-08-01 11:32:02,905 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:32:22,502 : INFO : Results after 81.2800% iterations of epoch 1:
+2024-08-01 11:32:22,502 : INFO : Discriminator loss: 0.0658
+2024-08-01 11:32:22,502 : INFO : Gradient norm: 0.1129
+2024-08-01 11:32:22,502 : INFO : Current learning rate: 1.9335537190082646e-05
+2024-08-01 11:32:22,503 : INFO : Accuracy for replacement task: 0.9770
+2024-08-01 11:32:22,503 : INFO : Precision for replacement task: 0.9490
+2024-08-01 11:32:22,503 : INFO : Recall for replacement task: 0.9326
+2024-08-01 11:32:22,503 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:32:41,293 : INFO : Results after 81.6000% iterations of epoch 1:
+2024-08-01 11:32:41,293 : INFO : Discriminator loss: 0.0633
+2024-08-01 11:32:41,293 : INFO : Gradient norm: 0.1058
+2024-08-01 11:32:41,293 : INFO : Current learning rate: 1.9004958677685952e-05
+2024-08-01 11:32:41,293 : INFO : Accuracy for replacement task: 0.9769
+2024-08-01 11:32:41,293 : INFO : Precision for replacement task: 0.9504
+2024-08-01 11:32:41,293 : INFO : Recall for replacement task: 0.9319
+2024-08-01 11:32:41,293 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:33:00,057 : INFO : Results after 81.9200% iterations of epoch 1:
+2024-08-01 11:33:00,057 : INFO : Discriminator loss: 0.0615
+2024-08-01 11:33:00,057 : INFO : Gradient norm: 0.1225
+2024-08-01 11:33:00,057 : INFO : Current learning rate: 1.8674380165289258e-05
+2024-08-01 11:33:00,057 : INFO : Accuracy for replacement task: 0.9772
+2024-08-01 11:33:00,057 : INFO : Precision for replacement task: 0.9593
+2024-08-01 11:33:00,057 : INFO : Recall for replacement task: 0.9241
+2024-08-01 11:33:00,057 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:33:18,805 : INFO : Results after 82.2400% iterations of epoch 1:
+2024-08-01 11:33:18,805 : INFO : Discriminator loss: 0.0620
+2024-08-01 11:33:18,805 : INFO : Gradient norm: 0.1182
+2024-08-01 11:33:18,805 : INFO : Current learning rate: 1.834380165289256e-05
+2024-08-01 11:33:18,805 : INFO : Accuracy for replacement task: 0.9774
+2024-08-01 11:33:18,805 : INFO : Precision for replacement task: 0.9495
+2024-08-01 11:33:18,805 : INFO : Recall for replacement task: 0.9359
+2024-08-01 11:33:18,805 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:33:37,551 : INFO : Results after 82.5600% iterations of epoch 1:
+2024-08-01 11:33:37,552 : INFO : Discriminator loss: 0.0675
+2024-08-01 11:33:37,552 : INFO : Gradient norm: 0.1381
+2024-08-01 11:33:37,552 : INFO : Current learning rate: 1.801322314049587e-05
+2024-08-01 11:33:37,552 : INFO : Accuracy for replacement task: 0.9750
+2024-08-01 11:33:37,552 : INFO : Precision for replacement task: 0.9444
+2024-08-01 11:33:37,552 : INFO : Recall for replacement task: 0.9268
+2024-08-01 11:33:37,552 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:33:56,302 : INFO : Results after 82.8800% iterations of epoch 1:
+2024-08-01 11:33:56,302 : INFO : Discriminator loss: 0.0658
+2024-08-01 11:33:56,302 : INFO : Gradient norm: 0.1277
+2024-08-01 11:33:56,302 : INFO : Current learning rate: 1.7682644628099175e-05
+2024-08-01 11:33:56,302 : INFO : Accuracy for replacement task: 0.9765
+2024-08-01 11:33:56,302 : INFO : Precision for replacement task: 0.9505
+2024-08-01 11:33:56,302 : INFO : Recall for replacement task: 0.9291
+2024-08-01 11:33:56,302 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:34:15,906 : INFO : Results after 83.2000% iterations of epoch 1:
+2024-08-01 11:34:15,907 : INFO : Discriminator loss: 0.0628
+2024-08-01 11:34:15,907 : INFO : Gradient norm: 0.1077
+2024-08-01 11:34:15,907 : INFO : Current learning rate: 1.735206611570248e-05
+2024-08-01 11:34:15,907 : INFO : Accuracy for replacement task: 0.9772
+2024-08-01 11:34:15,907 : INFO : Precision for replacement task: 0.9576
+2024-08-01 11:34:15,907 : INFO : Recall for replacement task: 0.9285
+2024-08-01 11:34:15,907 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:34:34,669 : INFO : Results after 83.5200% iterations of epoch 1:
+2024-08-01 11:34:34,670 : INFO : Discriminator loss: 0.0650
+2024-08-01 11:34:34,670 : INFO : Gradient norm: 0.1137
+2024-08-01 11:34:34,670 : INFO : Current learning rate: 1.7021487603305787e-05
+2024-08-01 11:34:34,670 : INFO : Accuracy for replacement task: 0.9754
+2024-08-01 11:34:34,670 : INFO : Precision for replacement task: 0.9498
+2024-08-01 11:34:34,670 : INFO : Recall for replacement task: 0.9263
+2024-08-01 11:34:34,670 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:34:53,426 : INFO : Results after 83.8400% iterations of epoch 1:
+2024-08-01 11:34:53,426 : INFO : Discriminator loss: 0.0662
+2024-08-01 11:34:53,426 : INFO : Gradient norm: 0.1034
+2024-08-01 11:34:53,426 : INFO : Current learning rate: 1.669090909090909e-05
+2024-08-01 11:34:53,426 : INFO : Accuracy for replacement task: 0.9760
+2024-08-01 11:34:53,426 : INFO : Precision for replacement task: 0.9503
+2024-08-01 11:34:53,426 : INFO : Recall for replacement task: 0.9279
+2024-08-01 11:34:53,426 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:35:13,047 : INFO : Results after 84.1600% iterations of epoch 1:
+2024-08-01 11:35:13,047 : INFO : Discriminator loss: 0.0677
+2024-08-01 11:35:13,047 : INFO : Gradient norm: 0.1438
+2024-08-01 11:35:13,047 : INFO : Current learning rate: 1.63603305785124e-05
+2024-08-01 11:35:13,047 : INFO : Accuracy for replacement task: 0.9758
+2024-08-01 11:35:13,047 : INFO : Precision for replacement task: 0.9559
+2024-08-01 11:35:13,047 : INFO : Recall for replacement task: 0.9213
+2024-08-01 11:35:13,047 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:35:31,792 : INFO : Results after 84.4800% iterations of epoch 1:
+2024-08-01 11:35:31,792 : INFO : Discriminator loss: 0.0671
+2024-08-01 11:35:31,792 : INFO : Gradient norm: 0.1102
+2024-08-01 11:35:31,792 : INFO : Current learning rate: 1.60297520661157e-05
+2024-08-01 11:35:31,792 : INFO : Accuracy for replacement task: 0.9760
+2024-08-01 11:35:31,792 : INFO : Precision for replacement task: 0.9519
+2024-08-01 11:35:31,792 : INFO : Recall for replacement task: 0.9277
+2024-08-01 11:35:31,792 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:35:50,539 : INFO : Results after 84.8000% iterations of epoch 1:
+2024-08-01 11:35:50,539 : INFO : Discriminator loss: 0.0582
+2024-08-01 11:35:50,539 : INFO : Gradient norm: 0.1036
+2024-08-01 11:35:50,539 : INFO : Current learning rate: 1.569917355371901e-05
+2024-08-01 11:35:50,539 : INFO : Accuracy for replacement task: 0.9788
+2024-08-01 11:35:50,539 : INFO : Precision for replacement task: 0.9589
+2024-08-01 11:35:50,539 : INFO : Recall for replacement task: 0.9323
+2024-08-01 11:35:50,539 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:36:10,142 : INFO : Results after 85.1200% iterations of epoch 1:
+2024-08-01 11:36:10,143 : INFO : Discriminator loss: 0.0636
+2024-08-01 11:36:10,143 : INFO : Gradient norm: 0.1421
+2024-08-01 11:36:10,143 : INFO : Current learning rate: 1.5368595041322316e-05
+2024-08-01 11:36:10,143 : INFO : Accuracy for replacement task: 0.9763
+2024-08-01 11:36:10,143 : INFO : Precision for replacement task: 0.9600
+2024-08-01 11:36:10,143 : INFO : Recall for replacement task: 0.9207
+2024-08-01 11:36:10,143 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:36:28,883 : INFO : Results after 85.4400% iterations of epoch 1:
+2024-08-01 11:36:28,884 : INFO : Discriminator loss: 0.0664
+2024-08-01 11:36:28,884 : INFO : Gradient norm: 0.1483
+2024-08-01 11:36:28,884 : INFO : Current learning rate: 1.5038016528925619e-05
+2024-08-01 11:36:28,884 : INFO : Accuracy for replacement task: 0.9758
+2024-08-01 11:36:28,884 : INFO : Precision for replacement task: 0.9580
+2024-08-01 11:36:28,884 : INFO : Recall for replacement task: 0.9209
+2024-08-01 11:36:28,884 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:36:47,630 : INFO : Results after 85.7600% iterations of epoch 1:
+2024-08-01 11:36:47,630 : INFO : Discriminator loss: 0.0667
+2024-08-01 11:36:47,630 : INFO : Gradient norm: 0.1179
+2024-08-01 11:36:47,630 : INFO : Current learning rate: 1.4707438016528926e-05
+2024-08-01 11:36:47,630 : INFO : Accuracy for replacement task: 0.9756
+2024-08-01 11:36:47,630 : INFO : Precision for replacement task: 0.9519
+2024-08-01 11:36:47,630 : INFO : Recall for replacement task: 0.9243
+2024-08-01 11:36:47,630 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:37:06,390 : INFO : Results after 86.0800% iterations of epoch 1:
+2024-08-01 11:37:06,390 : INFO : Discriminator loss: 0.0683
+2024-08-01 11:37:06,390 : INFO : Gradient norm: 0.1671
+2024-08-01 11:37:06,390 : INFO : Current learning rate: 1.4376859504132232e-05
+2024-08-01 11:37:06,390 : INFO : Accuracy for replacement task: 0.9758
+2024-08-01 11:37:06,390 : INFO : Precision for replacement task: 0.9518
+2024-08-01 11:37:06,390 : INFO : Recall for replacement task: 0.9240
+2024-08-01 11:37:06,390 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:37:26,011 : INFO : Results after 86.4000% iterations of epoch 1:
+2024-08-01 11:37:26,011 : INFO : Discriminator loss: 0.0609
+2024-08-01 11:37:26,011 : INFO : Gradient norm: 0.1327
+2024-08-01 11:37:26,011 : INFO : Current learning rate: 1.4046280991735538e-05
+2024-08-01 11:37:26,011 : INFO : Accuracy for replacement task: 0.9787
+2024-08-01 11:37:26,011 : INFO : Precision for replacement task: 0.9601
+2024-08-01 11:37:26,011 : INFO : Recall for replacement task: 0.9318
+2024-08-01 11:37:26,011 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:37:44,790 : INFO : Results after 86.7200% iterations of epoch 1:
+2024-08-01 11:37:44,790 : INFO : Discriminator loss: 0.0601
+2024-08-01 11:37:44,790 : INFO : Gradient norm: 0.1385
+2024-08-01 11:37:44,790 : INFO : Current learning rate: 1.3715702479338844e-05
+2024-08-01 11:37:44,790 : INFO : Accuracy for replacement task: 0.9777
+2024-08-01 11:37:44,790 : INFO : Precision for replacement task: 0.9604
+2024-08-01 11:37:44,790 : INFO : Recall for replacement task: 0.9260
+2024-08-01 11:37:44,790 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:38:03,570 : INFO : Results after 87.0400% iterations of epoch 1:
+2024-08-01 11:38:03,570 : INFO : Discriminator loss: 0.0614
+2024-08-01 11:38:03,570 : INFO : Gradient norm: 0.1038
+2024-08-01 11:38:03,570 : INFO : Current learning rate: 1.3385123966942151e-05
+2024-08-01 11:38:03,570 : INFO : Accuracy for replacement task: 0.9777
+2024-08-01 11:38:03,570 : INFO : Precision for replacement task: 0.9537
+2024-08-01 11:38:03,570 : INFO : Recall for replacement task: 0.9324
+2024-08-01 11:38:03,570 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:38:22,348 : INFO : Results after 87.3600% iterations of epoch 1:
+2024-08-01 11:38:22,348 : INFO : Discriminator loss: 0.0669
+2024-08-01 11:38:22,348 : INFO : Gradient norm: 0.1101
+2024-08-01 11:38:22,348 : INFO : Current learning rate: 1.3054545454545455e-05
+2024-08-01 11:38:22,348 : INFO : Accuracy for replacement task: 0.9757
+2024-08-01 11:38:22,348 : INFO : Precision for replacement task: 0.9553
+2024-08-01 11:38:22,348 : INFO : Recall for replacement task: 0.9227
+2024-08-01 11:38:22,348 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:38:41,121 : INFO : Results after 87.6800% iterations of epoch 1:
+2024-08-01 11:38:41,122 : INFO : Discriminator loss: 0.0629
+2024-08-01 11:38:41,122 : INFO : Gradient norm: 0.1159
+2024-08-01 11:38:41,122 : INFO : Current learning rate: 1.272396694214876e-05
+2024-08-01 11:38:41,122 : INFO : Accuracy for replacement task: 0.9769
+2024-08-01 11:38:41,122 : INFO : Precision for replacement task: 0.9565
+2024-08-01 11:38:41,122 : INFO : Recall for replacement task: 0.9255
+2024-08-01 11:38:41,122 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:38:59,888 : INFO : Results after 88.0000% iterations of epoch 1:
+2024-08-01 11:38:59,889 : INFO : Discriminator loss: 0.0665
+2024-08-01 11:38:59,889 : INFO : Gradient norm: 0.1184
+2024-08-01 11:38:59,889 : INFO : Current learning rate: 1.2393388429752065e-05
+2024-08-01 11:38:59,889 : INFO : Accuracy for replacement task: 0.9758
+2024-08-01 11:38:59,889 : INFO : Precision for replacement task: 0.9521
+2024-08-01 11:38:59,889 : INFO : Recall for replacement task: 0.9265
+2024-08-01 11:38:59,889 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:39:18,647 : INFO : Results after 88.3200% iterations of epoch 1:
+2024-08-01 11:39:18,647 : INFO : Discriminator loss: 0.0641
+2024-08-01 11:39:18,647 : INFO : Gradient norm: 0.1101
+2024-08-01 11:39:18,647 : INFO : Current learning rate: 1.2062809917355373e-05
+2024-08-01 11:39:18,647 : INFO : Accuracy for replacement task: 0.9773
+2024-08-01 11:39:18,647 : INFO : Precision for replacement task: 0.9516
+2024-08-01 11:39:18,647 : INFO : Recall for replacement task: 0.9329
+2024-08-01 11:39:18,647 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:39:37,405 : INFO : Results after 88.6400% iterations of epoch 1:
+2024-08-01 11:39:37,405 : INFO : Discriminator loss: 0.0699
+2024-08-01 11:39:37,406 : INFO : Gradient norm: 0.1101
+2024-08-01 11:39:37,406 : INFO : Current learning rate: 1.1732231404958679e-05
+2024-08-01 11:39:37,406 : INFO : Accuracy for replacement task: 0.9743
+2024-08-01 11:39:37,406 : INFO : Precision for replacement task: 0.9489
+2024-08-01 11:39:37,406 : INFO : Recall for replacement task: 0.9200
+2024-08-01 11:39:37,406 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:39:56,167 : INFO : Results after 88.9600% iterations of epoch 1:
+2024-08-01 11:39:56,168 : INFO : Discriminator loss: 0.0615
+2024-08-01 11:39:56,168 : INFO : Gradient norm: 0.1015
+2024-08-01 11:39:56,168 : INFO : Current learning rate: 1.1401652892561985e-05
+2024-08-01 11:39:56,168 : INFO : Accuracy for replacement task: 0.9774
+2024-08-01 11:39:56,168 : INFO : Precision for replacement task: 0.9568
+2024-08-01 11:39:56,168 : INFO : Recall for replacement task: 0.9274
+2024-08-01 11:39:56,168 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:40:14,925 : INFO : Results after 89.2800% iterations of epoch 1:
+2024-08-01 11:40:14,926 : INFO : Discriminator loss: 0.0598
+2024-08-01 11:40:14,926 : INFO : Gradient norm: 0.1144
+2024-08-01 11:40:14,926 : INFO : Current learning rate: 1.107107438016529e-05
+2024-08-01 11:40:14,926 : INFO : Accuracy for replacement task: 0.9782
+2024-08-01 11:40:14,926 : INFO : Precision for replacement task: 0.9564
+2024-08-01 11:40:14,926 : INFO : Recall for replacement task: 0.9316
+2024-08-01 11:40:14,926 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:40:33,681 : INFO : Results after 89.6000% iterations of epoch 1:
+2024-08-01 11:40:33,681 : INFO : Discriminator loss: 0.0578
+2024-08-01 11:40:33,682 : INFO : Gradient norm: 0.1171
+2024-08-01 11:40:33,682 : INFO : Current learning rate: 1.0740495867768595e-05
+2024-08-01 11:40:33,682 : INFO : Accuracy for replacement task: 0.9788
+2024-08-01 11:40:33,682 : INFO : Precision for replacement task: 0.9519
+2024-08-01 11:40:33,682 : INFO : Recall for replacement task: 0.9415
+2024-08-01 11:40:33,682 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:40:52,438 : INFO : Results after 89.9200% iterations of epoch 1:
+2024-08-01 11:40:52,438 : INFO : Discriminator loss: 0.0635
+2024-08-01 11:40:52,438 : INFO : Gradient norm: 0.1112
+2024-08-01 11:40:52,438 : INFO : Current learning rate: 1.04099173553719e-05
+2024-08-01 11:40:52,438 : INFO : Accuracy for replacement task: 0.9767
+2024-08-01 11:40:52,438 : INFO : Precision for replacement task: 0.9513
+2024-08-01 11:40:52,438 : INFO : Recall for replacement task: 0.9293
+2024-08-01 11:40:52,438 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:41:11,199 : INFO : Results after 90.2400% iterations of epoch 1:
+2024-08-01 11:41:11,199 : INFO : Discriminator loss: 0.0640
+2024-08-01 11:41:11,199 : INFO : Gradient norm: 0.1190
+2024-08-01 11:41:11,199 : INFO : Current learning rate: 1.0079338842975206e-05
+2024-08-01 11:41:11,200 : INFO : Accuracy for replacement task: 0.9771
+2024-08-01 11:41:11,200 : INFO : Precision for replacement task: 0.9568
+2024-08-01 11:41:11,200 : INFO : Recall for replacement task: 0.9276
+2024-08-01 11:41:11,200 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:41:29,964 : INFO : Results after 90.5600% iterations of epoch 1:
+2024-08-01 11:41:29,964 : INFO : Discriminator loss: 0.0632
+2024-08-01 11:41:29,964 : INFO : Gradient norm: 0.1249
+2024-08-01 11:41:29,964 : INFO : Current learning rate: 9.748760330578514e-06
+2024-08-01 11:41:29,964 : INFO : Accuracy for replacement task: 0.9770
+2024-08-01 11:41:29,964 : INFO : Precision for replacement task: 0.9499
+2024-08-01 11:41:29,964 : INFO : Recall for replacement task: 0.9317
+2024-08-01 11:41:29,964 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:41:48,726 : INFO : Results after 90.8800% iterations of epoch 1:
+2024-08-01 11:41:48,726 : INFO : Discriminator loss: 0.0654
+2024-08-01 11:41:48,726 : INFO : Gradient norm: 0.1293
+2024-08-01 11:41:48,726 : INFO : Current learning rate: 9.41818181818182e-06
+2024-08-01 11:41:48,726 : INFO : Accuracy for replacement task: 0.9761
+2024-08-01 11:41:48,726 : INFO : Precision for replacement task: 0.9448
+2024-08-01 11:41:48,726 : INFO : Recall for replacement task: 0.9329
+2024-08-01 11:41:48,726 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:42:07,490 : INFO : Results after 91.2000% iterations of epoch 1:
+2024-08-01 11:42:07,490 : INFO : Discriminator loss: 0.0595
+2024-08-01 11:42:07,490 : INFO : Gradient norm: 0.1079
+2024-08-01 11:42:07,490 : INFO : Current learning rate: 9.087603305785125e-06
+2024-08-01 11:42:07,490 : INFO : Accuracy for replacement task: 0.9778
+2024-08-01 11:42:07,490 : INFO : Precision for replacement task: 0.9540
+2024-08-01 11:42:07,490 : INFO : Recall for replacement task: 0.9334
+2024-08-01 11:42:07,490 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:42:26,254 : INFO : Results after 91.5200% iterations of epoch 1:
+2024-08-01 11:42:26,254 : INFO : Discriminator loss: 0.0620
+2024-08-01 11:42:26,254 : INFO : Gradient norm: 0.1120
+2024-08-01 11:42:26,255 : INFO : Current learning rate: 8.75702479338843e-06
+2024-08-01 11:42:26,255 : INFO : Accuracy for replacement task: 0.9778
+2024-08-01 11:42:26,255 : INFO : Precision for replacement task: 0.9586
+2024-08-01 11:42:26,255 : INFO : Recall for replacement task: 0.9280
+2024-08-01 11:42:26,255 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:42:45,016 : INFO : Results after 91.8400% iterations of epoch 1:
+2024-08-01 11:42:45,017 : INFO : Discriminator loss: 0.0660
+2024-08-01 11:42:45,017 : INFO : Gradient norm: 0.1039
+2024-08-01 11:42:45,017 : INFO : Current learning rate: 8.426446280991735e-06
+2024-08-01 11:42:45,017 : INFO : Accuracy for replacement task: 0.9758
+2024-08-01 11:42:45,017 : INFO : Precision for replacement task: 0.9510
+2024-08-01 11:42:45,017 : INFO : Recall for replacement task: 0.9235
+2024-08-01 11:42:45,017 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:43:03,779 : INFO : Results after 92.1600% iterations of epoch 1:
+2024-08-01 11:43:03,779 : INFO : Discriminator loss: 0.0634
+2024-08-01 11:43:03,779 : INFO : Gradient norm: 0.1064
+2024-08-01 11:43:03,779 : INFO : Current learning rate: 8.095867768595041e-06
+2024-08-01 11:43:03,779 : INFO : Accuracy for replacement task: 0.9766
+2024-08-01 11:43:03,779 : INFO : Precision for replacement task: 0.9561
+2024-08-01 11:43:03,779 : INFO : Recall for replacement task: 0.9254
+2024-08-01 11:43:03,779 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:43:22,544 : INFO : Results after 92.4800% iterations of epoch 1:
+2024-08-01 11:43:22,544 : INFO : Discriminator loss: 0.0619
+2024-08-01 11:43:22,544 : INFO : Gradient norm: 0.1057
+2024-08-01 11:43:22,544 : INFO : Current learning rate: 7.765289256198347e-06
+2024-08-01 11:43:22,544 : INFO : Accuracy for replacement task: 0.9775
+2024-08-01 11:43:22,544 : INFO : Precision for replacement task: 0.9541
+2024-08-01 11:43:22,544 : INFO : Recall for replacement task: 0.9311
+2024-08-01 11:43:22,544 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:43:41,309 : INFO : Results after 92.8000% iterations of epoch 1:
+2024-08-01 11:43:41,309 : INFO : Discriminator loss: 0.0664
+2024-08-01 11:43:41,309 : INFO : Gradient norm: 0.1104
+2024-08-01 11:43:41,309 : INFO : Current learning rate: 7.434710743801654e-06
+2024-08-01 11:43:41,309 : INFO : Accuracy for replacement task: 0.9758
+2024-08-01 11:43:41,309 : INFO : Precision for replacement task: 0.9505
+2024-08-01 11:43:41,309 : INFO : Recall for replacement task: 0.9272
+2024-08-01 11:43:41,309 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:44:00,073 : INFO : Results after 93.1200% iterations of epoch 1:
+2024-08-01 11:44:00,074 : INFO : Discriminator loss: 0.0639
+2024-08-01 11:44:00,074 : INFO : Gradient norm: 0.1143
+2024-08-01 11:44:00,074 : INFO : Current learning rate: 7.104132231404959e-06
+2024-08-01 11:44:00,074 : INFO : Accuracy for replacement task: 0.9771
+2024-08-01 11:44:00,074 : INFO : Precision for replacement task: 0.9508
+2024-08-01 11:44:00,074 : INFO : Recall for replacement task: 0.9323
+2024-08-01 11:44:00,074 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:44:18,836 : INFO : Results after 93.4400% iterations of epoch 1:
+2024-08-01 11:44:18,836 : INFO : Discriminator loss: 0.0645
+2024-08-01 11:44:18,836 : INFO : Gradient norm: 0.1074
+2024-08-01 11:44:18,836 : INFO : Current learning rate: 6.773553719008265e-06
+2024-08-01 11:44:18,836 : INFO : Accuracy for replacement task: 0.9771
+2024-08-01 11:44:18,836 : INFO : Precision for replacement task: 0.9514
+2024-08-01 11:44:18,836 : INFO : Recall for replacement task: 0.9306
+2024-08-01 11:44:18,836 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:44:37,603 : INFO : Results after 93.7600% iterations of epoch 1:
+2024-08-01 11:44:37,603 : INFO : Discriminator loss: 0.0656
+2024-08-01 11:44:37,603 : INFO : Gradient norm: 0.1080
+2024-08-01 11:44:37,603 : INFO : Current learning rate: 6.4429752066115705e-06
+2024-08-01 11:44:37,603 : INFO : Accuracy for replacement task: 0.9757
+2024-08-01 11:44:37,603 : INFO : Precision for replacement task: 0.9474
+2024-08-01 11:44:37,603 : INFO : Recall for replacement task: 0.9276
+2024-08-01 11:44:37,603 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:44:56,521 : INFO : Results after 94.0800% iterations of epoch 1:
+2024-08-01 11:44:56,521 : INFO : Discriminator loss: 0.0656
+2024-08-01 11:44:56,521 : INFO : Gradient norm: 0.1166
+2024-08-01 11:44:56,521 : INFO : Current learning rate: 6.112396694214876e-06
+2024-08-01 11:44:56,521 : INFO : Accuracy for replacement task: 0.9764
+2024-08-01 11:44:56,521 : INFO : Precision for replacement task: 0.9477
+2024-08-01 11:44:56,521 : INFO : Recall for replacement task: 0.9351
+2024-08-01 11:44:56,521 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:45:15,276 : INFO : Results after 94.4000% iterations of epoch 1:
+2024-08-01 11:45:15,277 : INFO : Discriminator loss: 0.0648
+2024-08-01 11:45:15,277 : INFO : Gradient norm: 0.1114
+2024-08-01 11:45:15,277 : INFO : Current learning rate: 5.781818181818182e-06
+2024-08-01 11:45:15,277 : INFO : Accuracy for replacement task: 0.9761
+2024-08-01 11:45:15,277 : INFO : Precision for replacement task: 0.9480
+2024-08-01 11:45:15,277 : INFO : Recall for replacement task: 0.9286
+2024-08-01 11:45:15,277 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:45:34,032 : INFO : Results after 94.7200% iterations of epoch 1:
+2024-08-01 11:45:34,032 : INFO : Discriminator loss: 0.0654
+2024-08-01 11:45:34,032 : INFO : Gradient norm: 0.1136
+2024-08-01 11:45:34,032 : INFO : Current learning rate: 5.451239669421488e-06
+2024-08-01 11:45:34,032 : INFO : Accuracy for replacement task: 0.9756
+2024-08-01 11:45:34,032 : INFO : Precision for replacement task: 0.9538
+2024-08-01 11:45:34,032 : INFO : Recall for replacement task: 0.9219
+2024-08-01 11:45:34,032 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:45:52,793 : INFO : Results after 95.0400% iterations of epoch 1:
+2024-08-01 11:45:52,794 : INFO : Discriminator loss: 0.0673
+2024-08-01 11:45:52,794 : INFO : Gradient norm: 0.1134
+2024-08-01 11:45:52,794 : INFO : Current learning rate: 5.120661157024793e-06
+2024-08-01 11:45:52,794 : INFO : Accuracy for replacement task: 0.9747
+2024-08-01 11:45:52,794 : INFO : Precision for replacement task: 0.9500
+2024-08-01 11:45:52,794 : INFO : Recall for replacement task: 0.9213
+2024-08-01 11:45:52,794 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:46:11,554 : INFO : Results after 95.3600% iterations of epoch 1:
+2024-08-01 11:46:11,554 : INFO : Discriminator loss: 0.0591
+2024-08-01 11:46:11,554 : INFO : Gradient norm: 0.1033
+2024-08-01 11:46:11,554 : INFO : Current learning rate: 4.7900826446281e-06
+2024-08-01 11:46:11,554 : INFO : Accuracy for replacement task: 0.9795
+2024-08-01 11:46:11,554 : INFO : Precision for replacement task: 0.9585
+2024-08-01 11:46:11,555 : INFO : Recall for replacement task: 0.9351
+2024-08-01 11:46:11,555 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:46:30,317 : INFO : Results after 95.6800% iterations of epoch 1:
+2024-08-01 11:46:30,317 : INFO : Discriminator loss: 0.0678
+2024-08-01 11:46:30,317 : INFO : Gradient norm: 0.1096
+2024-08-01 11:46:30,317 : INFO : Current learning rate: 4.459504132231406e-06
+2024-08-01 11:46:30,317 : INFO : Accuracy for replacement task: 0.9747
+2024-08-01 11:46:30,317 : INFO : Precision for replacement task: 0.9501
+2024-08-01 11:46:30,317 : INFO : Recall for replacement task: 0.9226
+2024-08-01 11:46:30,317 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:46:49,079 : INFO : Results after 96.0000% iterations of epoch 1:
+2024-08-01 11:46:49,080 : INFO : Discriminator loss: 0.0636
+2024-08-01 11:46:49,080 : INFO : Gradient norm: 0.1106
+2024-08-01 11:46:49,080 : INFO : Current learning rate: 4.1289256198347106e-06
+2024-08-01 11:46:49,080 : INFO : Accuracy for replacement task: 0.9770
+2024-08-01 11:46:49,080 : INFO : Precision for replacement task: 0.9516
+2024-08-01 11:46:49,080 : INFO : Recall for replacement task: 0.9294
+2024-08-01 11:46:49,080 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:47:07,842 : INFO : Results after 96.3200% iterations of epoch 1:
+2024-08-01 11:47:07,842 : INFO : Discriminator loss: 0.0658
+2024-08-01 11:47:07,842 : INFO : Gradient norm: 0.1089
+2024-08-01 11:47:07,842 : INFO : Current learning rate: 3.798347107438017e-06
+2024-08-01 11:47:07,842 : INFO : Accuracy for replacement task: 0.9759
+2024-08-01 11:47:07,842 : INFO : Precision for replacement task: 0.9548
+2024-08-01 11:47:07,842 : INFO : Recall for replacement task: 0.9228
+2024-08-01 11:47:07,842 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:47:26,607 : INFO : Results after 96.6400% iterations of epoch 1:
+2024-08-01 11:47:26,607 : INFO : Discriminator loss: 0.0613
+2024-08-01 11:47:26,607 : INFO : Gradient norm: 0.1110
+2024-08-01 11:47:26,607 : INFO : Current learning rate: 3.4677685950413223e-06
+2024-08-01 11:47:26,607 : INFO : Accuracy for replacement task: 0.9773
+2024-08-01 11:47:26,607 : INFO : Precision for replacement task: 0.9515
+2024-08-01 11:47:26,607 : INFO : Recall for replacement task: 0.9305
+2024-08-01 11:47:26,607 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:47:45,371 : INFO : Results after 96.9600% iterations of epoch 1:
+2024-08-01 11:47:45,372 : INFO : Discriminator loss: 0.0592
+2024-08-01 11:47:45,372 : INFO : Gradient norm: 0.0935
+2024-08-01 11:47:45,372 : INFO : Current learning rate: 3.137190082644628e-06
+2024-08-01 11:47:45,372 : INFO : Accuracy for replacement task: 0.9785
+2024-08-01 11:47:45,372 : INFO : Precision for replacement task: 0.9566
+2024-08-01 11:47:45,372 : INFO : Recall for replacement task: 0.9310
+2024-08-01 11:47:45,372 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:48:04,137 : INFO : Results after 97.2800% iterations of epoch 1:
+2024-08-01 11:48:04,137 : INFO : Discriminator loss: 0.0612
+2024-08-01 11:48:04,137 : INFO : Gradient norm: 0.1037
+2024-08-01 11:48:04,137 : INFO : Current learning rate: 2.806611570247934e-06
+2024-08-01 11:48:04,137 : INFO : Accuracy for replacement task: 0.9780
+2024-08-01 11:48:04,137 : INFO : Precision for replacement task: 0.9554
+2024-08-01 11:48:04,137 : INFO : Recall for replacement task: 0.9345
+2024-08-01 11:48:04,137 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:48:22,905 : INFO : Results after 97.6000% iterations of epoch 1:
+2024-08-01 11:48:22,905 : INFO : Discriminator loss: 0.0624
+2024-08-01 11:48:22,905 : INFO : Gradient norm: 0.1055
+2024-08-01 11:48:22,905 : INFO : Current learning rate: 2.4760330578512398e-06
+2024-08-01 11:48:22,905 : INFO : Accuracy for replacement task: 0.9771
+2024-08-01 11:48:22,905 : INFO : Precision for replacement task: 0.9502
+2024-08-01 11:48:22,905 : INFO : Recall for replacement task: 0.9323
+2024-08-01 11:48:22,905 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:48:41,671 : INFO : Results after 97.9200% iterations of epoch 1:
+2024-08-01 11:48:41,671 : INFO : Discriminator loss: 0.0603
+2024-08-01 11:48:41,671 : INFO : Gradient norm: 0.1070
+2024-08-01 11:48:41,671 : INFO : Current learning rate: 2.1454545454545456e-06
+2024-08-01 11:48:41,671 : INFO : Accuracy for replacement task: 0.9786
+2024-08-01 11:48:41,671 : INFO : Precision for replacement task: 0.9577
+2024-08-01 11:48:41,671 : INFO : Recall for replacement task: 0.9330
+2024-08-01 11:48:41,671 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:49:00,439 : INFO : Results after 98.2400% iterations of epoch 1:
+2024-08-01 11:49:00,440 : INFO : Discriminator loss: 0.0682
+2024-08-01 11:49:00,440 : INFO : Gradient norm: 0.1171
+2024-08-01 11:49:00,440 : INFO : Current learning rate: 1.8148760330578513e-06
+2024-08-01 11:49:00,440 : INFO : Accuracy for replacement task: 0.9755
+2024-08-01 11:49:00,440 : INFO : Precision for replacement task: 0.9478
+2024-08-01 11:49:00,440 : INFO : Recall for replacement task: 0.9250
+2024-08-01 11:49:00,440 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:49:19,206 : INFO : Results after 98.5600% iterations of epoch 1:
+2024-08-01 11:49:19,206 : INFO : Discriminator loss: 0.0638
+2024-08-01 11:49:19,206 : INFO : Gradient norm: 0.1030
+2024-08-01 11:49:19,206 : INFO : Current learning rate: 1.484297520661157e-06
+2024-08-01 11:49:19,206 : INFO : Accuracy for replacement task: 0.9760
+2024-08-01 11:49:19,207 : INFO : Precision for replacement task: 0.9525
+2024-08-01 11:49:19,207 : INFO : Recall for replacement task: 0.9267
+2024-08-01 11:49:19,207 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:49:37,972 : INFO : Results after 98.8800% iterations of epoch 1:
+2024-08-01 11:49:37,973 : INFO : Discriminator loss: 0.0607
+2024-08-01 11:49:37,973 : INFO : Gradient norm: 0.1032
+2024-08-01 11:49:37,973 : INFO : Current learning rate: 1.153719008264463e-06
+2024-08-01 11:49:37,973 : INFO : Accuracy for replacement task: 0.9775
+2024-08-01 11:49:37,973 : INFO : Precision for replacement task: 0.9538
+2024-08-01 11:49:37,973 : INFO : Recall for replacement task: 0.9329
+2024-08-01 11:49:37,973 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:49:56,736 : INFO : Results after 99.2000% iterations of epoch 1:
+2024-08-01 11:49:56,736 : INFO : Discriminator loss: 0.0608
+2024-08-01 11:49:56,736 : INFO : Gradient norm: 0.1184
+2024-08-01 11:49:56,736 : INFO : Current learning rate: 8.231404958677686e-07
+2024-08-01 11:49:56,736 : INFO : Accuracy for replacement task: 0.9778
+2024-08-01 11:49:56,736 : INFO : Precision for replacement task: 0.9536
+2024-08-01 11:49:56,736 : INFO : Recall for replacement task: 0.9331
+2024-08-01 11:49:56,736 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:50:15,502 : INFO : Results after 99.5200% iterations of epoch 1:
+2024-08-01 11:50:15,503 : INFO : Discriminator loss: 0.0613
+2024-08-01 11:50:15,503 : INFO : Gradient norm: 0.1144
+2024-08-01 11:50:15,503 : INFO : Current learning rate: 4.925619834710744e-07
+2024-08-01 11:50:15,503 : INFO : Accuracy for replacement task: 0.9771
+2024-08-01 11:50:15,503 : INFO : Precision for replacement task: 0.9534
+2024-08-01 11:50:15,503 : INFO : Recall for replacement task: 0.9302
+2024-08-01 11:50:15,503 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:50:34,266 : INFO : Results after 99.8400% iterations of epoch 1:
+2024-08-01 11:50:34,266 : INFO : Discriminator loss: 0.0661
+2024-08-01 11:50:34,266 : INFO : Gradient norm: 0.1346
+2024-08-01 11:50:34,266 : INFO : Current learning rate: 1.6198347107438018e-07
+2024-08-01 11:50:34,266 : INFO : Accuracy for replacement task: 0.9763
+2024-08-01 11:50:34,266 : INFO : Precision for replacement task: 0.9496
+2024-08-01 11:50:34,266 : INFO : Recall for replacement task: 0.9290
+2024-08-01 11:50:34,266 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-01 11:50:43,460 : INFO : ...training is finished, saving results and model.
+2024-08-01 11:50:43,808 : INFO : Results and model are saved.

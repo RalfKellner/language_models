@@ -1,0 +1,27 @@
+dataset_config:
+  tokenizer_path: "/home/ralf/language_models/00_tokenizer/finlm-wordpiece-tokenizer.json"
+  max_sequence_length: 256
+  db_name: "/data/finlm_sequences/finlm_chunks.sqlite"
+  n_10k_seq: 2000000
+  n_8k_seq: 2000000
+  n_ec_seq: 2000000
+  n_news_seq: 2000000
+  batch_size: 128
+  draw_random_sequences: True
+model_config:
+  embedding_size: 128
+  hidden_size: 256
+  num_hidden_layers: 12
+  num_attention_heads: 4
+  intermediate_size: 1024
+  generator_size: 0.25
+  generator_layer_size: 1.0
+optimization_config:
+  learning_rate: 0.0001
+  n_epochs: 3
+  lr_scheduler_warm_up_steps: 10000
+  mlm_probability: 0.20
+  new_database_for_every_epoch: True
+  use_gradient_clipping: True
+  discriminator_weight: 50
+  discriminator_sampling: "aggressive"
