@@ -5,7 +5,7 @@ import pandas as pd
 import logging
 
 class Chunker:
-    def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None):
+    def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None) -> None:
 
         """
             A parent class for chunking classes which are specifically designed for different financial text sources.
@@ -125,7 +125,7 @@ class Chunker:
 
 
 class Form10KChunker(Chunker):
-    def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None):
+    def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None) -> None:
         """A class which collects 10K form flings from our database, chunks them into approximate equal seqences and exports these to a new database"""
         super().__init__(db_in, sheet_in, limit, offset)
 
@@ -152,7 +152,7 @@ class Form10KChunker(Chunker):
 
 
 class Form8KChunker(Chunker):
-    def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None):
+    def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None) -> None:
         """
             A class which collects 8K form flings from our database, chunks them into approximate equal seqences and exports these to a new database.
             We try to collect press release statements which are usually accompanied by Exhibit identifiers as defined below. Furthermore, in the
@@ -202,7 +202,7 @@ class Form8KChunker(Chunker):
 
 
 class EarningCallChunker(Chunker):
-    def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None):
+    def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None) -> None:
         """A class which collects earning call transcripts collected at Financial Modeling Prep API, chunks them into approximate equal seqences and exports these to a new database"""
         super().__init__(db_in, sheet_in, limit, offset)
 
@@ -243,7 +243,7 @@ class EarningCallChunker(Chunker):
 
 
 class TRNewsChunker(Chunker):
-    def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None):
+    def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None) -> None:
         """A class which collects news from the Thomson Reuters news database, chunks them into approximate equal seqences and exports these to a new database"""
         super().__init__(db_in, sheet_in, limit, offset)
 

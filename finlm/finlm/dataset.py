@@ -22,8 +22,27 @@ class FinLMDataset:
             batch_size: int,
             random_sql = True,
             **kwargs
-            ):
+            ) -> None:
         
+        """
+            A class for defining a dataset which retrieves chunked text sequences, tokenizes them and returns batches of
+            input_ids and attention_mask tensors which are needed for pretraining financial models.
+
+            tokenizer_path: path to self trained tokeniezer
+            max_sequence_length: the maximum number of tokens per sequence
+            db_name: the location of the database where the chunked text sequences are
+            n_10k_seq: the number of desired text sequences of chunked 10K form filling
+            n_8k_seq: the number of desired text sequences of chunked 8K press releases
+            n_ec_seq: the number of desired text sequences of chunked earning call transcripts
+            n_news_seq: the number of desired text sequences of chunked TR news
+            batch_size: the number of sequences which should be returned per batch
+            random_sql: if set to True, sequences in each table are shuffled before retrieval
+            
+            Important: if one does not to retrieve random sequences but to use LIMIT and OFFSET, [n_10k_seq, n_8k_seq, n_ec_seq, n_news_seq]
+                are used as LIMIT and OFFSET can be set as a list using a kwargs argument called 'offsets', e.g., offsets = [10, 10, 10, 10]
+        """
+
+
         self.logger = logging.getLogger(self.__class__.__name__)
         self.tokenizer = FinLMTokenizer(tokenizer_path)
         self.max_sequence_length = max_sequence_length
@@ -41,6 +60,9 @@ class FinLMDataset:
         self.random_sql = random_sql
 
     def _get_table_names(self):
+
+        """Determines table names in the database."""
+        
         conn = sqlite3.connect(self.db_name)
         res = conn.execute("SELECT name from sqlite_master")
         table_names = res.fetchall()
@@ -49,6 +71,9 @@ class FinLMDataset:
         self.table_names = table_names
 
     def _get_n_sequences(self):
+        
+        """Determines the complete number of available sequences in each table of the database, NOT the number of sequences which is used."""
+        
         self.logger.info("Counting the number of sequences in the database...")
         conn = sqlite3.connect(self.db_name)
         self.n_seqs = []
@@ -59,6 +84,13 @@ class FinLMDataset:
         conn.close()
     
     def _create_database_retrieval(self, **kwargs):
+        """
+            This function creates a dictionary with the keys: t_name, limit and offset. This arguments are used for the sql query for each table
+            when data is retrieved. Using offsets only makes senses if random_sql is set to False, but then can be used to iteratively collect
+            new sequences from the database during training as the memory space is not enough to import all sequences at once. Furthermore, 
+            we should not need all sequences which are available as this would by far exceed the number of sequences which are typically used
+            for pretraining, e.g., Electra small 500k * 128.
+        """
         if len(kwargs) == 0:
             self.database_retrieval = {}
             for t_name, limit in zip(self.table_names, self.n_sequences):
@@ -75,6 +107,9 @@ class FinLMDataset:
                 self.database_retrieval[t_name]["offset"] = offset
 
     def _retrieve_sequences_from_database(self):    
+
+        """Uses the database_retrieval dictionary to collect sequences as desired."""
+
         self.logger.info("Starting to retrieve sequences from database.")
         sequences = []
         conn = sqlite3.connect(self.db_name)
@@ -94,10 +129,16 @@ class FinLMDataset:
         self.sequences = sequences
         self.logger.info("Sequences have been retrieved from database.")
 
-    def _tokenization(self, text_sequence):
+    def _tokenization(self, text_sequence: list[str]):
+
+        """A helper function which is used by the map method from the dataset below."""
+
         return self.tokenizer(text_sequence["text"], padding='max_length', truncation=True, max_length=self.max_sequence_length)
 
     def _create_hf_dataset(self):
+
+        """This function creates a dataset from datasets' Dataset class. Tokenizes all sequences and sets the format to torch."""
+
         self.hf_dataset = Dataset.from_list([{"text": text} for text in self.sequences])
         self.logger.info("Starting to tokenize the sequences.")
         self.hf_dataset = self.hf_dataset.map(self._tokenization)
@@ -106,10 +147,16 @@ class FinLMDataset:
         self.data_loader = DataLoader(self.hf_dataset, batch_size = self.batch_size, shuffle = False)
 
     def _prepare_data_loader(self):
+        
+        """Create dictionary with sql query information and collect data accordingly."""
+
         self._retrieve_sequences_from_database()
         self._create_hf_dataset()
 
     def __iter__(self):
+        
+        """Use the data_loader created by the torch's DataLoader class for iteration."""
+
         if not hasattr(self, "data_loader"):
             self._prepare_data_loader()
         for batch in self.data_loader:
