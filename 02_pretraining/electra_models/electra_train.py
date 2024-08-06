@@ -1,4 +1,7 @@
 from finlm.models import PretrainElectra
+from finlm.config import FinLMConfig
 
-electra_modeling = PretrainElectra("electra_config.yaml")
+config = FinLMConfig.from_yaml("electra_config.yaml", "../../pretrained_models/")
+
+electra_modeling = PretrainElectra(config)
 electra_modeling.train()

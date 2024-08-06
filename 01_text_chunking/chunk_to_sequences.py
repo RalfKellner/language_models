@@ -1,4 +1,5 @@
-from finlm.chunking import Form10KChunker, Form8KChunker, EarningCallChunker, TRNewsChunker
+from finlm.chunking import Form10KChunker, Form8KChunker, EarningCallChunker, TRNewsChunker, rename_table, shuffle_and_create_new_table
+import sqlite3
 import logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
@@ -21,3 +22,26 @@ logging.info("Start with TR news chunking.")
 news_chunker = TRNewsChunker("/data/trnews/trnews.sqlite", "trnews")
 news_chunker.chunk_to_database(database_out, "tr_news", chunk_size, ignore_first_sentences=None, ignore_last_sentences=None)
 logging.info("TR news chunking is finished.")
+
+
+# After chunking is finished, rename the tables, shuffle each table, save this and remove the original sequences
+old_table_names = ["form_tenk", "form_eightk", "earning_calls", "tr_news"] 
+new_table_names = ["form_tenk_og", "form_eightk_og", "earning_calls_og", "tr_news_og"] 
+logging.info("Starting to randomize sequences in each table...")
+
+for old_name, new_name in zip(old_table_names, new_table_names):
+    logging.info(f"...first rename {old_name} to {new_name}")
+    # rename tables
+    rename_table(database_out, old_name, new_name)
+    # shuffle and create new tables
+    logging.info(f"...now shuffling table {new_name} and create a shuffled version of it with the name {old_name}")
+    shuffle_and_create_new_table(database_out, old_name, new_name)
+    # drop the original table
+    logging.info(f"...delete table {new_name}")
+    conn = sqlite3.connect(database_out)
+    conn.execute(f"DROP TABLE {old_name}")
+    conn.close()
+
+logging.info("Randomization of sequences is finished.")
+
+

@@ -3,6 +3,8 @@ import string
 import sqlite3
 import pandas as pd
 import logging
+import sqlite3
+import time
 
 class Chunker:
     def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None) -> None:
@@ -267,3 +269,48 @@ class TRNewsChunker(Chunker):
             else:
                 yield_news = False
         conn_in.close()
+
+
+def rename_table(database, old_table_name, new_table_name, retries=5, delay=1):
+    try:
+        # Connect to the SQLite database
+        conn = sqlite3.connect(database)
+        conn.execute('PRAGMA busy_timeout = 5000')  # Set busy timeout to 5000 milliseconds
+        cur = conn.cursor()
+        
+        # Define the rename command
+        rename_command = f"ALTER TABLE {old_table_name} RENAME TO {new_table_name}"
+        
+        for attempt in range(retries):
+            try:
+                # Execute the rename command
+                cur.execute(rename_command)
+                conn.commit()
+                print(f"Table renamed to {new_table_name} successfully.")
+                return True
+            except sqlite3.OperationalError as e:
+                if "database is locked" in str(e):
+                    print(f"Attempt {attempt + 1} of {retries}: Database is locked, retrying after {delay} seconds...")
+                    time.sleep(delay)
+                else:
+                    raise
+        print("Failed to rename the table after multiple attempts.")
+    finally:
+        # Close the connection
+        conn.close()
+
+def shuffle_and_create_new_table(database, original_table, shuffled_table):
+    # Connect to the database
+    conn = sqlite3.connect(database)
+    cur = conn.cursor()
+
+    # Step 1: Create the new table with the same schema as the original table
+    cur.execute(f"CREATE TABLE {shuffled_table} AS SELECT * FROM {original_table} WHERE 0")
+    conn.commit()
+
+    # Step 2: Insert shuffled data into the new table
+    cur.execute(f"INSERT INTO {shuffled_table} SELECT * FROM {original_table} ORDER BY RANDOM()")
+    conn.commit()
+
+    # Close the connection
+    conn.close()
