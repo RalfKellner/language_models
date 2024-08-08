@@ -1,5 +1,5 @@
 import sqlite3
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 import random
 from datasets import Dataset
 import datasets
@@ -123,5 +123,60 @@ class FinLMDataset:
             self.prepare_data_loader()
         for batch in self.data_loader:
             yield batch
+
+
+
+class FinetuningDataset:
+    def __init__(self,
+            tokenizer_path: str,
+            max_sequence_length: int,
+            dataset: Dataset,
+            text_column: str,
+            dataset_columns: list[str],
+            shuffle_data: bool = True,
+            shuffle_data_random_seed: Optional[int] = None,
+            training_data_fraction: float = 0.80
+        ):
+
+        self.tokenizer_path = tokenizer_path
+        self.tokenizer = FinLMTokenizer(self.tokenizer_path)
+        self.max_sequence_length = max_sequence_length
+        self.dataset = dataset
+        self.text_column = text_column
+        self.dataset_columns = dataset_columns
+        self.shuffle_data = shuffle_data
+        self.shuffle_data_random_seed = shuffle_data_random_seed
+        self.training_data_fraction = training_data_fraction
+        self.logger = logging.getLogger(self.__class__.__name__)
+        self._prepare_training_and_test_data()
+
+
+    def _tokenization(self, text_sequence: list[str]):
+
+        """A helper function which is used by the map method from the dataset below."""
+
+        return self.tokenizer(text_sequence[self.text_column], padding='max_length', truncation=True, max_length=self.max_sequence_length)
+
+    def _map_dataset(self):
+
+        """This function creates a dataset from datasets' Dataset class. Tokenizes all sequences and sets the format to torch."""
+
+        self.logger.info("Starting to tokenize the sequences.")
+        self.dataset = self.dataset.map(self._tokenization)
+        self.logger.info("Tokenization is finished.")
+        self.dataset.set_format(type="torch", columns=self.dataset_columns)
+
+    def _prepare_training_and_test_data(self):
+        self._map_dataset()
+        if self.shuffle_data:
+            if self.shuffle_data_random_seed:
+                self.dataset = self.dataset.shuffle(self.shuffle_data_random_seed)
+            else:
+                self.dataset = self.dataset.shuffle()
+
+        self.train_size = int(len(self.dataset) * self.training_data_fraction)
+        self.training_data = self.dataset.select(range(self.train_size))
+        self.test_data = self.dataset.select(range(self.train_size, len(self.dataset)))
+
 
 

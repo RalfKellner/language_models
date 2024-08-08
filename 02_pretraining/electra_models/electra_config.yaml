@@ -26,7 +26,7 @@ model_config:
   generator_layer_size: 1.0
 optimization_config:
   learning_rate: 0.0001
-  n_epochs: 5
+  n_epochs: 10
   lr_scheduler_warm_up_steps: 10000
   mlm_probability: 0.15
   use_gradient_clipping: True

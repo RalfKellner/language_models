@@ -1,5 +1,6 @@
 .venv/
 old/
 pretrained_models/
+pretrained_models_downstreaming/
 playground.ipynb
 electra_pretraining.ipynb
