@@ -12062,3 +12062,977 @@ You should probably TRAIN this model on a down-stream task to be able to use it 
 2024-08-12 13:11:50,732 : INFO : EarlyStopping counter: 1 out of 2
 2024-08-12 13:11:50,732 : INFO : Starting epoch 6
 2024-08-12 13:11:51,376 : INFO : Current training batch loss: 0.1076 in epoch 6
+2024-08-12 13:11:52,182 : INFO : Current training batch loss: 0.1185 in epoch 6
+2024-08-12 13:11:52,988 : INFO : Current training batch loss: 0.0388 in epoch 6
+2024-08-12 13:11:53,795 : INFO : Current training batch loss: 0.0326 in epoch 6
+2024-08-12 13:11:54,137 : INFO : Epoch finished, average loss over training batches: 0.0827
+2024-08-12 13:11:54,137 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:11:54,137 : INFO : Training metrics:
+2024-08-12 13:11:54,137 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:11:54,141 : INFO : Accuracy: 0.9818
+2024-08-12 13:11:54,141 : INFO : Precision score for label_class 0: 0.9269
+2024-08-12 13:11:54,141 : INFO : Precision score for label_class 1: 0.9926
+2024-08-12 13:11:54,141 : INFO : Precision score for label_class 2: 0.9839
+2024-08-12 13:11:54,141 : INFO : Recall score for label_class 0: 0.9694
+2024-08-12 13:11:54,141 : INFO : Recall score for label_class 1: 0.9877
+2024-08-12 13:11:54,141 : INFO : Recall score for label_class 2: 0.9747
+2024-08-12 13:11:54,141 : INFO : Average F1 score: 0.9724
+2024-08-12 13:11:54,421 : INFO : Average loss over validation batches: 0.3893
+2024-08-12 13:11:54,421 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:11:54,421 : INFO : Validation metrics:
+2024-08-12 13:11:54,421 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:11:54,425 : INFO : Accuracy: 0.8798
+2024-08-12 13:11:54,425 : INFO : Precision score for label_class 0: 0.8046
+2024-08-12 13:11:54,425 : INFO : Precision score for label_class 1: 0.8892
+2024-08-12 13:11:54,425 : INFO : Precision score for label_class 2: 0.8953
+2024-08-12 13:11:54,425 : INFO : Recall score for label_class 0: 0.8046
+2024-08-12 13:11:54,425 : INFO : Recall score for label_class 1: 0.9462
+2024-08-12 13:11:54,425 : INFO : Recall score for label_class 2: 0.7817
+2024-08-12 13:11:54,425 : INFO : Average F1 score: 0.8520
+2024-08-12 13:11:54,425 : INFO : EarlyStopping counter: 2 out of 2
+2024-08-12 13:11:54,425 : INFO : Early stopping, loading best model from before and determine score...
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at /data/language_models/pretrained_models/mlm_00/mlm_model and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 13:11:54,464 : INFO : Loading model from /data/language_models/pretrained_models_downstreaming/financial_phrasebank/mlm_01/current_split_model/checkpoint.pth
+2024-08-12 13:11:54,776 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:11:54,776 : INFO : Validation metrics after reloading the model before ending this training:
+2024-08-12 13:11:54,776 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:11:54,780 : INFO : Accuracy: 0.8709
+2024-08-12 13:11:54,780 : INFO : Precision score for label_class 0: 0.7400
+2024-08-12 13:11:54,780 : INFO : Precision score for label_class 1: 0.9219
+2024-08-12 13:11:54,780 : INFO : Precision score for label_class 2: 0.8368
+2024-08-12 13:11:54,780 : INFO : Recall score for label_class 0: 0.8506
+2024-08-12 13:11:54,780 : INFO : Recall score for label_class 1: 0.9077
+2024-08-12 13:11:54,780 : INFO : Recall score for label_class 2: 0.8071
+2024-08-12 13:11:54,780 : INFO : Average F1 score: 0.8426
+2024-08-12 13:11:54,780 : INFO : Determined score from best model, ending training.
+2024-08-12 13:11:54,781 : INFO : Split 4 is finished, the score is: 0.8426
+2024-08-12 13:11:54,781 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:11:54,781 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:11:54,781 : INFO : Starting training for split 5
+2024-08-12 13:11:54,792 : INFO : Occurence of labels for training split: (array([0, 1, 2]), array([ 330, 1615,  754]))
+2024-08-12 13:11:54,794 : INFO : Occurence of labels for validation split: (array([0, 1, 2]), array([ 84, 396, 194]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at /data/language_models/pretrained_models/mlm_00/mlm_model and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 13:11:54,835 : INFO : Starting epoch 1
+2024-08-12 13:11:54,877 : INFO : Current training batch loss: 1.0892 in epoch 1
+2024-08-12 13:11:55,682 : INFO : Current training batch loss: 0.9886 in epoch 1
+2024-08-12 13:11:56,488 : INFO : Current training batch loss: 0.7689 in epoch 1
+2024-08-12 13:11:57,293 : INFO : Current training batch loss: 0.6657 in epoch 1
+2024-08-12 13:11:58,099 : INFO : Current training batch loss: 0.7684 in epoch 1
+2024-08-12 13:11:58,240 : INFO : Epoch finished, average loss over training batches: 0.8086
+2024-08-12 13:11:58,240 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:11:58,240 : INFO : Training metrics:
+2024-08-12 13:11:58,240 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:11:58,251 : INFO : Accuracy: 0.6714
+2024-08-12 13:11:58,251 : INFO : Precision score for label_class 0: 0.5926
+2024-08-12 13:11:58,251 : INFO : Precision score for label_class 1: 0.6972
+2024-08-12 13:11:58,251 : INFO : Precision score for label_class 2: 0.5512
+2024-08-12 13:11:58,251 : INFO : Recall score for label_class 0: 0.0485
+2024-08-12 13:11:58,252 : INFO : Recall score for label_class 1: 0.9554
+2024-08-12 13:11:58,252 : INFO : Recall score for label_class 2: 0.3355
+2024-08-12 13:11:58,252 : INFO : Average F1 score: 0.4376
+2024-08-12 13:11:58,532 : INFO : Average loss over validation batches: 0.5887
+2024-08-12 13:11:58,532 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:11:58,532 : INFO : Validation metrics:
+2024-08-12 13:11:58,533 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:11:58,536 : INFO : Accuracy: 0.7359
+2024-08-12 13:11:58,536 : INFO : Precision score for label_class 0: 0.0000
+2024-08-12 13:11:58,536 : INFO : Precision score for label_class 1: 0.8043
+2024-08-12 13:11:58,536 : INFO : Precision score for label_class 2: 0.5784
+2024-08-12 13:11:58,536 : INFO : Recall score for label_class 0: 0.0000
+2024-08-12 13:11:58,536 : INFO : Recall score for label_class 1: 0.9545
+2024-08-12 13:11:58,536 : INFO : Recall score for label_class 2: 0.6082
+2024-08-12 13:11:58,536 : INFO : Average F1 score: 0.4886
+2024-08-12 13:11:58,536 : INFO : Validation metric decreased (inf --> 0.588680).  Saving model ...
+2024-08-12 13:11:58,647 : INFO : Starting epoch 2
+2024-08-12 13:11:59,291 : INFO : Current training batch loss: 0.5587 in epoch 2
+2024-08-12 13:12:00,096 : INFO : Current training batch loss: 0.4199 in epoch 2
+2024-08-12 13:12:00,901 : INFO : Current training batch loss: 0.2644 in epoch 2
+2024-08-12 13:12:01,707 : INFO : Current training batch loss: 0.4120 in epoch 2
+2024-08-12 13:12:02,050 : INFO : Epoch finished, average loss over training batches: 0.4392
+2024-08-12 13:12:02,050 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:02,050 : INFO : Training metrics:
+2024-08-12 13:12:02,050 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:02,061 : INFO : Accuracy: 0.8562
+2024-08-12 13:12:02,061 : INFO : Precision score for label_class 0: 0.8077
+2024-08-12 13:12:02,061 : INFO : Precision score for label_class 1: 0.8854
+2024-08-12 13:12:02,061 : INFO : Precision score for label_class 2: 0.8059
+2024-08-12 13:12:02,061 : INFO : Recall score for label_class 0: 0.7000
+2024-08-12 13:12:02,061 : INFO : Recall score for label_class 1: 0.9331
+2024-08-12 13:12:02,061 : INFO : Recall score for label_class 2: 0.7599
+2024-08-12 13:12:02,061 : INFO : Average F1 score: 0.8136
+2024-08-12 13:12:02,340 : INFO : Average loss over validation batches: 0.4284
+2024-08-12 13:12:02,340 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:02,340 : INFO : Validation metrics:
+2024-08-12 13:12:02,340 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:02,343 : INFO : Accuracy: 0.8294
+2024-08-12 13:12:02,343 : INFO : Precision score for label_class 0: 0.7910
+2024-08-12 13:12:02,343 : INFO : Precision score for label_class 1: 0.8532
+2024-08-12 13:12:02,343 : INFO : Precision score for label_class 2: 0.7836
+2024-08-12 13:12:02,343 : INFO : Recall score for label_class 0: 0.6310
+2024-08-12 13:12:02,343 : INFO : Recall score for label_class 1: 0.9394
+2024-08-12 13:12:02,343 : INFO : Recall score for label_class 2: 0.6907
+2024-08-12 13:12:02,343 : INFO : Average F1 score: 0.7768
+2024-08-12 13:12:02,344 : INFO : Validation metric decreased (0.588680 --> 0.428442).  Saving model ...
+2024-08-12 13:12:02,443 : INFO : Starting epoch 3
+2024-08-12 13:12:02,887 : INFO : Current training batch loss: 0.2046 in epoch 3
+2024-08-12 13:12:03,692 : INFO : Current training batch loss: 0.3648 in epoch 3
+2024-08-12 13:12:04,498 : INFO : Current training batch loss: 0.3260 in epoch 3
+2024-08-12 13:12:05,304 : INFO : Current training batch loss: 0.1622 in epoch 3
+2024-08-12 13:12:05,847 : INFO : Epoch finished, average loss over training batches: 0.2464
+2024-08-12 13:12:05,847 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:05,847 : INFO : Training metrics:
+2024-08-12 13:12:05,847 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:05,858 : INFO : Accuracy: 0.9263
+2024-08-12 13:12:05,858 : INFO : Precision score for label_class 0: 0.8643
+2024-08-12 13:12:05,858 : INFO : Precision score for label_class 1: 0.9519
+2024-08-12 13:12:05,858 : INFO : Precision score for label_class 2: 0.8986
+2024-08-12 13:12:05,858 : INFO : Recall score for label_class 0: 0.8879
+2024-08-12 13:12:05,858 : INFO : Recall score for label_class 1: 0.9548
+2024-08-12 13:12:05,858 : INFO : Recall score for label_class 2: 0.8820
+2024-08-12 13:12:05,858 : INFO : Average F1 score: 0.9065
+2024-08-12 13:12:06,138 : INFO : Average loss over validation batches: 0.4084
+2024-08-12 13:12:06,138 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:06,138 : INFO : Validation metrics:
+2024-08-12 13:12:06,138 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:06,142 : INFO : Accuracy: 0.8472
+2024-08-12 13:12:06,142 : INFO : Precision score for label_class 0: 0.8028
+2024-08-12 13:12:06,142 : INFO : Precision score for label_class 1: 0.8886
+2024-08-12 13:12:06,142 : INFO : Precision score for label_class 2: 0.7737
+2024-08-12 13:12:06,142 : INFO : Recall score for label_class 0: 0.6786
+2024-08-12 13:12:06,142 : INFO : Recall score for label_class 1: 0.9268
+2024-08-12 13:12:06,142 : INFO : Recall score for label_class 2: 0.7577
+2024-08-12 13:12:06,142 : INFO : Average F1 score: 0.8028
+2024-08-12 13:12:06,142 : INFO : Validation metric decreased (0.428442 --> 0.408420).  Saving model ...
+2024-08-12 13:12:06,244 : INFO : Starting epoch 4
+2024-08-12 13:12:06,485 : INFO : Current training batch loss: 0.3067 in epoch 4
+2024-08-12 13:12:07,285 : INFO : Current training batch loss: 0.2224 in epoch 4
+2024-08-12 13:12:08,086 : INFO : Current training batch loss: 0.0976 in epoch 4
+2024-08-12 13:12:08,886 : INFO : Current training batch loss: 0.0627 in epoch 4
+2024-08-12 13:12:09,619 : INFO : Epoch finished, average loss over training batches: 0.1445
+2024-08-12 13:12:09,619 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:09,619 : INFO : Training metrics:
+2024-08-12 13:12:09,619 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:09,628 : INFO : Accuracy: 0.9596
+2024-08-12 13:12:09,628 : INFO : Precision score for label_class 0: 0.9167
+2024-08-12 13:12:09,628 : INFO : Precision score for label_class 1: 0.9752
+2024-08-12 13:12:09,628 : INFO : Precision score for label_class 2: 0.9451
+2024-08-12 13:12:09,628 : INFO : Recall score for label_class 0: 0.9333
+2024-08-12 13:12:09,628 : INFO : Recall score for label_class 1: 0.9759
+2024-08-12 13:12:09,628 : INFO : Recall score for label_class 2: 0.9363
+2024-08-12 13:12:09,628 : INFO : Average F1 score: 0.9471
+2024-08-12 13:12:09,908 : INFO : Average loss over validation batches: 0.4143
+2024-08-12 13:12:09,908 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:09,908 : INFO : Validation metrics:
+2024-08-12 13:12:09,908 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:09,912 : INFO : Accuracy: 0.8457
+2024-08-12 13:12:09,912 : INFO : Precision score for label_class 0: 0.7234
+2024-08-12 13:12:09,912 : INFO : Precision score for label_class 1: 0.9003
+2024-08-12 13:12:09,912 : INFO : Precision score for label_class 2: 0.7937
+2024-08-12 13:12:09,912 : INFO : Recall score for label_class 0: 0.8095
+2024-08-12 13:12:09,912 : INFO : Recall score for label_class 1: 0.8889
+2024-08-12 13:12:09,912 : INFO : Recall score for label_class 2: 0.7732
+2024-08-12 13:12:09,912 : INFO : Average F1 score: 0.8140
+2024-08-12 13:12:09,912 : INFO : EarlyStopping counter: 1 out of 2
+2024-08-12 13:12:09,912 : INFO : Starting epoch 5
+2024-08-12 13:12:09,953 : INFO : Current training batch loss: 0.0708 in epoch 5
+2024-08-12 13:12:10,752 : INFO : Current training batch loss: 0.1839 in epoch 5
+2024-08-12 13:12:11,552 : INFO : Current training batch loss: 0.0995 in epoch 5
+2024-08-12 13:12:12,352 : INFO : Current training batch loss: 0.0943 in epoch 5
+2024-08-12 13:12:13,153 : INFO : Current training batch loss: 0.0330 in epoch 5
+2024-08-12 13:12:13,286 : INFO : Epoch finished, average loss over training batches: 0.0897
+2024-08-12 13:12:13,287 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:13,287 : INFO : Training metrics:
+2024-08-12 13:12:13,287 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:13,296 : INFO : Accuracy: 0.9785
+2024-08-12 13:12:13,296 : INFO : Precision score for label_class 0: 0.9435
+2024-08-12 13:12:13,296 : INFO : Precision score for label_class 1: 0.9876
+2024-08-12 13:12:13,296 : INFO : Precision score for label_class 2: 0.9746
+2024-08-12 13:12:13,296 : INFO : Recall score for label_class 0: 0.9606
+2024-08-12 13:12:13,296 : INFO : Recall score for label_class 1: 0.9876
+2024-08-12 13:12:13,296 : INFO : Recall score for label_class 2: 0.9668
+2024-08-12 13:12:13,296 : INFO : Average F1 score: 0.9701
+2024-08-12 13:12:13,575 : INFO : Average loss over validation batches: 0.4265
+2024-08-12 13:12:13,576 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:13,576 : INFO : Validation metrics:
+2024-08-12 13:12:13,576 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:13,579 : INFO : Accuracy: 0.8531
+2024-08-12 13:12:13,579 : INFO : Precision score for label_class 0: 0.7586
+2024-08-12 13:12:13,579 : INFO : Precision score for label_class 1: 0.9054
+2024-08-12 13:12:13,579 : INFO : Precision score for label_class 2: 0.7908
+2024-08-12 13:12:13,579 : INFO : Recall score for label_class 0: 0.7857
+2024-08-12 13:12:13,579 : INFO : Recall score for label_class 1: 0.8939
+2024-08-12 13:12:13,579 : INFO : Recall score for label_class 2: 0.7990
+2024-08-12 13:12:13,579 : INFO : Average F1 score: 0.8221
+2024-08-12 13:12:13,579 : INFO : EarlyStopping counter: 2 out of 2
+2024-08-12 13:12:13,579 : INFO : Early stopping, loading best model from before and determine score...
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at /data/language_models/pretrained_models/mlm_00/mlm_model and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 13:12:13,613 : INFO : Loading model from /data/language_models/pretrained_models_downstreaming/financial_phrasebank/mlm_01/current_split_model/checkpoint.pth
+2024-08-12 13:12:13,928 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:13,928 : INFO : Validation metrics after reloading the model before ending this training:
+2024-08-12 13:12:13,928 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:13,931 : INFO : Accuracy: 0.8472
+2024-08-12 13:12:13,931 : INFO : Precision score for label_class 0: 0.8028
+2024-08-12 13:12:13,931 : INFO : Precision score for label_class 1: 0.8886
+2024-08-12 13:12:13,931 : INFO : Precision score for label_class 2: 0.7737
+2024-08-12 13:12:13,931 : INFO : Recall score for label_class 0: 0.6786
+2024-08-12 13:12:13,931 : INFO : Recall score for label_class 1: 0.9268
+2024-08-12 13:12:13,931 : INFO : Recall score for label_class 2: 0.7577
+2024-08-12 13:12:13,932 : INFO : Average F1 score: 0.8028
+2024-08-12 13:12:13,932 : INFO : Determined score from best model, ending training.
+2024-08-12 13:12:13,933 : INFO : Split 5 is finished, the score is: 0.8028
+2024-08-12 13:12:13,933 : INFO : ----------------------------------------------------------------------------------------------------
+[I 2024-08-12 13:12:13,933] Trial 15 finished with value: 0.8392448056528223 and parameters: {'n_epochs': 7, 'learning_rate': 4.648920528590328e-05, 'classifier_dropout': 0.8995971579411239, 'warmup_step_fraction': 0.014707551917070372, 'use_gradient_clipping': False}. Best is trial 13 with value: 0.845151673471549.
+2024-08-12 13:12:13,947 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:13,947 : INFO : Starting training for split 1
+2024-08-12 13:12:13,958 : INFO : Occurence of labels for training split: (array([0, 1, 2]), array([ 328, 1596,  774]))
+2024-08-12 13:12:13,960 : INFO : Occurence of labels for validation split: (array([0, 1, 2]), array([ 86, 415, 174]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at /data/language_models/pretrained_models/mlm_00/mlm_model and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 13:12:14,010 : INFO : Starting epoch 1
+2024-08-12 13:12:14,052 : INFO : Current training batch loss: 1.0989 in epoch 1
+2024-08-12 13:12:14,852 : INFO : Current training batch loss: 1.0090 in epoch 1
+2024-08-12 13:12:15,652 : INFO : Current training batch loss: 1.0029 in epoch 1
+2024-08-12 13:12:16,453 : INFO : Current training batch loss: 0.8203 in epoch 1
+2024-08-12 13:12:17,253 : INFO : Current training batch loss: 0.7989 in epoch 1
+2024-08-12 13:12:17,387 : INFO : Epoch finished, average loss over training batches: 0.9214
+2024-08-12 13:12:17,387 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:17,387 : INFO : Training metrics:
+2024-08-12 13:12:17,387 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:17,397 : INFO : Accuracy: 0.6286
+2024-08-12 13:12:17,397 : INFO : Precision score for label_class 0: 0.1279
+2024-08-12 13:12:17,397 : INFO : Precision score for label_class 1: 0.6573
+2024-08-12 13:12:17,397 : INFO : Precision score for label_class 2: 0.5526
+2024-08-12 13:12:17,397 : INFO : Recall score for label_class 0: 0.0335
+2024-08-12 13:12:17,397 : INFO : Recall score for label_class 1: 0.9505
+2024-08-12 13:12:17,397 : INFO : Recall score for label_class 2: 0.2171
+2024-08-12 13:12:17,397 : INFO : Average F1 score: 0.3807
+2024-08-12 13:12:17,677 : INFO : Average loss over validation batches: 0.7303
+2024-08-12 13:12:17,677 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:17,677 : INFO : Validation metrics:
+2024-08-12 13:12:17,677 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:17,679 : INFO : Accuracy: 0.7126
+2024-08-12 13:12:17,679 : INFO : Precision score for label_class 0: 0.0000
+2024-08-12 13:12:17,679 : INFO : Precision score for label_class 1: 0.8259
+2024-08-12 13:12:17,679 : INFO : Precision score for label_class 2: 0.4890
+2024-08-12 13:12:17,679 : INFO : Recall score for label_class 0: 0.0000
+2024-08-12 13:12:17,679 : INFO : Recall score for label_class 1: 0.8916
+2024-08-12 13:12:17,679 : INFO : Recall score for label_class 2: 0.6379
+2024-08-12 13:12:17,679 : INFO : Average F1 score: 0.4704
+2024-08-12 13:12:17,679 : INFO : Validation metric decreased (inf --> 0.730291).  Saving model ...
+2024-08-12 13:12:17,787 : INFO : Starting epoch 2
+2024-08-12 13:12:18,427 : INFO : Current training batch loss: 0.5101 in epoch 2
+2024-08-12 13:12:19,226 : INFO : Current training batch loss: 0.6384 in epoch 2
+2024-08-12 13:12:20,026 : INFO : Current training batch loss: 0.5782 in epoch 2
+2024-08-12 13:12:20,826 : INFO : Current training batch loss: 0.5070 in epoch 2
+2024-08-12 13:12:21,159 : INFO : Epoch finished, average loss over training batches: 0.5897
+2024-08-12 13:12:21,159 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:21,159 : INFO : Training metrics:
+2024-08-12 13:12:21,159 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:21,169 : INFO : Accuracy: 0.7872
+2024-08-12 13:12:21,169 : INFO : Precision score for label_class 0: 0.7619
+2024-08-12 13:12:21,169 : INFO : Precision score for label_class 1: 0.8509
+2024-08-12 13:12:21,169 : INFO : Precision score for label_class 2: 0.6602
+2024-08-12 13:12:21,169 : INFO : Recall score for label_class 0: 0.1463
+2024-08-12 13:12:21,169 : INFO : Recall score for label_class 1: 0.9405
+2024-08-12 13:12:21,169 : INFO : Recall score for label_class 2: 0.7429
+2024-08-12 13:12:21,169 : INFO : Average F1 score: 0.6127
+2024-08-12 13:12:21,449 : INFO : Average loss over validation batches: 0.4888
+2024-08-12 13:12:21,449 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:21,449 : INFO : Validation metrics:
+2024-08-12 13:12:21,449 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:21,452 : INFO : Accuracy: 0.8444
+2024-08-12 13:12:21,452 : INFO : Precision score for label_class 0: 0.8305
+2024-08-12 13:12:21,452 : INFO : Precision score for label_class 1: 0.8810
+2024-08-12 13:12:21,452 : INFO : Precision score for label_class 2: 0.7598
+2024-08-12 13:12:21,452 : INFO : Recall score for label_class 0: 0.5698
+2024-08-12 13:12:21,452 : INFO : Recall score for label_class 1: 0.9277
+2024-08-12 13:12:21,452 : INFO : Recall score for label_class 2: 0.7816
+2024-08-12 13:12:21,452 : INFO : Average F1 score: 0.7834
+2024-08-12 13:12:21,452 : INFO : Validation metric decreased (0.730291 --> 0.488797).  Saving model ...
+2024-08-12 13:12:21,554 : INFO : Starting epoch 3
+2024-08-12 13:12:21,995 : INFO : Current training batch loss: 0.4511 in epoch 3
+2024-08-12 13:12:22,795 : INFO : Current training batch loss: 0.4055 in epoch 3
+2024-08-12 13:12:23,595 : INFO : Current training batch loss: 0.3851 in epoch 3
+2024-08-12 13:12:24,396 : INFO : Current training batch loss: 0.3073 in epoch 3
+2024-08-12 13:12:24,929 : INFO : Epoch finished, average loss over training batches: 0.3885
+2024-08-12 13:12:24,929 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:24,929 : INFO : Training metrics:
+2024-08-12 13:12:24,929 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:24,936 : INFO : Accuracy: 0.8884
+2024-08-12 13:12:24,936 : INFO : Precision score for label_class 0: 0.7917
+2024-08-12 13:12:24,936 : INFO : Precision score for label_class 1: 0.9118
+2024-08-12 13:12:24,936 : INFO : Precision score for label_class 2: 0.8764
+2024-08-12 13:12:24,936 : INFO : Recall score for label_class 0: 0.7530
+2024-08-12 13:12:24,936 : INFO : Recall score for label_class 1: 0.9518
+2024-08-12 13:12:24,936 : INFO : Recall score for label_class 2: 0.8152
+2024-08-12 13:12:24,936 : INFO : Average F1 score: 0.8493
+2024-08-12 13:12:25,216 : INFO : Average loss over validation batches: 0.3613
+2024-08-12 13:12:25,216 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:25,216 : INFO : Validation metrics:
+2024-08-12 13:12:25,216 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:25,219 : INFO : Accuracy: 0.8889
+2024-08-12 13:12:25,219 : INFO : Precision score for label_class 0: 0.8261
+2024-08-12 13:12:25,219 : INFO : Precision score for label_class 1: 0.9106
+2024-08-12 13:12:25,219 : INFO : Precision score for label_class 2: 0.8671
+2024-08-12 13:12:25,219 : INFO : Recall score for label_class 0: 0.8837
+2024-08-12 13:12:25,219 : INFO : Recall score for label_class 1: 0.9325
+2024-08-12 13:12:25,219 : INFO : Recall score for label_class 2: 0.7874
+2024-08-12 13:12:25,219 : INFO : Average F1 score: 0.8669
+2024-08-12 13:12:25,219 : INFO : Validation metric decreased (0.488797 --> 0.361333).  Saving model ...
+2024-08-12 13:12:25,320 : INFO : Starting epoch 4
+2024-08-12 13:12:25,561 : INFO : Current training batch loss: 0.7209 in epoch 4
+2024-08-12 13:12:26,361 : INFO : Current training batch loss: 0.3195 in epoch 4
+2024-08-12 13:12:27,161 : INFO : Current training batch loss: 0.3592 in epoch 4
+2024-08-12 13:12:27,962 : INFO : Current training batch loss: 0.2115 in epoch 4
+2024-08-12 13:12:28,694 : INFO : Epoch finished, average loss over training batches: 0.2667
+2024-08-12 13:12:28,694 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:28,694 : INFO : Training metrics:
+2024-08-12 13:12:28,694 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:28,701 : INFO : Accuracy: 0.9325
+2024-08-12 13:12:28,701 : INFO : Precision score for label_class 0: 0.8592
+2024-08-12 13:12:28,701 : INFO : Precision score for label_class 1: 0.9473
+2024-08-12 13:12:28,701 : INFO : Precision score for label_class 2: 0.9338
+2024-08-12 13:12:28,701 : INFO : Recall score for label_class 0: 0.8933
+2024-08-12 13:12:28,701 : INFO : Recall score for label_class 1: 0.9687
+2024-08-12 13:12:28,701 : INFO : Recall score for label_class 2: 0.8747
+2024-08-12 13:12:28,701 : INFO : Average F1 score: 0.9124
+2024-08-12 13:12:28,980 : INFO : Average loss over validation batches: 0.3836
+2024-08-12 13:12:28,981 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:28,981 : INFO : Validation metrics:
+2024-08-12 13:12:28,981 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:28,983 : INFO : Accuracy: 0.8593
+2024-08-12 13:12:28,983 : INFO : Precision score for label_class 0: 0.7596
+2024-08-12 13:12:28,983 : INFO : Precision score for label_class 1: 0.9558
+2024-08-12 13:12:28,983 : INFO : Precision score for label_class 2: 0.7416
+2024-08-12 13:12:28,983 : INFO : Recall score for label_class 0: 0.9186
+2024-08-12 13:12:28,983 : INFO : Recall score for label_class 1: 0.8337
+2024-08-12 13:12:28,983 : INFO : Recall score for label_class 2: 0.8908
+2024-08-12 13:12:28,983 : INFO : Average F1 score: 0.8439
+2024-08-12 13:12:28,983 : INFO : EarlyStopping counter: 1 out of 2
+2024-08-12 13:12:28,983 : INFO : Starting epoch 5
+2024-08-12 13:12:29,024 : INFO : Current training batch loss: 0.2260 in epoch 5
+2024-08-12 13:12:29,824 : INFO : Current training batch loss: 0.3216 in epoch 5
+2024-08-12 13:12:30,625 : INFO : Current training batch loss: 0.1731 in epoch 5
+2024-08-12 13:12:31,425 : INFO : Current training batch loss: 0.2051 in epoch 5
+2024-08-12 13:12:32,226 : INFO : Current training batch loss: 0.2534 in epoch 5
+2024-08-12 13:12:32,359 : INFO : Epoch finished, average loss over training batches: 0.1949
+2024-08-12 13:12:32,359 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:32,360 : INFO : Training metrics:
+2024-08-12 13:12:32,360 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:32,366 : INFO : Accuracy: 0.9518
+2024-08-12 13:12:32,366 : INFO : Precision score for label_class 0: 0.8786
+2024-08-12 13:12:32,366 : INFO : Precision score for label_class 1: 0.9653
+2024-08-12 13:12:32,366 : INFO : Precision score for label_class 2: 0.9565
+2024-08-12 13:12:32,366 : INFO : Recall score for label_class 0: 0.9268
+2024-08-12 13:12:32,366 : INFO : Recall score for label_class 1: 0.9774
+2024-08-12 13:12:32,366 : INFO : Recall score for label_class 2: 0.9096
+2024-08-12 13:12:32,366 : INFO : Average F1 score: 0.9353
+2024-08-12 13:12:32,646 : INFO : Average loss over validation batches: 0.4135
+2024-08-12 13:12:32,646 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:32,646 : INFO : Validation metrics:
+2024-08-12 13:12:32,646 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:32,649 : INFO : Accuracy: 0.8519
+2024-08-12 13:12:32,649 : INFO : Precision score for label_class 0: 0.7407
+2024-08-12 13:12:32,649 : INFO : Precision score for label_class 1: 0.9656
+2024-08-12 13:12:32,649 : INFO : Precision score for label_class 2: 0.7248
+2024-08-12 13:12:32,649 : INFO : Recall score for label_class 0: 0.9302
+2024-08-12 13:12:32,649 : INFO : Recall score for label_class 1: 0.8120
+2024-08-12 13:12:32,649 : INFO : Recall score for label_class 2: 0.9080
+2024-08-12 13:12:32,649 : INFO : Average F1 score: 0.8377
+2024-08-12 13:12:32,649 : INFO : EarlyStopping counter: 2 out of 2
+2024-08-12 13:12:32,649 : INFO : Early stopping, loading best model from before and determine score...
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at /data/language_models/pretrained_models/mlm_00/mlm_model and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 13:12:32,686 : INFO : Loading model from /data/language_models/pretrained_models_downstreaming/financial_phrasebank/mlm_01/current_split_model/checkpoint.pth
+2024-08-12 13:12:33,000 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:33,000 : INFO : Validation metrics after reloading the model before ending this training:
+2024-08-12 13:12:33,000 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:33,003 : INFO : Accuracy: 0.8889
+2024-08-12 13:12:33,003 : INFO : Precision score for label_class 0: 0.8261
+2024-08-12 13:12:33,003 : INFO : Precision score for label_class 1: 0.9106
+2024-08-12 13:12:33,003 : INFO : Precision score for label_class 2: 0.8671
+2024-08-12 13:12:33,003 : INFO : Recall score for label_class 0: 0.8837
+2024-08-12 13:12:33,003 : INFO : Recall score for label_class 1: 0.9325
+2024-08-12 13:12:33,003 : INFO : Recall score for label_class 2: 0.7874
+2024-08-12 13:12:33,003 : INFO : Average F1 score: 0.8669
+2024-08-12 13:12:33,003 : INFO : Determined score from best model, ending training.
+2024-08-12 13:12:33,004 : INFO : Split 1 is finished, the score is: 0.8669
+2024-08-12 13:12:33,004 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:33,004 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:33,004 : INFO : Starting training for split 2
+2024-08-12 13:12:33,016 : INFO : Occurence of labels for training split: (array([0, 1, 2]), array([ 343, 1601,  754]))
+2024-08-12 13:12:33,018 : INFO : Occurence of labels for validation split: (array([0, 1, 2]), array([ 71, 410, 194]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at /data/language_models/pretrained_models/mlm_00/mlm_model and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 13:12:33,057 : INFO : Starting epoch 1
+2024-08-12 13:12:33,098 : INFO : Current training batch loss: 1.1076 in epoch 1
+2024-08-12 13:12:33,898 : INFO : Current training batch loss: 1.0538 in epoch 1
+2024-08-12 13:12:34,699 : INFO : Current training batch loss: 1.0167 in epoch 1
+2024-08-12 13:12:35,500 : INFO : Current training batch loss: 0.8459 in epoch 1
+2024-08-12 13:12:36,300 : INFO : Current training batch loss: 0.8597 in epoch 1
+2024-08-12 13:12:36,433 : INFO : Epoch finished, average loss over training batches: 0.9377
+2024-08-12 13:12:36,433 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:36,434 : INFO : Training metrics:
+2024-08-12 13:12:36,434 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:36,446 : INFO : Accuracy: 0.5752
+2024-08-12 13:12:36,446 : INFO : Precision score for label_class 0: 0.0000
+2024-08-12 13:12:36,447 : INFO : Precision score for label_class 1: 0.6491
+2024-08-12 13:12:36,447 : INFO : Precision score for label_class 2: 0.3572
+2024-08-12 13:12:36,447 : INFO : Recall score for label_class 0: 0.0000
+2024-08-12 13:12:36,447 : INFO : Recall score for label_class 1: 0.8170
+2024-08-12 13:12:36,447 : INFO : Recall score for label_class 2: 0.3236
+2024-08-12 13:12:36,447 : INFO : Average F1 score: 0.3543
+2024-08-12 13:12:36,726 : INFO : Average loss over validation batches: 0.7423
+2024-08-12 13:12:36,727 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:36,727 : INFO : Validation metrics:
+2024-08-12 13:12:36,727 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:36,731 : INFO : Accuracy: 0.7230
+2024-08-12 13:12:36,731 : INFO : Precision score for label_class 0: 0.0000
+2024-08-12 13:12:36,731 : INFO : Precision score for label_class 1: 0.7831
+2024-08-12 13:12:36,731 : INFO : Precision score for label_class 2: 0.5707
+2024-08-12 13:12:36,731 : INFO : Recall score for label_class 0: 0.0000
+2024-08-12 13:12:36,731 : INFO : Recall score for label_class 1: 0.9244
+2024-08-12 13:12:36,731 : INFO : Recall score for label_class 2: 0.5619
+2024-08-12 13:12:36,731 : INFO : Average F1 score: 0.4714
+2024-08-12 13:12:36,731 : INFO : Validation metric decreased (inf --> 0.742316).  Saving model ...
+2024-08-12 13:12:36,840 : INFO : Starting epoch 2
+2024-08-12 13:12:37,481 : INFO : Current training batch loss: 0.7009 in epoch 2
+2024-08-12 13:12:38,280 : INFO : Current training batch loss: 0.6573 in epoch 2
+2024-08-12 13:12:39,080 : INFO : Current training batch loss: 0.5774 in epoch 2
+2024-08-12 13:12:39,880 : INFO : Current training batch loss: 0.5522 in epoch 2
+2024-08-12 13:12:40,213 : INFO : Epoch finished, average loss over training batches: 0.6344
+2024-08-12 13:12:40,213 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:40,213 : INFO : Training metrics:
+2024-08-12 13:12:40,213 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:40,223 : INFO : Accuracy: 0.7487
+2024-08-12 13:12:40,223 : INFO : Precision score for label_class 0: 1.0000
+2024-08-12 13:12:40,223 : INFO : Precision score for label_class 1: 0.8328
+2024-08-12 13:12:40,223 : INFO : Precision score for label_class 2: 0.5745
+2024-08-12 13:12:40,223 : INFO : Recall score for label_class 0: 0.0029
+2024-08-12 13:12:40,223 : INFO : Recall score for label_class 1: 0.9457
+2024-08-12 13:12:40,223 : INFO : Recall score for label_class 2: 0.6698
+2024-08-12 13:12:40,223 : INFO : Average F1 score: 0.5033
+2024-08-12 13:12:40,503 : INFO : Average loss over validation batches: 0.5559
+2024-08-12 13:12:40,503 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:40,503 : INFO : Validation metrics:
+2024-08-12 13:12:40,503 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:40,507 : INFO : Accuracy: 0.7852
+2024-08-12 13:12:40,507 : INFO : Precision score for label_class 0: 0.0000
+2024-08-12 13:12:40,507 : INFO : Precision score for label_class 1: 0.8556
+2024-08-12 13:12:40,507 : INFO : Precision score for label_class 2: 0.6444
+2024-08-12 13:12:40,507 : INFO : Recall score for label_class 0: 0.0000
+2024-08-12 13:12:40,507 : INFO : Recall score for label_class 1: 0.9390
+2024-08-12 13:12:40,507 : INFO : Recall score for label_class 2: 0.7474
+2024-08-12 13:12:40,507 : INFO : Average F1 score: 0.5292
+2024-08-12 13:12:40,507 : INFO : Validation metric decreased (0.742316 --> 0.555856).  Saving model ...
+2024-08-12 13:12:40,608 : INFO : Starting epoch 3
+2024-08-12 13:12:41,049 : INFO : Current training batch loss: 0.4743 in epoch 3
+2024-08-12 13:12:41,850 : INFO : Current training batch loss: 0.4810 in epoch 3
+2024-08-12 13:12:42,652 : INFO : Current training batch loss: 0.4286 in epoch 3
+2024-08-12 13:12:43,454 : INFO : Current training batch loss: 0.2812 in epoch 3
+2024-08-12 13:12:43,987 : INFO : Epoch finished, average loss over training batches: 0.4354
+2024-08-12 13:12:43,988 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:43,988 : INFO : Training metrics:
+2024-08-12 13:12:43,988 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:44,000 : INFO : Accuracy: 0.8699
+2024-08-12 13:12:44,000 : INFO : Precision score for label_class 0: 0.8000
+2024-08-12 13:12:44,000 : INFO : Precision score for label_class 1: 0.9128
+2024-08-12 13:12:44,000 : INFO : Precision score for label_class 2: 0.7995
+2024-08-12 13:12:44,000 : INFO : Recall score for label_class 0: 0.5948
+2024-08-12 13:12:44,000 : INFO : Recall score for label_class 1: 0.9550
+2024-08-12 13:12:44,000 : INFO : Recall score for label_class 2: 0.8143
+2024-08-12 13:12:44,000 : INFO : Average F1 score: 0.8075
+2024-08-12 13:12:44,280 : INFO : Average loss over validation batches: 0.4285
+2024-08-12 13:12:44,280 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:44,280 : INFO : Validation metrics:
+2024-08-12 13:12:44,280 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:44,283 : INFO : Accuracy: 0.8681
+2024-08-12 13:12:44,283 : INFO : Precision score for label_class 0: 0.7179
+2024-08-12 13:12:44,283 : INFO : Precision score for label_class 1: 0.8742
+2024-08-12 13:12:44,283 : INFO : Precision score for label_class 2: 0.9276
+2024-08-12 13:12:44,283 : INFO : Recall score for label_class 0: 0.7887
+2024-08-12 13:12:44,283 : INFO : Recall score for label_class 1: 0.9488
+2024-08-12 13:12:44,283 : INFO : Recall score for label_class 2: 0.7268
+2024-08-12 13:12:44,283 : INFO : Average F1 score: 0.8255
+2024-08-12 13:12:44,283 : INFO : Validation metric decreased (0.555856 --> 0.428513).  Saving model ...
+2024-08-12 13:12:44,385 : INFO : Starting epoch 4
+2024-08-12 13:12:44,627 : INFO : Current training batch loss: 0.5259 in epoch 4
+2024-08-12 13:12:45,432 : INFO : Current training batch loss: 0.2914 in epoch 4
+2024-08-12 13:12:46,238 : INFO : Current training batch loss: 0.3968 in epoch 4
+2024-08-12 13:12:47,043 : INFO : Current training batch loss: 0.1985 in epoch 4
+2024-08-12 13:12:47,787 : INFO : Epoch finished, average loss over training batches: 0.2836
+2024-08-12 13:12:47,787 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:47,787 : INFO : Training metrics:
+2024-08-12 13:12:47,787 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:47,798 : INFO : Accuracy: 0.9266
+2024-08-12 13:12:47,798 : INFO : Precision score for label_class 0: 0.8497
+2024-08-12 13:12:47,798 : INFO : Precision score for label_class 1: 0.9469
+2024-08-12 13:12:47,798 : INFO : Precision score for label_class 2: 0.9174
+2024-08-12 13:12:47,798 : INFO : Recall score for label_class 0: 0.8571
+2024-08-12 13:12:47,798 : INFO : Recall score for label_class 1: 0.9688
+2024-08-12 13:12:47,798 : INFO : Recall score for label_class 2: 0.8687
+2024-08-12 13:12:47,798 : INFO : Average F1 score: 0.9012
+2024-08-12 13:12:48,077 : INFO : Average loss over validation batches: 0.3863
+2024-08-12 13:12:48,078 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:48,078 : INFO : Validation metrics:
+2024-08-12 13:12:48,078 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:48,081 : INFO : Accuracy: 0.8652
+2024-08-12 13:12:48,081 : INFO : Precision score for label_class 0: 0.7342
+2024-08-12 13:12:48,081 : INFO : Precision score for label_class 1: 0.9082
+2024-08-12 13:12:48,081 : INFO : Precision score for label_class 2: 0.8290
+2024-08-12 13:12:48,081 : INFO : Recall score for label_class 0: 0.8169
+2024-08-12 13:12:48,081 : INFO : Recall score for label_class 1: 0.8927
+2024-08-12 13:12:48,081 : INFO : Recall score for label_class 2: 0.8247
+2024-08-12 13:12:48,081 : INFO : Average F1 score: 0.8335
+2024-08-12 13:12:48,081 : INFO : Validation metric decreased (0.428513 --> 0.386261).  Saving model ...
+2024-08-12 13:12:48,182 : INFO : Starting epoch 5
+2024-08-12 13:12:48,224 : INFO : Current training batch loss: 0.1805 in epoch 5
+2024-08-12 13:12:49,029 : INFO : Current training batch loss: 0.3044 in epoch 5
+2024-08-12 13:12:49,836 : INFO : Current training batch loss: 0.2120 in epoch 5
+2024-08-12 13:12:50,641 : INFO : Current training batch loss: 0.1951 in epoch 5
+2024-08-12 13:12:51,448 : INFO : Current training batch loss: 0.2606 in epoch 5
+2024-08-12 13:12:51,589 : INFO : Epoch finished, average loss over training batches: 0.2014
+2024-08-12 13:12:51,589 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:51,589 : INFO : Training metrics:
+2024-08-12 13:12:51,589 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:51,597 : INFO : Accuracy: 0.9518
+2024-08-12 13:12:51,597 : INFO : Precision score for label_class 0: 0.8855
+2024-08-12 13:12:51,597 : INFO : Precision score for label_class 1: 0.9701
+2024-08-12 13:12:51,597 : INFO : Precision score for label_class 2: 0.9442
+2024-08-12 13:12:51,597 : INFO : Recall score for label_class 0: 0.9242
+2024-08-12 13:12:51,597 : INFO : Recall score for label_class 1: 0.9725
+2024-08-12 13:12:51,597 : INFO : Recall score for label_class 2: 0.9204
+2024-08-12 13:12:51,597 : INFO : Average F1 score: 0.9360
+2024-08-12 13:12:51,877 : INFO : Average loss over validation batches: 0.4272
+2024-08-12 13:12:51,877 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:51,877 : INFO : Validation metrics:
+2024-08-12 13:12:51,877 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:51,880 : INFO : Accuracy: 0.8563
+2024-08-12 13:12:51,880 : INFO : Precision score for label_class 0: 0.7303
+2024-08-12 13:12:51,880 : INFO : Precision score for label_class 1: 0.9330
+2024-08-12 13:12:51,880 : INFO : Precision score for label_class 2: 0.7746
+2024-08-12 13:12:51,880 : INFO : Recall score for label_class 0: 0.9155
+2024-08-12 13:12:51,880 : INFO : Recall score for label_class 1: 0.8488
+2024-08-12 13:12:51,880 : INFO : Recall score for label_class 2: 0.8505
+2024-08-12 13:12:51,880 : INFO : Average F1 score: 0.8374
+2024-08-12 13:12:51,880 : INFO : EarlyStopping counter: 1 out of 2
+2024-08-12 13:12:51,880 : INFO : Starting epoch 6
+2024-08-12 13:12:52,525 : INFO : Current training batch loss: 0.2390 in epoch 6
+2024-08-12 13:12:53,330 : INFO : Current training batch loss: 0.1954 in epoch 6
+2024-08-12 13:12:54,136 : INFO : Current training batch loss: 0.0774 in epoch 6
+2024-08-12 13:12:54,942 : INFO : Current training batch loss: 0.0976 in epoch 6
+2024-08-12 13:12:55,284 : INFO : Epoch finished, average loss over training batches: 0.1639
+2024-08-12 13:12:55,284 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:55,284 : INFO : Training metrics:
+2024-08-12 13:12:55,284 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:55,291 : INFO : Accuracy: 0.9615
+2024-08-12 13:12:55,292 : INFO : Precision score for label_class 0: 0.9124
+2024-08-12 13:12:55,292 : INFO : Precision score for label_class 1: 0.9739
+2024-08-12 13:12:55,292 : INFO : Precision score for label_class 2: 0.9579
+2024-08-12 13:12:55,292 : INFO : Recall score for label_class 0: 0.9417
+2024-08-12 13:12:55,292 : INFO : Recall score for label_class 1: 0.9781
+2024-08-12 13:12:55,292 : INFO : Recall score for label_class 2: 0.9350
+2024-08-12 13:12:55,292 : INFO : Average F1 score: 0.9497
+2024-08-12 13:12:55,571 : INFO : Average loss over validation batches: 0.4215
+2024-08-12 13:12:55,571 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:55,572 : INFO : Validation metrics:
+2024-08-12 13:12:55,572 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:55,575 : INFO : Accuracy: 0.8563
+2024-08-12 13:12:55,575 : INFO : Precision score for label_class 0: 0.7143
+2024-08-12 13:12:55,575 : INFO : Precision score for label_class 1: 0.9330
+2024-08-12 13:12:55,575 : INFO : Precision score for label_class 2: 0.7820
+2024-08-12 13:12:55,575 : INFO : Recall score for label_class 0: 0.9155
+2024-08-12 13:12:55,575 : INFO : Recall score for label_class 1: 0.8488
+2024-08-12 13:12:55,575 : INFO : Recall score for label_class 2: 0.8505
+2024-08-12 13:12:55,575 : INFO : Average F1 score: 0.8354
+2024-08-12 13:12:55,575 : INFO : EarlyStopping counter: 2 out of 2
+2024-08-12 13:12:55,575 : INFO : Early stopping, loading best model from before and determine score...
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at /data/language_models/pretrained_models/mlm_00/mlm_model and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 13:12:55,612 : INFO : Loading model from /data/language_models/pretrained_models_downstreaming/financial_phrasebank/mlm_01/current_split_model/checkpoint.pth
+2024-08-12 13:12:55,922 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:55,922 : INFO : Validation metrics after reloading the model before ending this training:
+2024-08-12 13:12:55,922 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:55,925 : INFO : Accuracy: 0.8652
+2024-08-12 13:12:55,925 : INFO : Precision score for label_class 0: 0.7342
+2024-08-12 13:12:55,925 : INFO : Precision score for label_class 1: 0.9082
+2024-08-12 13:12:55,925 : INFO : Precision score for label_class 2: 0.8290
+2024-08-12 13:12:55,925 : INFO : Recall score for label_class 0: 0.8169
+2024-08-12 13:12:55,925 : INFO : Recall score for label_class 1: 0.8927
+2024-08-12 13:12:55,925 : INFO : Recall score for label_class 2: 0.8247
+2024-08-12 13:12:55,925 : INFO : Average F1 score: 0.8335
+2024-08-12 13:12:55,925 : INFO : Determined score from best model, ending training.
+2024-08-12 13:12:55,932 : INFO : Split 2 is finished, the score is: 0.8335
+2024-08-12 13:12:55,932 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:55,932 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:55,932 : INFO : Starting training for split 3
+2024-08-12 13:12:55,944 : INFO : Occurence of labels for training split: (array([0, 1, 2]), array([ 328, 1611,  759]))
+2024-08-12 13:12:55,946 : INFO : Occurence of labels for validation split: (array([0, 1, 2]), array([ 86, 400, 189]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at /data/language_models/pretrained_models/mlm_00/mlm_model and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 13:12:55,995 : INFO : Starting epoch 1
+2024-08-12 13:12:56,038 : INFO : Current training batch loss: 1.0914 in epoch 1
+2024-08-12 13:12:56,843 : INFO : Current training batch loss: 1.0672 in epoch 1
+2024-08-12 13:12:57,649 : INFO : Current training batch loss: 0.9484 in epoch 1
+2024-08-12 13:12:58,455 : INFO : Current training batch loss: 0.8648 in epoch 1
+2024-08-12 13:12:59,260 : INFO : Current training batch loss: 0.8621 in epoch 1
+2024-08-12 13:12:59,401 : INFO : Epoch finished, average loss over training batches: 0.9418
+2024-08-12 13:12:59,401 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:59,401 : INFO : Training metrics:
+2024-08-12 13:12:59,401 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:59,408 : INFO : Accuracy: 0.6027
+2024-08-12 13:12:59,409 : INFO : Precision score for label_class 0: 0.1443
+2024-08-12 13:12:59,409 : INFO : Precision score for label_class 1: 0.6514
+2024-08-12 13:12:59,409 : INFO : Precision score for label_class 2: 0.5339
+2024-08-12 13:12:59,409 : INFO : Recall score for label_class 0: 0.0884
+2024-08-12 13:12:59,409 : INFO : Recall score for label_class 1: 0.9081
+2024-08-12 13:12:59,409 : INFO : Recall score for label_class 2: 0.1765
+2024-08-12 13:12:59,409 : INFO : Average F1 score: 0.3779
+2024-08-12 13:12:59,688 : INFO : Average loss over validation batches: 0.7558
+2024-08-12 13:12:59,688 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:59,688 : INFO : Validation metrics:
+2024-08-12 13:12:59,688 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:12:59,691 : INFO : Accuracy: 0.7022
+2024-08-12 13:12:59,691 : INFO : Precision score for label_class 0: 0.0000
+2024-08-12 13:12:59,691 : INFO : Precision score for label_class 1: 0.7764
+2024-08-12 13:12:59,691 : INFO : Precision score for label_class 2: 0.5156
+2024-08-12 13:12:59,691 : INFO : Recall score for label_class 0: 0.0000
+2024-08-12 13:12:59,691 : INFO : Recall score for label_class 1: 0.9375
+2024-08-12 13:12:59,691 : INFO : Recall score for label_class 2: 0.5238
+2024-08-12 13:12:59,691 : INFO : Average F1 score: 0.4564
+2024-08-12 13:12:59,691 : INFO : Validation metric decreased (inf --> 0.755757).  Saving model ...
+2024-08-12 13:12:59,802 : INFO : Starting epoch 2
+2024-08-12 13:13:00,447 : INFO : Current training batch loss: 0.7073 in epoch 2
+2024-08-12 13:13:01,252 : INFO : Current training batch loss: 0.6355 in epoch 2
+2024-08-12 13:13:02,057 : INFO : Current training batch loss: 0.5976 in epoch 2
+2024-08-12 13:13:02,861 : INFO : Current training batch loss: 0.4829 in epoch 2
+2024-08-12 13:13:03,203 : INFO : Epoch finished, average loss over training batches: 0.6274
+2024-08-12 13:13:03,203 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:03,204 : INFO : Training metrics:
+2024-08-12 13:13:03,204 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:03,211 : INFO : Accuracy: 0.7669
+2024-08-12 13:13:03,211 : INFO : Precision score for label_class 0: 0.8148
+2024-08-12 13:13:03,211 : INFO : Precision score for label_class 1: 0.8358
+2024-08-12 13:13:03,211 : INFO : Precision score for label_class 2: 0.6144
+2024-08-12 13:13:03,211 : INFO : Recall score for label_class 0: 0.1341
+2024-08-12 13:13:03,211 : INFO : Recall score for label_class 1: 0.9385
+2024-08-12 13:13:03,211 : INFO : Recall score for label_class 2: 0.6759
+2024-08-12 13:13:03,211 : INFO : Average F1 score: 0.5861
+2024-08-12 13:13:03,492 : INFO : Average loss over validation batches: 0.5196
+2024-08-12 13:13:03,492 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:03,492 : INFO : Validation metrics:
+2024-08-12 13:13:03,492 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:03,494 : INFO : Accuracy: 0.8311
+2024-08-12 13:13:03,494 : INFO : Precision score for label_class 0: 0.9750
+2024-08-12 13:13:03,494 : INFO : Precision score for label_class 1: 0.8575
+2024-08-12 13:13:03,494 : INFO : Precision score for label_class 2: 0.7409
+2024-08-12 13:13:03,494 : INFO : Recall score for label_class 0: 0.4535
+2024-08-12 13:13:03,494 : INFO : Recall score for label_class 1: 0.9475
+2024-08-12 13:13:03,494 : INFO : Recall score for label_class 2: 0.7566
+2024-08-12 13:13:03,494 : INFO : Average F1 score: 0.7560
+2024-08-12 13:13:03,494 : INFO : Validation metric decreased (0.755757 --> 0.519592).  Saving model ...
+2024-08-12 13:13:03,596 : INFO : Starting epoch 3
+2024-08-12 13:13:04,039 : INFO : Current training batch loss: 0.4607 in epoch 3
+2024-08-12 13:13:04,845 : INFO : Current training batch loss: 0.4379 in epoch 3
+2024-08-12 13:13:05,651 : INFO : Current training batch loss: 0.4002 in epoch 3
+2024-08-12 13:13:06,456 : INFO : Current training batch loss: 0.2822 in epoch 3
+2024-08-12 13:13:06,999 : INFO : Epoch finished, average loss over training batches: 0.4084
+2024-08-12 13:13:07,000 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:07,000 : INFO : Training metrics:
+2024-08-12 13:13:07,000 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:07,003 : INFO : Accuracy: 0.8847
+2024-08-12 13:13:07,003 : INFO : Precision score for label_class 0: 0.8007
+2024-08-12 13:13:07,003 : INFO : Precision score for label_class 1: 0.9102
+2024-08-12 13:13:07,003 : INFO : Precision score for label_class 2: 0.8606
+2024-08-12 13:13:07,003 : INFO : Recall score for label_class 0: 0.7470
+2024-08-12 13:13:07,003 : INFO : Recall score for label_class 1: 0.9503
+2024-08-12 13:13:07,003 : INFO : Recall score for label_class 2: 0.8050
+2024-08-12 13:13:07,003 : INFO : Average F1 score: 0.8449
+2024-08-12 13:13:07,284 : INFO : Average loss over validation batches: 0.3834
+2024-08-12 13:13:07,284 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:07,284 : INFO : Validation metrics:
+2024-08-12 13:13:07,284 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:07,286 : INFO : Accuracy: 0.8770
+2024-08-12 13:13:07,286 : INFO : Precision score for label_class 0: 0.8333
+2024-08-12 13:13:07,286 : INFO : Precision score for label_class 1: 0.9115
+2024-08-12 13:13:07,286 : INFO : Precision score for label_class 2: 0.8207
+2024-08-12 13:13:07,286 : INFO : Recall score for label_class 0: 0.8140
+2024-08-12 13:13:07,286 : INFO : Recall score for label_class 1: 0.9275
+2024-08-12 13:13:07,286 : INFO : Recall score for label_class 2: 0.7989
+2024-08-12 13:13:07,286 : INFO : Average F1 score: 0.8509
+2024-08-12 13:13:07,286 : INFO : Validation metric decreased (0.519592 --> 0.383449).  Saving model ...
+2024-08-12 13:13:07,390 : INFO : Starting epoch 4
+2024-08-12 13:13:07,632 : INFO : Current training batch loss: 0.4424 in epoch 4
+2024-08-12 13:13:08,438 : INFO : Current training batch loss: 0.3755 in epoch 4
+2024-08-12 13:13:09,244 : INFO : Current training batch loss: 0.3641 in epoch 4
+2024-08-12 13:13:10,050 : INFO : Current training batch loss: 0.1884 in epoch 4
+2024-08-12 13:13:10,793 : INFO : Epoch finished, average loss over training batches: 0.2801
+2024-08-12 13:13:10,794 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:10,794 : INFO : Training metrics:
+2024-08-12 13:13:10,794 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:10,799 : INFO : Accuracy: 0.9277
+2024-08-12 13:13:10,799 : INFO : Precision score for label_class 0: 0.8614
+2024-08-12 13:13:10,799 : INFO : Precision score for label_class 1: 0.9500
+2024-08-12 13:13:10,799 : INFO : Precision score for label_class 2: 0.9093
+2024-08-12 13:13:10,799 : INFO : Recall score for label_class 0: 0.8902
+2024-08-12 13:13:10,799 : INFO : Recall score for label_class 1: 0.9553
+2024-08-12 13:13:10,799 : INFO : Recall score for label_class 2: 0.8854
+2024-08-12 13:13:10,799 : INFO : Average F1 score: 0.9085
+2024-08-12 13:13:11,079 : INFO : Average loss over validation batches: 0.3593
+2024-08-12 13:13:11,079 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:11,079 : INFO : Validation metrics:
+2024-08-12 13:13:11,079 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:11,082 : INFO : Accuracy: 0.8711
+2024-08-12 13:13:11,082 : INFO : Precision score for label_class 0: 0.7426
+2024-08-12 13:13:11,082 : INFO : Precision score for label_class 1: 0.9373
+2024-08-12 13:13:11,082 : INFO : Precision score for label_class 2: 0.8063
+2024-08-12 13:13:11,082 : INFO : Recall score for label_class 0: 0.8721
+2024-08-12 13:13:11,082 : INFO : Recall score for label_class 1: 0.8975
+2024-08-12 13:13:11,082 : INFO : Recall score for label_class 2: 0.8148
+2024-08-12 13:13:11,082 : INFO : Average F1 score: 0.8432
+2024-08-12 13:13:11,082 : INFO : Validation metric decreased (0.383449 --> 0.359261).  Saving model ...
+2024-08-12 13:13:11,183 : INFO : Starting epoch 5
+2024-08-12 13:13:11,225 : INFO : Current training batch loss: 0.1886 in epoch 5
+2024-08-12 13:13:12,030 : INFO : Current training batch loss: 0.3825 in epoch 5
+2024-08-12 13:13:12,836 : INFO : Current training batch loss: 0.2690 in epoch 5
+2024-08-12 13:13:13,643 : INFO : Current training batch loss: 0.3089 in epoch 5
+2024-08-12 13:13:14,449 : INFO : Current training batch loss: 0.2274 in epoch 5
+2024-08-12 13:13:14,590 : INFO : Epoch finished, average loss over training batches: 0.2059
+2024-08-12 13:13:14,590 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:14,590 : INFO : Training metrics:
+2024-08-12 13:13:14,590 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:14,596 : INFO : Accuracy: 0.9529
+2024-08-12 13:13:14,596 : INFO : Precision score for label_class 0: 0.8870
+2024-08-12 13:13:14,596 : INFO : Precision score for label_class 1: 0.9679
+2024-08-12 13:13:14,596 : INFO : Precision score for label_class 2: 0.9510
+2024-08-12 13:13:14,596 : INFO : Recall score for label_class 0: 0.9329
+2024-08-12 13:13:14,596 : INFO : Recall score for label_class 1: 0.9727
+2024-08-12 13:13:14,596 : INFO : Recall score for label_class 2: 0.9196
+2024-08-12 13:13:14,596 : INFO : Average F1 score: 0.9382
+2024-08-12 13:13:14,876 : INFO : Average loss over validation batches: 0.3983
+2024-08-12 13:13:14,876 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:14,876 : INFO : Validation metrics:
+2024-08-12 13:13:14,876 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:14,879 : INFO : Accuracy: 0.8430
+2024-08-12 13:13:14,879 : INFO : Precision score for label_class 0: 0.7353
+2024-08-12 13:13:14,879 : INFO : Precision score for label_class 1: 0.9511
+2024-08-12 13:13:14,879 : INFO : Precision score for label_class 2: 0.7244
+2024-08-12 13:13:14,879 : INFO : Recall score for label_class 0: 0.8721
+2024-08-12 13:13:14,879 : INFO : Recall score for label_class 1: 0.8275
+2024-08-12 13:13:14,879 : INFO : Recall score for label_class 2: 0.8624
+2024-08-12 13:13:14,879 : INFO : Average F1 score: 0.8234
+2024-08-12 13:13:14,879 : INFO : EarlyStopping counter: 1 out of 2
+2024-08-12 13:13:14,879 : INFO : Starting epoch 6
+2024-08-12 13:13:15,524 : INFO : Current training batch loss: 0.3079 in epoch 6
+2024-08-12 13:13:16,329 : INFO : Current training batch loss: 0.1514 in epoch 6
+2024-08-12 13:13:17,135 : INFO : Current training batch loss: 0.0822 in epoch 6
+2024-08-12 13:13:17,940 : INFO : Current training batch loss: 0.0723 in epoch 6
+2024-08-12 13:13:18,283 : INFO : Epoch finished, average loss over training batches: 0.1699
+2024-08-12 13:13:18,283 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:18,283 : INFO : Training metrics:
+2024-08-12 13:13:18,283 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:18,290 : INFO : Accuracy: 0.9615
+2024-08-12 13:13:18,290 : INFO : Precision score for label_class 0: 0.9035
+2024-08-12 13:13:18,290 : INFO : Precision score for label_class 1: 0.9723
+2024-08-12 13:13:18,290 : INFO : Precision score for label_class 2: 0.9645
+2024-08-12 13:13:18,290 : INFO : Recall score for label_class 0: 0.9421
+2024-08-12 13:13:18,290 : INFO : Recall score for label_class 1: 0.9795
+2024-08-12 13:13:18,290 : INFO : Recall score for label_class 2: 0.9315
+2024-08-12 13:13:18,290 : INFO : Average F1 score: 0.9487
+2024-08-12 13:13:18,570 : INFO : Average loss over validation batches: 0.3695
+2024-08-12 13:13:18,570 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:18,570 : INFO : Validation metrics:
+2024-08-12 13:13:18,570 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:18,572 : INFO : Accuracy: 0.8667
+2024-08-12 13:13:18,572 : INFO : Precision score for label_class 0: 0.7979
+2024-08-12 13:13:18,572 : INFO : Precision score for label_class 1: 0.9479
+2024-08-12 13:13:18,572 : INFO : Precision score for label_class 2: 0.7593
+2024-08-12 13:13:18,572 : INFO : Recall score for label_class 0: 0.8721
+2024-08-12 13:13:18,572 : INFO : Recall score for label_class 1: 0.8650
+2024-08-12 13:13:18,572 : INFO : Recall score for label_class 2: 0.8677
+2024-08-12 13:13:18,572 : INFO : Average F1 score: 0.8493
+2024-08-12 13:13:18,573 : INFO : EarlyStopping counter: 2 out of 2
+2024-08-12 13:13:18,573 : INFO : Early stopping, loading best model from before and determine score...
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at /data/language_models/pretrained_models/mlm_00/mlm_model and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 13:13:18,606 : INFO : Loading model from /data/language_models/pretrained_models_downstreaming/financial_phrasebank/mlm_01/current_split_model/checkpoint.pth
+2024-08-12 13:13:18,916 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:18,916 : INFO : Validation metrics after reloading the model before ending this training:
+2024-08-12 13:13:18,916 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:18,918 : INFO : Accuracy: 0.8711
+2024-08-12 13:13:18,918 : INFO : Precision score for label_class 0: 0.7426
+2024-08-12 13:13:18,918 : INFO : Precision score for label_class 1: 0.9373
+2024-08-12 13:13:18,918 : INFO : Precision score for label_class 2: 0.8063
+2024-08-12 13:13:18,918 : INFO : Recall score for label_class 0: 0.8721
+2024-08-12 13:13:18,918 : INFO : Recall score for label_class 1: 0.8975
+2024-08-12 13:13:18,918 : INFO : Recall score for label_class 2: 0.8148
+2024-08-12 13:13:18,918 : INFO : Average F1 score: 0.8432
+2024-08-12 13:13:18,918 : INFO : Determined score from best model, ending training.
+2024-08-12 13:13:18,920 : INFO : Split 3 is finished, the score is: 0.8432
+2024-08-12 13:13:18,920 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:18,920 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:18,920 : INFO : Starting training for split 4
+2024-08-12 13:13:18,931 : INFO : Occurence of labels for training split: (array([0, 1, 2]), array([ 327, 1621,  751]))
+2024-08-12 13:13:18,933 : INFO : Occurence of labels for validation split: (array([0, 1, 2]), array([ 87, 390, 197]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at /data/language_models/pretrained_models/mlm_00/mlm_model and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 13:13:18,973 : INFO : Starting epoch 1
+2024-08-12 13:13:19,015 : INFO : Current training batch loss: 1.0617 in epoch 1
+2024-08-12 13:13:19,820 : INFO : Current training batch loss: 1.0358 in epoch 1
+2024-08-12 13:13:20,625 : INFO : Current training batch loss: 0.9163 in epoch 1
+2024-08-12 13:13:21,430 : INFO : Current training batch loss: 0.8291 in epoch 1
+2024-08-12 13:13:22,236 : INFO : Current training batch loss: 0.7659 in epoch 1
+2024-08-12 13:13:22,377 : INFO : Epoch finished, average loss over training batches: 0.9043
+2024-08-12 13:13:22,377 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:22,377 : INFO : Training metrics:
+2024-08-12 13:13:22,377 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:22,385 : INFO : Accuracy: 0.6462
+2024-08-12 13:13:22,385 : INFO : Precision score for label_class 0: 1.0000
+2024-08-12 13:13:22,385 : INFO : Precision score for label_class 1: 0.6552
+2024-08-12 13:13:22,385 : INFO : Precision score for label_class 2: 0.5623
+2024-08-12 13:13:22,385 : INFO : Recall score for label_class 0: 0.0031
+2024-08-12 13:13:22,385 : INFO : Recall score for label_class 1: 0.9833
+2024-08-12 13:13:22,385 : INFO : Recall score for label_class 2: 0.1984
+2024-08-12 13:13:22,385 : INFO : Average F1 score: 0.3619
+2024-08-12 13:13:22,666 : INFO : Average loss over validation batches: 0.7268
+2024-08-12 13:13:22,666 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:22,666 : INFO : Validation metrics:
+2024-08-12 13:13:22,666 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:22,669 : INFO : Accuracy: 0.7240
+2024-08-12 13:13:22,670 : INFO : Precision score for label_class 0: 0.0000
+2024-08-12 13:13:22,670 : INFO : Precision score for label_class 1: 0.7808
+2024-08-12 13:13:22,670 : INFO : Precision score for label_class 2: 0.5846
+2024-08-12 13:13:22,670 : INFO : Recall score for label_class 0: 0.0000
+2024-08-12 13:13:22,670 : INFO : Recall score for label_class 1: 0.9590
+2024-08-12 13:13:22,670 : INFO : Recall score for label_class 2: 0.5787
+2024-08-12 13:13:22,670 : INFO : Average F1 score: 0.4808
+2024-08-12 13:13:22,670 : INFO : Validation metric decreased (inf --> 0.726777).  Saving model ...
+2024-08-12 13:13:22,770 : INFO : Starting epoch 2
+2024-08-12 13:13:23,414 : INFO : Current training batch loss: 0.6781 in epoch 2
+2024-08-12 13:13:24,219 : INFO : Current training batch loss: 0.5671 in epoch 2
+2024-08-12 13:13:25,024 : INFO : Current training batch loss: 0.4187 in epoch 2
+2024-08-12 13:13:25,829 : INFO : Current training batch loss: 0.4857 in epoch 2
+2024-08-12 13:13:26,172 : INFO : Epoch finished, average loss over training batches: 0.5705
+2024-08-12 13:13:26,172 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:26,172 : INFO : Training metrics:
+2024-08-12 13:13:26,172 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:26,176 : INFO : Accuracy: 0.8166
+2024-08-12 13:13:26,176 : INFO : Precision score for label_class 0: 0.7980
+2024-08-12 13:13:26,176 : INFO : Precision score for label_class 1: 0.8500
+2024-08-12 13:13:26,176 : INFO : Precision score for label_class 2: 0.7377
+2024-08-12 13:13:26,176 : INFO : Recall score for label_class 0: 0.4954
+2024-08-12 13:13:26,176 : INFO : Recall score for label_class 1: 0.9371
+2024-08-12 13:13:26,176 : INFO : Recall score for label_class 2: 0.6964
+2024-08-12 13:13:26,176 : INFO : Average F1 score: 0.7397
+2024-08-12 13:13:26,456 : INFO : Average loss over validation batches: 0.4737
+2024-08-12 13:13:26,456 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:26,456 : INFO : Validation metrics:
+2024-08-12 13:13:26,456 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:26,460 : INFO : Accuracy: 0.8383
+2024-08-12 13:13:26,460 : INFO : Precision score for label_class 0: 0.7065
+2024-08-12 13:13:26,460 : INFO : Precision score for label_class 1: 0.8629
+2024-08-12 13:13:26,460 : INFO : Precision score for label_class 2: 0.8491
+2024-08-12 13:13:26,460 : INFO : Recall score for label_class 0: 0.7471
+2024-08-12 13:13:26,460 : INFO : Recall score for label_class 1: 0.9359
+2024-08-12 13:13:26,460 : INFO : Recall score for label_class 2: 0.6853
+2024-08-12 13:13:26,460 : INFO : Average F1 score: 0.7942
+2024-08-12 13:13:26,460 : INFO : Validation metric decreased (0.726777 --> 0.473650).  Saving model ...
+2024-08-12 13:13:26,561 : INFO : Starting epoch 3
+2024-08-12 13:13:27,005 : INFO : Current training batch loss: 0.3682 in epoch 3
+2024-08-12 13:13:27,887 : INFO : Current training batch loss: 0.4305 in epoch 3
+2024-08-12 13:13:28,693 : INFO : Current training batch loss: 0.3627 in epoch 3
+2024-08-12 13:13:29,498 : INFO : Current training batch loss: 0.2250 in epoch 3
+2024-08-12 13:13:30,041 : INFO : Epoch finished, average loss over training batches: 0.3682
+2024-08-12 13:13:30,041 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:30,041 : INFO : Training metrics:
+2024-08-12 13:13:30,041 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:30,049 : INFO : Accuracy: 0.8914
+2024-08-12 13:13:30,049 : INFO : Precision score for label_class 0: 0.8104
+2024-08-12 13:13:30,049 : INFO : Precision score for label_class 1: 0.9195
+2024-08-12 13:13:30,049 : INFO : Precision score for label_class 2: 0.8637
+2024-08-12 13:13:30,049 : INFO : Recall score for label_class 0: 0.8104
+2024-08-12 13:13:30,049 : INFO : Recall score for label_class 1: 0.9377
+2024-08-12 13:13:30,049 : INFO : Recall score for label_class 2: 0.8269
+2024-08-12 13:13:30,049 : INFO : Average F1 score: 0.8613
+2024-08-12 13:13:30,329 : INFO : Average loss over validation batches: 0.3839
+2024-08-12 13:13:30,329 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:30,329 : INFO : Validation metrics:
+2024-08-12 13:13:30,329 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:30,333 : INFO : Accuracy: 0.8769
+2024-08-12 13:13:30,333 : INFO : Precision score for label_class 0: 0.8140
+2024-08-12 13:13:30,333 : INFO : Precision score for label_class 1: 0.9175
+2024-08-12 13:13:30,333 : INFO : Precision score for label_class 2: 0.8250
+2024-08-12 13:13:30,333 : INFO : Recall score for label_class 0: 0.8046
+2024-08-12 13:13:30,333 : INFO : Recall score for label_class 1: 0.9128
+2024-08-12 13:13:30,333 : INFO : Recall score for label_class 2: 0.8376
+2024-08-12 13:13:30,333 : INFO : Average F1 score: 0.8519
+2024-08-12 13:13:30,333 : INFO : Validation metric decreased (0.473650 --> 0.383921).  Saving model ...
+2024-08-12 13:13:30,435 : INFO : Starting epoch 4
+2024-08-12 13:13:30,678 : INFO : Current training batch loss: 0.4150 in epoch 4
+2024-08-12 13:13:31,484 : INFO : Current training batch loss: 0.3235 in epoch 4
+2024-08-12 13:13:32,289 : INFO : Current training batch loss: 0.2525 in epoch 4
+2024-08-12 13:13:33,095 : INFO : Current training batch loss: 0.1689 in epoch 4
+2024-08-12 13:13:33,839 : INFO : Epoch finished, average loss over training batches: 0.2392
+2024-08-12 13:13:33,839 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:33,839 : INFO : Training metrics:
+2024-08-12 13:13:33,839 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:33,846 : INFO : Accuracy: 0.9426
+2024-08-12 13:13:33,846 : INFO : Precision score for label_class 0: 0.8806
+2024-08-12 13:13:33,846 : INFO : Precision score for label_class 1: 0.9567
+2024-08-12 13:13:33,846 : INFO : Precision score for label_class 2: 0.9391
+2024-08-12 13:13:33,846 : INFO : Recall score for label_class 0: 0.9021
+2024-08-12 13:13:33,846 : INFO : Recall score for label_class 1: 0.9685
+2024-08-12 13:13:33,846 : INFO : Recall score for label_class 2: 0.9041
+2024-08-12 13:13:33,846 : INFO : Average F1 score: 0.9250
+2024-08-12 13:13:34,126 : INFO : Average loss over validation batches: 0.3782
+2024-08-12 13:13:34,126 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:34,126 : INFO : Validation metrics:
+2024-08-12 13:13:34,126 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:34,129 : INFO : Accuracy: 0.8724
+2024-08-12 13:13:34,129 : INFO : Precision score for label_class 0: 0.8046
+2024-08-12 13:13:34,129 : INFO : Precision score for label_class 1: 0.9186
+2024-08-12 13:13:34,129 : INFO : Precision score for label_class 2: 0.8155
+2024-08-12 13:13:34,129 : INFO : Recall score for label_class 0: 0.8046
+2024-08-12 13:13:34,129 : INFO : Recall score for label_class 1: 0.8974
+2024-08-12 13:13:34,129 : INFO : Recall score for label_class 2: 0.8528
+2024-08-12 13:13:34,129 : INFO : Average F1 score: 0.8488
+2024-08-12 13:13:34,129 : INFO : Validation metric decreased (0.383921 --> 0.378196).  Saving model ...
+2024-08-12 13:13:34,230 : INFO : Starting epoch 5
+2024-08-12 13:13:34,272 : INFO : Current training batch loss: 0.1660 in epoch 5
+2024-08-12 13:13:35,078 : INFO : Current training batch loss: 0.2486 in epoch 5
+2024-08-12 13:13:35,884 : INFO : Current training batch loss: 0.2346 in epoch 5
+2024-08-12 13:13:36,689 : INFO : Current training batch loss: 0.1992 in epoch 5
+2024-08-12 13:13:37,495 : INFO : Current training batch loss: 0.2906 in epoch 5
+2024-08-12 13:13:37,636 : INFO : Epoch finished, average loss over training batches: 0.1855
+2024-08-12 13:13:37,636 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:37,636 : INFO : Training metrics:
+2024-08-12 13:13:37,636 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:37,640 : INFO : Accuracy: 0.9559
+2024-08-12 13:13:37,640 : INFO : Precision score for label_class 0: 0.8974
+2024-08-12 13:13:37,640 : INFO : Precision score for label_class 1: 0.9722
+2024-08-12 13:13:37,640 : INFO : Precision score for label_class 2: 0.9474
+2024-08-12 13:13:37,640 : INFO : Recall score for label_class 0: 0.9358
+2024-08-12 13:13:37,640 : INFO : Recall score for label_class 1: 0.9698
+2024-08-12 13:13:37,640 : INFO : Recall score for label_class 2: 0.9348
+2024-08-12 13:13:37,640 : INFO : Average F1 score: 0.9427
+2024-08-12 13:13:37,920 : INFO : Average loss over validation batches: 0.3639
+2024-08-12 13:13:37,920 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:37,920 : INFO : Validation metrics:
+2024-08-12 13:13:37,920 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 13:13:37,924 : INFO : Accuracy: 0.8798
+2024-08-12 13:13:37,924 : INFO : Precision score for label_class 0: 0.7912
+2024-08-12 13:13:37,924 : INFO : Precision score for label_class 1: 0.9109
+2024-08-12 13:13:37,924 : INFO : Precision score for label_class 2: 0.8579
+2024-08-12 13:13:37,924 : INFO : Recall score for label_class 0: 0.8276
+2024-08-12 13:13:37,924 : INFO : Recall score for label_class 1: 0.9179
+2024-08-12 13:13:37,924 : INFO : Recall score for label_class 2: 0.8274
+2024-08-12 13:13:37,924 : INFO : Average F1 score: 0.8553
+2024-08-12 13:13:37,924 : INFO : Validation metric decreased (0.378196 --> 0.363938).  Saving model ...
+2024-08-12 13:13:38,026 : INFO : Starting epoch 6
+2024-08-12 13:13:38,671 : INFO : Current training batch loss: 0.2550 in epoch 6
+2024-08-12 13:13:39,478 : INFO : Current training batch loss: 0.1629 in epoch 6
+2024-08-12 13:13:40,285 : INFO : Current training batch loss: 0.0645 in epoch 6
+2024-08-12 13:13:41,091 : INFO : Current training batch loss: 0.0902 in epoch 6
