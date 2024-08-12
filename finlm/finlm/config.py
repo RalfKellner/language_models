@@ -1,3 +1,4 @@
+from transformers import ElectraConfig
 from dataclasses import dataclass, asdict
 from typing import Any, Dict
 import yaml
@@ -78,3 +79,5 @@ class FinLMConfig:
     def to_json(self, file_path: str) -> None:
         with open(file_path, 'w') as file:
             json.dump(self.to_dict(), file, indent=4)
+
+

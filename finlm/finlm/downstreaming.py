@@ -203,7 +203,10 @@ class EncoderClassificationDownstreaming:
             self.logger.info(f"Epoch finished, average loss over training batches: {training_loss:.4f}")
             training_predictions = torch.cat(training_predictions, dim = 0)
             training_labels = torch.cat(training_labels, dim = 0)
-            training_scores = self._determine_multi_classification_scores(training_labels.numpy(), training_predictions.numpy())
+            if self.device.type == "cuda":
+                training_scores = self._determine_multi_classification_scores(training_labels.cpu().numpy(), training_predictions.cpu().numpy())
+            else:
+                training_scores = self._determine_multi_classification_scores(training_labels.numpy(), training_predictions.numpy())
             self.logger.info(f"After iteration {iteration} in epoch {epoch + 1} the training scores are:")
             self.logger.info("-" * 100)
             self._logging_multi_classification_scores(training_scores)
@@ -224,7 +227,10 @@ class EncoderClassificationDownstreaming:
             self.logger.info(f"Average loss over validation batches: {validation_loss:.4f}")
             validation_predictions = torch.cat(validation_predictions, dim = 0)
             validation_labels = torch.cat(validation_labels, dim = 0)
-            validation_scores = self._determine_multi_classification_scores(validation_labels.numpy(), validation_predictions.numpy())
+            if self.device.type == "cuda":
+                validation_scores = self._determine_multi_classification_scores(validation_labels.cpu().numpy(), validation_predictions.cpu().numpy())
+            else:
+                validation_scores = self._determine_multi_classification_scores(validation_labels.numpy(), validation_predictions.numpy())
             validation_f1_score = validation_scores['average_f1_score']
             self.logger.info(f"After iteration {iteration} in epoch {epoch + 1} the validation scores are:")
             self.logger.info("-" * 100)
@@ -239,6 +245,7 @@ class EncoderClassificationDownstreaming:
                 else:
                     self.logger.info("Last epoch reached, validation loss was better before, loading best model during training.")
                 model = self._load_electra_model(classifier_dropout, os.path.join(save_best_model_path, "checkpoint.pth"))
+                model.to(self.device)
 
                 validation_predictions, validation_labels = [], []
                 validation_loss = 0
@@ -253,7 +260,10 @@ class EncoderClassificationDownstreaming:
                 validation_loss /= len(validation_data)
                 validation_predictions = torch.cat(validation_predictions, dim = 0)
                 validation_labels = torch.cat(validation_labels, dim = 0)
-                validation_scores = self._determine_multi_classification_scores(validation_labels.numpy(), validation_predictions.numpy())
+                if self.device.type == "cuda":
+                    validation_scores = self._determine_multi_classification_scores(validation_labels.cpu().numpy(), validation_predictions.cpu().numpy())
+                else:
+                    validation_scores = self._determine_multi_classification_scores(validation_labels.numpy(), validation_predictions.numpy())
                 validation_f1_score = validation_scores['average_f1_score']
                 self.logger.info("Determined score from best model, ending training.")
 
@@ -261,7 +271,50 @@ class EncoderClassificationDownstreaming:
                     break
 
         return validation_f1_score
+    
+    def final_evaluation(self, fintuned_model_path):
+        
+        model = ElectraForSequenceClassification.from_pretrained(fintuned_model_path)
+        model.to(self.device)
 
+        training_data = DataLoader(self.dataset.training_data, 32, False)
+        test_data = DataLoader(self.dataset.test_data, 32, False)
+
+        self.logger.info("Determining training scores of final model.")
+        with torch.no_grad():
+            training_predictions, training_labels = [], []
+            for batch in training_data:
+                inputs, attention_mask, labels = batch["input_ids"].to(self.device), batch["attention_mask"].to(self.device), batch["label"].to(self.device)
+                model_output = model(input_ids = inputs, attention_mask = attention_mask, labels = labels)
+                batch_predictions = model_output.logits.argmax(dim = 1)
+                training_predictions.append(batch_predictions)
+                training_labels.append(labels)
+
+        training_predictions = torch.cat(training_predictions, dim = 0)
+        training_labels = torch.cat(training_labels, dim = 0)
+        if self.device.type == "cuda":
+            training_scores = self._determine_multi_classification_scores(training_labels.cpu().numpy(), training_predictions.cpu().numpy())
+        else:
+            training_scores = self._determine_multi_classification_scores(training_labels.numpy(), training_predictions.numpy())
+
+        self.logger.info("Determining test scores of final model.")
+        test_predictions, test_labels = [], []
+        with torch.no_grad():
+            for batch in test_data:
+                inputs, attention_mask, labels = batch["input_ids"].to(self.device), batch["attention_mask"].to(self.device), batch["label"].to(self.device)
+                model_output = model(input_ids = inputs, attention_mask = attention_mask, labels = labels)
+                batch_predictions = model_output.logits.argmax(dim = 1)
+                test_predictions.append(batch_predictions)
+                test_labels.append(labels)
+            
+        test_predictions = torch.cat(test_predictions, dim = 0)
+        test_labels = torch.cat(test_labels, dim = 0)
+        if self.device.type == "cuda":
+            test_scores = self._determine_multi_classification_scores(test_labels.cpu().numpy(), test_predictions.cpu().numpy())
+        else:
+            test_scores = self._determine_multi_classification_scores(test_labels.numpy(), test_predictions.numpy())
+        return training_scores, test_scores
+    
     @staticmethod
     def _determine_multi_classification_scores(true_labels: np.ndarray, predicted_labels: np.ndarray) -> Dict[str, float]: 
         accuracy_scores = accuracy_score(true_labels, predicted_labels)
@@ -299,4 +352,4 @@ class EncoderClassificationDownstreaming:
         metadata["model_path"] = self.model_path
         metadata["tokenizer_path"] = self.dataset.tokenizer_path
         with open(os.path.join(self.save_path, "tokenizer_and_model_info.json"), "w") as file:
-            json.dump(metadata, file, intend = 4)
+            json.dump(metadata, file, indent = 4)

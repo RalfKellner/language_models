@@ -8,9 +8,10 @@ import pandas as pd
 import numpy as np
 import matplotlib.pylab as plt
 import torch
+from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 from torcheval.metrics.functional import binary_precision, binary_recall
-from torch import nn
-from typing import Optional, Any
+from torch import nn, Tensor
+from typing import Optional, Any, List
 import math
 import logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -558,76 +559,6 @@ class PretrainElectra(PretrainLM):
 # Models for pretraining
 #########################################################################################################################
 
-
-class ElectraAggregationHead(nn.Module):
-    """
-    Head to aggregate sequence embeddings of a batch to a single prediction. This could be used for every document, e.g., earning call transcripts,
-    and the number of sequences is arbitrary per document. Maybe it is better to extent this for a scenario where a batch is actually a batch of batches
-    which means multiple documents and their sequences are used for an iteration. Currently, this implementation would create a gradient update per
-    document which may cause high variance during training. However, it may also be better to iterate over documents to determine an aggregate loss 
-    which is used for a gradient update...discuss layer
-    """
-    def __init__(self, config):
-        super().__init__()
-        # densely connect all sequence embeddings
-        self.dense = nn.Linear(config.hidden_size, config.hidden_size)
-        # dropout
-        aggregation_head_dropout = (
-            config.classifier_dropout if config.classifier_dropout is not None else config.hidden_dropout_prob
-        )
-        self.dropout = nn.Dropout(aggregation_head_dropout)
-        self.activation = nn.GELU()
-        # project the average aggregate of sequence embeddings after the dense layer
-        self.out_projection = nn.Linear(config.hidden_size, 1)
-
-    def forward(self, hidden_states):
-        x = self.dense(hidden_states)
-        x = self.dropout(x)
-        x = self.activation(x)
-        x = x.mean(dim = 0)
-        x = self.dropout(x)
-        x = self.out_projection(x)
-        return x
-    
-
-class ElectraForAggregatePrediction(ElectraPreTrainedModel):
-    def __init__(self, config):
-        super().__init__(config)
-        self.config = config
-        # the encoder for creating token embeddings
-        self.electra = ElectraModel(config)
-        # the head for creating a single prediction for a batch of embeddings, in our case a batch of sequence embeddings
-        self.head = ElectraAggregationHead(config)
-
-        self.post_init()
-
-    def forward(
-        self, 
-        input_ids: Optional[torch.Tensor] = None,
-        attention_mask: Optional[torch.Tensor] = None,
-        labels: Optional[torch.Tensor] = None
-    ) -> Any:
-       
-        discriminator_hidden_states = self.electra(
-            input_ids = input_ids,
-            attention_mask=attention_mask,
-        )
-
-        # collect all token embeddings 
-        sequence_output = discriminator_hidden_states[0]
-        # collect the sequence embeddings, only assuming the first token is a seq token
-        sequence_output = sequence_output[:, 0, :]
-        # logits is the real valued prediction
-        logits = self.head(sequence_output)
-
-        loss = None
-        if labels is not None:
-            loss_fct = nn.MSELoss()
-            loss = loss_fct(logits.squeeze(), labels.squeeze())
-
-        return (loss, logits)
-
-
 class ElectraSimpleAttention(nn.Module):
     """This class is a single head attention layer"""
     def __init__(self, config):
@@ -670,17 +601,19 @@ class ElectraSimpleAttentionOutput(nn.Module):
         )
         self.dropout = nn.Dropout(aggregation_head_dropout)
         self.LayerNorm = nn.LayerNorm(config.hidden_size, eps=config.layer_norm_eps)
-        self.out_projection = nn.Linear(config.hidden_size, 1)
+        self.out_projection = nn.Linear(config.hidden_size, config.num_labels)
 
-    
-    def forward(self, sequence_attention_embeddings, sequence_embeddings):
+
+    def forward(self, sequence_attention_embeddings, sequence_embeddings, original_shapes):
         # sequence attention embeddings are the ones coming from the simple attention layer
         sequence_attention_embeddings = self.dense(sequence_attention_embeddings)
         sequence_attention_embeddings = self.dropout(sequence_attention_embeddings)
         # residual connection with the original sequence embeddings
         sequence_attention_embeddings = self.LayerNorm(sequence_attention_embeddings + sequence_embeddings)
-        aggregate_sequence_embeddings = sequence_attention_embeddings.mean(dim = 0)
-        logits = self.out_projection(aggregate_sequence_embeddings)
+        sequence_attention_embeddings_original_shapes = torch.split(sequence_attention_embeddings, original_shapes, dim = 0)
+        sequence_attention_embeddings_aggregated = torch.stack([torch_tensor.mean(dim = 0) for torch_tensor in sequence_attention_embeddings_original_shapes])
+        logits = self.out_projection(sequence_attention_embeddings_aggregated)
+ 
         return logits
 
 
@@ -691,7 +624,7 @@ class ElectraSimpleAttentionHead(nn.Module):
         self.simple_attention = ElectraSimpleAttention(config)
         self.attention_output = ElectraSimpleAttentionOutput(config)
 
-    def forward(self, sequence_embeddings, return_attention = True):
+    def forward(self, sequence_embeddings, original_shapes, return_attention = True):
 
         # determine simple attention output and attention probabilities (if return_attention is set to True)
         simple_attention_output = self.simple_attention(sequence_embeddings, return_attention = return_attention)
@@ -703,7 +636,7 @@ class ElectraSimpleAttentionHead(nn.Module):
             attention_probs = simple_attention_output[1]
 
         # process sequence attention embeddings through a dense layer and create a residual connection with the original sequence embeddings
-        logits = self.attention_output(sequence_attention_embeddings, sequence_embeddings)
+        logits = self.attention_output(sequence_attention_embeddings, sequence_embeddings, original_shapes)
         
         # output prediction and optionally the attention probabilities
         output = (logits, attention_probs) if return_attention else (logits,)
@@ -714,6 +647,7 @@ class ElectraForAggregatePredictionWithAttention(ElectraPreTrainedModel):
     def __init__(self, config):
         super().__init__(config)
         self.config = config
+        self.num_labels = config.num_labels
         # the encoder for creating token embeddings
         self.electra = ElectraModel(config)
         # the head for creating a single prediction for a batch of embeddings, in our case a batch of sequence embeddings
@@ -723,23 +657,33 @@ class ElectraForAggregatePredictionWithAttention(ElectraPreTrainedModel):
 
     def forward(
         self, 
-        input_ids: Optional[torch.Tensor] = None,
-        attention_mask: Optional[torch.Tensor] = None,
+        input_ids: List[List[Tensor]] = None,
+        attention_mask: List[List[Tensor]] = None,
         labels: Optional[torch.Tensor] = None,
         return_attention = True
     ) -> Any:
        
+        input_id_tensors = [torch.stack(batch_input_ids) for batch_input_ids in input_ids]
+        attention_mask_tensors = [torch.stack(batch_attention_mask) for batch_attention_mask in attention_mask]
+        # Store the original shapes
+        original_shapes = [input_ids_tensor.shape[0] for input_ids_tensor in input_id_tensors]
+
+        # Step 2: Concatenate the tensors along the first dimension
+        flattened_input_ids = torch.cat(input_id_tensors, dim=0)
+        flattened_attention_mask = torch.cat(attention_mask_tensors, dim=0)
+
         discriminator_hidden_states = self.electra(
-            input_ids = input_ids,
-            attention_mask=attention_mask,
+            input_ids = flattened_input_ids,
+            attention_mask=flattened_attention_mask,
         )
 
         # collect all token embeddings 
         sequence_output = discriminator_hidden_states[0]
         # collect the sequence embeddings, only assuming the first token is a seq token
         sequence_embeddings = sequence_output[:, 0, :]
+
         # logits is the real valued prediction
-        output = self.head(sequence_embeddings, return_attention = return_attention)
+        output = self.head(sequence_embeddings, original_shapes, return_attention = return_attention)
     
         logits = output[0]
     
@@ -748,9 +692,124 @@ class ElectraForAggregatePredictionWithAttention(ElectraPreTrainedModel):
 
         loss = None
         if labels is not None:
-            loss_fct = nn.MSELoss()
-            loss = loss_fct(logits.squeeze(), labels.squeeze())
+            if self.config.problem_type is None:
+                if self.num_labels == 1:
+                    self.config.problem_type = "regression"
+                elif self.num_labels > 1 and (labels.dtype == torch.long or labels.dtype == torch.int):
+                    self.config.problem_type = "single_label_classification"
+                else:
+                    self.config.problem_type = "multi_label_classification"
+
+            if self.config.problem_type == "regression":
+                loss_fct = MSELoss()
+                if self.num_labels == 1:
+                    loss = loss_fct(logits.squeeze(), labels.squeeze())
+                else:
+                    loss = loss_fct(logits, labels)
+            elif self.config.problem_type == "single_label_classification":
+                loss_fct = CrossEntropyLoss()
+                loss = loss_fct(logits.view(-1, self.num_labels), labels.view(-1))
+            elif self.config.problem_type == "multi_label_classification":
+                loss_fct = BCEWithLogitsLoss()
+                loss = loss_fct(logits, labels)
 
         full_output = (loss, logits, attention_probabilities) if return_attention else (loss, logits)
 
         return full_output
+
+
+
+
+class ElectraAggregationHead(nn.Module):
+    """
+    Head to aggregate sequence embeddings of a batch of documents with sequences to predictions for each document. The number of sequences must be the same.
+    """
+    def __init__(self, config):
+        super().__init__()
+        # densely connect all sequence embeddings
+        self.dense = nn.Linear(config.hidden_size, config.hidden_size)
+        # dropout
+        aggregation_head_dropout = (
+            config.classifier_dropout if config.classifier_dropout is not None else config.hidden_dropout_prob
+        )
+        self.dropout = nn.Dropout(aggregation_head_dropout)
+        self.activation = nn.GELU()
+        # project the average aggregate of sequence embeddings after the dense layer
+        self.out_projection = nn.Linear(config.hidden_size, config.num_labels)
+
+    def forward(self, hidden_states, original_shapes):
+        # document_sequence_attention_mask is of shape [n_documents, n_sequences, sequence_length]
+        # process flattened input embedding states through dense layer
+        x = self.dense(hidden_states)
+        x = self.dropout(x)
+        x = self.activation(x)
+        x_original_shapes = torch.split(x, original_shapes, dim = 0)
+        x_aggregated = torch.stack([torch_tensor.mean(dim = 0) for torch_tensor in x_original_shapes])
+        logits = self.out_projection(x_aggregated)
+        return logits
+    
+
+class ElectraForAggregatePrediction(ElectraPreTrainedModel):
+    def __init__(self, config):
+        super().__init__(config)
+        self.config = config
+        self.num_labels = config.num_labels
+        # the encoder for creating token embeddings
+        self.electra = ElectraModel(config)
+        # the head for creating a single prediction for a batch of embeddings, in our case a batch of sequence embeddings
+        self.head = ElectraAggregationHead(config)
+
+        self.post_init()
+
+    def forward(
+        self, 
+        input_ids: List[List[Tensor]] = None,
+        attention_mask: List[List[Tensor]] = None,
+        labels: Optional[torch.Tensor] = None
+    ) -> Any:
+       
+        input_id_tensors = [torch.stack(batch_input_ids) for batch_input_ids in input_ids]
+        attention_mask_tensors = [torch.stack(batch_attention_mask) for batch_attention_mask in attention_mask]
+        # Store the original shapes
+        original_shapes = [input_ids_tensor.shape[0] for input_ids_tensor in input_id_tensors]
+
+        # Step 2: Concatenate the tensors along the first dimension
+        flattened_input_ids = torch.cat(input_id_tensors, dim=0)
+        flattened_attention_mask = torch.cat(attention_mask_tensors, dim=0)
+
+        discriminator_hidden_states = self.electra(
+            input_ids = flattened_input_ids,
+            attention_mask=flattened_attention_mask,
+        )
+
+        # collect all token embeddings 
+        sequence_output = discriminator_hidden_states[0]
+        # collect the sequence embeddings, only assuming the first token is a seq token
+        sequence_embeddings = sequence_output[:, 0, :]
+        # logits is the real valued prediction
+        logits = self.head(sequence_embeddings, original_shapes)
+
+        loss = None
+        if labels is not None:
+            if self.config.problem_type is None:
+                if self.num_labels == 1:
+                    self.config.problem_type = "regression"
+                elif self.num_labels > 1 and (labels.dtype == torch.long or labels.dtype == torch.int):
+                    self.config.problem_type = "single_label_classification"
+                else:
+                    self.config.problem_type = "multi_label_classification"
+
+            if self.config.problem_type == "regression":
+                loss_fct = MSELoss()
+                if self.num_labels == 1:
+                    loss = loss_fct(logits.squeeze(), labels.squeeze())
+                else:
+                    loss = loss_fct(logits, labels)
+            elif self.config.problem_type == "single_label_classification":
+                loss_fct = CrossEntropyLoss()
+                loss = loss_fct(logits.view(-1, self.num_labels), labels.view(-1))
+            elif self.config.problem_type == "multi_label_classification":
+                loss_fct = BCEWithLogitsLoss()
+                loss = loss_fct(logits, labels)
+
+        return (loss, logits)

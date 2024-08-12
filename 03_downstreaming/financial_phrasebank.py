@@ -7,13 +7,14 @@ if not(torch.cuda.is_available()):
 else:
     device = torch.device("cuda")
 
-device = torch.device("cpu")
+#device = torch.device("cpu")
 
 dataset = load_dataset("financial_phrasebank", 'sentences_66agree')
 dataset = dataset["train"]
 
+# write a function which makes sure that a save_path gets not overwritten out of mistake
 electra_classifier = EncoderClassificationDownstreaming(
-    model_path = "/home/ralf/language_models/pretrained_models/electra_00/discriminator_model",
+    model_path = "/home/ralf/language_models/pretrained_models/electra_01/discriminator_model",
     num_labels = 3, 
     device = device,
     tokenizer_path = "/home/ralf/language_models/00_tokenizer/finlm-wordpiece-tokenizer.json",
@@ -29,7 +30,7 @@ electra_classifier = EncoderClassificationDownstreaming(
     classifier_dropout = Hyperparameter("classifier_dropout", float, 0.2, 0.9, 0.5),
     warmup_step_fraction = Hyperparameter("warmup_step_fraction", float, 0.01, 0.10, 0.05),
     use_gradient_clipping = Hyperparameter("use_gradient_clipping", bool, low = None, high = None, default = False),
-    save_path = "/home/ralf/language_models/pretrained_models_downstreaming/financial_phrasebank/electra_00"
+    save_path = "/home/ralf/language_models/pretrained_models_downstreaming/financial_phrasebank/electra_01"
 )
 
 electra_classifier.train_optuna_optimized_cv_model(n_trials = 25)

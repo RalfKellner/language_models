@@ -3,6 +3,8 @@ from typing import Dict, Any, Optional
 import random
 from datasets import Dataset
 import datasets
+import torch
+from torch.utils.data import Dataset as TorchDataset
 from torch.utils.data import DataLoader
 from finlm.tokenizer import FinLMTokenizer
 import logging
@@ -179,4 +181,87 @@ class FinetuningDataset:
         self.test_data = self.dataset.select(range(self.train_size, len(self.dataset)))
 
 
+
+class AggregatedDocumentDataset(TorchDataset):
+    def __init__(self, documents, labels, tokenizer, sequence_length, use_dataloader = False, shuffle = False, batch_size = 1):
+        """
+        documents: List of documents, where each document is a list of sequences.
+        labels: List of labels, one for each document.
+        tokenizer: The tokenizer to use.
+        sequence_length: The length to which each sequence should be padded/truncated.
+        """
+        self.documents = documents
+        self.labels = labels
+        self.tokenizer = tokenizer
+        self.sequence_length = sequence_length
+        self.use_dataloader = use_dataloader
+
+        if use_dataloader:
+            self.dataloader = DataLoader(
+                self, 
+                batch_size = batch_size,
+                shuffle = shuffle,
+                collate_fn = self._collate_fn
+            )
+        else:
+            self.dataloader = None
+
+    def __len__(self):
+        return len(self.documents)
+
+    def __getitem__(self, idx):
+        document = self.documents[idx]
+        label = self.labels[idx]
+
+        input_ids = []
+        attention_masks = []
+
+        # Tokenize each sequence in the document
+        for sequence in document:
+            encoded = self.tokenizer(
+                sequence,
+                truncation=True,
+                padding='max_length',
+                max_length=self.sequence_length,
+                return_tensors='pt'
+            )
+            input_ids.append(encoded['input_ids'].squeeze())
+            attention_masks.append(encoded['attention_mask'].squeeze())
+
+        # Convert to tensors but do not stack sequences into a single tensor
+        return {
+            'input_ids': input_ids,  # List of tensors, each with shape (sequence_length,)
+            'attention_mask': attention_masks,  # List of tensors, each with shape (sequence_length,)
+            'labels': torch.tensor(label, dtype=torch.float)
+        }
+
+    def __iter__(self):
+        if self.use_dataloader:
+            return iter(self.dataloader)
+        else:
+            self.current_idx = 0
+            return self
+
+    def __next__(self):
+        if not self.use_dataloader:
+            if self.current_idx < len(self):
+                item = self[self.current_idx]
+                self.current_idx += 1
+                return item
+            else:
+                raise StopIteration
+        else:
+            raise RuntimeError("Use dataloader's iterator instead")
+
+    @staticmethod
+    def _collate_fn(batch):
+        input_ids = [item['input_ids'] for item in batch]
+        attention_masks = [item['attention_mask'] for item in batch]
+        labels = torch.tensor([item['labels'] for item in batch], dtype=torch.float)
+
+        return {
+            'input_ids': input_ids,  # List of lists of tensors
+            'attention_mask': attention_masks,  # List of lists of tensors
+            'labels': labels
+        }
 
