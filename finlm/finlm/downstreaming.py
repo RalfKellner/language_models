@@ -1,74 +1,267 @@
 import optuna
 from datasets import Dataset
+from finlm.config import FintuningConfig
 import torch
 from torch.utils.data import DataLoader
 import numpy as np
 import json
 from transformers import ElectraForSequenceClassification
 from transformers import get_linear_schedule_with_warmup
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, r2_score, mean_absolute_error, mean_squared_error
 from sklearn.model_selection import KFold
 from finlm.dataset import FinetuningDataset
 from finlm.callbacks import EarlyStopping
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 import os
 import logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
+
 class Hyperparameter:
+
+    """
+    A class representing a hyperparameter with a specified type and optional range.
+
+    This class is used to define hyperparameters that can be used in various machine 
+    learning or deep learning models. Each hyperparameter has a name, data type, and 
+    optional range (low, high) along with a default value.
+
+    Attributes
+    ----------
+    name : str
+        The name of the hyperparameter.
+    dtype : type
+        The data type of the hyperparameter (e.g., int, float, bool).
+    low : Optional[Union[int, float]], optional
+        The lower bound for the hyperparameter (default is None).
+    high : Optional[Union[int, float]], optional
+        The upper bound for the hyperparameter (default is None).
+    default : Optional[Union[int, float, bool]], optional
+        The default value of the hyperparameter (default is None).
+
+    Methods
+    -------
+    from_dict(data: Dict[str, Any]) -> 'Hyperparameter'
+        Creates an instance of the Hyperparameter class from a dictionary.
+    """
+
     def __init__(self, name, dtype, low = None, high = None, default = None):
+
+        """
+        Initializes a Hyperparameter instance with the specified attributes.
+
+        Parameters
+        ----------
+        name : str
+            The name of the hyperparameter.
+        dtype : type
+            The data type of the hyperparameter (e.g., int, float, bool).
+        low : Optional[Union[int, float]], optional
+            The lower bound for the hyperparameter (default is None).
+        high : Optional[Union[int, float]], optional
+            The upper bound for the hyperparameter (default is None).
+        default : Optional[Union[int, float, bool]], optional
+            The default value of the hyperparameter (default is None).
+        """
+
         self.name = name
         self.dtype = dtype
         self.low = low
         self.high = high
         self.default = default
 
-class EncoderClassificationDownstreaming:
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> 'Hyperparameter':
+
+        """
+        Creates an instance of the Hyperparameter class from a dictionary.
+
+        This method converts the data type string to the corresponding Python type 
+        (e.g., "int" to int) and initializes the Hyperparameter instance with the 
+        provided values.
+
+        Parameters
+        ----------
+        data : Dict[str, Any]
+            A dictionary containing the configuration parameters.
+
+        Returns
+        -------
+        Hyperparameter
+            An instance of Hyperparameter initialized with the provided data.
+
+        Raises
+        ------
+        ValueError
+            If the dtype in the dictionary is not supported.
+        """
+
+        dtype_mapper = {
+            "int": int,
+            "float": float,
+            "bool": bool
+        }
+
+        dtype = dtype_mapper.get(data["dtype"])
+
+        return cls(name = data["name"], dtype = dtype, low = data["low"], high = data["high"], default = data["default"])
+    
+
+class FinetuningEncoderClassifier:
+
+    """
+    A class for fine-tuning an encoder-based classifier model, specifically for sequence classification tasks using the ELECTRA architecture.
+
+    This class supports tasks such as regression, binary classification, and multi-class classification.
+    It provides functionality for training the model with cross-validation, hyperparameter optimization using Optuna, 
+    and final evaluation of the trained model.
+
+    The methods are written bottom to top which means the first method here, is the one which uses the other methods below to find the 
+    best set of hyperparameters for a cross validated training data set. Once the optimization is finished the best model and its 
+    performance metrics as well as the configuation of the best model search are saved.
+
+    Attributes
+    ----------
+    config : FintuningConfig
+        The configuration object containing hyperparameters and paths required for fine-tuning.
+    device : torch.device
+        The device (CPU or GPU) on which the model will be trained and evaluated.
+    dataset : FinetuningDataset
+        The dataset object used for fine-tuning, created from the input dataset and config.
+    model_path : str
+        Path to the pre-trained model that will be fine-tuned.
+    num_labels : int
+        Number of labels for the classification task.
+    task : str
+        The type of task being performed: "regression", "binary_classification", or "multi_classification".
+    n_epochs : Hyperparameter
+        The number of training epochs, represented as a Hyperparameter object.
+    learning_rate : Hyperparameter
+        The learning rate for the optimizer, represented as a Hyperparameter object.
+    classifier_dropout : Hyperparameter
+        The dropout rate used in the classifier layer, represented as a Hyperparameter object.
+    warmup_step_fraction : Hyperparameter
+        The fraction of warmup steps during training, represented as a Hyperparameter object.
+    use_gradient_clipping : Hyperparameter
+        A boolean indicating whether to use gradient clipping, represented as a Hyperparameter object.
+    save_path : str
+        The directory where the trained model and other outputs will be saved.
+    logger : logging.Logger
+        Logger for recording information during training and evaluation.
+
+    Methods
+    -------
+    train_optuna_optimized_cv_model(n_trials: int)
+        Trains the model using cross-validation with hyperparameters optimized by Optuna.
+    optuna_optimize(n_trials: int = 10) -> Tuple[Dict[str, Any], float]
+        Optimizes hyperparameters using Optuna and returns the best parameters and score.
+    optuna_objective(trial) -> float
+        Defines the objective function for Optuna hyperparameter optimization.
+    cross_validate(
+        n_folds: int, 
+        training_data, 
+        training_batch_size: int, 
+        validation_batch_size: int, 
+        n_epochs: int, 
+        learning_rate: float, 
+        classifier_dropout: float, 
+        warmup_step_fraction: float, 
+        use_gradient_clipping: bool
+    ) -> float
+        Performs cross-validation on the training data and returns the average score across folds.
+    train(
+        training_data, 
+        validation_data, 
+        n_epochs: int, 
+        learning_rate: float, 
+        classifier_dropout: float, 
+        warmup_step_fraction: float, 
+        use_gradient_clipping: bool, 
+        save_best_model_path: str
+    ) -> float
+        Trains the model on the training data and validates it on the validation data, with early stopping and checkpointing.
+    final_evaluation(finetuned_model_path: str) -> Tuple[Dict[str, Any], Dict[str, Any]]
+        Evaluates the final trained model on both the training and test datasets, returning performance metrics.
+    _determine_scores(true_labels: np.ndarray, predicted_labels: np.ndarray) -> Dict[str, Any]
+        Computes and logs performance metrics based on the true and predicted labels.
+    _load_electra_model(classifier_dropout: float, save_path: str = None) -> ElectraForSequenceClassification
+        Loads the ELECTRA model with the specified dropout rate, optionally from a saved checkpoint.
+    """
+
     def __init__(
             self,
-            model_path: str,
-            num_labels: int,
+            config: FintuningConfig,
             device: torch.device,
-            tokenizer_path: str,
-            max_sequence_length: int,
             dataset: Dataset,
-            text_column: str,
-            dataset_columns: list[str],
-            shuffle_data: bool = True,
-            shuffle_data_random_seed: Optional[int] = None,
-            training_data_fraction: float = 0.80,
-            n_epochs: Hyperparameter = None,
-            learning_rate: Hyperparameter = None,
-            classifier_dropout: Hyperparameter = None,
-            warmup_step_fraction: Hyperparameter = None,
-            use_gradient_clipping: Hyperparameter = None,
-            save_path: str = None
         ):
+
+        """
+        Initializes the FinetuningEncoderClassifier with the provided configuration, device, and dataset.
+
+        Parameters
+        ----------
+        config : FintuningConfig
+            The configuration object containing hyperparameters and paths required for fine-tuning.
+        device : torch.device
+            The device (CPU or GPU) on which the model will be trained and evaluated.
+        dataset : Dataset
+            The dataset to be used for fine-tuning.
+        
+        Raises
+        ------
+        ValueError
+            If the save path already exists, indicating the model has already been trained.
+        """
     
-        self.model_path = model_path
-        self.num_labels = num_labels
+        self.config = config
+        self.model_path = self.config.model_path
+        self.num_labels = self.config.num_labels
+        if self.num_labels == 1:
+            self.task = "regression"
+        elif self.num_labels == 2:
+            self.task = "binary_classification"
+        else:
+            self.task = "multi_classification"
         self.device = device
         self.dataset = FinetuningDataset(
-            tokenizer_path,
-            max_sequence_length,
+            self.config.tokenizer_path,
+            self.config.max_sequence_length,
             dataset,
-            text_column,
-            dataset_columns,
-            shuffle_data,
-            shuffle_data_random_seed,
-            training_data_fraction
+            self.config.text_column,
+            self.config.dataset_columns,
+            self.config.shuffle_data,
+            self.config.shuffle_data_random_seed,
+            self.config.training_data_fraction
         )
-        self.n_epochs = n_epochs
-        self.learning_rate = learning_rate
-        self.classifier_dropout = classifier_dropout
-        self.warmup_step_fraction = warmup_step_fraction
-        self.use_gradient_clipping = use_gradient_clipping
-        self.save_path = save_path
+        self.n_epochs = Hyperparameter.from_dict(self.config.n_epochs)
+        self.learning_rate = Hyperparameter.from_dict(self.config.learning_rate)
+        self.classifier_dropout = Hyperparameter.from_dict(self.config.classifier_dropout)
+        self.warmup_step_fraction = Hyperparameter.from_dict(self.config.warmup_step_fraction)
+        self.use_gradient_clipping = Hyperparameter.from_dict(self.config.use_gradient_clipping)
+        self.save_path = self.config.save_path
+        if os.path.exists(self.save_path):
+            raise ValueError("It seems you already trained this model, check the save path or delete the current one.")
         self.logger = logging.getLogger(self.__class__.__name__)
         self.logger.info(f"Occurence of labels for training data: {np.unique(self.dataset.training_data['label'], return_counts=True)}")
         self.logger.info(f"Occurence of labels for test data: {np.unique(self.dataset.test_data['label'], return_counts=True)}")
 
+
     def train_optuna_optimized_cv_model(self, n_trials):
+
+        """
+        Trains the model using cross-validation with hyperparameters optimized by Optuna.
+
+        Parameters
+        ----------
+        n_trials : int
+            The number of trials for Optuna optimization.
+
+        This method:
+        - Optimizes hyperparameters using Optuna.
+        - Trains the model on the full training dataset.
+        - Saves the final trained model and evaluation metrics.
+        """
+
         best_params, _ = self.optuna_optimize(n_trials = n_trials)
         full_training_split = DataLoader(self.dataset.training_data, batch_size = 32, shuffle = False)
         test_split = DataLoader(self.dataset.test_data, batch_size = 32, shuffle = False)
@@ -88,14 +281,62 @@ class EncoderClassificationDownstreaming:
         self.logger.info(f"Loading model finetuned model from checkpoint.")
         model.load_state_dict(torch.load(os.path.join(self.save_path, "checkpoint.pth")))
         model.save_pretrained(os.path.join(self.save_path, "finetuned_model"))
-        self.model_and_token_info_to_json()
+        self.config.to_json(os.path.join(self.save_path, "finetuning_config.json"))
+        training_scores, test_scores = self.final_evaluation(os.path.join(self.save_path, "finetuned_model"))
+        training_scores["precision_scores"] = training_scores["precision_scores"].tolist()
+        training_scores["recall_scores"] = training_scores["recall_scores"].tolist()
+        test_scores["precision_scores"] = test_scores["precision_scores"].tolist()
+        test_scores["recall_scores"] = test_scores["recall_scores"].tolist()
+        
+        with open(os.path.join(self.save_path, "training_scores.json"), "w") as file:
+            json.dump(training_scores, file, indent = 4)
+
+        with open(os.path.join(self.save_path, "test_scores.json"), "w") as file:
+            json.dump(test_scores, file, indent = 4)
+
 
     def optuna_optimize(self, n_trials = 10):
-            study = optuna.create_study(direction = "maximize")
-            study.optimize(self.optuna_objective, n_trials = n_trials)            
-            return study.best_params, study.best_value
+            
+        """
+        Optimizes hyperparameters using Optuna and returns the best parameters and score.
+
+        Parameters
+        ----------
+        n_trials : int, optional
+            The number of trials for Optuna optimization (default is 10).
+
+        Returns
+        -------
+        Tuple[Dict[str, Any], float]
+            The best hyperparameters and the corresponding score.
+        """
+            
+        study = optuna.create_study(direction = "maximize")
+        study.optimize(self.optuna_objective, n_trials = n_trials)            
+        return study.best_params, study.best_value
+
 
     def optuna_objective(self, trial):
+
+        """
+        Defines the objective function for Optuna hyperparameter optimization.
+
+        Parameters
+        ----------
+        trial : optuna.Trial
+            A single trial object for Optuna optimization.
+
+        Returns
+        -------
+        float
+            The cross-validation score for the current trial's hyperparameters.
+        
+        Raises
+        ------
+        ValueError
+            If the data type of a hyperparameter is not one of float, int, or bool.
+        """
+
         hyperparameters = [self.n_epochs, self.learning_rate, self.classifier_dropout, self.warmup_step_fraction, self.use_gradient_clipping]
         hyperparameter_dictionary = {}
         for hyperparameter in hyperparameters:
@@ -138,6 +379,36 @@ class EncoderClassificationDownstreaming:
             use_gradient_clipping
         ):
 
+        """
+        Performs cross-validation on the training data and returns the average score across folds.
+
+        Parameters
+        ----------
+        n_folds : int
+            The number of cross-validation folds.
+        training_data : Dataset
+            The training dataset to be used.
+        training_batch_size : int
+            The batch size for training.
+        validation_batch_size : int
+            The batch size for validation.
+        n_epochs : int
+            The number of epochs to train for.
+        learning_rate : float
+            The learning rate for the optimizer.
+        classifier_dropout : float
+            The dropout rate for the classifier layer.
+        warmup_step_fraction : float
+            The fraction of steps for learning rate warm-up.
+        use_gradient_clipping : bool
+            Whether to apply gradient clipping.
+
+        Returns
+        -------
+        float
+            The average cross-validation score across all folds.
+        """
+
         if not os.path.exists(self.save_path):
             os.makedirs(self.save_path)
 
@@ -164,6 +435,34 @@ class EncoderClassificationDownstreaming:
 
     def train(self, training_data, validation_data, n_epochs, learning_rate, classifier_dropout, warmup_step_fraction, use_gradient_clipping, save_best_model_path):
         
+        """
+        Trains the model on the training data and validates it on the validation data, with early stopping and checkpointing.
+
+        Parameters
+        ----------
+        training_data : DataLoader
+            The training data loader.
+        validation_data : DataLoader
+            The validation data loader.
+        n_epochs : int
+            The number of epochs to train for.
+        learning_rate : float
+            The learning rate for the optimizer.
+        classifier_dropout : float
+            The dropout rate for the classifier layer.
+        warmup_step_fraction : float
+            The fraction of steps for learning rate warm-up.
+        use_gradient_clipping : bool
+            Whether to apply gradient clipping.
+        save_best_model_path : str
+            The path to save the best model during training.
+
+        Returns
+        -------
+        float
+            The best validation score achieved during training.
+        """
+
         # Early stopping instance with specified save path
         early_stopping = EarlyStopping(patience = 2, verbose = True, mode = 'min', save_path = save_best_model_path)
 
@@ -203,14 +502,14 @@ class EncoderClassificationDownstreaming:
             self.logger.info(f"Epoch finished, average loss over training batches: {training_loss:.4f}")
             training_predictions = torch.cat(training_predictions, dim = 0)
             training_labels = torch.cat(training_labels, dim = 0)
+
+            self.logger.info("-"*100)
+            self.logger.info("Training metrics:")
+            self.logger.info("-"*100)
             if self.device.type == "cuda":
-                training_scores = self._determine_multi_classification_scores(training_labels.cpu().numpy(), training_predictions.cpu().numpy())
+                self._determine_scores(training_labels.cpu().numpy(), training_predictions.cpu().numpy())
             else:
-                training_scores = self._determine_multi_classification_scores(training_labels.numpy(), training_predictions.numpy())
-            self.logger.info(f"After iteration {iteration} in epoch {epoch + 1} the training scores are:")
-            self.logger.info("-" * 100)
-            self._logging_multi_classification_scores(training_scores)
-            self.logger.info("-" * 100)
+                self._determine_scores(training_labels.numpy(), training_predictions.numpy())
             
             validation_predictions, validation_labels = [], []
             validation_loss = 0
@@ -227,15 +526,15 @@ class EncoderClassificationDownstreaming:
             self.logger.info(f"Average loss over validation batches: {validation_loss:.4f}")
             validation_predictions = torch.cat(validation_predictions, dim = 0)
             validation_labels = torch.cat(validation_labels, dim = 0)
+
+            self.logger.info("-"*100)
+            self.logger.info("Validation metrics:")
+            self.logger.info("-"*100)
             if self.device.type == "cuda":
-                validation_scores = self._determine_multi_classification_scores(validation_labels.cpu().numpy(), validation_predictions.cpu().numpy())
+                validation_scores = self._determine_scores(validation_labels.cpu().numpy(), validation_predictions.cpu().numpy())
             else:
-                validation_scores = self._determine_multi_classification_scores(validation_labels.numpy(), validation_predictions.numpy())
-            validation_f1_score = validation_scores['average_f1_score']
-            self.logger.info(f"After iteration {iteration} in epoch {epoch + 1} the validation scores are:")
-            self.logger.info("-" * 100)
-            self._logging_multi_classification_scores(validation_scores)
-            self.logger.info("-" * 100)
+                validation_scores = self._determine_scores(validation_labels.numpy(), validation_predictions.numpy())
+            max_score = validation_scores['max_score']
 
             early_stopping(validation_loss, model)
 
@@ -260,20 +559,39 @@ class EncoderClassificationDownstreaming:
                 validation_loss /= len(validation_data)
                 validation_predictions = torch.cat(validation_predictions, dim = 0)
                 validation_labels = torch.cat(validation_labels, dim = 0)
+
+                self.logger.info("-"*100)
+                self.logger.info("Validation metrics after reloading the model before ending this training:")
+                self.logger.info("-"*100)
+
                 if self.device.type == "cuda":
-                    validation_scores = self._determine_multi_classification_scores(validation_labels.cpu().numpy(), validation_predictions.cpu().numpy())
+                    validation_scores = self._determine_scores(validation_labels.cpu().numpy(), validation_predictions.cpu().numpy())
                 else:
-                    validation_scores = self._determine_multi_classification_scores(validation_labels.numpy(), validation_predictions.numpy())
-                validation_f1_score = validation_scores['average_f1_score']
+                    validation_scores = self._determine_scores(validation_labels.numpy(), validation_predictions.numpy())
+                max_score = validation_scores['max_score']
                 self.logger.info("Determined score from best model, ending training.")
 
                 if early_stopping.early_stop:
                     break
 
-        return validation_f1_score
+        return max_score
     
     def final_evaluation(self, fintuned_model_path):
         
+        """
+        Evaluates the final trained model on both the training and test datasets, returning performance metrics.
+
+        Parameters
+        ----------
+        finetuned_model_path : str
+            The path to the fine-tuned model for evaluation.
+
+        Returns
+        -------
+        Tuple[Dict[str, Any], Dict[str, Any]]
+            The training and test performance metrics.
+        """
+
         model = ElectraForSequenceClassification.from_pretrained(fintuned_model_path)
         model.to(self.device)
 
@@ -293,9 +611,9 @@ class EncoderClassificationDownstreaming:
         training_predictions = torch.cat(training_predictions, dim = 0)
         training_labels = torch.cat(training_labels, dim = 0)
         if self.device.type == "cuda":
-            training_scores = self._determine_multi_classification_scores(training_labels.cpu().numpy(), training_predictions.cpu().numpy())
+            training_scores = self._determine_scores(training_labels.cpu().numpy(), training_predictions.cpu().numpy())
         else:
-            training_scores = self._determine_multi_classification_scores(training_labels.numpy(), training_predictions.numpy())
+            training_scores = self._determine_scores(training_labels.numpy(), training_predictions.numpy())
 
         self.logger.info("Determining test scores of final model.")
         test_predictions, test_labels = [], []
@@ -310,36 +628,107 @@ class EncoderClassificationDownstreaming:
         test_predictions = torch.cat(test_predictions, dim = 0)
         test_labels = torch.cat(test_labels, dim = 0)
         if self.device.type == "cuda":
-            test_scores = self._determine_multi_classification_scores(test_labels.cpu().numpy(), test_predictions.cpu().numpy())
+            test_scores = self._determine_scores(test_labels.cpu().numpy(), test_predictions.cpu().numpy())
         else:
-            test_scores = self._determine_multi_classification_scores(test_labels.numpy(), test_predictions.numpy())
+            test_scores = self._determine_scores(test_labels.numpy(), test_predictions.numpy())
         return training_scores, test_scores
-    
-    @staticmethod
-    def _determine_multi_classification_scores(true_labels: np.ndarray, predicted_labels: np.ndarray) -> Dict[str, float]: 
-        accuracy_scores = accuracy_score(true_labels, predicted_labels)
-        precision_scores = precision_score(true_labels, predicted_labels, average = None, zero_division = 0)
-        recall_scores = recall_score(true_labels, predicted_labels, average = None, zero_division = 0)
-        average_f1_score = f1_score(true_labels, predicted_labels, average = "macro", zero_division = 0)
 
-        scores = dict(
-            accuracy_score = accuracy_scores,
-            precision_scores = precision_scores,
-            recall_scores = recall_scores,
-            average_f1_score = average_f1_score
-        )
+
+    def _determine_scores(self, true_labels: np.ndarray, predicted_labels: np.ndarray) -> Dict[str, Any]:
+
+        """
+        Computes and logs performance metrics based on the true and predicted labels.
+
+        Parameters
+        ----------
+        true_labels : np.ndarray
+            The true labels for the data.
+        predicted_labels : np.ndarray
+            The predicted labels from the model.
+
+        Returns
+        -------
+        Dict[str, Any]
+            A dictionary containing performance metrics such as accuracy, precision, recall, and F1 score.
+        """
+
+        if self.task == "regression":
+            mae = mean_absolute_error(true_labels, predicted_labels)
+            mse = mean_squared_error(true_labels, predicted_labels)
+            r2 = r2_score(true_labels, predicted_labels)
+            
+            scores = dict(
+                mean_absolute_error = mae,
+                mean_squared_error = mse,
+                max_score = r2,
+            )
+
+            self.logger.info(f"Mean absolute error: {scores['mean_absolute_error']:.4f}")
+            self.logger.info(f"Mean squared error: {scores['mean_squared_error']:.4f}")
+            self.logger.info(f"R2 score: {scores['max_score']:.4f}")
+
+        elif self.task == "binary_classification":
+            accuracy_scores = accuracy_score(true_labels, predicted_labels)
+            precision_scores = precision_score(true_labels, predicted_labels)
+            recall_scores = recall_score(true_labels, predicted_labels)
+            f1_scores = f1_score(true_labels, predicted_labels)
+
+            scores = dict(
+                accuracy_score = accuracy_scores,
+                precision_score = precision_scores,
+                recall_score = recall_scores,
+                max_score = f1_scores
+            )
+
+            self.logger.info(f"Accuracy: {scores['accuracy_score']:.4f}")
+            self.logger.info(f"Precision: {scores['precision_score']:.4f}")
+            self.logger.info(f"Recall: {scores['recall_score']:.4f}")
+            self.logger.info(f"F1 score: {scores['max_score']:.4f}")
+
+        else:
+            accuracy_scores = accuracy_score(true_labels, predicted_labels)
+            precision_scores = precision_score(true_labels, predicted_labels, average = None, zero_division = 0)
+            recall_scores = recall_score(true_labels, predicted_labels, average = None, zero_division = 0)
+            average_f1_score = f1_score(true_labels, predicted_labels, average = "macro", zero_division = 0)
+
+            scores = dict(
+                accuracy_score = accuracy_scores,
+                precision_scores = precision_scores,
+                recall_scores = recall_scores,
+                max_score = average_f1_score
+            )
+
+            self.logger.info(f"Accuracy: {scores['accuracy_score']:.4f}")
+            for label_class in range(len(scores["precision_scores"])):
+                self.logger.info(f"Precision score for label_class {label_class}: {scores['precision_scores'][label_class]:.4f}")
+            for label_class in range(len(scores["recall_scores"])):
+                self.logger.info(f"Recall score for label_class {label_class}: {scores['recall_scores'][label_class]:.4f}")
+            self.logger.info(f"Average F1 score: {scores['max_score']:.4f}") 
 
         return scores
-    
-    def _logging_multi_classification_scores(self, scores):
-        self.logger.info(f"Accuracy: {scores['accuracy_score']:.4f}")
-        for label_class in range(len(scores["precision_scores"])):
-            self.logger.info(f"Precision score for label_class {label_class}: {scores['precision_scores'][label_class]:.4f}")
-        for label_class in range(len(scores["recall_scores"])):
-            self.logger.info(f"Recall score for label_class {label_class}: {scores['recall_scores'][label_class]:.4f}")
-        self.logger.info(f"Average F1 score: {scores['average_f1_score']:.4f}") 
 
     def _load_electra_model(self, classifier_dropout, save_path = None):
+
+        """
+        Loads the ELECTRA model for sequence classification with a specified dropout rate.
+
+        This method loads a pre-trained ELECTRA model for sequence classification, applying the specified 
+        dropout rate to the classifier layer. If a save path is provided, the model's state is loaded from 
+        the specified checkpoint.
+
+        Parameters
+        ----------
+        classifier_dropout : float
+            The dropout rate to apply to the classifier layer.
+        save_path : str, optional
+            The path to a saved model checkpoint to load. If None, the model is loaded without applying any checkpoint (default is None).
+
+        Returns
+        -------
+        ElectraForSequenceClassification
+            The loaded ELECTRA model, ready for training or evaluation.
+        """
+
         model = ElectraForSequenceClassification.from_pretrained(self.model_path, num_labels = self.num_labels, classifier_dropout = classifier_dropout)        
         if save_path:
             self.logger.info(f"Loading model from {save_path}")
@@ -347,9 +736,3 @@ class EncoderClassificationDownstreaming:
 
         return model       
 
-    def model_and_token_info_to_json(self):
-        metadata = {}
-        metadata["model_path"] = self.model_path
-        metadata["tokenizer_path"] = self.dataset.tokenizer_path
-        with open(os.path.join(self.save_path, "tokenizer_and_model_info.json"), "w") as file:
-            json.dump(metadata, file, indent = 4)

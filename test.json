@@ -1,0 +1,52 @@
+{
+    "model_path": "/home/ralf/language_models/pretrained_models/mlm_00/mlm_model",
+    "num_labels": 3,
+    "tokenizer_path": "/home/ralf/language_models/00_tokenizer/finlm-wordpiece-tokenizer.json",
+    "max_sequence_length": 256,
+    "text_column": "sentence",
+    "dataset_name": "financial_phrasebank",
+    "dataset_columns": [
+        "input_ids",
+        "attention_mask",
+        "label"
+    ],
+    "shuffle_data": true,
+    "shuffle_data_random_seed": 42,
+    "training_data_fraction": 0.8,
+    "n_epochs": {
+        "name": "n_epochs",
+        "dtype": "int",
+        "low": 2,
+        "high": 10,
+        "default": 5
+    },
+    "learning_rate": {
+        "name": "learning_rate",
+        "dtype": "float",
+        "low": 1e-05,
+        "high": 0.0001,
+        "default": 0.0005
+    },
+    "classifier_dropout": {
+        "name": "classifier_dropout",
+        "dtype": "float",
+        "low": 0.2,
+        "high": 0.9,
+        "default": 0.5
+    },
+    "warmup_step_fraction": {
+        "name": "warmup_step_fraction",
+        "dtype": "float",
+        "low": 0.01,
+        "high": 0.1,
+        "default": 0.05
+    },
+    "use_gradient_clipping": {
+        "name": "use_gradient_clipping",
+        "dtype": "bool",
+        "low": "None",
+        "high": "None",
+        "default": false
+    },
+    "save_path": "/home/ralf/language_models/pretrained_models_downstreaming/financial_phrasebank/mlm_01"
+}

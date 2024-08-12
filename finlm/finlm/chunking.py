@@ -7,15 +7,53 @@ import sqlite3
 import time
 
 class Chunker:
+    
+    """
+    A base class for chunking text documents from a database.
+
+    This class provides methods for counting documents in a database table and chunking text documents
+    into approximately equal text chunks based on the number of words.
+
+    Attributes
+    ----------
+    db_in : str
+        The path to the input SQLite database.
+    sheet_in : str
+        The name of the table in the database containing the text documents.
+    limit : int, optional
+        The maximum number of documents to process (default is None).
+    offset : int, optional
+        The starting point from which to begin processing documents (default is None).
+    n_documents : int
+        The total number of documents in the specified table.
+    logger : logging.Logger
+        Logger instance for logging messages related to chunking operations.
+
+    Methods
+    -------
+    count_documents() -> int
+        Counts the number of documents in the specified table.
+    chunk_to_database(db_out: str, sheet_out: str, chunk_size_in_words: int, ignore_first_sentences: int, ignore_last_sentences: int) -> None
+        Chunks the documents into equal text chunks and saves them to a new database.
+    split_text_into_chunks_by_words(text: str, max_words_per_chunk: int, ignore_first_sentences: int = None, ignore_last_sentences: int = None) -> list[str]
+        Splits the input text into chunks based on the number of words, keeping sentences together.
+    """
+
     def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None) -> None:
 
         """
-            A parent class for chunking classes which are specifically designed for different financial text sources.
+        Initializes the Chunker with database and table information.
 
-            db_in: name of the database location which is supposed to be processed
-            sheet_in: table name of the database where the text files are located
-            limit: limited number of observations from the table
-            offset: collect observations from here on
+        Parameters
+        ----------
+        db_in : str
+            The path to the input SQLite database.
+        sheet_in : str
+            The name of the table in the database containing the text documents.
+        limit : int, optional
+            The maximum number of documents to process (default is None).
+        offset : int, optional
+            The starting point from which to begin processing documents (default is None).
         """
         
         self.db_in = db_in
@@ -27,7 +65,14 @@ class Chunker:
 
     def count_documents(self) -> int:
         
-        """A method to determine the number of sequences in a sheet."""
+        """
+        Counts the number of documents in the specified table.
+
+        Returns
+        -------
+        int
+            The total number of documents in the specified table.
+        """
         
         conn_in = sqlite3.connect(self.db_in)
         count_n = conn_in.execute(f"SELECT COUNT(*) FROM {self.sheet_in};")
@@ -44,15 +89,23 @@ class Chunker:
             ignore_last_sentences: int) -> None:
 
         """
-            A method to chunk documents into approximate equal text chunks.
+        Chunks the documents into equal text chunks and saves them to a new database.
 
-            db_out: the location of the database where to commit the chunked text sequences
-            sheet_out: the table name where to commit the chunked text sequences
-            chunk_size_in_words: number of desired words per chunk, Note: words, not tokens!
-            ignore_first_sentences: the number of first sentences which are not going to be exported via the chunking process
-                makes sense for documents such as 10K form filings as the first sentences often include just formal definitions which do not include 
-                relevant content.
-            ignore_last_sentences: the number of last sentences which are not going to be exported vie the chunking process
+        This method processes each document in the specified table, splitting it into chunks of 
+        approximately equal size (based on word count) and saving the resulting chunks to a new table.
+
+        Parameters
+        ----------
+        db_out : str
+            The path to the output SQLite database where the chunked sequences will be saved.
+        sheet_out : str
+            The name of the table where the chunked sequences will be saved.
+        chunk_size_in_words : int
+            The desired number of words per chunk.
+        ignore_first_sentences : int
+            The number of initial sentences to exclude from chunking.
+        ignore_last_sentences : int
+            The number of final sentences to exclude from chunking.
         """
 
         conn_out = sqlite3.connect(db_out)
@@ -79,15 +132,25 @@ class Chunker:
         
         """
         Splits the input text into chunks based on the number of words, keeping sentences together.
-        
-        Args:
-        text (str): The input text to be split.
-        max_words_per_chunk (int): The maximum number of words per chunk.
-        
-        Returns:
-        List[str]: A list of text chunks.
+
+        Parameters
+        ----------
+        text : str
+            The input text to be split into chunks.
+        max_words_per_chunk : int
+            The maximum number of words allowed in each chunk.
+        ignore_first_sentences : int, optional
+            The number of initial sentences to exclude from chunking (default is None).
+        ignore_last_sentences : int, optional
+            The number of final sentences to exclude from chunking (default is None).
+
+        Returns
+        -------
+        list[str]
+            A list of text chunks, each containing up to `max_words_per_chunk` words.
         """
-        # Split the text into sentences using a regular expression
+
+            # Split the text into sentences using a regular expression
         sentences = re.split(r'(?<=[.!?]) +', text)
 
         if ignore_first_sentences and not(ignore_last_sentences):
@@ -127,8 +190,36 @@ class Chunker:
 
 
 class Form10KChunker(Chunker):
+
+    """
+    A class for chunking 10-K form filings from a database.
+
+    This class inherits from `Chunker` and is specifically designed to process 10-K forms, 
+    chunking them into approximately equal sequences and exporting the chunks to a new database.
+
+    Methods
+    -------
+    __iter__()
+        A generator that yields the text of 10-K forms from the database.
+    """
+
     def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None) -> None:
-        """A class which collects 10K form flings from our database, chunks them into approximate equal seqences and exports these to a new database"""
+        
+        """
+        Initializes the Form10KChunker with database and table information.
+
+        Parameters
+        ----------
+        db_in : str
+            The path to the input SQLite database.
+        sheet_in : str
+            The name of the table in the database containing the 10-K forms.
+        limit : int, optional
+            The maximum number of documents to process (default is None).
+        offset : int, optional
+            The starting point from which to begin processing documents (default is None).
+        """
+
         super().__init__(db_in, sheet_in, limit, offset)
 
     # define the generator
@@ -154,13 +245,38 @@ class Form10KChunker(Chunker):
 
 
 class Form8KChunker(Chunker):
+
+    """
+    A class for chunking 8-K form filings from a database.
+
+    This class inherits from `Chunker` and is specifically designed to process 8-K forms, 
+    focusing on press release statements (by Exhibit identifier) and filtering out documents with excessive punctuation or numbers.
+
+    Methods
+    -------
+    __iter__()
+        A generator that yields the text of 8-K forms from the database.
+    count_numbers_and_punctuation(s: str) -> float
+        Calculates the fraction of characters in a string that are digits or punctuation.
+    """
+
     def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None) -> None:
+        
         """
-            A class which collects 8K form flings from our database, chunks them into approximate equal seqences and exports these to a new database.
-            We try to collect press release statements which are usually accompanied by Exhibit identifiers as defined below. Furthermore, in the
-            database a few of these releases look add and can be identified by a large fraction of punctuation and numbers which is why this method
-            is included and used in the 8K chunker class. 
+        Initializes the Form8KChunker with database and table information.
+
+        Parameters
+        ----------
+        db_in : str
+            The path to the input SQLite database.
+        sheet_in : str
+            The name of the table in the database containing the 8-K forms.
+        limit : int, optional
+            The maximum number of documents to process (default is None).
+        offset : int, optional
+            The starting point from which to begin processing documents (default is None).
         """
+            
         super().__init__(db_in, sheet_in, limit, offset)
 
     def __iter__(self):
@@ -191,6 +307,21 @@ class Form8KChunker(Chunker):
 
     @staticmethod
     def count_numbers_and_punctuation(s: str) -> float:
+
+        """
+        Calculates the fraction of characters in a string that are digits or punctuation.
+
+        Parameters
+        ----------
+        s : str
+            The input string to analyze.
+
+        Returns
+        -------
+        float
+            The fraction of characters in the string that are digits or punctuation.
+        """
+
         # Counters for digits and punctuation
         num_digits = sum(c.isdigit() for c in s)
         num_punctuation = sum(c in string.punctuation for c in s)
@@ -204,8 +335,36 @@ class Form8KChunker(Chunker):
 
 
 class EarningCallChunker(Chunker):
+    
+    """
+    A class for chunking earnings call transcripts from a database.
+
+    This class inherits from `Chunker` and is specifically designed to process earnings call transcripts, 
+    filtering out participant names and short sentences, and then exporting the cleaned text to a new database.
+
+    Methods
+    -------
+    __iter__()
+        A generator that yields the cleaned text of earnings call transcripts from the database.
+    """
+
     def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None) -> None:
-        """A class which collects earning call transcripts collected at Financial Modeling Prep API, chunks them into approximate equal seqences and exports these to a new database"""
+        
+        """
+        Initializes the EarningCallChunker with database and table information.
+
+        Parameters
+        ----------
+        db_in : str
+            The path to the input SQLite database.
+        sheet_in : str
+            The name of the table in the database containing the earnings call transcripts.
+        limit : int, optional
+            The maximum number of documents to process (default is None).
+        offset : int, optional
+            The starting point from which to begin processing documents (default is None).
+        """
+
         super().__init__(db_in, sheet_in, limit, offset)
 
     def __iter__(self):
@@ -245,8 +404,36 @@ class EarningCallChunker(Chunker):
 
 
 class TRNewsChunker(Chunker):
+
+    """
+    A class for chunking Thomson Reuters news articles from a database.
+
+    This class inherits from `Chunker` and is specifically designed to process news articles, 
+    splitting them into chunks and exporting the chunks to a new database.
+
+    Methods
+    -------
+    __iter__()
+        A generator that yields the text of news articles from the database.
+    """
+
     def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None) -> None:
-        """A class which collects news from the Thomson Reuters news database, chunks them into approximate equal seqences and exports these to a new database"""
+        
+        """
+        Initializes the TRNewsChunker with database and table information.
+
+        Parameters
+        ----------
+        db_in : str
+            The path to the input SQLite database.
+        sheet_in : str
+            The name of the table in the database containing the news articles.
+        limit : int, optional
+            The maximum number of documents to process (default is None).
+        offset : int, optional
+            The starting point from which to begin processing documents (default is None).
+        """
+
         super().__init__(db_in, sheet_in, limit, offset)
 
     def __iter__(self):
@@ -272,6 +459,37 @@ class TRNewsChunker(Chunker):
 
 
 def rename_table(database, old_table_name, new_table_name, retries=5, delay=1):
+
+    """
+    Renames a table in a SQLite database, with retries in case the database is locked.
+
+    This function attempts to rename a table in the specified SQLite database. If the database is locked,
+    it will retry the operation for a specified number of times with a delay between attempts.
+
+    Parameters
+    ----------
+    database : str
+        The path to the SQLite database file.
+    old_table_name : str
+        The current name of the table to be renamed.
+    new_table_name : str
+        The new name for the table.
+    retries : int, optional
+        The number of times to retry the operation if the database is locked (default is 5).
+    delay : int, optional
+        The number of seconds to wait between retry attempts (default is 1).
+
+    Returns
+    -------
+    bool
+        Returns True if the table was renamed successfully; otherwise, prints a failure message.
+
+    Raises
+    ------
+    sqlite3.OperationalError
+        If an unexpected database operation error occurs other than a locked database.
+    """
+
     try:
         # Connect to the SQLite database
         conn = sqlite3.connect(database)
@@ -300,6 +518,27 @@ def rename_table(database, old_table_name, new_table_name, retries=5, delay=1):
         conn.close()
 
 def shuffle_and_create_new_table(database, original_table, shuffled_table):
+    
+    """
+    Creates a new table with shuffled data from an existing table in a SQLite database.
+
+    This function creates a new table in the specified SQLite database with the same schema as an existing table.
+    The new table is populated with the data from the original table, but the rows are shuffled randomly.
+
+    Parameters
+    ----------
+    database : str
+        The path to the SQLite database file.
+    original_table : str
+        The name of the original table from which data is to be copied and shuffled.
+    shuffled_table : str
+        The name of the new table to create with shuffled data.
+
+    Returns
+    -------
+    None
+    """
+    
     # Connect to the database
     conn = sqlite3.connect(database)
     cur = conn.cursor()
