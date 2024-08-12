@@ -73,6 +73,8 @@ class ModelConfig:
         Number of attention heads in each attention layer (default is 4).
     intermediate_size : int, optional
         Size of the intermediate layer in the transformer (default is 1024).
+    max_position_embeddings: int, optional
+        The maximum sequence length that this model might ever be used with.
     generator_size : float, optional
         Scaling factor for the generator size (default is 0.25).
     generator_layer_size : float, optional
@@ -89,6 +91,7 @@ class ModelConfig:
     num_hidden_layers: int = 12
     num_attention_heads: int = 4
     intermediate_size: int = 1024
+    max_position_embeddings: int = 256
     generator_size: float = 0.25
     generator_layer_size: float = 1.0
 
@@ -276,6 +279,8 @@ class FintuningConfig:
     shuffle_data: bool
     shuffle_data_random_seed: int
     training_data_fraction: float
+    batch_size: int
+    n_splits: int
     n_epochs: Dict[str, Any]
     learning_rate: Dict[str, Any]
     classifier_dropout: Dict[str, Any]

@@ -148,6 +148,8 @@ class FinetuningEncoderClassifier:
         The directory where the trained model and other outputs will be saved.
     logger : logging.Logger
         Logger for recording information during training and evaluation.
+    model_loader: callable
+        A callable which receives a model path of model name from huggingface, the number of labels and a classifier dropout rate
 
     Methods
     -------
@@ -184,8 +186,8 @@ class FinetuningEncoderClassifier:
         Evaluates the final trained model on both the training and test datasets, returning performance metrics.
     _determine_scores(true_labels: np.ndarray, predicted_labels: np.ndarray) -> Dict[str, Any]
         Computes and logs performance metrics based on the true and predicted labels.
-    _load_electra_model(classifier_dropout: float, save_path: str = None) -> ElectraForSequenceClassification
-        Loads the ELECTRA model with the specified dropout rate, optionally from a saved checkpoint.
+    _load_model(classifier_dropout: float, save_path: str = None) -> Any
+        Loads an encoder classification model with the specified dropout rate, optionally from a saved checkpoint as defined by the model_loader callable.
     """
 
     def __init__(
@@ -193,6 +195,7 @@ class FinetuningEncoderClassifier:
             config: FintuningConfig,
             device: torch.device,
             dataset: Dataset,
+            model_loader: callable
         ):
 
         """
@@ -233,6 +236,8 @@ class FinetuningEncoderClassifier:
             self.config.shuffle_data_random_seed,
             self.config.training_data_fraction
         )
+        self.batch_size = self.config.batch_size
+        self.n_splits = self.config.n_splits
         self.n_epochs = Hyperparameter.from_dict(self.config.n_epochs)
         self.learning_rate = Hyperparameter.from_dict(self.config.learning_rate)
         self.classifier_dropout = Hyperparameter.from_dict(self.config.classifier_dropout)
@@ -244,7 +249,7 @@ class FinetuningEncoderClassifier:
         self.logger = logging.getLogger(self.__class__.__name__)
         self.logger.info(f"Occurence of labels for training data: {np.unique(self.dataset.training_data['label'], return_counts=True)}")
         self.logger.info(f"Occurence of labels for test data: {np.unique(self.dataset.test_data['label'], return_counts=True)}")
-
+        self.model_loader = model_loader
 
     def train_optuna_optimized_cv_model(self, n_trials):
 
@@ -353,10 +358,10 @@ class FinetuningEncoderClassifier:
                     raise ValueError("Data type of the hyperparameters must be one of float, int or bool")
         
         cross_validation_score = self.cross_validate(
-            n_folds = 5,
+            n_folds = self.n_splits,
             training_data = self.dataset.training_data,
-            training_batch_size = 32,
-            validation_batch_size = 32,
+            training_batch_size = self.batch_size,
+            validation_batch_size = self.batch_size,
             n_epochs = hyperparameter_dictionary["n_epochs"],
             learning_rate = hyperparameter_dictionary["learning_rate"],
             classifier_dropout = hyperparameter_dictionary["classifier_dropout"],
@@ -466,7 +471,7 @@ class FinetuningEncoderClassifier:
         # Early stopping instance with specified save path
         early_stopping = EarlyStopping(patience = 2, verbose = True, mode = 'min', save_path = save_best_model_path)
 
-        model = self._load_electra_model(classifier_dropout)
+        model = self._load_model(classifier_dropout)
         model.to(self.device)
 
         n_warmup = int(n_epochs * len(training_data) * warmup_step_fraction)
@@ -543,7 +548,7 @@ class FinetuningEncoderClassifier:
                     self.logger.info("Early stopping, loading best model from before and determine score...")
                 else:
                     self.logger.info("Last epoch reached, validation loss was better before, loading best model during training.")
-                model = self._load_electra_model(classifier_dropout, os.path.join(save_best_model_path, "checkpoint.pth"))
+                model = self._load_model(classifier_dropout, os.path.join(save_best_model_path, "checkpoint.pth"))
                 model.to(self.device)
 
                 validation_predictions, validation_labels = [], []
@@ -595,8 +600,8 @@ class FinetuningEncoderClassifier:
         model = ElectraForSequenceClassification.from_pretrained(fintuned_model_path)
         model.to(self.device)
 
-        training_data = DataLoader(self.dataset.training_data, 32, False)
-        test_data = DataLoader(self.dataset.test_data, 32, False)
+        training_data = DataLoader(self.dataset.training_data, self.batch_size, False)
+        test_data = DataLoader(self.dataset.test_data, self.batch_size, False)
 
         self.logger.info("Determining training scores of final model.")
         with torch.no_grad():
@@ -707,12 +712,12 @@ class FinetuningEncoderClassifier:
 
         return scores
 
-    def _load_electra_model(self, classifier_dropout, save_path = None):
+    def _load_model(self, classifier_dropout: float, save_path = None):
 
         """
-        Loads the ELECTRA model for sequence classification with a specified dropout rate.
+        Loads an encoder model for sequence classification with a specified dropout rate.
 
-        This method loads a pre-trained ELECTRA model for sequence classification, applying the specified 
+        This method loads a pre-trained model for sequence classification, applying the specified 
         dropout rate to the classifier layer. If a save path is provided, the model's state is loaded from 
         the specified checkpoint.
 
@@ -729,7 +734,8 @@ class FinetuningEncoderClassifier:
             The loaded ELECTRA model, ready for training or evaluation.
         """
 
-        model = ElectraForSequenceClassification.from_pretrained(self.model_path, num_labels = self.num_labels, classifier_dropout = classifier_dropout)        
+        model = self.model_loader(self.model_path, num_labels = self.num_labels, classifier_dropout = classifier_dropout)
+        #model = ElectraForSequenceClassification.from_pretrained(self.model_path, num_labels = self.num_labels, classifier_dropout = classifier_dropout)        
         if save_path:
             self.logger.info(f"Loading model from {save_path}")
             model.load_state_dict(torch.load(save_path))

@@ -1,0 +1,56 @@
+2024-08-12 14:13:07,136 : INFO : Counting the number of sequences in the database...
+2024-08-12 14:13:29,684 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 14:13:29,684 : INFO : The database includes 4 sheets with the following names and number of sequences:
+2024-08-12 14:13:29,684 : INFO : form_tenk: form_tenk
+2024-08-12 14:13:29,684 : INFO : form_eightk: form_eightk
+2024-08-12 14:13:29,684 : INFO : earning_calls: earning_calls
+2024-08-12 14:13:29,684 : INFO : tr_news: tr_news
+2024-08-12 14:13:29,684 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 14:13:30,074 : INFO : Starting with training...
+2024-08-12 14:13:30,074 : INFO : Starting to retrieve sequences from database.
+2024-08-12 14:13:30,077 : INFO : Sequences have been retrieved from database.
+2024-08-12 14:13:30,086 : INFO : Starting to tokenize the sequences.
+2024-08-12 14:13:30,885 : INFO : Tokenization is finished.
+2024-08-12 14:13:31,706 : INFO : Results after 0.0000% iterations of epoch 1:
+2024-08-12 14:13:31,706 : INFO : Loss: 45.0555
+2024-08-12 14:13:31,706 : INFO : MLM Loss: 10.8252
+2024-08-12 14:13:31,706 : INFO : Discriminator Loss: 0.6846
+2024-08-12 14:13:31,706 : INFO : Gradient norm: 1.0000
+2024-08-12 14:13:31,706 : INFO : Current learning rate: 9.791666666666667e-05
+2024-08-12 14:13:31,706 : INFO : Accuracy for masking task: 0.0000
+2024-08-12 14:13:31,706 : INFO : Accuracy for replacement task: 0.7550
+2024-08-12 14:13:31,706 : INFO : Precision for replacement task: 0.1400
+2024-08-12 14:13:31,706 : INFO : Recall for replacement task: 0.2018
+2024-08-12 14:13:31,706 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 14:13:35,294 : INFO : Starting to retrieve sequences from database.
+2024-08-12 14:13:35,299 : INFO : Sequences have been retrieved from database.
+2024-08-12 14:13:35,311 : INFO : Starting to tokenize the sequences.
+2024-08-12 14:13:36,109 : INFO : Tokenization is finished.
+2024-08-12 14:13:36,348 : INFO : Results after 0.0000% iterations of epoch 2:
+2024-08-12 14:13:36,348 : INFO : Loss: 38.7007
+2024-08-12 14:13:36,349 : INFO : MLM Loss: 10.7094
+2024-08-12 14:13:36,349 : INFO : Discriminator Loss: 0.5598
+2024-08-12 14:13:36,349 : INFO : Gradient norm: 1.0000
+2024-08-12 14:13:36,349 : INFO : Current learning rate: 6.458333333333334e-05
+2024-08-12 14:13:36,349 : INFO : Accuracy for masking task: 0.0006
+2024-08-12 14:13:36,349 : INFO : Accuracy for replacement task: 0.8827
+2024-08-12 14:13:36,349 : INFO : Precision for replacement task: 0.0000
+2024-08-12 14:13:36,349 : INFO : Recall for replacement task: 0.0000
+2024-08-12 14:13:36,349 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 14:13:39,938 : INFO : Starting to retrieve sequences from database.
+2024-08-12 14:13:39,943 : INFO : Sequences have been retrieved from database.
+2024-08-12 14:13:39,955 : INFO : Starting to tokenize the sequences.
+2024-08-12 14:13:40,750 : INFO : Tokenization is finished.
+2024-08-12 14:13:40,990 : INFO : Results after 0.0000% iterations of epoch 3:
+2024-08-12 14:13:40,990 : INFO : Loss: 36.4236
+2024-08-12 14:13:40,990 : INFO : MLM Loss: 10.6339
+2024-08-12 14:13:40,990 : INFO : Discriminator Loss: 0.5158
+2024-08-12 14:13:40,990 : INFO : Gradient norm: 1.0000
+2024-08-12 14:13:40,990 : INFO : Current learning rate: 3.125e-05
+2024-08-12 14:13:40,990 : INFO : Accuracy for masking task: 0.0048
+2024-08-12 14:13:40,990 : INFO : Accuracy for replacement task: 0.8825
+2024-08-12 14:13:40,990 : INFO : Precision for replacement task: 0.0000
+2024-08-12 14:13:40,990 : INFO : Recall for replacement task: 0.0000
+2024-08-12 14:13:40,990 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 14:13:44,578 : INFO : ...training is finished, saving results and model.
+2024-08-12 14:13:44,997 : INFO : Results and model are saved.

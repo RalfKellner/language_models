@@ -7,6 +7,7 @@ import torch
 from torch.utils.data import Dataset as TorchDataset
 from torch.utils.data import DataLoader
 from finlm.tokenizer import FinLMTokenizer
+from transformers import AutoTokenizer
 import logging
 datasets.disable_progress_bars()
 
@@ -101,7 +102,7 @@ class FinLMDataset:
 
         self.logger.info("-"*100)
         self.logger.info(f"The database includes {len(self.table_names)} sheets with the following names and number of sequences:")
-        for t_name, n_seq in zip(self.table_names, self.n_total_sequences):
+        for t_name, n_seq in self.n_total_sequences.items():
             self.logger.info(f"{t_name}: {n_seq}")
         self.logger.info("-"*100)
 
@@ -357,7 +358,10 @@ class FinetuningDataset:
         """
 
         self.tokenizer_path = tokenizer_path
-        self.tokenizer = FinLMTokenizer(self.tokenizer_path)
+        try:
+            self.tokenizer = FinLMTokenizer(self.tokenizer_path)
+        except:
+            self.tokenizer = AutoTokenizer.from_pretrained(self.tokenizer_path)
         self.max_sequence_length = max_sequence_length
         self.dataset = dataset
         self.text_column = text_column

@@ -262,7 +262,8 @@ class PretrainMLM(PretrainLM):
             hidden_size = self.model_config.hidden_size, 
             num_hidden_layers = self.model_config.num_hidden_layers,
             num_attention_heads = self.model_config.num_attention_heads,
-            intermediate_size = self.model_config.intermediate_size
+            intermediate_size = self.model_config.intermediate_size,
+            max_position_embeddings = self.model_config.max_position_embeddings
         )
 
         self.model = ElectraForMaskedLM(self.model_config)
@@ -459,7 +460,8 @@ class PretrainDiscriminator(PretrainLM):
             embedding_size = self.model_config.embedding_size,
             hidden_size = self.model_config.hidden_size, 
             num_hidden_layers = self.model_config.num_hidden_layers,
-            num_attention_heads = self.model_config.num_attention_heads
+            num_attention_heads = self.model_config.num_attention_heads,
+            max_position_embeddings = self.model_config.max_position_embeddings
         )
 
         self.model = ElectraForPreTraining(self.model_config)
@@ -726,7 +728,8 @@ class PretrainElectra(PretrainLM):
             hidden_size = int(self.model_config.hidden_size * self.model_config.generator_size), 
             intermediate_size = int(self.model_config.intermediate_size * self.model_config.generator_size),
             num_hidden_layers = int(self.model_config.num_hidden_layers * self.model_config.generator_layer_size),
-            num_attention_heads = int(self.model_config.num_attention_heads * self.model_config.generator_size)
+            num_attention_heads = int(self.model_config.num_attention_heads * self.model_config.generator_size),
+            max_position_embeddings = self.model_config.max_position_embeddings
         )
 
         self.discriminator_model_config = ElectraConfig(
@@ -734,7 +737,8 @@ class PretrainElectra(PretrainLM):
             embedding_size = self.model_config.embedding_size,
             hidden_size = self.model_config.hidden_size, 
             num_hidden_layers = self.model_config.num_hidden_layers,
-            num_attention_heads = self.model_config.num_attention_heads
+            num_attention_heads = self.model_config.num_attention_heads,
+            max_position_embeddings = self.model_config.max_position_embeddings
         )
 
         self.generator = ElectraForMaskedLM(self.generator_model_config)

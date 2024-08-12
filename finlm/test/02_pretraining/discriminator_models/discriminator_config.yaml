@@ -1,5 +1,5 @@
 dataset_config:
-  tokenizer_path: "/home/ralf/language_models/00_tokenizer/finlm-wordpiece-tokenizer.json"
+  tokenizer_path: "/data/language_models/tokenizers/finlm-wordpiece-tokenizer.json"
   max_sequence_length: 256
   db_name: "/data/finlm_sequences/finlm_chunks.sqlite"
   batch_size: 128

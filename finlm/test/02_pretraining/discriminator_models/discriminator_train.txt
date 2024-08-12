@@ -1,0 +1,47 @@
+2024-08-12 14:22:08,264 : INFO : Counting the number of sequences in the database...
+2024-08-12 14:22:30,609 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 14:22:30,609 : INFO : The database includes 4 sheets with the following names and number of sequences:
+2024-08-12 14:22:30,609 : INFO : form_tenk: 33316659
+2024-08-12 14:22:30,609 : INFO : form_eightk: 13139781
+2024-08-12 14:22:30,609 : INFO : earning_calls: 5706841
+2024-08-12 14:22:30,609 : INFO : tr_news: 21717556
+2024-08-12 14:22:30,609 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 14:22:30,927 : INFO : Starting with training...
+2024-08-12 14:22:30,928 : INFO : Starting to retrieve sequences from database.
+2024-08-12 14:22:30,930 : INFO : Sequences have been retrieved from database.
+2024-08-12 14:22:30,942 : INFO : Starting to tokenize the sequences.
+2024-08-12 14:22:31,738 : INFO : Tokenization is finished.
+2024-08-12 14:22:32,235 : INFO : Results after 0.0000% iterations of epoch 1:
+2024-08-12 14:22:32,235 : INFO : Discriminator loss: 0.6915
+2024-08-12 14:22:32,235 : INFO : Gradient norm: 0.5807
+2024-08-12 14:22:32,235 : INFO : Current learning rate: 9.791666666666667e-05
+2024-08-12 14:22:32,235 : INFO : Accuracy for replacement task: 0.5483
+2024-08-12 14:22:32,235 : INFO : Precision for replacement task: 0.1988
+2024-08-12 14:22:32,235 : INFO : Recall for replacement task: 0.4226
+2024-08-12 14:22:32,235 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 14:22:33,252 : INFO : Starting to retrieve sequences from database.
+2024-08-12 14:22:33,256 : INFO : Sequences have been retrieved from database.
+2024-08-12 14:22:33,266 : INFO : Starting to tokenize the sequences.
+2024-08-12 14:22:34,058 : INFO : Tokenization is finished.
+2024-08-12 14:22:34,127 : INFO : Results after 0.0000% iterations of epoch 2:
+2024-08-12 14:22:34,127 : INFO : Discriminator loss: 0.5790
+2024-08-12 14:22:34,127 : INFO : Gradient norm: 0.6443
+2024-08-12 14:22:34,127 : INFO : Current learning rate: 6.458333333333334e-05
+2024-08-12 14:22:34,127 : INFO : Accuracy for replacement task: 0.8024
+2024-08-12 14:22:34,127 : INFO : Precision for replacement task: 0.0000
+2024-08-12 14:22:34,127 : INFO : Recall for replacement task: 0.0000
+2024-08-12 14:22:34,127 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 14:22:35,145 : INFO : Starting to retrieve sequences from database.
+2024-08-12 14:22:35,150 : INFO : Sequences have been retrieved from database.
+2024-08-12 14:22:35,160 : INFO : Starting to tokenize the sequences.
+2024-08-12 14:22:35,949 : INFO : Tokenization is finished.
+2024-08-12 14:22:36,018 : INFO : Results after 0.0000% iterations of epoch 3:
+2024-08-12 14:22:36,018 : INFO : Discriminator loss: 0.5487
+2024-08-12 14:22:36,018 : INFO : Gradient norm: 0.6189
+2024-08-12 14:22:36,018 : INFO : Current learning rate: 3.125e-05
+2024-08-12 14:22:36,018 : INFO : Accuracy for replacement task: 0.8038
+2024-08-12 14:22:36,018 : INFO : Precision for replacement task: 0.0000
+2024-08-12 14:22:36,018 : INFO : Recall for replacement task: 0.0000
+2024-08-12 14:22:36,018 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 14:22:37,038 : INFO : ...training is finished, saving results and model.
+2024-08-12 14:22:37,327 : INFO : Results and model are saved.

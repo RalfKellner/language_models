@@ -1,10 +1,13 @@
 from finlm.chunking import Form10KChunker, Form8KChunker, EarningCallChunker, TRNewsChunker, rename_table, shuffle_and_create_new_table
 import sqlite3
+import os
 import logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 chunk_size = 200
-database_out = "chunked_sequences.sqlite"
+database_out = "/data/language_models/test_outputs/01_chunking_results/chunked_sequences.sqlite"
+if os.path.exists(database_out):
+    raise ValueError("Database for chunked sequences already exists, empty test folder or rename database.")
 
 logging.info("Start with 10k chunking.")
 form_10k_chunker = Form10KChunker("/data/edgar/filings_data/filings.sqlite", "form_tenk", limit = 5)

@@ -1,0 +1,41 @@
+2024-08-12 14:19:43,513 : INFO : Counting the number of sequences in the database...
+2024-08-12 14:20:05,852 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 14:20:05,852 : INFO : The database includes 4 sheets with the following names and number of sequences:
+2024-08-12 14:20:05,852 : INFO : form_tenk: 33316659
+2024-08-12 14:20:05,852 : INFO : form_eightk: 13139781
+2024-08-12 14:20:05,852 : INFO : earning_calls: 5706841
+2024-08-12 14:20:05,852 : INFO : tr_news: 21717556
+2024-08-12 14:20:05,852 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 14:20:06,215 : INFO : Starting with training...
+2024-08-12 14:20:06,215 : INFO : Starting to retrieve sequences from database.
+2024-08-12 14:20:06,218 : INFO : Sequences have been retrieved from database.
+2024-08-12 14:20:06,230 : INFO : Starting to tokenize the sequences.
+2024-08-12 14:20:07,032 : INFO : Tokenization is finished.
+2024-08-12 14:20:07,653 : INFO : Results after 0.0000% iterations of epoch 1:
+2024-08-12 14:20:07,653 : INFO : MLM loss: 10.8245
+2024-08-12 14:20:07,653 : INFO : Gradient norm: 1.0000
+2024-08-12 14:20:07,653 : INFO : Current learning rate: 9.791666666666667e-05
+2024-08-12 14:20:07,653 : INFO : Accuracy for masking task: 0.0003
+2024-08-12 14:20:07,653 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 14:20:10,731 : INFO : Starting to retrieve sequences from database.
+2024-08-12 14:20:10,735 : INFO : Sequences have been retrieved from database.
+2024-08-12 14:20:10,746 : INFO : Starting to tokenize the sequences.
+2024-08-12 14:20:11,542 : INFO : Tokenization is finished.
+2024-08-12 14:20:11,748 : INFO : Results after 0.0000% iterations of epoch 2:
+2024-08-12 14:20:11,749 : INFO : MLM loss: 10.6404
+2024-08-12 14:20:11,749 : INFO : Gradient norm: 0.8206
+2024-08-12 14:20:11,749 : INFO : Current learning rate: 6.458333333333334e-05
+2024-08-12 14:20:11,749 : INFO : Accuracy for masking task: 0.0139
+2024-08-12 14:20:11,749 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 14:20:14,829 : INFO : Starting to retrieve sequences from database.
+2024-08-12 14:20:14,834 : INFO : Sequences have been retrieved from database.
+2024-08-12 14:20:14,845 : INFO : Starting to tokenize the sequences.
+2024-08-12 14:20:15,638 : INFO : Tokenization is finished.
+2024-08-12 14:20:15,844 : INFO : Results after 0.0000% iterations of epoch 3:
+2024-08-12 14:20:15,844 : INFO : MLM loss: 10.5650
+2024-08-12 14:20:15,844 : INFO : Gradient norm: 0.7930
+2024-08-12 14:20:15,844 : INFO : Current learning rate: 3.125e-05
+2024-08-12 14:20:15,844 : INFO : Accuracy for masking task: 0.0234
+2024-08-12 14:20:15,844 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 14:20:18,924 : INFO : ...training is finished, saving results and model.
+2024-08-12 14:20:19,149 : INFO : Results and model are saved.
