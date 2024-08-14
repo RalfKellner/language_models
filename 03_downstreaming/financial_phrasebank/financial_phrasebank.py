@@ -2,9 +2,9 @@ from datasets import load_dataset
 import torch
 from finlm.downstreaming import FinetuningEncoderClassifier
 from finlm.config import FintuningConfig
-from transformers import RobertaForSequenceClassification
+from transformers import ElectraForSequenceClassification #, RobertaForSequenceClassification
 
-model_loader = lambda model_path, num_labels, classifier_dropout: RobertaForSequenceClassification.from_pretrained(model_path, num_labels = num_labels, classifier_dropout = classifier_dropout) 
+model_loader = lambda model_path, num_labels, classifier_dropout: ElectraForSequenceClassification.from_pretrained(model_path, num_labels = num_labels, classifier_dropout = classifier_dropout) 
 
 if not(torch.cuda.is_available()):
     print("GPU seems to be unavailable.")
@@ -13,6 +13,7 @@ else:
 
 dataset = load_dataset("financial_phrasebank", 'sentences_66agree')
 dataset = dataset["train"]
+dataset = dataset.shuffle(42)
 
 config = FintuningConfig.from_yaml("financial_phrasebank_config.yaml")
 

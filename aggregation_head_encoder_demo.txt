@@ -1,0 +1,584 @@
+2024-08-13 16:55:28,837 : INFO : Preparing aggregated datasets
+2024-08-13 16:55:31,017 : INFO : Initializing model
+Some weights of ElectraForAggregatePredictionWithAttention were not initialized from the model checkpoint at google/electra-small-discriminator and are newly initialized: ['head.attention_output.LayerNorm.bias', 'head.attention_output.LayerNorm.weight', 'head.attention_output.dense.bias', 'head.attention_output.dense.weight', 'head.attention_output.out_projection.bias', 'head.attention_output.out_projection.weight', 'head.simple_attention.key.bias', 'head.simple_attention.key.weight', 'head.simple_attention.query.bias', 'head.simple_attention.query.weight', 'head.simple_attention.value.bias', 'head.simple_attention.value.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-13 16:55:31,791 : INFO : Starting training...
+2024-08-13 16:55:32,223 : INFO : Current training batch loss: 0.6573 in epoch 1
+2024-08-13 16:55:34,015 : INFO : Current training batch loss: 0.4757 in epoch 1
+2024-08-13 16:55:35,798 : INFO : Current training batch loss: 0.5994 in epoch 1
+2024-08-13 16:55:37,548 : INFO : Current training batch loss: 0.6139 in epoch 1
+2024-08-13 16:55:39,347 : INFO : Current training batch loss: 0.6636 in epoch 1
+2024-08-13 16:55:41,114 : INFO : Current training batch loss: 0.7393 in epoch 1
+2024-08-13 16:55:42,860 : INFO : Current training batch loss: 0.5845 in epoch 1
+2024-08-13 16:55:44,643 : INFO : Current training batch loss: 0.6788 in epoch 1
+2024-08-13 16:55:46,403 : INFO : Current training batch loss: 0.6701 in epoch 1
+2024-08-13 16:55:48,217 : INFO : Current training batch loss: 0.7142 in epoch 1
+2024-08-13 16:55:50,010 : INFO : Current training batch loss: 0.6362 in epoch 1
+2024-08-13 16:55:51,771 : INFO : Current training batch loss: 0.6457 in epoch 1
+2024-08-13 16:55:53,594 : INFO : Current training batch loss: 0.6035 in epoch 1
+2024-08-13 16:55:55,380 : INFO : Current training batch loss: 0.6541 in epoch 1
+2024-08-13 16:55:57,137 : INFO : Current training batch loss: 0.6489 in epoch 1
+2024-08-13 16:55:58,918 : INFO : Current training batch loss: 0.6208 in epoch 1
+2024-08-13 16:56:00,731 : INFO : Current training batch loss: 0.6949 in epoch 1
+2024-08-13 16:56:02,527 : INFO : Current training batch loss: 0.5003 in epoch 1
+2024-08-13 16:56:04,301 : INFO : Current training batch loss: 0.6291 in epoch 1
+2024-08-13 16:56:06,089 : INFO : Current training batch loss: 0.4779 in epoch 1
+2024-08-13 16:56:07,874 : INFO : Current training batch loss: 0.5256 in epoch 1
+2024-08-13 16:56:09,668 : INFO : Current training batch loss: 0.3655 in epoch 1
+2024-08-13 16:56:11,477 : INFO : Current training batch loss: 0.6716 in epoch 1
+2024-08-13 16:56:13,257 : INFO : Current training batch loss: 0.3172 in epoch 1
+2024-08-13 16:56:15,076 : INFO : Current training batch loss: 0.5260 in epoch 1
+2024-08-13 16:56:16,881 : INFO : Current training batch loss: 0.5813 in epoch 1
+2024-08-13 16:56:18,686 : INFO : Current training batch loss: 0.5632 in epoch 1
+2024-08-13 16:56:20,458 : INFO : Current training batch loss: 0.4631 in epoch 1
+2024-08-13 16:56:22,289 : INFO : Current training batch loss: 0.5010 in epoch 1
+2024-08-13 16:56:24,065 : INFO : Current training batch loss: 0.3801 in epoch 1
+2024-08-13 16:56:25,866 : INFO : Current training batch loss: 0.4146 in epoch 1
+2024-08-13 16:56:27,643 : INFO : Current training batch loss: 0.3871 in epoch 1
+2024-08-13 16:56:29,420 : INFO : Current training batch loss: 0.3496 in epoch 1
+2024-08-13 16:56:31,206 : INFO : Current training batch loss: 0.3297 in epoch 1
+2024-08-13 16:56:33,058 : INFO : Current training batch loss: 0.4414 in epoch 1
+2024-08-13 16:56:34,887 : INFO : Current training batch loss: 0.2568 in epoch 1
+2024-08-13 16:56:36,714 : INFO : Current training batch loss: 0.5630 in epoch 1
+2024-08-13 16:56:38,499 : INFO : Current training batch loss: 0.1344 in epoch 1
+2024-08-13 16:56:40,287 : INFO : Current training batch loss: 0.2249 in epoch 1
+2024-08-13 16:56:42,106 : INFO : Current training batch loss: 0.2223 in epoch 1
+2024-08-13 16:56:43,899 : INFO : Current training batch loss: 0.2581 in epoch 1
+2024-08-13 16:56:45,745 : INFO : Current training batch loss: 0.5184 in epoch 1
+2024-08-13 16:56:47,549 : INFO : Current training batch loss: 0.1871 in epoch 1
+2024-08-13 16:56:49,345 : INFO : Current training batch loss: 0.2702 in epoch 1
+2024-08-13 16:56:51,150 : INFO : Current training batch loss: 0.2824 in epoch 1
+2024-08-13 16:56:52,964 : INFO : Current training batch loss: 0.3606 in epoch 1
+2024-08-13 16:56:54,774 : INFO : Current training batch loss: 0.2302 in epoch 1
+2024-08-13 16:56:56,593 : INFO : Current training batch loss: 0.1757 in epoch 1
+2024-08-13 16:56:58,428 : INFO : Current training batch loss: 0.1583 in epoch 1
+2024-08-13 16:57:00,236 : INFO : Current training batch loss: 0.2303 in epoch 1
+2024-08-13 16:57:02,037 : INFO : Current training batch loss: 0.3456 in epoch 1
+2024-08-13 16:57:03,864 : INFO : Current training batch loss: 0.3105 in epoch 1
+2024-08-13 16:57:05,672 : INFO : Current training batch loss: 0.4961 in epoch 1
+2024-08-13 16:57:07,491 : INFO : Current training batch loss: 0.2933 in epoch 1
+2024-08-13 16:57:09,358 : INFO : Current training batch loss: 0.2384 in epoch 1
+2024-08-13 16:57:11,172 : INFO : Current training batch loss: 0.1967 in epoch 1
+2024-08-13 16:57:12,989 : INFO : Current training batch loss: 0.2158 in epoch 1
+2024-08-13 16:57:14,783 : INFO : Current training batch loss: 0.2029 in epoch 1
+2024-08-13 16:57:16,618 : INFO : Current training batch loss: 0.1268 in epoch 1
+2024-08-13 16:57:18,402 : INFO : Current training batch loss: 0.1435 in epoch 1
+2024-08-13 16:57:20,193 : INFO : Current training batch loss: 0.8070 in epoch 1
+2024-08-13 16:57:21,971 : INFO : Current training batch loss: 0.1795 in epoch 1
+2024-08-13 16:57:23,797 : INFO : Current training batch loss: 0.3333 in epoch 1
+2024-08-13 16:57:25,625 : INFO : Current training batch loss: 0.3753 in epoch 1
+2024-08-13 16:57:27,421 : INFO : Current training batch loss: 0.3788 in epoch 1
+2024-08-13 16:57:29,258 : INFO : Current training batch loss: 0.2361 in epoch 1
+2024-08-13 16:57:31,074 : INFO : Current training batch loss: 0.4782 in epoch 1
+2024-08-13 16:57:32,962 : INFO : Current training batch loss: 0.3556 in epoch 1
+2024-08-13 16:57:34,790 : INFO : Current training batch loss: 0.1850 in epoch 1
+2024-08-13 16:57:36,590 : INFO : Current training batch loss: 0.3691 in epoch 1
+2024-08-13 16:57:38,394 : INFO : Current training batch loss: 0.2068 in epoch 1
+2024-08-13 16:57:40,226 : INFO : Current training batch loss: 0.3597 in epoch 1
+2024-08-13 16:57:42,066 : INFO : Current training batch loss: 0.1436 in epoch 1
+2024-08-13 16:57:43,881 : INFO : Current training batch loss: 0.4341 in epoch 1
+2024-08-13 16:57:45,700 : INFO : Current training batch loss: 0.2995 in epoch 1
+2024-08-13 16:57:47,476 : INFO : Current training batch loss: 0.3487 in epoch 1
+2024-08-13 16:57:49,308 : INFO : Current training batch loss: 0.1474 in epoch 1
+2024-08-13 16:57:51,148 : INFO : Current training batch loss: 0.0323 in epoch 1
+2024-08-13 16:57:52,954 : INFO : Current training batch loss: 0.3925 in epoch 1
+2024-08-13 16:57:54,763 : INFO : Current training batch loss: 0.0553 in epoch 1
+2024-08-13 16:57:56,519 : INFO : Current training batch loss: 0.5490 in epoch 1
+2024-08-13 16:57:58,333 : INFO : Current training batch loss: 0.2702 in epoch 1
+2024-08-13 16:58:00,123 : INFO : Current training batch loss: 0.4732 in epoch 1
+2024-08-13 16:58:01,961 : INFO : Current training batch loss: 0.2350 in epoch 1
+2024-08-13 16:58:03,754 : INFO : Current training batch loss: 0.5718 in epoch 1
+2024-08-13 16:58:05,571 : INFO : Current training batch loss: 0.1515 in epoch 1
+2024-08-13 16:58:07,352 : INFO : Current training batch loss: 0.3127 in epoch 1
+2024-08-13 16:58:09,144 : INFO : Current training batch loss: 0.6434 in epoch 1
+2024-08-13 16:58:11,065 : INFO : Current training batch loss: 0.1149 in epoch 1
+2024-08-13 16:58:12,869 : INFO : Current training batch loss: 0.2044 in epoch 1
+2024-08-13 16:58:14,685 : INFO : Current training batch loss: 0.4985 in epoch 1
+2024-08-13 16:58:16,476 : INFO : Current training batch loss: 0.0860 in epoch 1
+2024-08-13 16:58:18,317 : INFO : Current training batch loss: 0.6799 in epoch 1
+2024-08-13 16:58:20,114 : INFO : Current training batch loss: 0.1896 in epoch 1
+2024-08-13 16:58:21,921 : INFO : Current training batch loss: 0.1094 in epoch 1
+2024-08-13 16:58:23,777 : INFO : Current training batch loss: 0.0666 in epoch 1
+2024-08-13 16:58:25,587 : INFO : Current training batch loss: 0.3926 in epoch 1
+2024-08-13 16:58:27,403 : INFO : Current training batch loss: 0.3657 in epoch 1
+2024-08-13 16:58:29,205 : INFO : Current training batch loss: 0.9929 in epoch 1
+2024-08-13 16:58:31,065 : INFO : Current training batch loss: 0.3921 in epoch 1
+2024-08-13 16:58:31,472 : INFO : Epoch finished, average loss over training batches: 0.0309
+2024-08-13 16:58:31,476 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 16:58:31,477 : INFO : Training metrics:
+2024-08-13 16:58:31,477 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 16:58:31,501 : INFO : Training accuracy: 0.8155
+2024-08-13 16:58:31,501 : INFO : Training precision: 0.7943
+2024-08-13 16:58:31,501 : INFO : Training recall: 0.8515
+2024-08-13 16:58:31,501 : INFO : Training f1: 0.8219
+2024-08-13 16:59:58,249 : INFO : Average loss over validation batches: 0.0211
+2024-08-13 16:59:58,254 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 16:59:58,254 : INFO : Validation metrics:
+2024-08-13 16:59:58,254 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 16:59:58,266 : INFO : Validation accuracy: 0.8925
+2024-08-13 16:59:58,266 : INFO : Validation precision: 0.8390
+2024-08-13 16:59:58,266 : INFO : Validation recall: 0.9714
+2024-08-13 16:59:58,266 : INFO : Validation f1: 0.9004
+2024-08-13 16:59:59,632 : INFO : Current training batch loss: 0.3768 in epoch 2
+2024-08-13 17:00:01,470 : INFO : Current training batch loss: 0.2696 in epoch 2
+2024-08-13 17:00:03,251 : INFO : Current training batch loss: 0.3589 in epoch 2
+2024-08-13 17:00:05,057 : INFO : Current training batch loss: 0.1644 in epoch 2
+2024-08-13 17:00:06,880 : INFO : Current training batch loss: 0.2723 in epoch 2
+2024-08-13 17:00:08,659 : INFO : Current training batch loss: 0.5431 in epoch 2
+2024-08-13 17:00:10,450 : INFO : Current training batch loss: 0.0915 in epoch 2
+2024-08-13 17:00:12,260 : INFO : Current training batch loss: 0.8988 in epoch 2
+2024-08-13 17:00:14,078 : INFO : Current training batch loss: 0.2112 in epoch 2
+2024-08-13 17:00:15,921 : INFO : Current training batch loss: 0.2814 in epoch 2
+2024-08-13 17:00:17,713 : INFO : Current training batch loss: 0.5192 in epoch 2
+2024-08-13 17:00:19,532 : INFO : Current training batch loss: 0.0460 in epoch 2
+2024-08-13 17:00:21,368 : INFO : Current training batch loss: 0.8510 in epoch 2
+2024-08-13 17:00:23,151 : INFO : Current training batch loss: 0.1440 in epoch 2
+2024-08-13 17:00:24,958 : INFO : Current training batch loss: 0.4366 in epoch 2
+2024-08-13 17:00:26,796 : INFO : Current training batch loss: 0.5350 in epoch 2
+2024-08-13 17:00:28,597 : INFO : Current training batch loss: 0.1811 in epoch 2
+2024-08-13 17:00:30,401 : INFO : Current training batch loss: 0.5003 in epoch 2
+2024-08-13 17:00:32,210 : INFO : Current training batch loss: 0.0815 in epoch 2
+2024-08-13 17:00:33,991 : INFO : Current training batch loss: 0.3123 in epoch 2
+2024-08-13 17:00:35,790 : INFO : Current training batch loss: 0.2391 in epoch 2
+2024-08-13 17:00:37,633 : INFO : Current training batch loss: 0.3255 in epoch 2
+2024-08-13 17:00:39,421 : INFO : Current training batch loss: 0.3364 in epoch 2
+2024-08-13 17:00:41,262 : INFO : Current training batch loss: 0.2664 in epoch 2
+2024-08-13 17:00:43,059 : INFO : Current training batch loss: 0.5927 in epoch 2
+2024-08-13 17:00:44,899 : INFO : Current training batch loss: 0.0562 in epoch 2
+2024-08-13 17:00:46,691 : INFO : Current training batch loss: 0.1459 in epoch 2
+2024-08-13 17:00:48,506 : INFO : Current training batch loss: 0.1382 in epoch 2
+2024-08-13 17:00:50,298 : INFO : Current training batch loss: 0.0590 in epoch 2
+2024-08-13 17:00:52,107 : INFO : Current training batch loss: 0.2002 in epoch 2
+2024-08-13 17:00:53,915 : INFO : Current training batch loss: 0.3086 in epoch 2
+2024-08-13 17:00:55,696 : INFO : Current training batch loss: 0.0481 in epoch 2
+2024-08-13 17:00:57,499 : INFO : Current training batch loss: 0.1321 in epoch 2
+2024-08-13 17:00:59,324 : INFO : Current training batch loss: 0.0763 in epoch 2
+2024-08-13 17:01:01,155 : INFO : Current training batch loss: 0.1775 in epoch 2
+2024-08-13 17:01:03,005 : INFO : Current training batch loss: 0.5175 in epoch 2
+2024-08-13 17:01:04,812 : INFO : Current training batch loss: 0.2283 in epoch 2
+2024-08-13 17:01:06,591 : INFO : Current training batch loss: 0.3431 in epoch 2
+2024-08-13 17:01:08,429 : INFO : Current training batch loss: 0.1454 in epoch 2
+2024-08-13 17:01:10,229 : INFO : Current training batch loss: 0.0261 in epoch 2
+2024-08-13 17:01:12,071 : INFO : Current training batch loss: 0.0739 in epoch 2
+2024-08-13 17:01:13,882 : INFO : Current training batch loss: 0.7566 in epoch 2
+2024-08-13 17:01:15,693 : INFO : Current training batch loss: 0.1554 in epoch 2
+2024-08-13 17:01:17,459 : INFO : Current training batch loss: 0.1218 in epoch 2
+2024-08-13 17:01:19,277 : INFO : Current training batch loss: 0.1757 in epoch 2
+2024-08-13 17:01:21,114 : INFO : Current training batch loss: 0.1243 in epoch 2
+2024-08-13 17:01:22,948 : INFO : Current training batch loss: 0.2329 in epoch 2
+2024-08-13 17:01:24,779 : INFO : Current training batch loss: 0.0566 in epoch 2
+2024-08-13 17:01:26,586 : INFO : Current training batch loss: 0.5272 in epoch 2
+2024-08-13 17:01:28,408 : INFO : Current training batch loss: 0.2643 in epoch 2
+2024-08-13 17:01:30,208 : INFO : Current training batch loss: 0.5651 in epoch 2
+2024-08-13 17:01:32,033 : INFO : Current training batch loss: 0.0340 in epoch 2
+2024-08-13 17:01:33,851 : INFO : Current training batch loss: 0.0469 in epoch 2
+2024-08-13 17:01:35,703 : INFO : Current training batch loss: 0.0282 in epoch 2
+2024-08-13 17:01:37,547 : INFO : Current training batch loss: 0.4327 in epoch 2
+2024-08-13 17:01:39,338 : INFO : Current training batch loss: 0.5371 in epoch 2
+2024-08-13 17:01:41,153 : INFO : Current training batch loss: 0.0573 in epoch 2
+2024-08-13 17:01:42,969 : INFO : Current training batch loss: 0.1385 in epoch 2
+2024-08-13 17:01:44,774 : INFO : Current training batch loss: 0.0547 in epoch 2
+2024-08-13 17:01:46,559 : INFO : Current training batch loss: 0.0294 in epoch 2
+2024-08-13 17:01:48,346 : INFO : Current training batch loss: 0.3695 in epoch 2
+2024-08-13 17:01:50,174 : INFO : Current training batch loss: 0.1051 in epoch 2
+2024-08-13 17:01:51,982 : INFO : Current training batch loss: 0.1650 in epoch 2
+2024-08-13 17:01:53,783 : INFO : Current training batch loss: 0.0054 in epoch 2
+2024-08-13 17:01:55,596 : INFO : Current training batch loss: 0.0645 in epoch 2
+2024-08-13 17:01:57,459 : INFO : Current training batch loss: 0.0391 in epoch 2
+2024-08-13 17:01:59,299 : INFO : Current training batch loss: 0.1386 in epoch 2
+2024-08-13 17:02:01,169 : INFO : Current training batch loss: 0.4415 in epoch 2
+2024-08-13 17:02:02,965 : INFO : Current training batch loss: 0.0373 in epoch 2
+2024-08-13 17:02:04,776 : INFO : Current training batch loss: 0.0187 in epoch 2
+2024-08-13 17:02:06,606 : INFO : Current training batch loss: 0.2694 in epoch 2
+2024-08-13 17:02:08,465 : INFO : Current training batch loss: 0.0239 in epoch 2
+2024-08-13 17:02:10,265 : INFO : Current training batch loss: 0.0110 in epoch 2
+2024-08-13 17:02:12,087 : INFO : Current training batch loss: 0.0626 in epoch 2
+2024-08-13 17:02:13,872 : INFO : Current training batch loss: 0.1655 in epoch 2
+2024-08-13 17:02:15,685 : INFO : Current training batch loss: 0.0202 in epoch 2
+2024-08-13 17:02:17,552 : INFO : Current training batch loss: 0.1567 in epoch 2
+2024-08-13 17:02:19,353 : INFO : Current training batch loss: 0.0482 in epoch 2
+2024-08-13 17:02:21,170 : INFO : Current training batch loss: 0.7296 in epoch 2
+2024-08-13 17:02:22,941 : INFO : Current training batch loss: 0.0376 in epoch 2
+2024-08-13 17:02:24,739 : INFO : Current training batch loss: 0.0958 in epoch 2
+2024-08-13 17:02:26,554 : INFO : Current training batch loss: 0.0619 in epoch 2
+2024-08-13 17:02:28,356 : INFO : Current training batch loss: 0.1486 in epoch 2
+2024-08-13 17:02:30,183 : INFO : Current training batch loss: 0.0533 in epoch 2
+2024-08-13 17:02:31,992 : INFO : Current training batch loss: 0.1969 in epoch 2
+2024-08-13 17:02:33,785 : INFO : Current training batch loss: 0.0204 in epoch 2
+2024-08-13 17:02:35,581 : INFO : Current training batch loss: 0.0347 in epoch 2
+2024-08-13 17:02:37,369 : INFO : Current training batch loss: 0.0128 in epoch 2
+2024-08-13 17:02:39,185 : INFO : Current training batch loss: 0.0102 in epoch 2
+2024-08-13 17:02:40,992 : INFO : Current training batch loss: 0.4321 in epoch 2
+2024-08-13 17:02:42,808 : INFO : Current training batch loss: 0.2003 in epoch 2
+2024-08-13 17:02:44,622 : INFO : Current training batch loss: 0.0434 in epoch 2
+2024-08-13 17:02:46,430 : INFO : Current training batch loss: 0.1107 in epoch 2
+2024-08-13 17:02:48,243 : INFO : Current training batch loss: 0.6227 in epoch 2
+2024-08-13 17:02:50,088 : INFO : Current training batch loss: 0.2594 in epoch 2
+2024-08-13 17:02:51,916 : INFO : Current training batch loss: 0.0134 in epoch 2
+2024-08-13 17:02:53,733 : INFO : Current training batch loss: 0.0956 in epoch 2
+2024-08-13 17:02:55,521 : INFO : Current training batch loss: 0.0944 in epoch 2
+2024-08-13 17:02:57,357 : INFO : Current training batch loss: 0.0198 in epoch 2
+2024-08-13 17:02:58,327 : INFO : Epoch finished, average loss over training batches: 0.0186
+2024-08-13 17:02:58,332 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 17:02:58,332 : INFO : Training metrics:
+2024-08-13 17:02:58,332 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 17:02:58,357 : INFO : Training accuracy: 0.9140
+2024-08-13 17:02:58,357 : INFO : Training precision: 0.9134
+2024-08-13 17:02:58,357 : INFO : Training recall: 0.9147
+2024-08-13 17:02:58,357 : INFO : Training f1: 0.9141
+2024-08-13 17:04:25,312 : INFO : Average loss over validation batches: 0.0337
+2024-08-13 17:04:25,317 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 17:04:25,317 : INFO : Validation metrics:
+2024-08-13 17:04:25,317 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 17:04:25,330 : INFO : Validation accuracy: 0.8629
+2024-08-13 17:04:25,330 : INFO : Validation precision: 0.7940
+2024-08-13 17:04:25,330 : INFO : Validation recall: 0.9800
+2024-08-13 17:04:25,330 : INFO : Validation f1: 0.8773
+2024-08-13 17:04:26,134 : INFO : Current training batch loss: 0.0578 in epoch 3
+2024-08-13 17:04:27,959 : INFO : Current training batch loss: 0.3803 in epoch 3
+2024-08-13 17:04:29,761 : INFO : Current training batch loss: 0.0380 in epoch 3
+2024-08-13 17:04:31,559 : INFO : Current training batch loss: 0.0505 in epoch 3
+2024-08-13 17:04:33,381 : INFO : Current training batch loss: 0.1251 in epoch 3
+2024-08-13 17:04:35,146 : INFO : Current training batch loss: 0.0172 in epoch 3
+2024-08-13 17:04:36,942 : INFO : Current training batch loss: 0.3405 in epoch 3
+2024-08-13 17:04:38,740 : INFO : Current training batch loss: 0.0751 in epoch 3
+2024-08-13 17:04:40,543 : INFO : Current training batch loss: 0.0661 in epoch 3
+2024-08-13 17:04:42,362 : INFO : Current training batch loss: 0.0037 in epoch 3
+2024-08-13 17:04:44,167 : INFO : Current training batch loss: 0.4160 in epoch 3
+2024-08-13 17:04:45,949 : INFO : Current training batch loss: 0.1511 in epoch 3
+2024-08-13 17:04:47,805 : INFO : Current training batch loss: 0.0255 in epoch 3
+2024-08-13 17:04:49,572 : INFO : Current training batch loss: 0.0622 in epoch 3
+2024-08-13 17:04:51,357 : INFO : Current training batch loss: 0.0807 in epoch 3
+2024-08-13 17:04:53,182 : INFO : Current training batch loss: 0.0578 in epoch 3
+2024-08-13 17:04:54,985 : INFO : Current training batch loss: 0.2532 in epoch 3
+2024-08-13 17:04:56,777 : INFO : Current training batch loss: 0.0206 in epoch 3
+2024-08-13 17:04:58,605 : INFO : Current training batch loss: 0.2022 in epoch 3
+2024-08-13 17:05:00,368 : INFO : Current training batch loss: 1.0284 in epoch 3
+2024-08-13 17:05:02,167 : INFO : Current training batch loss: 0.0055 in epoch 3
+2024-08-13 17:05:03,968 : INFO : Current training batch loss: 0.1044 in epoch 3
+2024-08-13 17:05:05,769 : INFO : Current training batch loss: 0.1641 in epoch 3
+2024-08-13 17:05:07,610 : INFO : Current training batch loss: 0.0631 in epoch 3
+2024-08-13 17:05:09,404 : INFO : Current training batch loss: 0.2708 in epoch 3
+2024-08-13 17:05:11,215 : INFO : Current training batch loss: 0.1740 in epoch 3
+2024-08-13 17:05:13,013 : INFO : Current training batch loss: 0.1191 in epoch 3
+2024-08-13 17:05:14,821 : INFO : Current training batch loss: 0.2061 in epoch 3
+2024-08-13 17:05:16,627 : INFO : Current training batch loss: 0.6329 in epoch 3
+2024-08-13 17:05:18,428 : INFO : Current training batch loss: 0.0059 in epoch 3
+2024-08-13 17:05:20,217 : INFO : Current training batch loss: 0.2236 in epoch 3
+2024-08-13 17:05:21,995 : INFO : Current training batch loss: 0.1266 in epoch 3
+2024-08-13 17:05:23,785 : INFO : Current training batch loss: 0.0135 in epoch 3
+2024-08-13 17:05:25,609 : INFO : Current training batch loss: 0.0100 in epoch 3
+2024-08-13 17:05:27,414 : INFO : Current training batch loss: 0.2138 in epoch 3
+2024-08-13 17:05:29,264 : INFO : Current training batch loss: 0.0441 in epoch 3
+2024-08-13 17:05:31,067 : INFO : Current training batch loss: 0.0703 in epoch 3
+2024-08-13 17:05:32,843 : INFO : Current training batch loss: 0.0062 in epoch 3
+2024-08-13 17:05:34,663 : INFO : Current training batch loss: 0.0210 in epoch 3
+2024-08-13 17:05:36,461 : INFO : Current training batch loss: 0.0340 in epoch 3
+2024-08-13 17:05:38,240 : INFO : Current training batch loss: 0.5599 in epoch 3
+2024-08-13 17:05:40,106 : INFO : Current training batch loss: 0.0069 in epoch 3
+2024-08-13 17:05:41,894 : INFO : Current training batch loss: 0.0128 in epoch 3
+2024-08-13 17:05:43,666 : INFO : Current training batch loss: 0.0751 in epoch 3
+2024-08-13 17:05:45,473 : INFO : Current training batch loss: 0.3152 in epoch 3
+2024-08-13 17:05:47,259 : INFO : Current training batch loss: 0.2173 in epoch 3
+2024-08-13 17:05:49,097 : INFO : Current training batch loss: 0.4807 in epoch 3
+2024-08-13 17:05:50,896 : INFO : Current training batch loss: 0.3386 in epoch 3
+2024-08-13 17:05:52,694 : INFO : Current training batch loss: 1.1198 in epoch 3
+2024-08-13 17:05:54,506 : INFO : Current training batch loss: 0.0030 in epoch 3
+2024-08-13 17:05:56,314 : INFO : Current training batch loss: 0.0129 in epoch 3
+2024-08-13 17:05:58,130 : INFO : Current training batch loss: 0.2225 in epoch 3
+2024-08-13 17:05:59,910 : INFO : Current training batch loss: 0.0889 in epoch 3
+2024-08-13 17:06:01,741 : INFO : Current training batch loss: 0.5524 in epoch 3
+2024-08-13 17:06:03,607 : INFO : Current training batch loss: 0.1496 in epoch 3
+2024-08-13 17:06:05,389 : INFO : Current training batch loss: 0.0194 in epoch 3
+2024-08-13 17:06:07,179 : INFO : Current training batch loss: 0.0032 in epoch 3
+2024-08-13 17:06:08,974 : INFO : Current training batch loss: 0.0166 in epoch 3
+2024-08-13 17:06:10,790 : INFO : Current training batch loss: 0.0206 in epoch 3
+2024-08-13 17:06:12,555 : INFO : Current training batch loss: 1.3063 in epoch 3
+2024-08-13 17:06:14,349 : INFO : Current training batch loss: 0.0826 in epoch 3
+2024-08-13 17:06:16,118 : INFO : Current training batch loss: 0.0024 in epoch 3
+2024-08-13 17:06:17,925 : INFO : Current training batch loss: 0.0804 in epoch 3
+2024-08-13 17:06:19,736 : INFO : Current training batch loss: 0.0914 in epoch 3
+2024-08-13 17:06:21,538 : INFO : Current training batch loss: 0.0804 in epoch 3
+2024-08-13 17:06:23,392 : INFO : Current training batch loss: 0.0645 in epoch 3
+2024-08-13 17:06:25,160 : INFO : Current training batch loss: 0.3174 in epoch 3
+2024-08-13 17:06:27,059 : INFO : Current training batch loss: 0.0633 in epoch 3
+2024-08-13 17:06:28,855 : INFO : Current training batch loss: 0.0540 in epoch 3
+2024-08-13 17:06:30,629 : INFO : Current training batch loss: 0.3403 in epoch 3
+2024-08-13 17:06:32,482 : INFO : Current training batch loss: 0.0423 in epoch 3
+2024-08-13 17:06:34,275 : INFO : Current training batch loss: 0.0152 in epoch 3
+2024-08-13 17:06:36,114 : INFO : Current training batch loss: 0.0599 in epoch 3
+2024-08-13 17:06:37,913 : INFO : Current training batch loss: 0.0408 in epoch 3
+2024-08-13 17:06:39,699 : INFO : Current training batch loss: 1.1469 in epoch 3
+2024-08-13 17:06:41,488 : INFO : Current training batch loss: 0.0815 in epoch 3
+2024-08-13 17:06:43,333 : INFO : Current training batch loss: 0.0357 in epoch 3
+2024-08-13 17:06:45,140 : INFO : Current training batch loss: 0.0055 in epoch 3
+2024-08-13 17:06:46,966 : INFO : Current training batch loss: 0.1266 in epoch 3
+2024-08-13 17:06:48,730 : INFO : Current training batch loss: 0.0051 in epoch 3
+2024-08-13 17:06:50,503 : INFO : Current training batch loss: 0.1523 in epoch 3
+2024-08-13 17:06:52,304 : INFO : Current training batch loss: 0.1304 in epoch 3
+2024-08-13 17:06:54,118 : INFO : Current training batch loss: 0.0547 in epoch 3
+2024-08-13 17:06:55,927 : INFO : Current training batch loss: 0.0026 in epoch 3
+2024-08-13 17:06:57,738 : INFO : Current training batch loss: 0.6300 in epoch 3
+2024-08-13 17:06:59,525 : INFO : Current training batch loss: 0.0380 in epoch 3
+2024-08-13 17:07:01,308 : INFO : Current training batch loss: 1.1149 in epoch 3
+2024-08-13 17:07:03,090 : INFO : Current training batch loss: 0.1857 in epoch 3
+2024-08-13 17:07:04,895 : INFO : Current training batch loss: 0.0160 in epoch 3
+2024-08-13 17:07:06,690 : INFO : Current training batch loss: 0.3168 in epoch 3
+2024-08-13 17:07:08,504 : INFO : Current training batch loss: 0.6735 in epoch 3
+2024-08-13 17:07:10,318 : INFO : Current training batch loss: 0.0809 in epoch 3
+2024-08-13 17:07:12,128 : INFO : Current training batch loss: 0.0453 in epoch 3
+2024-08-13 17:07:13,908 : INFO : Current training batch loss: 0.0057 in epoch 3
+2024-08-13 17:07:15,736 : INFO : Current training batch loss: 0.0243 in epoch 3
+2024-08-13 17:07:17,582 : INFO : Current training batch loss: 0.0405 in epoch 3
+2024-08-13 17:07:19,391 : INFO : Current training batch loss: 0.0073 in epoch 3
+2024-08-13 17:07:21,188 : INFO : Current training batch loss: 0.1454 in epoch 3
+2024-08-13 17:07:23,017 : INFO : Current training batch loss: 0.3576 in epoch 3
+2024-08-13 17:07:24,520 : INFO : Epoch finished, average loss over training batches: 0.0137
+2024-08-13 17:07:24,524 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 17:07:24,524 : INFO : Training metrics:
+2024-08-13 17:07:24,524 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 17:07:24,549 : INFO : Training accuracy: 0.9436
+2024-08-13 17:07:24,549 : INFO : Training precision: 0.9432
+2024-08-13 17:07:24,549 : INFO : Training recall: 0.9441
+2024-08-13 17:07:24,549 : INFO : Training f1: 0.9436
+2024-08-13 17:08:51,529 : INFO : Average loss over validation batches: 0.0301
+2024-08-13 17:08:51,534 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 17:08:51,534 : INFO : Validation metrics:
+2024-08-13 17:08:51,534 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 17:08:51,549 : INFO : Validation accuracy: 0.8854
+2024-08-13 17:08:51,549 : INFO : Validation precision: 0.8296
+2024-08-13 17:08:51,549 : INFO : Validation recall: 0.9700
+2024-08-13 17:08:51,549 : INFO : Validation f1: 0.8943
+2024-08-13 17:08:51,813 : INFO : Current training batch loss: 0.0987 in epoch 4
+2024-08-13 17:08:53,629 : INFO : Current training batch loss: 0.6673 in epoch 4
+2024-08-13 17:08:55,458 : INFO : Current training batch loss: 0.0436 in epoch 4
+2024-08-13 17:08:57,226 : INFO : Current training batch loss: 0.8240 in epoch 4
+2024-08-13 17:08:59,055 : INFO : Current training batch loss: 0.0007 in epoch 4
+2024-08-13 17:09:00,842 : INFO : Current training batch loss: 0.0391 in epoch 4
+2024-08-13 17:09:02,622 : INFO : Current training batch loss: 0.2764 in epoch 4
+2024-08-13 17:09:04,426 : INFO : Current training batch loss: 0.0149 in epoch 4
+2024-08-13 17:09:06,210 : INFO : Current training batch loss: 0.0032 in epoch 4
+2024-08-13 17:09:08,041 : INFO : Current training batch loss: 0.0844 in epoch 4
+2024-08-13 17:09:09,866 : INFO : Current training batch loss: 0.0963 in epoch 4
+2024-08-13 17:09:11,635 : INFO : Current training batch loss: 0.0018 in epoch 4
+2024-08-13 17:09:13,493 : INFO : Current training batch loss: 0.0109 in epoch 4
+2024-08-13 17:09:15,275 : INFO : Current training batch loss: 0.0984 in epoch 4
+2024-08-13 17:09:17,055 : INFO : Current training batch loss: 0.0151 in epoch 4
+2024-08-13 17:09:18,877 : INFO : Current training batch loss: 0.0056 in epoch 4
+2024-08-13 17:09:20,683 : INFO : Current training batch loss: 0.0217 in epoch 4
+2024-08-13 17:09:22,498 : INFO : Current training batch loss: 0.0055 in epoch 4
+2024-08-13 17:09:24,295 : INFO : Current training batch loss: 0.0036 in epoch 4
+2024-08-13 17:09:26,094 : INFO : Current training batch loss: 0.1838 in epoch 4
+2024-08-13 17:09:27,900 : INFO : Current training batch loss: 0.2069 in epoch 4
+2024-08-13 17:09:29,716 : INFO : Current training batch loss: 0.0854 in epoch 4
+2024-08-13 17:09:31,527 : INFO : Current training batch loss: 0.0520 in epoch 4
+2024-08-13 17:09:33,346 : INFO : Current training batch loss: 0.0208 in epoch 4
+2024-08-13 17:09:35,153 : INFO : Current training batch loss: 0.1266 in epoch 4
+2024-08-13 17:09:36,979 : INFO : Current training batch loss: 0.0086 in epoch 4
+2024-08-13 17:09:38,798 : INFO : Current training batch loss: 0.0108 in epoch 4
+2024-08-13 17:09:40,585 : INFO : Current training batch loss: 0.3791 in epoch 4
+2024-08-13 17:09:42,411 : INFO : Current training batch loss: 0.1495 in epoch 4
+2024-08-13 17:09:44,205 : INFO : Current training batch loss: 0.5811 in epoch 4
+2024-08-13 17:09:46,018 : INFO : Current training batch loss: 0.0003 in epoch 4
+2024-08-13 17:09:47,794 : INFO : Current training batch loss: 0.0072 in epoch 4
+2024-08-13 17:09:49,588 : INFO : Current training batch loss: 0.0046 in epoch 4
+2024-08-13 17:09:51,380 : INFO : Current training batch loss: 0.1392 in epoch 4
+2024-08-13 17:09:53,247 : INFO : Current training batch loss: 0.0068 in epoch 4
+2024-08-13 17:09:55,095 : INFO : Current training batch loss: 0.4178 in epoch 4
+2024-08-13 17:09:56,924 : INFO : Current training batch loss: 0.3890 in epoch 4
+2024-08-13 17:09:58,717 : INFO : Current training batch loss: 0.0103 in epoch 4
+2024-08-13 17:10:00,528 : INFO : Current training batch loss: 0.0063 in epoch 4
+2024-08-13 17:10:02,360 : INFO : Current training batch loss: 0.0163 in epoch 4
+2024-08-13 17:10:04,143 : INFO : Current training batch loss: 0.0036 in epoch 4
+2024-08-13 17:10:05,982 : INFO : Current training batch loss: 0.0613 in epoch 4
+2024-08-13 17:10:07,778 : INFO : Current training batch loss: 0.0014 in epoch 4
+2024-08-13 17:10:09,587 : INFO : Current training batch loss: 0.1141 in epoch 4
+2024-08-13 17:10:11,417 : INFO : Current training batch loss: 0.3254 in epoch 4
+2024-08-13 17:10:13,209 : INFO : Current training batch loss: 2.0071 in epoch 4
+2024-08-13 17:10:15,043 : INFO : Current training batch loss: 0.4641 in epoch 4
+2024-08-13 17:10:16,824 : INFO : Current training batch loss: 0.0087 in epoch 4
+2024-08-13 17:10:18,662 : INFO : Current training batch loss: 0.2948 in epoch 4
+2024-08-13 17:10:20,474 : INFO : Current training batch loss: 0.1390 in epoch 4
+2024-08-13 17:10:22,274 : INFO : Current training batch loss: 0.1218 in epoch 4
+2024-08-13 17:10:24,080 : INFO : Current training batch loss: 0.0447 in epoch 4
+2024-08-13 17:10:25,882 : INFO : Current training batch loss: 0.0115 in epoch 4
+2024-08-13 17:10:27,692 : INFO : Current training batch loss: 0.2320 in epoch 4
+2024-08-13 17:10:29,568 : INFO : Current training batch loss: 0.0022 in epoch 4
+2024-08-13 17:10:31,390 : INFO : Current training batch loss: 0.1230 in epoch 4
+2024-08-13 17:10:33,213 : INFO : Current training batch loss: 0.4639 in epoch 4
+2024-08-13 17:10:34,994 : INFO : Current training batch loss: 0.0048 in epoch 4
+2024-08-13 17:10:36,836 : INFO : Current training batch loss: 0.0400 in epoch 4
+2024-08-13 17:10:38,621 : INFO : Current training batch loss: 0.0364 in epoch 4
+2024-08-13 17:10:40,435 : INFO : Current training batch loss: 0.4093 in epoch 4
+2024-08-13 17:10:42,206 : INFO : Current training batch loss: 0.0012 in epoch 4
+2024-08-13 17:10:44,038 : INFO : Current training batch loss: 0.0149 in epoch 4
+2024-08-13 17:10:45,859 : INFO : Current training batch loss: 0.0511 in epoch 4
+2024-08-13 17:10:47,668 : INFO : Current training batch loss: 0.0160 in epoch 4
+2024-08-13 17:10:49,517 : INFO : Current training batch loss: 0.1164 in epoch 4
+2024-08-13 17:10:51,329 : INFO : Current training batch loss: 0.0008 in epoch 4
+2024-08-13 17:10:53,223 : INFO : Current training batch loss: 0.2842 in epoch 4
+2024-08-13 17:10:55,069 : INFO : Current training batch loss: 0.1225 in epoch 4
+2024-08-13 17:10:56,862 : INFO : Current training batch loss: 0.1244 in epoch 4
+2024-08-13 17:10:58,689 : INFO : Current training batch loss: 0.0569 in epoch 4
+2024-08-13 17:11:00,528 : INFO : Current training batch loss: 0.0012 in epoch 4
+2024-08-13 17:11:02,368 : INFO : Current training batch loss: 0.0180 in epoch 4
+2024-08-13 17:11:04,191 : INFO : Current training batch loss: 0.0319 in epoch 4
+2024-08-13 17:11:06,018 : INFO : Current training batch loss: 0.4669 in epoch 4
+2024-08-13 17:11:07,798 : INFO : Current training batch loss: 0.0048 in epoch 4
+2024-08-13 17:11:09,638 : INFO : Current training batch loss: 0.0705 in epoch 4
+2024-08-13 17:11:11,489 : INFO : Current training batch loss: 0.2956 in epoch 4
+2024-08-13 17:11:13,305 : INFO : Current training batch loss: 0.1556 in epoch 4
+2024-08-13 17:11:15,115 : INFO : Current training batch loss: 0.2291 in epoch 4
+2024-08-13 17:11:16,886 : INFO : Current training batch loss: 0.0334 in epoch 4
+2024-08-13 17:11:18,697 : INFO : Current training batch loss: 0.0042 in epoch 4
+2024-08-13 17:11:20,509 : INFO : Current training batch loss: 0.0067 in epoch 4
+2024-08-13 17:11:22,351 : INFO : Current training batch loss: 0.0424 in epoch 4
+2024-08-13 17:11:24,154 : INFO : Current training batch loss: 0.0113 in epoch 4
+2024-08-13 17:11:25,983 : INFO : Current training batch loss: 0.0051 in epoch 4
+2024-08-13 17:11:27,762 : INFO : Current training batch loss: 0.1909 in epoch 4
+2024-08-13 17:11:29,567 : INFO : Current training batch loss: 0.2351 in epoch 4
+2024-08-13 17:11:31,375 : INFO : Current training batch loss: 0.0038 in epoch 4
+2024-08-13 17:11:33,186 : INFO : Current training batch loss: 0.0337 in epoch 4
+2024-08-13 17:11:35,014 : INFO : Current training batch loss: 0.1224 in epoch 4
+2024-08-13 17:11:36,802 : INFO : Current training batch loss: 0.3408 in epoch 4
+2024-08-13 17:11:38,650 : INFO : Current training batch loss: 0.0198 in epoch 4
+2024-08-13 17:11:40,450 : INFO : Current training batch loss: 0.3630 in epoch 4
+2024-08-13 17:11:42,265 : INFO : Current training batch loss: 0.9892 in epoch 4
+2024-08-13 17:11:44,134 : INFO : Current training batch loss: 0.0038 in epoch 4
+2024-08-13 17:11:45,944 : INFO : Current training batch loss: 0.0000 in epoch 4
+2024-08-13 17:11:47,767 : INFO : Current training batch loss: 0.4120 in epoch 4
+2024-08-13 17:11:49,597 : INFO : Current training batch loss: 0.6963 in epoch 4
+2024-08-13 17:11:51,431 : INFO : Current training batch loss: 0.0022 in epoch 4
+2024-08-13 17:11:51,665 : INFO : Epoch finished, average loss over training batches: 0.0116
+2024-08-13 17:11:51,670 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 17:11:51,670 : INFO : Training metrics:
+2024-08-13 17:11:51,670 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 17:11:51,693 : INFO : Training accuracy: 0.9550
+2024-08-13 17:11:51,693 : INFO : Training precision: 0.9545
+2024-08-13 17:11:51,693 : INFO : Training recall: 0.9556
+2024-08-13 17:11:51,693 : INFO : Training f1: 0.9551
+2024-08-13 17:13:18,653 : INFO : Average loss over validation batches: 0.0336
+2024-08-13 17:13:18,657 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 17:13:18,658 : INFO : Validation metrics:
+2024-08-13 17:13:18,658 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 17:13:18,670 : INFO : Validation accuracy: 0.8865
+2024-08-13 17:13:18,670 : INFO : Validation precision: 0.8393
+2024-08-13 17:13:18,670 : INFO : Validation recall: 0.9561
+2024-08-13 17:13:18,670 : INFO : Validation f1: 0.8939
+2024-08-13 17:13:20,228 : INFO : Current training batch loss: 0.0466 in epoch 5
+2024-08-13 17:13:22,054 : INFO : Current training batch loss: 0.0081 in epoch 5
+2024-08-13 17:13:23,845 : INFO : Current training batch loss: 0.0213 in epoch 5
+2024-08-13 17:13:25,666 : INFO : Current training batch loss: 0.0015 in epoch 5
+2024-08-13 17:13:27,490 : INFO : Current training batch loss: 0.0103 in epoch 5
+2024-08-13 17:13:29,268 : INFO : Current training batch loss: 0.0601 in epoch 5
+2024-08-13 17:13:31,076 : INFO : Current training batch loss: 0.0010 in epoch 5
+2024-08-13 17:13:32,888 : INFO : Current training batch loss: 0.6681 in epoch 5
+2024-08-13 17:13:34,702 : INFO : Current training batch loss: 0.0048 in epoch 5
+2024-08-13 17:13:36,546 : INFO : Current training batch loss: 0.0015 in epoch 5
+2024-08-13 17:13:38,346 : INFO : Current training batch loss: 0.1664 in epoch 5
+2024-08-13 17:13:40,192 : INFO : Current training batch loss: 0.0921 in epoch 5
+2024-08-13 17:13:42,004 : INFO : Current training batch loss: 1.1680 in epoch 5
+2024-08-13 17:13:43,794 : INFO : Current training batch loss: 0.0383 in epoch 5
+2024-08-13 17:13:45,601 : INFO : Current training batch loss: 0.0168 in epoch 5
+2024-08-13 17:13:47,447 : INFO : Current training batch loss: 0.0135 in epoch 5
+2024-08-13 17:13:49,257 : INFO : Current training batch loss: 0.2590 in epoch 5
+2024-08-13 17:13:51,056 : INFO : Current training batch loss: 0.1930 in epoch 5
+2024-08-13 17:13:52,871 : INFO : Current training batch loss: 0.0247 in epoch 5
+2024-08-13 17:13:54,673 : INFO : Current training batch loss: 0.0107 in epoch 5
+2024-08-13 17:13:56,463 : INFO : Current training batch loss: 0.0001 in epoch 5
+2024-08-13 17:13:58,306 : INFO : Current training batch loss: 0.1058 in epoch 5
+2024-08-13 17:14:00,098 : INFO : Current training batch loss: 0.0006 in epoch 5
+2024-08-13 17:14:01,942 : INFO : Current training batch loss: 0.6235 in epoch 5
+2024-08-13 17:14:03,742 : INFO : Current training batch loss: 0.0053 in epoch 5
+2024-08-13 17:14:05,591 : INFO : Current training batch loss: 0.0760 in epoch 5
+2024-08-13 17:14:07,375 : INFO : Current training batch loss: 0.0540 in epoch 5
+2024-08-13 17:14:09,207 : INFO : Current training batch loss: 0.2883 in epoch 5
+2024-08-13 17:14:11,004 : INFO : Current training batch loss: 0.0218 in epoch 5
+2024-08-13 17:14:12,808 : INFO : Current training batch loss: 0.3628 in epoch 5
+2024-08-13 17:14:14,617 : INFO : Current training batch loss: 0.0243 in epoch 5
+2024-08-13 17:14:16,406 : INFO : Current training batch loss: 0.1255 in epoch 5
+2024-08-13 17:14:18,211 : INFO : Current training batch loss: 0.1818 in epoch 5
+2024-08-13 17:14:20,061 : INFO : Current training batch loss: 0.2822 in epoch 5
+2024-08-13 17:14:21,883 : INFO : Current training batch loss: 0.0022 in epoch 5
+2024-08-13 17:14:23,744 : INFO : Current training batch loss: 0.1114 in epoch 5
+2024-08-13 17:14:25,556 : INFO : Current training batch loss: 0.0001 in epoch 5
+2024-08-13 17:14:27,335 : INFO : Current training batch loss: 0.2411 in epoch 5
+2024-08-13 17:14:29,171 : INFO : Current training batch loss: 0.6832 in epoch 5
+2024-08-13 17:14:30,961 : INFO : Current training batch loss: 0.0098 in epoch 5
+2024-08-13 17:14:32,797 : INFO : Current training batch loss: 0.0049 in epoch 5
+2024-08-13 17:14:34,615 : INFO : Current training batch loss: 0.0372 in epoch 5
+2024-08-13 17:14:36,390 : INFO : Current training batch loss: 0.0123 in epoch 5
+2024-08-13 17:14:38,143 : INFO : Current training batch loss: 0.1750 in epoch 5
+2024-08-13 17:14:39,959 : INFO : Current training batch loss: 0.0000 in epoch 5
+2024-08-13 17:14:41,770 : INFO : Current training batch loss: 0.0023 in epoch 5
+2024-08-13 17:14:43,573 : INFO : Current training batch loss: 0.0043 in epoch 5
+2024-08-13 17:14:45,392 : INFO : Current training batch loss: 0.0019 in epoch 5
+2024-08-13 17:14:47,176 : INFO : Current training batch loss: 0.3992 in epoch 5
+2024-08-13 17:14:48,981 : INFO : Current training batch loss: 0.0018 in epoch 5
+2024-08-13 17:14:50,768 : INFO : Current training batch loss: 0.0008 in epoch 5
+2024-08-13 17:14:52,580 : INFO : Current training batch loss: 0.0000 in epoch 5
+2024-08-13 17:14:54,371 : INFO : Current training batch loss: 0.1051 in epoch 5
+2024-08-13 17:14:56,227 : INFO : Current training batch loss: 0.0478 in epoch 5
+2024-08-13 17:14:58,030 : INFO : Current training batch loss: 0.0373 in epoch 5
+2024-08-13 17:14:59,810 : INFO : Current training batch loss: 0.0305 in epoch 5
+2024-08-13 17:15:01,602 : INFO : Current training batch loss: 0.1632 in epoch 5
+2024-08-13 17:15:03,418 : INFO : Current training batch loss: 0.0410 in epoch 5
+2024-08-13 17:15:05,196 : INFO : Current training batch loss: 0.0054 in epoch 5
+2024-08-13 17:15:06,965 : INFO : Current training batch loss: 0.0809 in epoch 5
+2024-08-13 17:15:08,749 : INFO : Current training batch loss: 0.0434 in epoch 5
+2024-08-13 17:15:10,564 : INFO : Current training batch loss: 0.0004 in epoch 5
+2024-08-13 17:15:12,371 : INFO : Current training batch loss: 0.0707 in epoch 5
+2024-08-13 17:15:14,164 : INFO : Current training batch loss: 0.0000 in epoch 5
+2024-08-13 17:15:15,977 : INFO : Current training batch loss: 0.2619 in epoch 5
+2024-08-13 17:15:17,827 : INFO : Current training batch loss: 0.0603 in epoch 5
+2024-08-13 17:15:19,674 : INFO : Current training batch loss: 0.0003 in epoch 5
+2024-08-13 17:15:21,515 : INFO : Current training batch loss: 0.0533 in epoch 5
+2024-08-13 17:15:23,310 : INFO : Current training batch loss: 0.0003 in epoch 5
+2024-08-13 17:15:25,123 : INFO : Current training batch loss: 0.0007 in epoch 5
+2024-08-13 17:15:26,951 : INFO : Current training batch loss: 0.0012 in epoch 5
+2024-08-13 17:15:28,779 : INFO : Current training batch loss: 0.0709 in epoch 5
+2024-08-13 17:15:30,595 : INFO : Current training batch loss: 0.9180 in epoch 5
+2024-08-13 17:15:32,392 : INFO : Current training batch loss: 0.0075 in epoch 5
+2024-08-13 17:15:34,168 : INFO : Current training batch loss: 0.0078 in epoch 5
+2024-08-13 17:15:35,979 : INFO : Current training batch loss: 0.0016 in epoch 5
+2024-08-13 17:15:37,834 : INFO : Current training batch loss: 0.0309 in epoch 5
+2024-08-13 17:15:39,630 : INFO : Current training batch loss: 0.0051 in epoch 5
+2024-08-13 17:15:41,437 : INFO : Current training batch loss: 0.0048 in epoch 5
+2024-08-13 17:15:43,194 : INFO : Current training batch loss: 0.6897 in epoch 5
+2024-08-13 17:15:44,986 : INFO : Current training batch loss: 1.2586 in epoch 5
+2024-08-13 17:15:46,795 : INFO : Current training batch loss: 0.5996 in epoch 5
+2024-08-13 17:15:48,604 : INFO : Current training batch loss: 0.0142 in epoch 5
+2024-08-13 17:15:50,406 : INFO : Current training batch loss: 0.0060 in epoch 5
+2024-08-13 17:15:52,208 : INFO : Current training batch loss: 0.6611 in epoch 5
+2024-08-13 17:15:53,998 : INFO : Current training batch loss: 0.0275 in epoch 5
+2024-08-13 17:15:55,776 : INFO : Current training batch loss: 0.0257 in epoch 5
+2024-08-13 17:15:57,566 : INFO : Current training batch loss: 0.0761 in epoch 5
+2024-08-13 17:15:59,370 : INFO : Current training batch loss: 0.0001 in epoch 5
+2024-08-13 17:16:01,174 : INFO : Current training batch loss: 0.0005 in epoch 5
+2024-08-13 17:16:02,975 : INFO : Current training batch loss: 0.0008 in epoch 5
+2024-08-13 17:16:04,778 : INFO : Current training batch loss: 0.0088 in epoch 5
+2024-08-13 17:16:06,594 : INFO : Current training batch loss: 0.0008 in epoch 5
+2024-08-13 17:16:08,380 : INFO : Current training batch loss: 0.0028 in epoch 5
+2024-08-13 17:16:10,225 : INFO : Current training batch loss: 0.3781 in epoch 5
+2024-08-13 17:16:12,045 : INFO : Current training batch loss: 0.0023 in epoch 5
+2024-08-13 17:16:13,853 : INFO : Current training batch loss: 0.0149 in epoch 5
+2024-08-13 17:16:15,637 : INFO : Current training batch loss: 0.0043 in epoch 5
+2024-08-13 17:16:17,474 : INFO : Current training batch loss: 0.0002 in epoch 5
+2024-08-13 17:16:18,253 : INFO : Epoch finished, average loss over training batches: 0.0090
+2024-08-13 17:16:18,257 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 17:16:18,258 : INFO : Training metrics:
+2024-08-13 17:16:18,258 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 17:16:18,284 : INFO : Training accuracy: 0.9678
+2024-08-13 17:16:18,284 : INFO : Training precision: 0.9666
+2024-08-13 17:16:18,284 : INFO : Training recall: 0.9690
+2024-08-13 17:16:18,284 : INFO : Training f1: 0.9678
+2024-08-13 17:17:45,220 : INFO : Average loss over validation batches: 0.0376
+2024-08-13 17:17:45,225 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 17:17:45,225 : INFO : Validation metrics:
+2024-08-13 17:17:45,225 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-13 17:17:45,240 : INFO : Validation accuracy: 0.9010
+2024-08-13 17:17:45,240 : INFO : Validation precision: 0.9037
+2024-08-13 17:17:45,240 : INFO : Validation recall: 0.8975
+2024-08-13 17:17:45,240 : INFO : Validation f1: 0.9006
+2024-08-13 17:17:45,240 : INFO : Training ended....
+2024-08-13 17:17:45,349 : INFO : Model has been saved.

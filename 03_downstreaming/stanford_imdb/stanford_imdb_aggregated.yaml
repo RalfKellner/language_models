@@ -1,0 +1,42 @@
+model_path: "google/electra-small-discriminator" #"/data/language_models/pretrained_models/mlm_00/mlm_model"
+num_labels: 2
+tokenizer_path: "google/electra-small-discriminator" #"/data/language_models/tokenizers/finlm-wordpiece-tokenizer.json"
+max_sequence_length: 128
+dataset_name: "stanford_imbd"
+text_column: "text"
+label_column: "label"
+training_data_fraction: 0.5    
+n_splits: 4
+early_stopping_patience: 2
+sequence_limit: 128
+n_epochs:
+  name: "n_epochs"
+  dtype: int
+  low: 1
+  high: 5
+  default: 3
+learning_rate:
+  name: "learning_rate"
+  dtype: float
+  low:  0.00001
+  high: 0.0001
+  default: 0.0005
+classifier_dropout: 
+  name: "classifier_dropout"
+  dtype: float
+  low: 0.1
+  high: 0.9
+  default: 0.5
+warmup_step_fraction:
+  name: "warmup_step_fraction"
+  dtype: float
+  low: 0.01
+  high: 0.10
+  default: 0.05
+use_gradient_clipping:
+  name: "use_gradient_clipping"
+  dtype: bool
+  low: None
+  high: None
+  default: False
+save_path: "/data/language_models/pretrained_models_downstreaming/stanford_imdb/electra_small_discriminator_aggregated"

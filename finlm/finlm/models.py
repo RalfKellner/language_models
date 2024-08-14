@@ -1,4 +1,5 @@
 import os
+from dataclasses import dataclass
 from dataclasses import asdict
 from finlm.dataset import FinLMDataset
 from transformers import ElectraConfig, ElectraForMaskedLM, ElectraForPreTraining, ElectraPreTrainedModel, ElectraModel
@@ -1342,9 +1343,12 @@ class ElectraForAggregatePredictionWithAttention(ElectraPreTrainedModel):
                 loss_fct = BCEWithLogitsLoss()
                 loss = loss_fct(logits, labels)
 
-        full_output = (loss, logits, attention_probabilities) if return_attention else (loss, logits)
+        if return_attention:
+            output = AggregatedPredictionOutput(loss = loss, logits = logits, attention = attention_probabilities)
+        else:
+            output = AggregatedPredictionOutput(loss = loss, logits = logits)
 
-        return full_output
+        return output, original_shapes
 
 
 class ElectraAggregationHead(nn.Module):
@@ -1395,6 +1399,7 @@ class ElectraAggregationHead(nn.Module):
         )
         self.dropout = nn.Dropout(aggregation_head_dropout)
         self.activation = nn.GELU()
+        self.LayerNorm = nn.LayerNorm(config.hidden_size, eps=config.layer_norm_eps)
         # project the average aggregate of sequence embeddings after the dense layer
         self.out_projection = nn.Linear(config.hidden_size, config.num_labels)
 
@@ -1422,6 +1427,7 @@ class ElectraAggregationHead(nn.Module):
         x = self.activation(x)
         x_original_shapes = torch.split(x, original_shapes, dim = 0)
         x_aggregated = torch.stack([torch_tensor.mean(dim = 0) for torch_tensor in x_original_shapes])
+        x_aggregated = self.LayerNorm(x_aggregated)
         logits = self.out_projection(x_aggregated)
         return logits
     
@@ -1543,4 +1549,12 @@ class ElectraForAggregatePrediction(ElectraPreTrainedModel):
                 loss_fct = BCEWithLogitsLoss()
                 loss = loss_fct(logits, labels)
 
-        return (loss, logits)
+        return AggregatedPredictionOutput(loss = loss, logits = logits)
+    
+
+
+@dataclass
+class AggregatedPredictionOutput:
+    loss: Optional[torch.FloatTensor] = None
+    logits: torch.FloatTensor = None
+    attention: Optional[torch.FloatTensor] = None

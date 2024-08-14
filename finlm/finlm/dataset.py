@@ -11,7 +11,6 @@ from transformers import AutoTokenizer
 import logging
 datasets.disable_progress_bars()
 
-
 class FinLMDataset:
 
     """
@@ -366,8 +365,6 @@ class FinetuningDataset:
         self.dataset = dataset
         self.text_column = text_column
         self.dataset_columns = dataset_columns
-        self.shuffle_data = shuffle_data
-        self.shuffle_data_random_seed = shuffle_data_random_seed
         self.training_data_fraction = training_data_fraction
         self.logger = logging.getLogger(self.__class__.__name__)
         self._prepare_training_and_test_data()
@@ -430,59 +427,15 @@ class FinetuningDataset:
         """
 
         self._map_dataset()
-        if self.shuffle_data:
-            if self.shuffle_data_random_seed:
-                self.dataset = self.dataset.shuffle(self.shuffle_data_random_seed)
-            else:
-                self.dataset = self.dataset.shuffle()
-
         self.train_size = int(len(self.dataset) * self.training_data_fraction)
         self.training_data = self.dataset.select(range(self.train_size))
         self.test_data = self.dataset.select(range(self.train_size, len(self.dataset)))
 
 
-
 class AggregatedDocumentDataset(TorchDataset):
-    """
-    A custom PyTorch dataset class for handling documents composed of multiple sequences, where each document has an associated label.
-
-    This dataset supports tokenization of sequences within each document, and can optionally be used with a DataLoader for batching and shuffling.
-
-    Attributes
-    ----------
-    documents : list[list[str]]
-        A list where each element is a document, and each document is a list of sequences (strings).
-    labels : list
-        A list of labels, one for each document.
-    tokenizer_path : str
-        Path to the pretrained tokenizer to be used for tokenization.
-    tokenizer : FinLMTokenizer
-        The tokenizer instance used for tokenizing the text sequences.
-    sequence_length : int
-        The length to which each sequence should be padded or truncated.
-    use_dataloader : bool
-        Whether to use a PyTorch DataLoader for batching and shuffling.
-    dataloader : DataLoader or None
-        A PyTorch DataLoader instance if `use_dataloader` is True; otherwise, None.
-
-    Methods
-    -------
-    __len__()
-        Returns the number of documents in the dataset.
-    __getitem__(idx)
-        Retrieves and tokenizes a document and its label based on the provided index.
-    __iter__()
-        Returns an iterator over the dataset.
-    __next__()
-        Retrieves the next item in the dataset when not using a DataLoader.
-    _collate_fn(batch)
-        A static method that collates a batch of documents into a format suitable for model input.
-    """
-
-    def __init__(self, documents, labels, tokenizer_path, sequence_length, use_dataloader = False, shuffle = False, batch_size = 1):
-        
+    def __init__(self, documents, labels, tokenizer_path, sequence_length, sequence_limit=128, device='cpu'):
         """
-        Initializes the `AggregatedDocumentDataset` with documents, labels, and tokenizer settings.
+        Initializes the `AggregatedDocumentDataset` with documents, labels, tokenizer settings, and device.
 
         Parameters
         ----------
@@ -494,75 +447,35 @@ class AggregatedDocumentDataset(TorchDataset):
             Path to the pretrained tokenizer to be used for tokenization.
         sequence_length : int
             The length to which each sequence should be padded or truncated.
-        use_dataloader : bool, optional
-            Whether to use a PyTorch DataLoader for batching and shuffling (default is False).
-        shuffle : bool, optional
-            Whether to shuffle the data if using a DataLoader (default is False).
-        batch_size : int, optional
-            The batch size to use if using a DataLoader (default is 1).
-
-        Attributes Initialized
-        ----------------------
-        dataloader : DataLoader or None
-            A PyTorch DataLoader instance if `use_dataloader` is True; otherwise, None.
+        sequence_limit : int
+            The maximum number of sequences to accumulate across multiple documents.
+        device : str
+            The device on which the tensors should be placed, e.g., 'cpu' or 'cuda'.
         """
-
         self.documents = documents
         self.labels = labels
         self.tokenizer_path = tokenizer_path
-        self.tokenizer = FinLMTokenizer(self.tokenizer_path)
+        try:
+            self.tokenizer = FinLMTokenizer(self.tokenizer_path)
+        except:
+            self.tokenizer = AutoTokenizer.from_pretrained(self.tokenizer_path)
         self.sequence_length = sequence_length
-        self.use_dataloader = use_dataloader
-
-        if use_dataloader:
-            self.dataloader = DataLoader(
-                self, 
-                batch_size = batch_size,
-                shuffle = shuffle,
-                collate_fn = self._collate_fn
-            )
-        else:
-            self.dataloader = None
+        self.sequence_limit = sequence_limit
+        self.device = device
 
     def __len__(self):
-
-        """
-        Returns the number of documents in the dataset.
-
-        Returns
-        -------
-        int
-            The number of documents in the dataset.
-        """
-
         return len(self.documents)
 
     def __getitem__(self, idx):
-
-        """
-        Retrieves and tokenizes a document and its label based on the provided index.
-
-        Parameters
-        ----------
-        idx : int
-            The index of the document to retrieve.
-
-        Returns
-        -------
-        dict
-            A dictionary containing tokenized input IDs, attention masks, and the associated label:
-            - 'input_ids': list of tensors, each with shape (sequence_length,)
-            - 'attention_mask': list of tensors, each with shape (sequence_length,)
-            - 'labels': Tensor containing the label for the document
-        """
-        
         document = self.documents[idx]
         label = self.labels[idx]
 
         input_ids = []
         attention_masks = []
 
-        # Tokenize each sequence in the document
+        if len(document) > self.sequence_limit:
+            document = document[:self.sequence_limit]
+
         for sequence in document:
             encoded = self.tokenizer(
                 sequence,
@@ -571,75 +484,21 @@ class AggregatedDocumentDataset(TorchDataset):
                 max_length=self.sequence_length,
                 return_tensors='pt'
             )
-            input_ids.append(encoded['input_ids'].squeeze())
-            attention_masks.append(encoded['attention_mask'].squeeze())
+            input_ids.append(encoded['input_ids'].squeeze().to(self.device))
+            attention_masks.append(encoded['attention_mask'].squeeze().to(self.device))
 
-        # Convert to tensors but do not stack sequences into a single tensor
         return {
-            'input_ids': input_ids,  # List of tensors, each with shape (sequence_length,)
-            'attention_mask': attention_masks,  # List of tensors, each with shape (sequence_length,)
-            'labels': torch.tensor(label, dtype=torch.float)
+            'input_ids': input_ids,
+            'attention_mask': attention_masks,
+            'labels': torch.tensor(label, dtype=torch.float).to(self.device)
         }
-
-    def __iter__(self):
-
-        """
-        Returns an iterator over the dataset.
-
-        If `use_dataloader` is True, returns an iterator over the DataLoader.
-        Otherwise, returns an iterator over the dataset itself.
-
-        Returns
-        -------
-        Iterator
-            An iterator over the dataset.
-        """
-
-        if self.use_dataloader:
-            return iter(self.dataloader)
-        else:
-            self.current_idx = 0
-            return self
-
-    def __next__(self):
-
-        """
-        Retrieves the next item in the dataset when not using a DataLoader.
-
-        If `use_dataloader` is False, this method retrieves the next document in the dataset.
-        If `use_dataloader` is True, raises a RuntimeError indicating that the DataLoader's iterator should be used.
-
-        Returns
-        -------
-        dict
-            The next document's tokenized input IDs, attention masks, and label.
-
-        Raises
-        ------
-        StopIteration
-            If there are no more items in the dataset.
-        RuntimeError
-            If `use_dataloader` is True and this method is called.
-        """
-
-        if not self.use_dataloader:
-            if self.current_idx < len(self):
-                item = self[self.current_idx]
-                self.current_idx += 1
-                return item
-            else:
-                raise StopIteration
-        else:
-            raise RuntimeError("Use dataloader's iterator instead")
 
     @staticmethod
     def _collate_fn(batch):
-
         """
-        Collates a batch of documents into a format suitable for model input.
-
-        This method processes a batch of documents and combines their tokenized sequences and labels
-        into a format that can be fed into a model.
+        Collates a batch of documents into a format suitable for model input, 
+        preserving the original shape (i.e., the number of sequences per document),
+        and moving them to the specified device.
 
         Parameters
         ----------
@@ -654,10 +513,9 @@ class AggregatedDocumentDataset(TorchDataset):
             - 'attention_mask': list of lists of tensors, where each list represents the attention masks of a document
             - 'labels': Tensor containing the labels for the batch
         """
-        
         input_ids = [item['input_ids'] for item in batch]
         attention_masks = [item['attention_mask'] for item in batch]
-        labels = torch.tensor([item['labels'] for item in batch], dtype=torch.float)
+        labels = torch.tensor([item['labels'] for item in batch], dtype=torch.float).to(batch[0]['labels'].device)
 
         return {
             'input_ids': input_ids,  # List of lists of tensors
@@ -665,3 +523,48 @@ class AggregatedDocumentDataset(TorchDataset):
             'labels': labels
         }
 
+    def __iter__(self):
+        self.current_idx = 0
+        return self
+
+    def __next__(self):
+        accumulated_input_ids = []
+        accumulated_attention_masks = []
+        accumulated_labels = []
+        accumulated_sequences = 0
+
+        while self.current_idx < len(self.documents) and accumulated_sequences < self.sequence_limit:
+            document = self.documents[self.current_idx]
+            label = self.labels[self.current_idx]
+            self.current_idx += 1
+
+            if len(document) > self.sequence_limit:
+                document = document[:self.sequence_limit]
+
+            input_ids = []
+            attention_masks = []
+            for sequence in document:
+                encoded = self.tokenizer(
+                    sequence,
+                    truncation=True,
+                    padding='max_length',
+                    max_length=self.sequence_length,
+                    return_tensors='pt'
+                )
+                input_ids.append(encoded['input_ids'].squeeze().to(self.device))
+                attention_masks.append(encoded['attention_mask'].squeeze().to(self.device))
+
+            accumulated_input_ids.append(input_ids)
+            accumulated_attention_masks.append(attention_masks)
+            accumulated_labels.append(torch.tensor(label, dtype=torch.float).to(self.device))
+
+            accumulated_sequences += len(document)
+
+        if not accumulated_input_ids:
+            raise StopIteration
+
+        return {
+            'input_ids': accumulated_input_ids,
+            'attention_mask': accumulated_attention_masks,
+            'labels': torch.stack(accumulated_labels)
+        }

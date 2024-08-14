@@ -5,7 +5,6 @@ import torch
 from torch.utils.data import DataLoader
 import numpy as np
 import json
-from transformers import ElectraForSequenceClassification
 from transformers import get_linear_schedule_with_warmup
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, r2_score, mean_absolute_error, mean_squared_error
 from sklearn.model_selection import KFold
@@ -232,12 +231,11 @@ class FinetuningEncoderClassifier:
             dataset,
             self.config.text_column,
             self.config.dataset_columns,
-            self.config.shuffle_data,
-            self.config.shuffle_data_random_seed,
             self.config.training_data_fraction
         )
         self.batch_size = self.config.batch_size
         self.n_splits = self.config.n_splits
+        self.early_stopping_patience = self.config.early_stopping_patience
         self.n_epochs = Hyperparameter.from_dict(self.config.n_epochs)
         self.learning_rate = Hyperparameter.from_dict(self.config.learning_rate)
         self.classifier_dropout = Hyperparameter.from_dict(self.config.classifier_dropout)
@@ -267,7 +265,11 @@ class FinetuningEncoderClassifier:
         - Saves the final trained model and evaluation metrics.
         """
 
-        best_params, _ = self.optuna_optimize(n_trials = n_trials)
+        best_params = self.optuna_optimize(n_trials = n_trials)
+
+        with open(os.path.join(self.save_path, "best_hyperparameters.json"), "w") as file:
+            json.dump(best_params, file, indent = 4)
+
         full_training_split = DataLoader(self.dataset.training_data, batch_size = 32, shuffle = False)
         test_split = DataLoader(self.dataset.test_data, batch_size = 32, shuffle = False)
 
@@ -282,16 +284,18 @@ class FinetuningEncoderClassifier:
             save_best_model_path = self.save_path           
         )
 
-        model = ElectraForSequenceClassification.from_pretrained(self.model_path, num_labels = self.num_labels)        
+        model = self._load_model(classifier_dropout = best_params["classifier_dropout"])        
         self.logger.info(f"Loading model finetuned model from checkpoint.")
         model.load_state_dict(torch.load(os.path.join(self.save_path, "checkpoint.pth")))
         model.save_pretrained(os.path.join(self.save_path, "finetuned_model"))
         self.config.to_json(os.path.join(self.save_path, "finetuning_config.json"))
-        training_scores, test_scores = self.final_evaluation(os.path.join(self.save_path, "finetuned_model"))
-        training_scores["precision_scores"] = training_scores["precision_scores"].tolist()
-        training_scores["recall_scores"] = training_scores["recall_scores"].tolist()
-        test_scores["precision_scores"] = test_scores["precision_scores"].tolist()
-        test_scores["recall_scores"] = test_scores["recall_scores"].tolist()
+        training_scores, test_scores = self.final_evaluation(os.path.join(self.save_path, "finetuned_model"), classifier_dropout=best_params["classifier_dropout"])
+        
+        if self.task == "multi_classification":
+            training_scores["precision_scores"] = training_scores["precision_scores"].tolist()
+            training_scores["recall_scores"] = training_scores["recall_scores"].tolist()
+            test_scores["precision_scores"] = test_scores["precision_scores"].tolist()
+            test_scores["recall_scores"] = test_scores["recall_scores"].tolist()
         
         with open(os.path.join(self.save_path, "training_scores.json"), "w") as file:
             json.dump(training_scores, file, indent = 4)
@@ -317,8 +321,17 @@ class FinetuningEncoderClassifier:
         """
             
         study = optuna.create_study(direction = "maximize")
-        study.optimize(self.optuna_objective, n_trials = n_trials)            
-        return study.best_params, study.best_value
+        study.optimize(self.optuna_objective, n_trials = n_trials)      
+        if study.best_trial.number == 0:
+            hyperparameters = [self.n_epochs, self.learning_rate, self.classifier_dropout, self.warmup_step_fraction, self.use_gradient_clipping]
+            best_params = {}
+            for hyperparameter in hyperparameters:
+                best_params[hyperparameter.name] = hyperparameter.default
+        else:
+            best_params = study.best_params
+        best_params["best_value"] = study.best_value 
+        
+        return best_params
 
 
     def optuna_objective(self, trial):
@@ -469,7 +482,7 @@ class FinetuningEncoderClassifier:
         """
 
         # Early stopping instance with specified save path
-        early_stopping = EarlyStopping(patience = 2, verbose = True, mode = 'min', save_path = save_best_model_path)
+        early_stopping = EarlyStopping(patience = self.early_stopping_patience, verbose = True, mode = 'min', save_path = save_best_model_path)
 
         model = self._load_model(classifier_dropout)
         model.to(self.device)
@@ -581,7 +594,7 @@ class FinetuningEncoderClassifier:
 
         return max_score
     
-    def final_evaluation(self, fintuned_model_path):
+    def final_evaluation(self, fintuned_model_path, classifier_dropout):
         
         """
         Evaluates the final trained model on both the training and test datasets, returning performance metrics.
@@ -597,7 +610,7 @@ class FinetuningEncoderClassifier:
             The training and test performance metrics.
         """
 
-        model = ElectraForSequenceClassification.from_pretrained(fintuned_model_path)
+        model = self.model_loader(model_path = fintuned_model_path, num_labels = self.num_labels, classifier_dropout = classifier_dropout) 
         model.to(self.device)
 
         training_data = DataLoader(self.dataset.training_data, self.batch_size, False)
@@ -735,7 +748,6 @@ class FinetuningEncoderClassifier:
         """
 
         model = self.model_loader(self.model_path, num_labels = self.num_labels, classifier_dropout = classifier_dropout)
-        #model = ElectraForSequenceClassification.from_pretrained(self.model_path, num_labels = self.num_labels, classifier_dropout = classifier_dropout)        
         if save_path:
             self.logger.info(f"Loading model from {save_path}")
             model.load_state_dict(torch.load(save_path))

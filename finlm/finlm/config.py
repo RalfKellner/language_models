@@ -276,11 +276,56 @@ class FintuningConfig:
     text_column: str
     dataset_name: str
     dataset_columns: list[str]
-    shuffle_data: bool
-    shuffle_data_random_seed: int
     training_data_fraction: float
     batch_size: int
     n_splits: int
+    early_stopping_patience: int
+    n_epochs: Dict[str, Any]
+    learning_rate: Dict[str, Any]
+    classifier_dropout: Dict[str, Any]
+    warmup_step_fraction: Dict[str, Any]
+    use_gradient_clipping: Dict[str, Any]
+    save_path: str
+
+
+    @classmethod
+    def from_yaml(cls, config_file_path: str):
+        with open(config_file_path, 'r') as yaml_file:
+            data = yaml.safe_load(yaml_file)
+
+        return cls(**data)
+    
+    def to_dict(self):
+        return asdict(self)
+    
+    def to_json(self, file_path: str) -> None:
+
+        """
+        Saves the configuration as a JSON file.
+
+        Parameters
+        ----------
+        file_path : str
+            The path where the JSON file will be saved.
+        """
+
+        with open(file_path, 'w') as file:
+            json.dump(self.to_dict(), file, indent=4)
+
+
+@dataclass
+class AggregatedFintuningConfig:
+    model_path: str
+    num_labels: int
+    tokenizer_path: str
+    max_sequence_length: int
+    text_column: str
+    label_column: str
+    dataset_name: str
+    training_data_fraction: float
+    n_splits: int
+    early_stopping_patience: int
+    sequence_limit: int
     n_epochs: Dict[str, Any]
     learning_rate: Dict[str, Any]
     classifier_dropout: Dict[str, Any]

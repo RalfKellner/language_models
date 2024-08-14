@@ -17,3 +17,2293 @@ You should probably TRAIN this model on a down-stream task to be able to use it 
 2024-08-12 18:38:27,924 : INFO : Current training batch loss: 0.7094 in epoch 1
 2024-08-12 18:38:45,001 : INFO : Current training batch loss: 0.6917 in epoch 1
 2024-08-12 18:39:02,078 : INFO : Current training batch loss: 0.6928 in epoch 1
+2024-08-12 18:39:19,168 : INFO : Current training batch loss: 0.6970 in epoch 1
+2024-08-12 18:39:36,269 : INFO : Current training batch loss: 0.7143 in epoch 1
+2024-08-12 18:39:53,363 : INFO : Current training batch loss: 0.6922 in epoch 1
+2024-08-12 18:40:10,455 : INFO : Current training batch loss: 0.7010 in epoch 1
+2024-08-12 18:40:27,545 : INFO : Current training batch loss: 0.6937 in epoch 1
+2024-08-12 18:40:44,642 : INFO : Current training batch loss: 0.6934 in epoch 1
+2024-08-12 18:41:01,728 : INFO : Current training batch loss: 0.6933 in epoch 1
+2024-08-12 18:41:18,831 : INFO : Current training batch loss: 0.6933 in epoch 1
+2024-08-12 18:41:28,578 : INFO : Epoch finished, average loss over training batches: 0.6737
+2024-08-12 18:41:29,070 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 18:41:29,070 : INFO : Training metrics:
+2024-08-12 18:41:29,070 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 18:41:29,081 : INFO : Accuracy: 0.5409
+2024-08-12 18:41:29,081 : INFO : Precision: 0.5433
+2024-08-12 18:41:29,081 : INFO : Recall: 0.4946
+2024-08-12 18:41:29,081 : INFO : F1 score: 0.5178
+2024-08-12 18:42:01,638 : INFO : Average loss over validation batches: 0.7002
+2024-08-12 18:42:01,638 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 18:42:01,638 : INFO : Validation metrics:
+2024-08-12 18:42:01,638 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 18:42:01,643 : INFO : Accuracy: 0.5048
+2024-08-12 18:42:01,643 : INFO : Precision: 0.5048
+2024-08-12 18:42:01,643 : INFO : Recall: 1.0000
+2024-08-12 18:42:01,643 : INFO : F1 score: 0.6709
+2024-08-12 18:42:01,643 : INFO : Validation metric decreased (inf --> 0.700216).  Saving model ...
+2024-08-12 18:42:02,097 : INFO : Starting epoch 2
+2024-08-12 18:42:08,928 : INFO : Current training batch loss: 0.7286 in epoch 2
+2024-08-12 18:42:26,011 : INFO : Current training batch loss: 0.6912 in epoch 2
+2024-08-12 18:42:43,099 : INFO : Current training batch loss: 0.6918 in epoch 2
+2024-08-12 18:43:00,190 : INFO : Current training batch loss: 0.6978 in epoch 2
+2024-08-12 18:43:17,280 : INFO : Current training batch loss: 0.6929 in epoch 2
+2024-08-12 18:43:34,370 : INFO : Current training batch loss: 0.6963 in epoch 2
+2024-08-12 18:43:51,457 : INFO : Current training batch loss: 0.6925 in epoch 2
+2024-08-12 18:44:08,557 : INFO : Current training batch loss: 0.6984 in epoch 2
+2024-08-12 18:44:25,637 : INFO : Current training batch loss: 0.6996 in epoch 2
+2024-08-12 18:44:42,719 : INFO : Current training batch loss: 0.6940 in epoch 2
+2024-08-12 18:44:59,797 : INFO : Current training batch loss: 0.6930 in epoch 2
+2024-08-12 18:45:16,869 : INFO : Current training batch loss: 0.6932 in epoch 2
+2024-08-12 18:45:33,931 : INFO : Current training batch loss: 0.6932 in epoch 2
+2024-08-12 18:45:50,998 : INFO : Current training batch loss: 0.6914 in epoch 2
+2024-08-12 18:46:08,069 : INFO : Current training batch loss: 0.6913 in epoch 2
+2024-08-12 18:46:11,827 : INFO : Epoch finished, average loss over training batches: 0.6941
+2024-08-12 18:46:11,828 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 18:46:11,828 : INFO : Training metrics:
+2024-08-12 18:46:11,828 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 18:46:12,365 : INFO : Accuracy: 0.4951
+2024-08-12 18:46:12,365 : INFO : Precision: 0.4911
+2024-08-12 18:46:12,365 : INFO : Recall: 0.3598
+2024-08-12 18:46:12,365 : INFO : F1 score: 0.4153
+2024-08-12 18:46:44,828 : INFO : Average loss over validation batches: 0.6945
+2024-08-12 18:46:44,828 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 18:46:44,828 : INFO : Validation metrics:
+2024-08-12 18:46:44,828 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 18:46:44,833 : INFO : Accuracy: 0.5048
+2024-08-12 18:46:44,833 : INFO : Precision: 0.5048
+2024-08-12 18:46:44,833 : INFO : Recall: 1.0000
+2024-08-12 18:46:44,833 : INFO : F1 score: 0.6709
+2024-08-12 18:46:44,833 : INFO : Validation metric decreased (0.700216 --> 0.694509).  Saving model ...
+2024-08-12 18:46:45,454 : INFO : Starting epoch 3
+2024-08-12 18:46:58,247 : INFO : Current training batch loss: 0.7122 in epoch 3
+2024-08-12 18:47:15,308 : INFO : Current training batch loss: 0.6957 in epoch 3
+2024-08-12 18:47:32,365 : INFO : Current training batch loss: 0.6960 in epoch 3
+2024-08-12 18:47:49,419 : INFO : Current training batch loss: 0.6934 in epoch 3
+2024-08-12 18:48:06,472 : INFO : Current training batch loss: 0.6930 in epoch 3
+2024-08-12 18:48:23,525 : INFO : Current training batch loss: 0.6934 in epoch 3
+2024-08-12 18:48:40,586 : INFO : Current training batch loss: 0.6932 in epoch 3
+2024-08-12 18:48:57,657 : INFO : Current training batch loss: 0.6950 in epoch 3
+2024-08-12 18:49:14,717 : INFO : Current training batch loss: 0.6910 in epoch 3
+2024-08-12 18:49:31,779 : INFO : Current training batch loss: 0.6912 in epoch 3
+2024-08-12 18:49:48,835 : INFO : Current training batch loss: 0.6903 in epoch 3
+2024-08-12 18:50:05,894 : INFO : Current training batch loss: 0.6947 in epoch 3
+2024-08-12 18:50:22,950 : INFO : Current training batch loss: 0.6934 in epoch 3
+2024-08-12 18:50:40,015 : INFO : Current training batch loss: 0.6909 in epoch 3
+2024-08-12 18:50:54,859 : INFO : Epoch finished, average loss over training batches: 0.6937
+2024-08-12 18:50:54,860 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 18:50:54,860 : INFO : Training metrics:
+2024-08-12 18:50:54,860 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 18:50:55,397 : INFO : Accuracy: 0.4929
+2024-08-12 18:50:55,397 : INFO : Precision: 0.4831
+2024-08-12 18:50:55,397 : INFO : Recall: 0.2515
+2024-08-12 18:50:55,397 : INFO : F1 score: 0.3308
+2024-08-12 18:51:27,847 : INFO : Average loss over validation batches: 0.6932
+2024-08-12 18:51:27,847 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 18:51:27,847 : INFO : Validation metrics:
+2024-08-12 18:51:27,847 : INFO : ----------------------------------------------------------------------------------------------------
+/home/ralf/language_models/.venv/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+2024-08-12 18:51:27,860 : INFO : Accuracy: 0.4952
+2024-08-12 18:51:27,860 : INFO : Precision: 0.0000
+2024-08-12 18:51:27,860 : INFO : Recall: 0.0000
+2024-08-12 18:51:27,860 : INFO : F1 score: 0.0000
+2024-08-12 18:51:27,860 : INFO : Validation metric decreased (0.694509 --> 0.693229).  Saving model ...
+2024-08-12 18:51:28,513 : INFO : Split 1 is finished, the score is: 0.0000
+2024-08-12 18:51:28,513 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 18:51:28,513 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 18:51:28,513 : INFO : Starting training for split 2
+2024-08-12 18:51:28,572 : INFO : Occurence of labels for training split: (array([0, 1]), array([9328, 9422]))
+2024-08-12 18:51:28,573 : INFO : Occurence of labels for validation split: (array([0, 1]), array([3172, 3078]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 18:51:29,467 : INFO : Starting epoch 1
+2024-08-12 18:51:30,333 : INFO : Current training batch loss: 0.6996 in epoch 1
+2024-08-12 18:51:47,559 : INFO : Current training batch loss: 0.4708 in epoch 1
+2024-08-12 18:52:04,790 : INFO : Current training batch loss: 0.6879 in epoch 1
+2024-08-12 18:52:21,953 : INFO : Current training batch loss: 0.6961 in epoch 1
+2024-08-12 18:52:39,100 : INFO : Current training batch loss: 0.6982 in epoch 1
+2024-08-12 18:52:56,249 : INFO : Current training batch loss: 0.6942 in epoch 1
+2024-08-12 18:53:13,338 : INFO : Current training batch loss: 0.6927 in epoch 1
+2024-08-12 18:53:30,367 : INFO : Current training batch loss: 0.7022 in epoch 1
+2024-08-12 18:53:47,403 : INFO : Current training batch loss: 0.7252 in epoch 1
+2024-08-12 18:54:04,427 : INFO : Current training batch loss: 0.6948 in epoch 1
+2024-08-12 18:54:21,451 : INFO : Current training batch loss: 0.6948 in epoch 1
+2024-08-12 18:54:38,474 : INFO : Current training batch loss: 0.6966 in epoch 1
+2024-08-12 18:54:55,505 : INFO : Current training batch loss: 0.6935 in epoch 1
+2024-08-12 18:55:12,529 : INFO : Current training batch loss: 0.6931 in epoch 1
+2024-08-12 18:55:29,568 : INFO : Current training batch loss: 0.6933 in epoch 1
+2024-08-12 18:55:39,283 : INFO : Epoch finished, average loss over training batches: 0.6730
+2024-08-12 18:55:39,284 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 18:55:39,284 : INFO : Training metrics:
+2024-08-12 18:55:39,284 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 18:55:39,782 : INFO : Accuracy: 0.5357
+2024-08-12 18:55:39,782 : INFO : Precision: 0.5358
+2024-08-12 18:55:39,782 : INFO : Recall: 0.5682
+2024-08-12 18:55:39,782 : INFO : F1 score: 0.5516
+2024-08-12 18:56:12,144 : INFO : Average loss over validation batches: 0.7096
+2024-08-12 18:56:12,144 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 18:56:12,144 : INFO : Validation metrics:
+2024-08-12 18:56:12,144 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 18:56:12,149 : INFO : Accuracy: 0.4925
+2024-08-12 18:56:12,149 : INFO : Precision: 0.4925
+2024-08-12 18:56:12,149 : INFO : Recall: 1.0000
+2024-08-12 18:56:12,149 : INFO : F1 score: 0.6599
+2024-08-12 18:56:12,149 : INFO : Validation metric decreased (inf --> 0.709583).  Saving model ...
+2024-08-12 18:56:12,761 : INFO : Starting epoch 2
+2024-08-12 18:56:19,568 : INFO : Current training batch loss: 0.7144 in epoch 2
+2024-08-12 18:56:36,597 : INFO : Current training batch loss: 0.6910 in epoch 2
+2024-08-12 18:56:53,636 : INFO : Current training batch loss: 0.6933 in epoch 2
+2024-08-12 18:57:10,677 : INFO : Current training batch loss: 0.6944 in epoch 2
+2024-08-12 18:57:27,727 : INFO : Current training batch loss: 0.6968 in epoch 2
+2024-08-12 18:57:44,774 : INFO : Current training batch loss: 0.6942 in epoch 2
+2024-08-12 18:58:01,818 : INFO : Current training batch loss: 0.6910 in epoch 2
+2024-08-12 18:58:18,883 : INFO : Current training batch loss: 0.6984 in epoch 2
+2024-08-12 18:58:35,943 : INFO : Current training batch loss: 0.6986 in epoch 2
+2024-08-12 18:58:53,002 : INFO : Current training batch loss: 0.6940 in epoch 2
+2024-08-12 18:59:10,077 : INFO : Current training batch loss: 0.6896 in epoch 2
+2024-08-12 18:59:27,137 : INFO : Current training batch loss: 0.6930 in epoch 2
+2024-08-12 18:59:44,192 : INFO : Current training batch loss: 0.6932 in epoch 2
+2024-08-12 19:00:01,251 : INFO : Current training batch loss: 0.6913 in epoch 2
+2024-08-12 19:00:18,323 : INFO : Current training batch loss: 0.6888 in epoch 2
+2024-08-12 19:00:22,081 : INFO : Epoch finished, average loss over training batches: 0.6941
+2024-08-12 19:00:22,082 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:00:22,082 : INFO : Training metrics:
+2024-08-12 19:00:22,082 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:00:22,583 : INFO : Accuracy: 0.4977
+2024-08-12 19:00:22,583 : INFO : Precision: 0.5002
+2024-08-12 19:00:22,583 : INFO : Recall: 0.5060
+2024-08-12 19:00:22,583 : INFO : F1 score: 0.5031
+2024-08-12 19:00:55,041 : INFO : Average loss over validation batches: 0.6902
+2024-08-12 19:00:55,042 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:00:55,042 : INFO : Validation metrics:
+2024-08-12 19:00:55,042 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:00:55,047 : INFO : Accuracy: 0.4925
+2024-08-12 19:00:55,047 : INFO : Precision: 0.4925
+2024-08-12 19:00:55,047 : INFO : Recall: 1.0000
+2024-08-12 19:00:55,047 : INFO : F1 score: 0.6599
+2024-08-12 19:00:55,047 : INFO : Validation metric decreased (0.709583 --> 0.690209).  Saving model ...
+2024-08-12 19:00:55,648 : INFO : Starting epoch 3
+2024-08-12 19:01:08,429 : INFO : Current training batch loss: 0.6936 in epoch 3
+2024-08-12 19:01:25,466 : INFO : Current training batch loss: 0.6959 in epoch 3
+2024-08-12 19:01:42,515 : INFO : Current training batch loss: 0.6900 in epoch 3
+2024-08-12 19:01:59,568 : INFO : Current training batch loss: 0.6901 in epoch 3
+2024-08-12 19:02:16,633 : INFO : Current training batch loss: 0.6821 in epoch 3
+2024-08-12 19:02:33,680 : INFO : Current training batch loss: 0.6940 in epoch 3
+2024-08-12 19:02:50,699 : INFO : Current training batch loss: 0.6956 in epoch 3
+2024-08-12 19:03:07,726 : INFO : Current training batch loss: 0.6976 in epoch 3
+2024-08-12 19:03:24,742 : INFO : Current training batch loss: 0.6897 in epoch 3
+2024-08-12 19:03:41,761 : INFO : Current training batch loss: 0.6908 in epoch 3
+2024-08-12 19:03:58,770 : INFO : Current training batch loss: 0.6904 in epoch 3
+2024-08-12 19:04:15,788 : INFO : Current training batch loss: 0.6942 in epoch 3
+2024-08-12 19:04:32,796 : INFO : Current training batch loss: 0.6933 in epoch 3
+2024-08-12 19:04:49,822 : INFO : Current training batch loss: 0.6914 in epoch 3
+2024-08-12 19:05:04,629 : INFO : Epoch finished, average loss over training batches: 0.6930
+2024-08-12 19:05:04,630 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:05:04,630 : INFO : Training metrics:
+2024-08-12 19:05:04,630 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:05:05,130 : INFO : Accuracy: 0.5019
+2024-08-12 19:05:05,130 : INFO : Precision: 0.5067
+2024-08-12 19:05:05,130 : INFO : Recall: 0.3288
+2024-08-12 19:05:05,130 : INFO : F1 score: 0.3988
+2024-08-12 19:05:37,391 : INFO : Average loss over validation batches: 0.6931
+2024-08-12 19:05:37,391 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:05:37,391 : INFO : Validation metrics:
+2024-08-12 19:05:37,391 : INFO : ----------------------------------------------------------------------------------------------------
+/home/ralf/language_models/.venv/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+2024-08-12 19:05:37,404 : INFO : Accuracy: 0.5075
+2024-08-12 19:05:37,404 : INFO : Precision: 0.0000
+2024-08-12 19:05:37,404 : INFO : Recall: 0.0000
+2024-08-12 19:05:37,404 : INFO : F1 score: 0.0000
+2024-08-12 19:05:37,404 : INFO : EarlyStopping counter: 1 out of 2
+2024-08-12 19:05:37,404 : INFO : Last epoch reached, validation loss was better before, loading best model during training.
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 19:05:38,137 : INFO : Loading model from /data/language_models/pretrained_models_downstreaming/stanford_imdb/electra_base_discriminator/current_split_model/checkpoint.pth
+2024-08-12 19:06:10,713 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:06:10,713 : INFO : Validation metrics after reloading the model before ending this training:
+2024-08-12 19:06:10,713 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:06:10,718 : INFO : Accuracy: 0.4925
+2024-08-12 19:06:10,719 : INFO : Precision: 0.4925
+2024-08-12 19:06:10,719 : INFO : Recall: 1.0000
+2024-08-12 19:06:10,719 : INFO : F1 score: 0.6599
+2024-08-12 19:06:10,719 : INFO : Determined score from best model, ending training.
+2024-08-12 19:06:10,720 : INFO : Split 2 is finished, the score is: 0.6599
+2024-08-12 19:06:10,720 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:06:10,720 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:06:10,720 : INFO : Starting training for split 3
+2024-08-12 19:06:10,864 : INFO : Occurence of labels for training split: (array([0, 1]), array([9346, 9404]))
+2024-08-12 19:06:10,866 : INFO : Occurence of labels for validation split: (array([0, 1]), array([3154, 3096]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 19:06:11,533 : INFO : Starting epoch 1
+2024-08-12 19:06:12,400 : INFO : Current training batch loss: 0.6950 in epoch 1
+2024-08-12 19:06:29,622 : INFO : Current training batch loss: 0.5489 in epoch 1
+2024-08-12 19:06:46,861 : INFO : Current training batch loss: 0.3656 in epoch 1
+2024-08-12 19:07:04,100 : INFO : Current training batch loss: 0.3839 in epoch 1
+2024-08-12 19:07:21,337 : INFO : Current training batch loss: 0.4378 in epoch 1
+2024-08-12 19:07:38,490 : INFO : Current training batch loss: 0.6949 in epoch 1
+2024-08-12 19:07:55,595 : INFO : Current training batch loss: 0.7839 in epoch 1
+2024-08-12 19:08:12,672 : INFO : Current training batch loss: 0.6933 in epoch 1
+2024-08-12 19:08:29,746 : INFO : Current training batch loss: 0.6908 in epoch 1
+2024-08-12 19:08:46,819 : INFO : Current training batch loss: 0.6907 in epoch 1
+2024-08-12 19:09:03,887 : INFO : Current training batch loss: 0.6971 in epoch 1
+2024-08-12 19:09:20,962 : INFO : Current training batch loss: 0.6948 in epoch 1
+2024-08-12 19:09:38,043 : INFO : Current training batch loss: 0.6934 in epoch 1
+2024-08-12 19:09:55,106 : INFO : Current training batch loss: 0.6932 in epoch 1
+2024-08-12 19:10:12,185 : INFO : Current training batch loss: 0.6933 in epoch 1
+2024-08-12 19:10:21,908 : INFO : Epoch finished, average loss over training batches: 0.6522
+2024-08-12 19:10:21,909 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:10:21,909 : INFO : Training metrics:
+2024-08-12 19:10:21,909 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:10:22,420 : INFO : Accuracy: 0.5737
+2024-08-12 19:10:22,421 : INFO : Precision: 0.5748
+2024-08-12 19:10:22,421 : INFO : Recall: 0.5768
+2024-08-12 19:10:22,421 : INFO : F1 score: 0.5758
+2024-08-12 19:10:54,966 : INFO : Average loss over validation batches: 0.7064
+2024-08-12 19:10:54,966 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:10:54,966 : INFO : Validation metrics:
+2024-08-12 19:10:54,966 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:10:54,971 : INFO : Accuracy: 0.4954
+2024-08-12 19:10:54,971 : INFO : Precision: 0.4954
+2024-08-12 19:10:54,971 : INFO : Recall: 1.0000
+2024-08-12 19:10:54,971 : INFO : F1 score: 0.6625
+2024-08-12 19:10:54,971 : INFO : Validation metric decreased (inf --> 0.706426).  Saving model ...
+2024-08-12 19:10:55,586 : INFO : Starting epoch 2
+2024-08-12 19:11:02,410 : INFO : Current training batch loss: 0.7178 in epoch 2
+2024-08-12 19:11:19,478 : INFO : Current training batch loss: 0.6899 in epoch 2
+2024-08-12 19:11:36,558 : INFO : Current training batch loss: 0.6933 in epoch 2
+2024-08-12 19:11:53,643 : INFO : Current training batch loss: 0.6942 in epoch 2
+2024-08-12 19:12:10,730 : INFO : Current training batch loss: 0.6967 in epoch 2
+2024-08-12 19:12:27,828 : INFO : Current training batch loss: 0.6792 in epoch 2
+2024-08-12 19:12:44,902 : INFO : Current training batch loss: 0.6933 in epoch 2
+2024-08-12 19:13:01,946 : INFO : Current training batch loss: 0.6918 in epoch 2
+2024-08-12 19:13:18,988 : INFO : Current training batch loss: 0.6932 in epoch 2
+2024-08-12 19:13:36,032 : INFO : Current training batch loss: 0.6921 in epoch 2
+2024-08-12 19:13:53,068 : INFO : Current training batch loss: 0.6934 in epoch 2
+2024-08-12 19:14:10,115 : INFO : Current training batch loss: 0.6933 in epoch 2
+2024-08-12 19:14:27,150 : INFO : Current training batch loss: 0.6935 in epoch 2
+2024-08-12 19:14:44,190 : INFO : Current training batch loss: 0.6912 in epoch 2
+2024-08-12 19:15:01,233 : INFO : Current training batch loss: 0.6902 in epoch 2
+2024-08-12 19:15:04,975 : INFO : Epoch finished, average loss over training batches: 0.6941
+2024-08-12 19:15:04,975 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:15:04,975 : INFO : Training metrics:
+2024-08-12 19:15:04,975 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:15:05,524 : INFO : Accuracy: 0.5020
+2024-08-12 19:15:05,524 : INFO : Precision: 0.5041
+2024-08-12 19:15:05,524 : INFO : Recall: 0.4291
+2024-08-12 19:15:05,524 : INFO : F1 score: 0.4636
+2024-08-12 19:15:37,938 : INFO : Average loss over validation batches: 0.6979
+2024-08-12 19:15:37,938 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:15:37,938 : INFO : Validation metrics:
+2024-08-12 19:15:37,938 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:15:37,943 : INFO : Accuracy: 0.4954
+2024-08-12 19:15:37,943 : INFO : Precision: 0.4954
+2024-08-12 19:15:37,943 : INFO : Recall: 1.0000
+2024-08-12 19:15:37,943 : INFO : F1 score: 0.6625
+2024-08-12 19:15:37,943 : INFO : Validation metric decreased (0.706426 --> 0.697923).  Saving model ...
+2024-08-12 19:15:38,553 : INFO : Starting epoch 3
+2024-08-12 19:15:51,326 : INFO : Current training batch loss: 0.6871 in epoch 3
+2024-08-12 19:16:08,352 : INFO : Current training batch loss: 0.6933 in epoch 3
+2024-08-12 19:16:25,387 : INFO : Current training batch loss: 0.6900 in epoch 3
+2024-08-12 19:16:42,420 : INFO : Current training batch loss: 0.6931 in epoch 3
+2024-08-12 19:16:59,458 : INFO : Current training batch loss: 0.6913 in epoch 3
+2024-08-12 19:17:16,502 : INFO : Current training batch loss: 0.6937 in epoch 3
+2024-08-12 19:17:33,542 : INFO : Current training batch loss: 0.6881 in epoch 3
+2024-08-12 19:17:50,577 : INFO : Current training batch loss: 0.6918 in epoch 3
+2024-08-12 19:18:07,614 : INFO : Current training batch loss: 0.6934 in epoch 3
+2024-08-12 19:18:24,654 : INFO : Current training batch loss: 0.6927 in epoch 3
+2024-08-12 19:18:41,686 : INFO : Current training batch loss: 0.6928 in epoch 3
+2024-08-12 19:18:58,727 : INFO : Current training batch loss: 0.6933 in epoch 3
+2024-08-12 19:19:15,761 : INFO : Current training batch loss: 0.6932 in epoch 3
+2024-08-12 19:19:32,800 : INFO : Current training batch loss: 0.6921 in epoch 3
+2024-08-12 19:19:47,614 : INFO : Epoch finished, average loss over training batches: 0.6937
+2024-08-12 19:19:47,614 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:19:47,614 : INFO : Training metrics:
+2024-08-12 19:19:47,614 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:19:48,161 : INFO : Accuracy: 0.4945
+2024-08-12 19:19:48,161 : INFO : Precision: 0.4934
+2024-08-12 19:19:48,161 : INFO : Recall: 0.2955
+2024-08-12 19:19:48,161 : INFO : F1 score: 0.3696
+2024-08-12 19:20:20,585 : INFO : Average loss over validation batches: 0.6931
+2024-08-12 19:20:20,586 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:20:20,586 : INFO : Validation metrics:
+2024-08-12 19:20:20,586 : INFO : ----------------------------------------------------------------------------------------------------
+/home/ralf/language_models/.venv/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+2024-08-12 19:20:20,591 : INFO : Accuracy: 0.5046
+2024-08-12 19:20:20,591 : INFO : Precision: 0.0000
+2024-08-12 19:20:20,591 : INFO : Recall: 0.0000
+2024-08-12 19:20:20,591 : INFO : F1 score: 0.0000
+2024-08-12 19:20:20,591 : INFO : Validation metric decreased (0.697923 --> 0.693133).  Saving model ...
+2024-08-12 19:20:21,198 : INFO : Split 3 is finished, the score is: 0.0000
+2024-08-12 19:20:21,198 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:20:21,198 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:20:21,198 : INFO : Starting training for split 4
+2024-08-12 19:20:21,207 : INFO : Occurence of labels for training split: (array([0, 1]), array([9421, 9329]))
+2024-08-12 19:20:21,208 : INFO : Occurence of labels for validation split: (array([0, 1]), array([3079, 3171]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 19:20:21,926 : INFO : Starting epoch 1
+2024-08-12 19:20:22,790 : INFO : Current training batch loss: 0.6950 in epoch 1
+2024-08-12 19:20:39,994 : INFO : Current training batch loss: 0.4681 in epoch 1
+2024-08-12 19:20:57,215 : INFO : Current training batch loss: 0.4034 in epoch 1
+2024-08-12 19:21:14,443 : INFO : Current training batch loss: 0.7756 in epoch 1
+2024-08-12 19:21:31,683 : INFO : Current training batch loss: 0.6116 in epoch 1
+2024-08-12 19:21:48,911 : INFO : Current training batch loss: 0.5160 in epoch 1
+2024-08-12 19:22:06,128 : INFO : Current training batch loss: 0.6988 in epoch 1
+2024-08-12 19:22:23,346 : INFO : Current training batch loss: 0.4905 in epoch 1
+2024-08-12 19:22:40,432 : INFO : Current training batch loss: 0.6906 in epoch 1
+2024-08-12 19:22:57,445 : INFO : Current training batch loss: 0.6961 in epoch 1
+2024-08-12 19:23:14,446 : INFO : Current training batch loss: 0.6960 in epoch 1
+2024-08-12 19:23:31,452 : INFO : Current training batch loss: 0.6909 in epoch 1
+2024-08-12 19:23:48,457 : INFO : Current training batch loss: 0.6929 in epoch 1
+2024-08-12 19:24:05,467 : INFO : Current training batch loss: 0.6923 in epoch 1
+2024-08-12 19:24:22,465 : INFO : Current training batch loss: 0.6951 in epoch 1
+2024-08-12 19:24:32,163 : INFO : Epoch finished, average loss over training batches: 0.5886
+2024-08-12 19:24:32,164 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:24:32,164 : INFO : Training metrics:
+2024-08-12 19:24:32,164 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:24:32,669 : INFO : Accuracy: 0.6332
+2024-08-12 19:24:32,669 : INFO : Precision: 0.6320
+2024-08-12 19:24:32,669 : INFO : Recall: 0.6288
+2024-08-12 19:24:32,669 : INFO : F1 score: 0.6304
+2024-08-12 19:25:04,881 : INFO : Average loss over validation batches: 0.6935
+2024-08-12 19:25:04,882 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:25:04,882 : INFO : Validation metrics:
+2024-08-12 19:25:04,882 : INFO : ----------------------------------------------------------------------------------------------------
+/home/ralf/language_models/.venv/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+2024-08-12 19:25:04,894 : INFO : Accuracy: 0.4926
+2024-08-12 19:25:04,894 : INFO : Precision: 0.0000
+2024-08-12 19:25:04,894 : INFO : Recall: 0.0000
+2024-08-12 19:25:04,894 : INFO : F1 score: 0.0000
+2024-08-12 19:25:04,894 : INFO : Validation metric decreased (inf --> 0.693494).  Saving model ...
+2024-08-12 19:25:05,509 : INFO : Starting epoch 2
+2024-08-12 19:25:12,312 : INFO : Current training batch loss: 0.6885 in epoch 2
+2024-08-12 19:25:29,317 : INFO : Current training batch loss: 0.6935 in epoch 2
+2024-08-12 19:25:46,335 : INFO : Current training batch loss: 0.6934 in epoch 2
+2024-08-12 19:26:03,344 : INFO : Current training batch loss: 0.6950 in epoch 2
+2024-08-12 19:26:20,359 : INFO : Current training batch loss: 0.6961 in epoch 2
+2024-08-12 19:26:37,372 : INFO : Current training batch loss: 0.6922 in epoch 2
+2024-08-12 19:26:54,381 : INFO : Current training batch loss: 0.6940 in epoch 2
+2024-08-12 19:27:11,390 : INFO : Current training batch loss: 0.6916 in epoch 2
+2024-08-12 19:27:28,400 : INFO : Current training batch loss: 0.6932 in epoch 2
+2024-08-12 19:27:45,409 : INFO : Current training batch loss: 0.6928 in epoch 2
+2024-08-12 19:28:02,408 : INFO : Current training batch loss: 0.6933 in epoch 2
+2024-08-12 19:28:19,413 : INFO : Current training batch loss: 0.6942 in epoch 2
+2024-08-12 19:28:36,429 : INFO : Current training batch loss: 0.6950 in epoch 2
+2024-08-12 19:28:53,432 : INFO : Current training batch loss: 0.6971 in epoch 2
+2024-08-12 19:29:10,436 : INFO : Current training batch loss: 0.6909 in epoch 2
+2024-08-12 19:29:14,179 : INFO : Epoch finished, average loss over training batches: 0.6937
+2024-08-12 19:29:14,180 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:29:14,180 : INFO : Training metrics:
+2024-08-12 19:29:14,180 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:29:14,683 : INFO : Accuracy: 0.4979
+2024-08-12 19:29:14,683 : INFO : Precision: 0.4949
+2024-08-12 19:29:14,683 : INFO : Recall: 0.4447
+2024-08-12 19:29:14,683 : INFO : F1 score: 0.4685
+2024-08-12 19:29:46,890 : INFO : Average loss over validation batches: 0.6940
+2024-08-12 19:29:46,890 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:29:46,890 : INFO : Validation metrics:
+2024-08-12 19:29:46,890 : INFO : ----------------------------------------------------------------------------------------------------
+/home/ralf/language_models/.venv/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+2024-08-12 19:29:46,903 : INFO : Accuracy: 0.4926
+2024-08-12 19:29:46,903 : INFO : Precision: 0.0000
+2024-08-12 19:29:46,903 : INFO : Recall: 0.0000
+2024-08-12 19:29:46,903 : INFO : F1 score: 0.0000
+2024-08-12 19:29:46,903 : INFO : EarlyStopping counter: 1 out of 2
+2024-08-12 19:29:46,903 : INFO : Starting epoch 3
+2024-08-12 19:29:59,661 : INFO : Current training batch loss: 0.6976 in epoch 3
+2024-08-12 19:30:16,668 : INFO : Current training batch loss: 0.6941 in epoch 3
+2024-08-12 19:30:33,682 : INFO : Current training batch loss: 0.6921 in epoch 3
+2024-08-12 19:30:50,703 : INFO : Current training batch loss: 0.6935 in epoch 3
+2024-08-12 19:31:07,720 : INFO : Current training batch loss: 0.6916 in epoch 3
+2024-08-12 19:31:24,738 : INFO : Current training batch loss: 0.6943 in epoch 3
+2024-08-12 19:31:41,747 : INFO : Current training batch loss: 0.6901 in epoch 3
+2024-08-12 19:31:58,757 : INFO : Current training batch loss: 0.6920 in epoch 3
+2024-08-12 19:32:15,768 : INFO : Current training batch loss: 0.6936 in epoch 3
+2024-08-12 19:32:32,779 : INFO : Current training batch loss: 0.6923 in epoch 3
+2024-08-12 19:32:49,788 : INFO : Current training batch loss: 0.6931 in epoch 3
+2024-08-12 19:33:06,800 : INFO : Current training batch loss: 0.6931 in epoch 3
+2024-08-12 19:33:23,821 : INFO : Current training batch loss: 0.6937 in epoch 3
+2024-08-12 19:33:40,833 : INFO : Current training batch loss: 0.6936 in epoch 3
+2024-08-12 19:33:55,631 : INFO : Epoch finished, average loss over training batches: 0.6934
+2024-08-12 19:33:55,632 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:33:55,632 : INFO : Training metrics:
+2024-08-12 19:33:55,632 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:33:56,197 : INFO : Accuracy: 0.4966
+2024-08-12 19:33:56,197 : INFO : Precision: 0.4908
+2024-08-12 19:33:56,197 : INFO : Recall: 0.3131
+2024-08-12 19:33:56,197 : INFO : F1 score: 0.3823
+2024-08-12 19:34:28,405 : INFO : Average loss over validation batches: 0.6932
+2024-08-12 19:34:28,406 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:34:28,406 : INFO : Validation metrics:
+2024-08-12 19:34:28,406 : INFO : ----------------------------------------------------------------------------------------------------
+/home/ralf/language_models/.venv/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+2024-08-12 19:34:28,418 : INFO : Accuracy: 0.4926
+2024-08-12 19:34:28,418 : INFO : Precision: 0.0000
+2024-08-12 19:34:28,418 : INFO : Recall: 0.0000
+2024-08-12 19:34:28,418 : INFO : F1 score: 0.0000
+2024-08-12 19:34:28,418 : INFO : Validation metric decreased (0.693494 --> 0.693212).  Saving model ...
+2024-08-12 19:34:29,040 : INFO : Split 4 is finished, the score is: 0.0000
+2024-08-12 19:34:29,040 : INFO : ----------------------------------------------------------------------------------------------------
+[I 2024-08-12 19:34:29,041] Trial 0 finished with value: 0.16498713550600344 and parameters: {}. Best is trial 0 with value: 0.16498713550600344.
+2024-08-12 19:34:29,042 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:34:29,042 : INFO : Starting training for split 1
+2024-08-12 19:34:29,049 : INFO : Occurence of labels for training split: (array([0, 1]), array([9405, 9345]))
+2024-08-12 19:34:29,051 : INFO : Occurence of labels for validation split: (array([0, 1]), array([3095, 3155]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 19:34:29,774 : INFO : Starting epoch 1
+2024-08-12 19:34:30,639 : INFO : Current training batch loss: 0.6932 in epoch 1
+2024-08-12 19:34:47,861 : INFO : Current training batch loss: 0.6803 in epoch 1
+2024-08-12 19:35:05,087 : INFO : Current training batch loss: 0.3759 in epoch 1
+2024-08-12 19:35:22,320 : INFO : Current training batch loss: 0.1848 in epoch 1
+2024-08-12 19:35:39,550 : INFO : Current training batch loss: 0.2073 in epoch 1
+2024-08-12 19:35:56,784 : INFO : Current training batch loss: 0.1492 in epoch 1
+2024-08-12 19:36:14,005 : INFO : Current training batch loss: 0.1949 in epoch 1
+2024-08-12 19:36:31,233 : INFO : Current training batch loss: 0.2112 in epoch 1
+2024-08-12 19:36:48,480 : INFO : Current training batch loss: 0.0964 in epoch 1
+2024-08-12 19:37:05,709 : INFO : Current training batch loss: 0.0908 in epoch 1
+2024-08-12 19:37:22,949 : INFO : Current training batch loss: 0.0900 in epoch 1
+2024-08-12 19:37:40,182 : INFO : Current training batch loss: 0.2142 in epoch 1
+2024-08-12 19:37:57,424 : INFO : Current training batch loss: 0.0547 in epoch 1
+2024-08-12 19:38:14,642 : INFO : Current training batch loss: 0.1369 in epoch 1
+2024-08-12 19:38:31,900 : INFO : Current training batch loss: 0.0845 in epoch 1
+2024-08-12 19:38:41,734 : INFO : Epoch finished, average loss over training batches: 0.2387
+2024-08-12 19:38:41,735 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:38:41,735 : INFO : Training metrics:
+2024-08-12 19:38:41,735 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:38:42,242 : INFO : Accuracy: 0.9010
+2024-08-12 19:38:42,242 : INFO : Precision: 0.9410
+2024-08-12 19:38:42,242 : INFO : Recall: 0.8549
+2024-08-12 19:38:42,242 : INFO : F1 score: 0.8959
+2024-08-12 19:39:15,354 : INFO : Average loss over validation batches: 0.1378
+2024-08-12 19:39:15,355 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:39:15,355 : INFO : Validation metrics:
+2024-08-12 19:39:15,355 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:39:15,360 : INFO : Accuracy: 0.9512
+2024-08-12 19:39:15,360 : INFO : Precision: 0.9561
+2024-08-12 19:39:15,360 : INFO : Recall: 0.9468
+2024-08-12 19:39:15,360 : INFO : F1 score: 0.9514
+2024-08-12 19:39:15,360 : INFO : Validation metric decreased (inf --> 0.137772).  Saving model ...
+2024-08-12 19:39:15,974 : INFO : Starting epoch 2
+2024-08-12 19:39:22,878 : INFO : Current training batch loss: 0.1356 in epoch 2
+2024-08-12 19:39:40,132 : INFO : Current training batch loss: 0.2930 in epoch 2
+2024-08-12 19:39:57,382 : INFO : Current training batch loss: 0.0906 in epoch 2
+2024-08-12 19:40:14,627 : INFO : Current training batch loss: 0.0352 in epoch 2
+2024-08-12 19:40:31,873 : INFO : Current training batch loss: 0.1138 in epoch 2
+2024-08-12 19:40:49,105 : INFO : Current training batch loss: 0.1447 in epoch 2
+2024-08-12 19:41:06,334 : INFO : Current training batch loss: 0.0696 in epoch 2
+2024-08-12 19:41:23,602 : INFO : Current training batch loss: 0.0745 in epoch 2
+2024-08-12 19:41:40,857 : INFO : Current training batch loss: 0.0075 in epoch 2
+2024-08-12 19:41:58,103 : INFO : Current training batch loss: 0.0599 in epoch 2
+2024-08-12 19:42:15,349 : INFO : Current training batch loss: 0.1165 in epoch 2
+2024-08-12 19:42:32,609 : INFO : Current training batch loss: 0.0423 in epoch 2
+2024-08-12 19:42:49,854 : INFO : Current training batch loss: 0.0176 in epoch 2
+2024-08-12 19:43:07,109 : INFO : Current training batch loss: 0.0467 in epoch 2
+2024-08-12 19:43:24,385 : INFO : Current training batch loss: 0.0235 in epoch 2
+2024-08-12 19:43:28,189 : INFO : Epoch finished, average loss over training batches: 0.0794
+2024-08-12 19:43:28,189 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:43:28,189 : INFO : Training metrics:
+2024-08-12 19:43:28,189 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:43:28,697 : INFO : Accuracy: 0.9750
+2024-08-12 19:43:28,697 : INFO : Precision: 0.9745
+2024-08-12 19:43:28,697 : INFO : Recall: 0.9755
+2024-08-12 19:43:28,697 : INFO : F1 score: 0.9750
+2024-08-12 19:44:01,887 : INFO : Average loss over validation batches: 0.1468
+2024-08-12 19:44:01,887 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:44:01,887 : INFO : Validation metrics:
+2024-08-12 19:44:01,887 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:44:01,893 : INFO : Accuracy: 0.9530
+2024-08-12 19:44:01,893 : INFO : Precision: 0.9503
+2024-08-12 19:44:01,893 : INFO : Recall: 0.9569
+2024-08-12 19:44:01,893 : INFO : F1 score: 0.9536
+2024-08-12 19:44:01,893 : INFO : EarlyStopping counter: 1 out of 2
+2024-08-12 19:44:01,893 : INFO : Starting epoch 3
+2024-08-12 19:44:14,835 : INFO : Current training batch loss: 0.0621 in epoch 3
+2024-08-12 19:44:32,100 : INFO : Current training batch loss: 0.1075 in epoch 3
+2024-08-12 19:44:49,358 : INFO : Current training batch loss: 0.0082 in epoch 3
+2024-08-12 19:45:06,605 : INFO : Current training batch loss: 0.0298 in epoch 3
+2024-08-12 19:45:23,861 : INFO : Current training batch loss: 0.1012 in epoch 3
+2024-08-12 19:45:41,110 : INFO : Current training batch loss: 0.1043 in epoch 3
+2024-08-12 19:45:58,374 : INFO : Current training batch loss: 0.0055 in epoch 3
+2024-08-12 19:46:15,649 : INFO : Current training batch loss: 0.0054 in epoch 3
+2024-08-12 19:46:32,903 : INFO : Current training batch loss: 0.0057 in epoch 3
+2024-08-12 19:46:50,166 : INFO : Current training batch loss: 0.1408 in epoch 3
+2024-08-12 19:47:07,411 : INFO : Current training batch loss: 0.0061 in epoch 3
+2024-08-12 19:47:24,668 : INFO : Current training batch loss: 0.0064 in epoch 3
+2024-08-12 19:47:41,920 : INFO : Current training batch loss: 0.0063 in epoch 3
+2024-08-12 19:47:59,186 : INFO : Current training batch loss: 0.0048 in epoch 3
+2024-08-12 19:48:14,207 : INFO : Epoch finished, average loss over training batches: 0.0358
+2024-08-12 19:48:14,208 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:48:14,208 : INFO : Training metrics:
+2024-08-12 19:48:14,208 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:48:14,714 : INFO : Accuracy: 0.9917
+2024-08-12 19:48:14,714 : INFO : Precision: 0.9918
+2024-08-12 19:48:14,714 : INFO : Recall: 0.9917
+2024-08-12 19:48:14,714 : INFO : F1 score: 0.9917
+2024-08-12 19:48:47,896 : INFO : Average loss over validation batches: 0.1634
+2024-08-12 19:48:47,896 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:48:47,896 : INFO : Validation metrics:
+2024-08-12 19:48:47,896 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:48:47,901 : INFO : Accuracy: 0.9517
+2024-08-12 19:48:47,902 : INFO : Precision: 0.9582
+2024-08-12 19:48:47,902 : INFO : Recall: 0.9455
+2024-08-12 19:48:47,902 : INFO : F1 score: 0.9518
+2024-08-12 19:48:47,902 : INFO : EarlyStopping counter: 2 out of 2
+2024-08-12 19:48:47,902 : INFO : Early stopping, loading best model from before and determine score...
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 19:48:48,768 : INFO : Loading model from /data/language_models/pretrained_models_downstreaming/stanford_imdb/electra_base_discriminator/current_split_model/checkpoint.pth
+2024-08-12 19:49:22,040 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:49:22,040 : INFO : Validation metrics after reloading the model before ending this training:
+2024-08-12 19:49:22,040 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:49:22,045 : INFO : Accuracy: 0.9512
+2024-08-12 19:49:22,045 : INFO : Precision: 0.9561
+2024-08-12 19:49:22,045 : INFO : Recall: 0.9468
+2024-08-12 19:49:22,045 : INFO : F1 score: 0.9514
+2024-08-12 19:49:22,045 : INFO : Determined score from best model, ending training.
+2024-08-12 19:49:22,047 : INFO : Split 1 is finished, the score is: 0.9514
+2024-08-12 19:49:22,047 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:49:22,047 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:49:22,047 : INFO : Starting training for split 2
+2024-08-12 19:49:22,190 : INFO : Occurence of labels for training split: (array([0, 1]), array([9328, 9422]))
+2024-08-12 19:49:22,191 : INFO : Occurence of labels for validation split: (array([0, 1]), array([3172, 3078]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 19:49:22,889 : INFO : Starting epoch 1
+2024-08-12 19:49:23,755 : INFO : Current training batch loss: 0.6974 in epoch 1
+2024-08-12 19:49:40,966 : INFO : Current training batch loss: 0.6773 in epoch 1
+2024-08-12 19:49:58,196 : INFO : Current training batch loss: 0.4203 in epoch 1
+2024-08-12 19:50:15,433 : INFO : Current training batch loss: 0.1438 in epoch 1
+2024-08-12 19:50:32,680 : INFO : Current training batch loss: 0.1349 in epoch 1
+2024-08-12 19:50:49,922 : INFO : Current training batch loss: 0.1570 in epoch 1
+2024-08-12 19:51:07,155 : INFO : Current training batch loss: 0.2132 in epoch 1
+2024-08-12 19:51:24,387 : INFO : Current training batch loss: 0.2065 in epoch 1
+2024-08-12 19:51:41,637 : INFO : Current training batch loss: 0.1216 in epoch 1
+2024-08-12 19:51:58,863 : INFO : Current training batch loss: 0.1070 in epoch 1
+2024-08-12 19:52:16,096 : INFO : Current training batch loss: 0.0879 in epoch 1
+2024-08-12 19:52:33,328 : INFO : Current training batch loss: 0.1921 in epoch 1
+2024-08-12 19:52:50,574 : INFO : Current training batch loss: 0.0680 in epoch 1
+2024-08-12 19:53:07,797 : INFO : Current training batch loss: 0.1339 in epoch 1
+2024-08-12 19:53:25,050 : INFO : Current training batch loss: 0.1346 in epoch 1
+2024-08-12 19:53:34,879 : INFO : Epoch finished, average loss over training batches: 0.2472
+2024-08-12 19:53:34,880 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:53:34,880 : INFO : Training metrics:
+2024-08-12 19:53:34,880 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:53:35,387 : INFO : Accuracy: 0.8974
+2024-08-12 19:53:35,387 : INFO : Precision: 0.8921
+2024-08-12 19:53:35,387 : INFO : Recall: 0.9054
+2024-08-12 19:53:35,387 : INFO : F1 score: 0.8987
+2024-08-12 19:54:08,483 : INFO : Average loss over validation batches: 0.1384
+2024-08-12 19:54:08,483 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:54:08,483 : INFO : Validation metrics:
+2024-08-12 19:54:08,483 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:54:08,489 : INFO : Accuracy: 0.9494
+2024-08-12 19:54:08,489 : INFO : Precision: 0.9490
+2024-08-12 19:54:08,489 : INFO : Recall: 0.9483
+2024-08-12 19:54:08,489 : INFO : F1 score: 0.9487
+2024-08-12 19:54:08,489 : INFO : Validation metric decreased (inf --> 0.138414).  Saving model ...
+2024-08-12 19:54:09,107 : INFO : Starting epoch 2
+2024-08-12 19:54:15,997 : INFO : Current training batch loss: 0.1305 in epoch 2
+2024-08-12 19:54:33,215 : INFO : Current training batch loss: 0.1189 in epoch 2
+2024-08-12 19:54:50,456 : INFO : Current training batch loss: 0.0551 in epoch 2
+2024-08-12 19:55:07,683 : INFO : Current training batch loss: 0.1210 in epoch 2
+2024-08-12 19:55:24,914 : INFO : Current training batch loss: 0.0996 in epoch 2
+2024-08-12 19:55:42,144 : INFO : Current training batch loss: 0.1090 in epoch 2
+2024-08-12 19:55:59,363 : INFO : Current training batch loss: 0.0583 in epoch 2
+2024-08-12 19:56:16,610 : INFO : Current training batch loss: 0.1010 in epoch 2
+2024-08-12 19:56:33,841 : INFO : Current training batch loss: 0.0074 in epoch 2
+2024-08-12 19:56:51,062 : INFO : Current training batch loss: 0.0660 in epoch 2
+2024-08-12 19:57:08,285 : INFO : Current training batch loss: 0.1099 in epoch 2
+2024-08-12 19:57:25,524 : INFO : Current training batch loss: 0.0301 in epoch 2
+2024-08-12 19:57:42,747 : INFO : Current training batch loss: 0.0415 in epoch 2
+2024-08-12 19:57:59,982 : INFO : Current training batch loss: 0.0515 in epoch 2
+2024-08-12 19:58:17,233 : INFO : Current training batch loss: 0.0248 in epoch 2
+2024-08-12 19:58:21,031 : INFO : Epoch finished, average loss over training batches: 0.0839
+2024-08-12 19:58:21,032 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:58:21,032 : INFO : Training metrics:
+2024-08-12 19:58:21,032 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:58:21,538 : INFO : Accuracy: 0.9746
+2024-08-12 19:58:21,538 : INFO : Precision: 0.9742
+2024-08-12 19:58:21,538 : INFO : Recall: 0.9752
+2024-08-12 19:58:21,538 : INFO : F1 score: 0.9747
+2024-08-12 19:58:54,639 : INFO : Average loss over validation batches: 0.1558
+2024-08-12 19:58:54,640 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:58:54,640 : INFO : Validation metrics:
+2024-08-12 19:58:54,640 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 19:58:54,646 : INFO : Accuracy: 0.9506
+2024-08-12 19:58:54,646 : INFO : Precision: 0.9485
+2024-08-12 19:58:54,646 : INFO : Recall: 0.9513
+2024-08-12 19:58:54,646 : INFO : F1 score: 0.9499
+2024-08-12 19:58:54,646 : INFO : EarlyStopping counter: 1 out of 2
+2024-08-12 19:58:54,646 : INFO : Starting epoch 3
+2024-08-12 19:59:07,577 : INFO : Current training batch loss: 0.0255 in epoch 3
+2024-08-12 19:59:24,804 : INFO : Current training batch loss: 0.0223 in epoch 3
+2024-08-12 19:59:42,058 : INFO : Current training batch loss: 0.0285 in epoch 3
+2024-08-12 19:59:59,310 : INFO : Current training batch loss: 0.0316 in epoch 3
+2024-08-12 20:00:16,561 : INFO : Current training batch loss: 0.0100 in epoch 3
+2024-08-12 20:00:33,805 : INFO : Current training batch loss: 0.0912 in epoch 3
+2024-08-12 20:00:51,057 : INFO : Current training batch loss: 0.0044 in epoch 3
+2024-08-12 20:01:08,331 : INFO : Current training batch loss: 0.0070 in epoch 3
+2024-08-12 20:01:25,591 : INFO : Current training batch loss: 0.0556 in epoch 3
+2024-08-12 20:01:42,858 : INFO : Current training batch loss: 0.1360 in epoch 3
+2024-08-12 20:02:00,113 : INFO : Current training batch loss: 0.0111 in epoch 3
+2024-08-12 20:02:17,372 : INFO : Current training batch loss: 0.0099 in epoch 3
+2024-08-12 20:02:34,616 : INFO : Current training batch loss: 0.0065 in epoch 3
+2024-08-12 20:02:51,896 : INFO : Current training batch loss: 0.0099 in epoch 3
+2024-08-12 20:03:06,939 : INFO : Epoch finished, average loss over training batches: 0.0368
+2024-08-12 20:03:06,940 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:03:06,940 : INFO : Training metrics:
+2024-08-12 20:03:06,940 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:03:07,447 : INFO : Accuracy: 0.9910
+2024-08-12 20:03:07,447 : INFO : Precision: 0.9910
+2024-08-12 20:03:07,447 : INFO : Recall: 0.9912
+2024-08-12 20:03:07,447 : INFO : F1 score: 0.9911
+2024-08-12 20:03:40,635 : INFO : Average loss over validation batches: 0.1736
+2024-08-12 20:03:40,635 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:03:40,635 : INFO : Validation metrics:
+2024-08-12 20:03:40,635 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:03:40,641 : INFO : Accuracy: 0.9501
+2024-08-12 20:03:40,641 : INFO : Precision: 0.9476
+2024-08-12 20:03:40,641 : INFO : Recall: 0.9513
+2024-08-12 20:03:40,641 : INFO : F1 score: 0.9494
+2024-08-12 20:03:40,641 : INFO : EarlyStopping counter: 2 out of 2
+2024-08-12 20:03:40,641 : INFO : Early stopping, loading best model from before and determine score...
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 20:03:41,291 : INFO : Loading model from /data/language_models/pretrained_models_downstreaming/stanford_imdb/electra_base_discriminator/current_split_model/checkpoint.pth
+2024-08-12 20:04:14,665 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:04:14,665 : INFO : Validation metrics after reloading the model before ending this training:
+2024-08-12 20:04:14,665 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:04:14,671 : INFO : Accuracy: 0.9494
+2024-08-12 20:04:14,671 : INFO : Precision: 0.9490
+2024-08-12 20:04:14,671 : INFO : Recall: 0.9483
+2024-08-12 20:04:14,671 : INFO : F1 score: 0.9487
+2024-08-12 20:04:14,671 : INFO : Determined score from best model, ending training.
+2024-08-12 20:04:14,672 : INFO : Split 2 is finished, the score is: 0.9487
+2024-08-12 20:04:14,672 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:04:14,672 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:04:14,672 : INFO : Starting training for split 3
+2024-08-12 20:04:14,730 : INFO : Occurence of labels for training split: (array([0, 1]), array([9346, 9404]))
+2024-08-12 20:04:14,731 : INFO : Occurence of labels for validation split: (array([0, 1]), array([3154, 3096]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 20:04:15,387 : INFO : Starting epoch 1
+2024-08-12 20:04:16,252 : INFO : Current training batch loss: 0.6968 in epoch 1
+2024-08-12 20:04:33,493 : INFO : Current training batch loss: 0.6849 in epoch 1
+2024-08-12 20:04:50,744 : INFO : Current training batch loss: 0.4755 in epoch 1
+2024-08-12 20:05:08,001 : INFO : Current training batch loss: 0.1049 in epoch 1
+2024-08-12 20:05:25,269 : INFO : Current training batch loss: 0.1786 in epoch 1
+2024-08-12 20:05:42,529 : INFO : Current training batch loss: 0.1900 in epoch 1
+2024-08-12 20:05:59,775 : INFO : Current training batch loss: 0.3055 in epoch 1
+2024-08-12 20:06:17,021 : INFO : Current training batch loss: 0.1771 in epoch 1
+2024-08-12 20:06:34,260 : INFO : Current training batch loss: 0.0893 in epoch 1
+2024-08-12 20:06:51,498 : INFO : Current training batch loss: 0.1032 in epoch 1
+2024-08-12 20:07:08,717 : INFO : Current training batch loss: 0.1326 in epoch 1
+2024-08-12 20:07:25,954 : INFO : Current training batch loss: 0.2068 in epoch 1
+2024-08-12 20:07:43,199 : INFO : Current training batch loss: 0.0659 in epoch 1
+2024-08-12 20:08:00,417 : INFO : Current training batch loss: 0.1557 in epoch 1
+2024-08-12 20:08:17,662 : INFO : Current training batch loss: 0.0932 in epoch 1
+2024-08-12 20:08:27,488 : INFO : Epoch finished, average loss over training batches: 0.2457
+2024-08-12 20:08:27,488 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:08:27,488 : INFO : Training metrics:
+2024-08-12 20:08:27,488 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:08:27,997 : INFO : Accuracy: 0.8982
+2024-08-12 20:08:27,997 : INFO : Precision: 0.8987
+2024-08-12 20:08:27,997 : INFO : Recall: 0.8983
+2024-08-12 20:08:27,997 : INFO : F1 score: 0.8985
+2024-08-12 20:09:01,078 : INFO : Average loss over validation batches: 0.1367
+2024-08-12 20:09:01,078 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:09:01,078 : INFO : Validation metrics:
+2024-08-12 20:09:01,078 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:09:01,083 : INFO : Accuracy: 0.9496
+2024-08-12 20:09:01,083 : INFO : Precision: 0.9458
+2024-08-12 20:09:01,084 : INFO : Recall: 0.9528
+2024-08-12 20:09:01,084 : INFO : F1 score: 0.9493
+2024-08-12 20:09:01,084 : INFO : Validation metric decreased (inf --> 0.136653).  Saving model ...
+2024-08-12 20:09:01,694 : INFO : Starting epoch 2
+2024-08-12 20:09:08,593 : INFO : Current training batch loss: 0.1318 in epoch 2
+2024-08-12 20:09:25,826 : INFO : Current training batch loss: 0.1101 in epoch 2
+2024-08-12 20:09:43,086 : INFO : Current training batch loss: 0.0379 in epoch 2
+2024-08-12 20:10:00,338 : INFO : Current training batch loss: 0.1042 in epoch 2
+2024-08-12 20:10:17,591 : INFO : Current training batch loss: 0.1080 in epoch 2
+2024-08-12 20:10:34,846 : INFO : Current training batch loss: 0.0157 in epoch 2
+2024-08-12 20:10:52,096 : INFO : Current training batch loss: 0.0100 in epoch 2
+2024-08-12 20:11:09,340 : INFO : Current training batch loss: 0.1663 in epoch 2
+2024-08-12 20:11:26,587 : INFO : Current training batch loss: 0.0442 in epoch 2
+2024-08-12 20:11:43,839 : INFO : Current training batch loss: 0.0079 in epoch 2
+2024-08-12 20:12:01,074 : INFO : Current training batch loss: 0.1275 in epoch 2
+2024-08-12 20:12:18,334 : INFO : Current training batch loss: 0.0225 in epoch 2
+2024-08-12 20:12:35,584 : INFO : Current training batch loss: 0.0660 in epoch 2
+2024-08-12 20:12:52,845 : INFO : Current training batch loss: 0.0535 in epoch 2
+2024-08-12 20:13:10,119 : INFO : Current training batch loss: 0.1174 in epoch 2
+2024-08-12 20:13:13,923 : INFO : Epoch finished, average loss over training batches: 0.0784
+2024-08-12 20:13:13,924 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:13:13,924 : INFO : Training metrics:
+2024-08-12 20:13:13,924 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:13:14,434 : INFO : Accuracy: 0.9756
+2024-08-12 20:13:14,435 : INFO : Precision: 0.9745
+2024-08-12 20:13:14,435 : INFO : Recall: 0.9768
+2024-08-12 20:13:14,435 : INFO : F1 score: 0.9757
+2024-08-12 20:13:47,622 : INFO : Average loss over validation batches: 0.1527
+2024-08-12 20:13:47,622 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:13:47,622 : INFO : Validation metrics:
+2024-08-12 20:13:47,622 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:13:47,628 : INFO : Accuracy: 0.9539
+2024-08-12 20:13:47,628 : INFO : Precision: 0.9567
+2024-08-12 20:13:47,628 : INFO : Recall: 0.9499
+2024-08-12 20:13:47,628 : INFO : F1 score: 0.9533
+2024-08-12 20:13:47,628 : INFO : EarlyStopping counter: 1 out of 2
+2024-08-12 20:13:47,628 : INFO : Starting epoch 3
+2024-08-12 20:14:00,579 : INFO : Current training batch loss: 0.0234 in epoch 3
+2024-08-12 20:14:17,833 : INFO : Current training batch loss: 0.0354 in epoch 3
+2024-08-12 20:14:35,112 : INFO : Current training batch loss: 0.0552 in epoch 3
+2024-08-12 20:14:52,383 : INFO : Current training batch loss: 0.0174 in epoch 3
+2024-08-12 20:15:09,653 : INFO : Current training batch loss: 0.0211 in epoch 3
+2024-08-12 20:15:26,913 : INFO : Current training batch loss: 0.0937 in epoch 3
+2024-08-12 20:15:44,173 : INFO : Current training batch loss: 0.0916 in epoch 3
+2024-08-12 20:16:01,430 : INFO : Current training batch loss: 0.1324 in epoch 3
+2024-08-12 20:16:18,696 : INFO : Current training batch loss: 0.0045 in epoch 3
+2024-08-12 20:16:35,954 : INFO : Current training batch loss: 0.0403 in epoch 3
+2024-08-12 20:16:53,211 : INFO : Current training batch loss: 0.0055 in epoch 3
+2024-08-12 20:17:10,480 : INFO : Current training batch loss: 0.0062 in epoch 3
+2024-08-12 20:17:27,728 : INFO : Current training batch loss: 0.0073 in epoch 3
+2024-08-12 20:17:44,998 : INFO : Current training batch loss: 0.0051 in epoch 3
+2024-08-12 20:18:00,021 : INFO : Epoch finished, average loss over training batches: 0.0356
+2024-08-12 20:18:00,022 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:18:00,022 : INFO : Training metrics:
+2024-08-12 20:18:00,022 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:18:00,532 : INFO : Accuracy: 0.9917
+2024-08-12 20:18:00,532 : INFO : Precision: 0.9912
+2024-08-12 20:18:00,532 : INFO : Recall: 0.9923
+2024-08-12 20:18:00,532 : INFO : F1 score: 0.9918
+2024-08-12 20:18:33,731 : INFO : Average loss over validation batches: 0.1691
+2024-08-12 20:18:33,731 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:18:33,731 : INFO : Validation metrics:
+2024-08-12 20:18:33,731 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:18:33,736 : INFO : Accuracy: 0.9515
+2024-08-12 20:18:33,736 : INFO : Precision: 0.9466
+2024-08-12 20:18:33,736 : INFO : Recall: 0.9561
+2024-08-12 20:18:33,736 : INFO : F1 score: 0.9513
+2024-08-12 20:18:33,737 : INFO : EarlyStopping counter: 2 out of 2
+2024-08-12 20:18:33,737 : INFO : Early stopping, loading best model from before and determine score...
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 20:18:34,420 : INFO : Loading model from /data/language_models/pretrained_models_downstreaming/stanford_imdb/electra_base_discriminator/current_split_model/checkpoint.pth
+2024-08-12 20:19:07,743 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:19:07,743 : INFO : Validation metrics after reloading the model before ending this training:
+2024-08-12 20:19:07,743 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:19:07,749 : INFO : Accuracy: 0.9496
+2024-08-12 20:19:07,749 : INFO : Precision: 0.9458
+2024-08-12 20:19:07,749 : INFO : Recall: 0.9528
+2024-08-12 20:19:07,749 : INFO : F1 score: 0.9493
+2024-08-12 20:19:07,749 : INFO : Determined score from best model, ending training.
+2024-08-12 20:19:07,753 : INFO : Split 3 is finished, the score is: 0.9493
+2024-08-12 20:19:07,753 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:19:07,753 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:19:07,753 : INFO : Starting training for split 4
+2024-08-12 20:19:07,761 : INFO : Occurence of labels for training split: (array([0, 1]), array([9421, 9329]))
+2024-08-12 20:19:07,762 : INFO : Occurence of labels for validation split: (array([0, 1]), array([3079, 3171]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 20:19:08,421 : INFO : Starting epoch 1
+2024-08-12 20:19:09,287 : INFO : Current training batch loss: 0.6869 in epoch 1
+2024-08-12 20:19:26,533 : INFO : Current training batch loss: 0.6785 in epoch 1
+2024-08-12 20:19:43,796 : INFO : Current training batch loss: 0.4087 in epoch 1
+2024-08-12 20:20:01,057 : INFO : Current training batch loss: 0.1251 in epoch 1
+2024-08-12 20:20:18,339 : INFO : Current training batch loss: 0.1630 in epoch 1
+2024-08-12 20:20:35,607 : INFO : Current training batch loss: 0.2175 in epoch 1
+2024-08-12 20:20:52,857 : INFO : Current training batch loss: 0.3361 in epoch 1
+2024-08-12 20:21:10,117 : INFO : Current training batch loss: 0.1778 in epoch 1
+2024-08-12 20:21:27,379 : INFO : Current training batch loss: 0.1006 in epoch 1
+2024-08-12 20:21:44,646 : INFO : Current training batch loss: 0.0865 in epoch 1
+2024-08-12 20:22:01,906 : INFO : Current training batch loss: 0.0597 in epoch 1
+2024-08-12 20:22:19,168 : INFO : Current training batch loss: 0.1906 in epoch 1
+2024-08-12 20:22:36,446 : INFO : Current training batch loss: 0.0496 in epoch 1
+2024-08-12 20:22:53,727 : INFO : Current training batch loss: 0.0658 in epoch 1
+2024-08-12 20:23:10,993 : INFO : Current training batch loss: 0.1959 in epoch 1
+2024-08-12 20:23:20,850 : INFO : Epoch finished, average loss over training batches: 0.2420
+2024-08-12 20:23:20,851 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:23:20,851 : INFO : Training metrics:
+2024-08-12 20:23:20,851 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:23:21,357 : INFO : Accuracy: 0.8996
+2024-08-12 20:23:21,357 : INFO : Precision: 0.9058
+2024-08-12 20:23:21,357 : INFO : Recall: 0.8908
+2024-08-12 20:23:21,357 : INFO : F1 score: 0.8982
+2024-08-12 20:23:54,553 : INFO : Average loss over validation batches: 0.1364
+2024-08-12 20:23:54,554 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:23:54,554 : INFO : Validation metrics:
+2024-08-12 20:23:54,554 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:23:54,559 : INFO : Accuracy: 0.9512
+2024-08-12 20:23:54,559 : INFO : Precision: 0.9581
+2024-08-12 20:23:54,559 : INFO : Recall: 0.9451
+2024-08-12 20:23:54,559 : INFO : F1 score: 0.9516
+2024-08-12 20:23:54,559 : INFO : Validation metric decreased (inf --> 0.136408).  Saving model ...
+2024-08-12 20:23:55,178 : INFO : Starting epoch 2
+2024-08-12 20:24:02,081 : INFO : Current training batch loss: 0.1609 in epoch 2
+2024-08-12 20:24:19,339 : INFO : Current training batch loss: 0.1347 in epoch 2
+2024-08-12 20:24:36,608 : INFO : Current training batch loss: 0.0400 in epoch 2
+2024-08-12 20:24:53,876 : INFO : Current training batch loss: 0.1165 in epoch 2
+2024-08-12 20:25:11,150 : INFO : Current training batch loss: 0.1077 in epoch 2
+2024-08-12 20:25:28,424 : INFO : Current training batch loss: 0.0182 in epoch 2
+2024-08-12 20:25:45,687 : INFO : Current training batch loss: 0.0169 in epoch 2
+2024-08-12 20:26:02,950 : INFO : Current training batch loss: 0.1215 in epoch 2
+2024-08-12 20:26:20,207 : INFO : Current training batch loss: 0.0578 in epoch 2
+2024-08-12 20:26:37,474 : INFO : Current training batch loss: 0.0177 in epoch 2
+2024-08-12 20:26:54,729 : INFO : Current training batch loss: 0.0980 in epoch 2
+2024-08-12 20:27:11,993 : INFO : Current training batch loss: 0.0156 in epoch 2
+2024-08-12 20:27:29,271 : INFO : Current training batch loss: 0.0064 in epoch 2
+2024-08-12 20:27:46,542 : INFO : Current training batch loss: 0.0113 in epoch 2
+2024-08-12 20:28:03,804 : INFO : Current training batch loss: 0.1223 in epoch 2
+2024-08-12 20:28:07,610 : INFO : Epoch finished, average loss over training batches: 0.0818
+2024-08-12 20:28:07,611 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:28:07,611 : INFO : Training metrics:
+2024-08-12 20:28:07,611 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:28:08,119 : INFO : Accuracy: 0.9734
+2024-08-12 20:28:08,120 : INFO : Precision: 0.9721
+2024-08-12 20:28:08,120 : INFO : Recall: 0.9746
+2024-08-12 20:28:08,120 : INFO : F1 score: 0.9733
+2024-08-12 20:28:41,319 : INFO : Average loss over validation batches: 0.1613
+2024-08-12 20:28:41,320 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:28:41,320 : INFO : Validation metrics:
+2024-08-12 20:28:41,320 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:28:41,325 : INFO : Accuracy: 0.9443
+2024-08-12 20:28:41,325 : INFO : Precision: 0.9710
+2024-08-12 20:28:41,325 : INFO : Recall: 0.9177
+2024-08-12 20:28:41,325 : INFO : F1 score: 0.9436
+2024-08-12 20:28:41,325 : INFO : EarlyStopping counter: 1 out of 2
+2024-08-12 20:28:41,325 : INFO : Starting epoch 3
+2024-08-12 20:28:54,272 : INFO : Current training batch loss: 0.0324 in epoch 3
+2024-08-12 20:29:11,519 : INFO : Current training batch loss: 0.0222 in epoch 3
+2024-08-12 20:29:28,799 : INFO : Current training batch loss: 0.1345 in epoch 3
+2024-08-12 20:29:46,073 : INFO : Current training batch loss: 0.0155 in epoch 3
+2024-08-12 20:30:03,343 : INFO : Current training batch loss: 0.0048 in epoch 3
+2024-08-12 20:30:20,612 : INFO : Current training batch loss: 0.1002 in epoch 3
+2024-08-12 20:30:37,878 : INFO : Current training batch loss: 0.0902 in epoch 3
+2024-08-12 20:30:55,135 : INFO : Current training batch loss: 0.1387 in epoch 3
+2024-08-12 20:31:12,399 : INFO : Current training batch loss: 0.0058 in epoch 3
+2024-08-12 20:31:29,666 : INFO : Current training batch loss: 0.0042 in epoch 3
+2024-08-12 20:31:46,927 : INFO : Current training batch loss: 0.0325 in epoch 3
+2024-08-12 20:32:04,200 : INFO : Current training batch loss: 0.0375 in epoch 3
+2024-08-12 20:32:21,492 : INFO : Current training batch loss: 0.0246 in epoch 3
+2024-08-12 20:32:38,761 : INFO : Current training batch loss: 0.0107 in epoch 3
+2024-08-12 20:32:53,791 : INFO : Epoch finished, average loss over training batches: 0.0344
+2024-08-12 20:32:53,792 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:32:53,792 : INFO : Training metrics:
+2024-08-12 20:32:53,792 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:32:54,302 : INFO : Accuracy: 0.9915
+2024-08-12 20:32:54,302 : INFO : Precision: 0.9910
+2024-08-12 20:32:54,302 : INFO : Recall: 0.9919
+2024-08-12 20:32:54,302 : INFO : F1 score: 0.9914
+2024-08-12 20:33:27,490 : INFO : Average loss over validation batches: 0.1599
+2024-08-12 20:33:27,490 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:33:27,490 : INFO : Validation metrics:
+2024-08-12 20:33:27,490 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:33:27,495 : INFO : Accuracy: 0.9562
+2024-08-12 20:33:27,495 : INFO : Precision: 0.9554
+2024-08-12 20:33:27,495 : INFO : Recall: 0.9584
+2024-08-12 20:33:27,495 : INFO : F1 score: 0.9569
+2024-08-12 20:33:27,495 : INFO : EarlyStopping counter: 2 out of 2
+2024-08-12 20:33:27,495 : INFO : Early stopping, loading best model from before and determine score...
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 20:33:28,179 : INFO : Loading model from /data/language_models/pretrained_models_downstreaming/stanford_imdb/electra_base_discriminator/current_split_model/checkpoint.pth
+2024-08-12 20:34:01,427 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:34:01,427 : INFO : Validation metrics after reloading the model before ending this training:
+2024-08-12 20:34:01,427 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:34:01,432 : INFO : Accuracy: 0.9512
+2024-08-12 20:34:01,432 : INFO : Precision: 0.9581
+2024-08-12 20:34:01,432 : INFO : Recall: 0.9451
+2024-08-12 20:34:01,432 : INFO : F1 score: 0.9516
+2024-08-12 20:34:01,433 : INFO : Determined score from best model, ending training.
+2024-08-12 20:34:01,439 : INFO : Split 4 is finished, the score is: 0.9516
+2024-08-12 20:34:01,439 : INFO : ----------------------------------------------------------------------------------------------------
+[I 2024-08-12 20:34:01,447] Trial 1 finished with value: 0.950243114073261 and parameters: {'n_epochs': 3, 'learning_rate': 2.9442946669757274e-05, 'classifier_dropout': 0.19021831226810093, 'warmup_step_fraction': 0.08110191764713745, 'use_gradient_clipping': False}. Best is trial 1 with value: 0.950243114073261.
+2024-08-12 20:34:01,448 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:34:01,448 : INFO : Starting training for split 1
+2024-08-12 20:34:01,458 : INFO : Occurence of labels for training split: (array([0, 1]), array([9405, 9345]))
+2024-08-12 20:34:01,460 : INFO : Occurence of labels for validation split: (array([0, 1]), array([3095, 3155]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 20:34:02,115 : INFO : Starting epoch 1
+2024-08-12 20:34:02,984 : INFO : Current training batch loss: 0.6965 in epoch 1
+2024-08-12 20:34:20,166 : INFO : Current training batch loss: 0.6715 in epoch 1
+2024-08-12 20:34:37,355 : INFO : Current training batch loss: 0.2738 in epoch 1
+2024-08-12 20:34:54,555 : INFO : Current training batch loss: 0.2525 in epoch 1
+2024-08-12 20:35:11,749 : INFO : Current training batch loss: 0.1667 in epoch 1
+2024-08-12 20:35:28,933 : INFO : Current training batch loss: 0.1778 in epoch 1
+2024-08-12 20:35:46,118 : INFO : Current training batch loss: 0.2104 in epoch 1
+2024-08-12 20:36:03,312 : INFO : Current training batch loss: 0.2513 in epoch 1
+2024-08-12 20:36:20,508 : INFO : Current training batch loss: 0.1052 in epoch 1
+2024-08-12 20:36:37,695 : INFO : Current training batch loss: 0.1338 in epoch 1
+2024-08-12 20:36:54,870 : INFO : Current training batch loss: 0.0610 in epoch 1
+2024-08-12 20:37:12,051 : INFO : Current training batch loss: 0.2304 in epoch 1
+2024-08-12 20:37:29,239 : INFO : Current training batch loss: 0.1928 in epoch 1
+2024-08-12 20:37:46,401 : INFO : Current training batch loss: 0.1665 in epoch 1
+2024-08-12 20:38:03,597 : INFO : Current training batch loss: 0.1300 in epoch 1
+2024-08-12 20:38:13,400 : INFO : Epoch finished, average loss over training batches: 0.2332
+2024-08-12 20:38:13,401 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:38:13,401 : INFO : Training metrics:
+2024-08-12 20:38:13,401 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:38:13,903 : INFO : Accuracy: 0.9029
+2024-08-12 20:38:13,903 : INFO : Precision: 0.9054
+2024-08-12 20:38:13,903 : INFO : Recall: 0.8992
+2024-08-12 20:38:13,903 : INFO : F1 score: 0.9023
+2024-08-12 20:38:46,847 : INFO : Average loss over validation batches: 0.1539
+2024-08-12 20:38:46,847 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:38:46,847 : INFO : Validation metrics:
+2024-08-12 20:38:46,847 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:38:46,853 : INFO : Accuracy: 0.9408
+2024-08-12 20:38:46,853 : INFO : Precision: 0.9712
+2024-08-12 20:38:46,853 : INFO : Recall: 0.9097
+2024-08-12 20:38:46,853 : INFO : F1 score: 0.9394
+2024-08-12 20:38:46,853 : INFO : Validation metric decreased (inf --> 0.153896).  Saving model ...
+2024-08-12 20:38:47,469 : INFO : Starting epoch 2
+2024-08-12 20:38:54,371 : INFO : Current training batch loss: 0.1458 in epoch 2
+2024-08-12 20:39:11,639 : INFO : Current training batch loss: 0.2574 in epoch 2
+2024-08-12 20:39:28,904 : INFO : Current training batch loss: 0.0567 in epoch 2
+2024-08-12 20:39:46,166 : INFO : Current training batch loss: 0.0181 in epoch 2
+2024-08-12 20:40:03,429 : INFO : Current training batch loss: 0.0905 in epoch 2
+2024-08-12 20:40:20,694 : INFO : Current training batch loss: 0.1052 in epoch 2
+2024-08-12 20:40:37,948 : INFO : Current training batch loss: 0.0115 in epoch 2
+2024-08-12 20:40:55,228 : INFO : Current training batch loss: 0.0812 in epoch 2
+2024-08-12 20:41:12,493 : INFO : Current training batch loss: 0.0090 in epoch 2
+2024-08-12 20:41:29,744 : INFO : Current training batch loss: 0.1085 in epoch 2
+2024-08-12 20:41:47,010 : INFO : Current training batch loss: 0.1338 in epoch 2
+2024-08-12 20:42:04,283 : INFO : Current training batch loss: 0.0923 in epoch 2
+2024-08-12 20:42:21,540 : INFO : Current training batch loss: 0.0625 in epoch 2
+2024-08-12 20:42:38,814 : INFO : Current training batch loss: 0.0266 in epoch 2
+2024-08-12 20:42:56,098 : INFO : Current training batch loss: 0.0434 in epoch 2
+2024-08-12 20:42:59,909 : INFO : Epoch finished, average loss over training batches: 0.0715
+2024-08-12 20:42:59,910 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:42:59,910 : INFO : Training metrics:
+2024-08-12 20:42:59,910 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:43:00,414 : INFO : Accuracy: 0.9775
+2024-08-12 20:43:00,414 : INFO : Precision: 0.9763
+2024-08-12 20:43:00,414 : INFO : Recall: 0.9786
+2024-08-12 20:43:00,414 : INFO : F1 score: 0.9774
+2024-08-12 20:43:33,595 : INFO : Average loss over validation batches: 0.1804
+2024-08-12 20:43:33,595 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:43:33,595 : INFO : Validation metrics:
+2024-08-12 20:43:33,595 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:43:33,600 : INFO : Accuracy: 0.9422
+2024-08-12 20:43:33,600 : INFO : Precision: 0.9210
+2024-08-12 20:43:33,600 : INFO : Recall: 0.9686
+2024-08-12 20:43:33,600 : INFO : F1 score: 0.9442
+2024-08-12 20:43:33,600 : INFO : EarlyStopping counter: 1 out of 2
+2024-08-12 20:43:33,600 : INFO : Starting epoch 3
+2024-08-12 20:43:46,547 : INFO : Current training batch loss: 0.0220 in epoch 3
+2024-08-12 20:44:03,814 : INFO : Current training batch loss: 0.0681 in epoch 3
+2024-08-12 20:44:21,075 : INFO : Current training batch loss: 0.0031 in epoch 3
+2024-08-12 20:44:38,333 : INFO : Current training batch loss: 0.0192 in epoch 3
+2024-08-12 20:44:55,590 : INFO : Current training batch loss: 0.0032 in epoch 3
+2024-08-12 20:45:12,841 : INFO : Current training batch loss: 0.0943 in epoch 3
+2024-08-12 20:45:30,103 : INFO : Current training batch loss: 0.0022 in epoch 3
+2024-08-12 20:45:47,382 : INFO : Current training batch loss: 0.0018 in epoch 3
+2024-08-12 20:46:04,642 : INFO : Current training batch loss: 0.0613 in epoch 3
+2024-08-12 20:46:21,909 : INFO : Current training batch loss: 0.1702 in epoch 3
+2024-08-12 20:46:39,162 : INFO : Current training batch loss: 0.0052 in epoch 3
+2024-08-12 20:46:56,432 : INFO : Current training batch loss: 0.0029 in epoch 3
+2024-08-12 20:47:13,686 : INFO : Current training batch loss: 0.0038 in epoch 3
+2024-08-12 20:47:30,959 : INFO : Current training batch loss: 0.0038 in epoch 3
+2024-08-12 20:47:45,992 : INFO : Epoch finished, average loss over training batches: 0.0248
+2024-08-12 20:47:45,993 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:47:45,993 : INFO : Training metrics:
+2024-08-12 20:47:45,993 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:47:46,497 : INFO : Accuracy: 0.9946
+2024-08-12 20:47:46,497 : INFO : Precision: 0.9940
+2024-08-12 20:47:46,497 : INFO : Recall: 0.9951
+2024-08-12 20:47:46,497 : INFO : F1 score: 0.9945
+2024-08-12 20:48:19,684 : INFO : Average loss over validation batches: 0.1834
+2024-08-12 20:48:19,684 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:48:19,685 : INFO : Validation metrics:
+2024-08-12 20:48:19,685 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:48:19,690 : INFO : Accuracy: 0.9491
+2024-08-12 20:48:19,690 : INFO : Precision: 0.9522
+2024-08-12 20:48:19,690 : INFO : Recall: 0.9468
+2024-08-12 20:48:19,690 : INFO : F1 score: 0.9495
+2024-08-12 20:48:19,690 : INFO : EarlyStopping counter: 2 out of 2
+2024-08-12 20:48:19,690 : INFO : Early stopping, loading best model from before and determine score...
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 20:48:20,354 : INFO : Loading model from /data/language_models/pretrained_models_downstreaming/stanford_imdb/electra_base_discriminator/current_split_model/checkpoint.pth
+2024-08-12 20:48:53,593 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:48:53,593 : INFO : Validation metrics after reloading the model before ending this training:
+2024-08-12 20:48:53,593 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:48:53,598 : INFO : Accuracy: 0.9408
+2024-08-12 20:48:53,598 : INFO : Precision: 0.9712
+2024-08-12 20:48:53,598 : INFO : Recall: 0.9097
+2024-08-12 20:48:53,598 : INFO : F1 score: 0.9394
+2024-08-12 20:48:53,598 : INFO : Determined score from best model, ending training.
+2024-08-12 20:48:53,611 : INFO : Split 1 is finished, the score is: 0.9394
+2024-08-12 20:48:53,611 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:48:53,611 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:48:53,611 : INFO : Starting training for split 2
+2024-08-12 20:48:53,668 : INFO : Occurence of labels for training split: (array([0, 1]), array([9328, 9422]))
+2024-08-12 20:48:53,670 : INFO : Occurence of labels for validation split: (array([0, 1]), array([3172, 3078]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 20:48:54,329 : INFO : Starting epoch 1
+2024-08-12 20:48:55,194 : INFO : Current training batch loss: 0.6919 in epoch 1
+2024-08-12 20:49:12,408 : INFO : Current training batch loss: 0.6311 in epoch 1
+2024-08-12 20:49:29,640 : INFO : Current training batch loss: 0.2714 in epoch 1
+2024-08-12 20:49:46,879 : INFO : Current training batch loss: 0.0791 in epoch 1
+2024-08-12 20:50:04,137 : INFO : Current training batch loss: 0.1477 in epoch 1
+2024-08-12 20:50:21,382 : INFO : Current training batch loss: 0.1395 in epoch 1
+2024-08-12 20:50:38,619 : INFO : Current training batch loss: 0.2028 in epoch 1
+2024-08-12 20:50:55,856 : INFO : Current training batch loss: 0.1414 in epoch 1
+2024-08-12 20:51:13,104 : INFO : Current training batch loss: 0.1266 in epoch 1
+2024-08-12 20:51:30,338 : INFO : Current training batch loss: 0.1378 in epoch 1
+2024-08-12 20:51:47,577 : INFO : Current training batch loss: 0.1257 in epoch 1
+2024-08-12 20:52:04,818 : INFO : Current training batch loss: 0.2420 in epoch 1
+2024-08-12 20:52:22,067 : INFO : Current training batch loss: 0.1574 in epoch 1
+2024-08-12 20:52:39,290 : INFO : Current training batch loss: 0.1737 in epoch 1
+2024-08-12 20:52:56,543 : INFO : Current training batch loss: 0.1278 in epoch 1
+2024-08-12 20:53:06,378 : INFO : Epoch finished, average loss over training batches: 0.2332
+2024-08-12 20:53:06,379 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:53:06,379 : INFO : Training metrics:
+2024-08-12 20:53:06,379 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:53:06,884 : INFO : Accuracy: 0.9060
+2024-08-12 20:53:06,884 : INFO : Precision: 0.9190
+2024-08-12 20:53:06,884 : INFO : Recall: 0.8914
+2024-08-12 20:53:06,884 : INFO : F1 score: 0.9050
+2024-08-12 20:53:39,965 : INFO : Average loss over validation batches: 0.1661
+2024-08-12 20:53:39,965 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:53:39,965 : INFO : Validation metrics:
+2024-08-12 20:53:39,965 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:53:39,971 : INFO : Accuracy: 0.9392
+2024-08-12 20:53:39,971 : INFO : Precision: 0.9639
+2024-08-12 20:53:39,971 : INFO : Recall: 0.9107
+2024-08-12 20:53:39,971 : INFO : F1 score: 0.9365
+2024-08-12 20:53:39,971 : INFO : Validation metric decreased (inf --> 0.166107).  Saving model ...
+2024-08-12 20:53:40,594 : INFO : Starting epoch 2
+2024-08-12 20:53:47,486 : INFO : Current training batch loss: 0.1598 in epoch 2
+2024-08-12 20:54:04,713 : INFO : Current training batch loss: 0.1150 in epoch 2
+2024-08-12 20:54:21,968 : INFO : Current training batch loss: 0.0425 in epoch 2
+2024-08-12 20:54:39,215 : INFO : Current training batch loss: 0.1499 in epoch 2
+2024-08-12 20:54:56,466 : INFO : Current training batch loss: 0.0709 in epoch 2
+2024-08-12 20:55:13,712 : INFO : Current training batch loss: 0.0918 in epoch 2
+2024-08-12 20:55:30,945 : INFO : Current training batch loss: 0.0630 in epoch 2
+2024-08-12 20:55:48,206 : INFO : Current training batch loss: 0.0987 in epoch 2
+2024-08-12 20:56:05,449 : INFO : Current training batch loss: 0.0113 in epoch 2
+2024-08-12 20:56:22,693 : INFO : Current training batch loss: 0.0941 in epoch 2
+2024-08-12 20:56:39,938 : INFO : Current training batch loss: 0.1109 in epoch 2
+2024-08-12 20:56:57,194 : INFO : Current training batch loss: 0.0707 in epoch 2
+2024-08-12 20:57:14,421 : INFO : Current training batch loss: 0.0230 in epoch 2
+2024-08-12 20:57:31,662 : INFO : Current training batch loss: 0.0332 in epoch 2
+2024-08-12 20:57:48,911 : INFO : Current training batch loss: 0.0160 in epoch 2
+2024-08-12 20:57:52,714 : INFO : Epoch finished, average loss over training batches: 0.0766
+2024-08-12 20:57:52,715 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:57:52,715 : INFO : Training metrics:
+2024-08-12 20:57:52,715 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:57:53,218 : INFO : Accuracy: 0.9766
+2024-08-12 20:57:53,218 : INFO : Precision: 0.9752
+2024-08-12 20:57:53,219 : INFO : Recall: 0.9782
+2024-08-12 20:57:53,219 : INFO : F1 score: 0.9767
+2024-08-12 20:58:26,289 : INFO : Average loss over validation batches: 0.1769
+2024-08-12 20:58:26,290 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:58:26,290 : INFO : Validation metrics:
+2024-08-12 20:58:26,290 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 20:58:26,295 : INFO : Accuracy: 0.9448
+2024-08-12 20:58:26,295 : INFO : Precision: 0.9266
+2024-08-12 20:58:26,295 : INFO : Recall: 0.9643
+2024-08-12 20:58:26,295 : INFO : F1 score: 0.9451
+2024-08-12 20:58:26,295 : INFO : EarlyStopping counter: 1 out of 2
+2024-08-12 20:58:26,295 : INFO : Starting epoch 3
+2024-08-12 20:58:39,220 : INFO : Current training batch loss: 0.0197 in epoch 3
+2024-08-12 20:58:56,446 : INFO : Current training batch loss: 0.0219 in epoch 3
+2024-08-12 20:59:13,690 : INFO : Current training batch loss: 0.1031 in epoch 3
+2024-08-12 20:59:30,936 : INFO : Current training batch loss: 0.0277 in epoch 3
+2024-08-12 20:59:48,180 : INFO : Current training batch loss: 0.0070 in epoch 3
+2024-08-12 21:00:05,422 : INFO : Current training batch loss: 0.0907 in epoch 3
+2024-08-12 21:00:22,665 : INFO : Current training batch loss: 0.0025 in epoch 3
+2024-08-12 21:00:39,929 : INFO : Current training batch loss: 0.0020 in epoch 3
+2024-08-12 21:00:57,167 : INFO : Current training batch loss: 0.0034 in epoch 3
+2024-08-12 21:01:14,415 : INFO : Current training batch loss: 0.1253 in epoch 3
+2024-08-12 21:01:31,652 : INFO : Current training batch loss: 0.0221 in epoch 3
+2024-08-12 21:01:48,890 : INFO : Current training batch loss: 0.0050 in epoch 3
+2024-08-12 21:02:06,115 : INFO : Current training batch loss: 0.0047 in epoch 3
+2024-08-12 21:02:23,369 : INFO : Current training batch loss: 0.0038 in epoch 3
+2024-08-12 21:02:38,382 : INFO : Epoch finished, average loss over training batches: 0.0282
+2024-08-12 21:02:38,383 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:02:38,383 : INFO : Training metrics:
+2024-08-12 21:02:38,383 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:02:38,887 : INFO : Accuracy: 0.9933
+2024-08-12 21:02:38,887 : INFO : Precision: 0.9924
+2024-08-12 21:02:38,887 : INFO : Recall: 0.9944
+2024-08-12 21:02:38,887 : INFO : F1 score: 0.9934
+2024-08-12 21:03:11,980 : INFO : Average loss over validation batches: 0.1705
+2024-08-12 21:03:11,980 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:03:11,980 : INFO : Validation metrics:
+2024-08-12 21:03:11,980 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:03:11,986 : INFO : Accuracy: 0.9528
+2024-08-12 21:03:11,986 : INFO : Precision: 0.9467
+2024-08-12 21:03:11,986 : INFO : Recall: 0.9581
+2024-08-12 21:03:11,986 : INFO : F1 score: 0.9524
+2024-08-12 21:03:11,986 : INFO : EarlyStopping counter: 2 out of 2
+2024-08-12 21:03:11,986 : INFO : Early stopping, loading best model from before and determine score...
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 21:03:12,666 : INFO : Loading model from /data/language_models/pretrained_models_downstreaming/stanford_imdb/electra_base_discriminator/current_split_model/checkpoint.pth
+2024-08-12 21:03:45,947 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:03:45,947 : INFO : Validation metrics after reloading the model before ending this training:
+2024-08-12 21:03:45,947 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:03:45,953 : INFO : Accuracy: 0.9392
+2024-08-12 21:03:45,953 : INFO : Precision: 0.9639
+2024-08-12 21:03:45,953 : INFO : Recall: 0.9107
+2024-08-12 21:03:45,953 : INFO : F1 score: 0.9365
+2024-08-12 21:03:45,953 : INFO : Determined score from best model, ending training.
+2024-08-12 21:03:45,965 : INFO : Split 2 is finished, the score is: 0.9365
+2024-08-12 21:03:45,965 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:03:45,965 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:03:45,966 : INFO : Starting training for split 3
+2024-08-12 21:03:46,109 : INFO : Occurence of labels for training split: (array([0, 1]), array([9346, 9404]))
+2024-08-12 21:03:46,110 : INFO : Occurence of labels for validation split: (array([0, 1]), array([3154, 3096]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 21:03:46,747 : INFO : Starting epoch 1
+2024-08-12 21:03:47,613 : INFO : Current training batch loss: 0.6925 in epoch 1
+2024-08-12 21:04:04,827 : INFO : Current training batch loss: 0.6580 in epoch 1
+2024-08-12 21:04:22,055 : INFO : Current training batch loss: 0.3214 in epoch 1
+2024-08-12 21:04:39,293 : INFO : Current training batch loss: 0.0705 in epoch 1
+2024-08-12 21:04:56,550 : INFO : Current training batch loss: 0.1745 in epoch 1
+2024-08-12 21:05:13,793 : INFO : Current training batch loss: 0.1958 in epoch 1
+2024-08-12 21:05:31,028 : INFO : Current training batch loss: 0.2763 in epoch 1
+2024-08-12 21:05:48,272 : INFO : Current training batch loss: 0.1558 in epoch 1
+2024-08-12 21:06:05,514 : INFO : Current training batch loss: 0.1059 in epoch 1
+2024-08-12 21:06:22,755 : INFO : Current training batch loss: 0.0909 in epoch 1
+2024-08-12 21:06:39,981 : INFO : Current training batch loss: 0.1371 in epoch 1
+2024-08-12 21:06:57,225 : INFO : Current training batch loss: 0.3700 in epoch 1
+2024-08-12 21:07:14,469 : INFO : Current training batch loss: 0.0406 in epoch 1
+2024-08-12 21:07:31,686 : INFO : Current training batch loss: 0.1494 in epoch 1
+2024-08-12 21:07:48,937 : INFO : Current training batch loss: 0.1309 in epoch 1
+2024-08-12 21:07:58,773 : INFO : Epoch finished, average loss over training batches: 0.2373
+2024-08-12 21:07:58,774 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:07:58,774 : INFO : Training metrics:
+2024-08-12 21:07:58,774 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:07:59,280 : INFO : Accuracy: 0.9045
+2024-08-12 21:07:59,280 : INFO : Precision: 0.9082
+2024-08-12 21:07:59,280 : INFO : Recall: 0.9007
+2024-08-12 21:07:59,280 : INFO : F1 score: 0.9044
+2024-08-12 21:08:32,377 : INFO : Average loss over validation batches: 0.1552
+2024-08-12 21:08:32,377 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:08:32,377 : INFO : Validation metrics:
+2024-08-12 21:08:32,377 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:08:32,383 : INFO : Accuracy: 0.9418
+2024-08-12 21:08:32,383 : INFO : Precision: 0.9743
+2024-08-12 21:08:32,383 : INFO : Recall: 0.9063
+2024-08-12 21:08:32,383 : INFO : F1 score: 0.9391
+2024-08-12 21:08:32,383 : INFO : Validation metric decreased (inf --> 0.155157).  Saving model ...
+2024-08-12 21:08:32,998 : INFO : Starting epoch 2
+2024-08-12 21:08:39,891 : INFO : Current training batch loss: 0.1546 in epoch 2
+2024-08-12 21:08:57,126 : INFO : Current training batch loss: 0.1345 in epoch 2
+2024-08-12 21:09:14,376 : INFO : Current training batch loss: 0.0336 in epoch 2
+2024-08-12 21:09:31,619 : INFO : Current training batch loss: 0.0914 in epoch 2
+2024-08-12 21:09:48,863 : INFO : Current training batch loss: 0.1266 in epoch 2
+2024-08-12 21:10:06,107 : INFO : Current training batch loss: 0.0234 in epoch 2
+2024-08-12 21:10:23,342 : INFO : Current training batch loss: 0.0087 in epoch 2
+2024-08-12 21:10:40,571 : INFO : Current training batch loss: 0.1283 in epoch 2
+2024-08-12 21:10:57,805 : INFO : Current training batch loss: 0.0222 in epoch 2
+2024-08-12 21:11:15,055 : INFO : Current training batch loss: 0.0206 in epoch 2
+2024-08-12 21:11:32,277 : INFO : Current training batch loss: 0.1453 in epoch 2
+2024-08-12 21:11:49,526 : INFO : Current training batch loss: 0.0631 in epoch 2
+2024-08-12 21:12:06,760 : INFO : Current training batch loss: 0.0142 in epoch 2
+2024-08-12 21:12:24,011 : INFO : Current training batch loss: 0.0173 in epoch 2
+2024-08-12 21:12:41,274 : INFO : Current training batch loss: 0.0271 in epoch 2
+2024-08-12 21:12:45,080 : INFO : Epoch finished, average loss over training batches: 0.0751
+2024-08-12 21:12:45,081 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:12:45,081 : INFO : Training metrics:
+2024-08-12 21:12:45,081 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:12:45,588 : INFO : Accuracy: 0.9769
+2024-08-12 21:12:45,588 : INFO : Precision: 0.9759
+2024-08-12 21:12:45,588 : INFO : Recall: 0.9781
+2024-08-12 21:12:45,588 : INFO : F1 score: 0.9770
+2024-08-12 21:13:18,690 : INFO : Average loss over validation batches: 0.1885
+2024-08-12 21:13:18,690 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:13:18,690 : INFO : Validation metrics:
+2024-08-12 21:13:18,690 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:13:18,695 : INFO : Accuracy: 0.9413
+2024-08-12 21:13:18,695 : INFO : Precision: 0.9197
+2024-08-12 21:13:18,695 : INFO : Recall: 0.9658
+2024-08-12 21:13:18,695 : INFO : F1 score: 0.9422
+2024-08-12 21:13:18,695 : INFO : EarlyStopping counter: 1 out of 2
+2024-08-12 21:13:18,695 : INFO : Starting epoch 3
+2024-08-12 21:13:31,627 : INFO : Current training batch loss: 0.0154 in epoch 3
+2024-08-12 21:13:48,848 : INFO : Current training batch loss: 0.0139 in epoch 3
+2024-08-12 21:14:06,100 : INFO : Current training batch loss: 0.0773 in epoch 3
+2024-08-12 21:14:23,347 : INFO : Current training batch loss: 0.0169 in epoch 3
+2024-08-12 21:14:40,589 : INFO : Current training batch loss: 0.0089 in epoch 3
+2024-08-12 21:14:57,828 : INFO : Current training batch loss: 0.1017 in epoch 3
+2024-08-12 21:15:15,073 : INFO : Current training batch loss: 0.0961 in epoch 3
+2024-08-12 21:15:32,306 : INFO : Current training batch loss: 0.0887 in epoch 3
+2024-08-12 21:15:49,544 : INFO : Current training batch loss: 0.0964 in epoch 3
+2024-08-12 21:16:06,779 : INFO : Current training batch loss: 0.0399 in epoch 3
+2024-08-12 21:16:23,999 : INFO : Current training batch loss: 0.0034 in epoch 3
+2024-08-12 21:16:41,235 : INFO : Current training batch loss: 0.0049 in epoch 3
+2024-08-12 21:16:58,468 : INFO : Current training batch loss: 0.0055 in epoch 3
+2024-08-12 21:17:15,717 : INFO : Current training batch loss: 0.0047 in epoch 3
+2024-08-12 21:17:30,724 : INFO : Epoch finished, average loss over training batches: 0.0280
+2024-08-12 21:17:30,725 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:17:30,725 : INFO : Training metrics:
+2024-08-12 21:17:30,725 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:17:31,231 : INFO : Accuracy: 0.9940
+2024-08-12 21:17:31,231 : INFO : Precision: 0.9935
+2024-08-12 21:17:31,231 : INFO : Recall: 0.9946
+2024-08-12 21:17:31,231 : INFO : F1 score: 0.9940
+2024-08-12 21:18:04,314 : INFO : Average loss over validation batches: 0.1734
+2024-08-12 21:18:04,315 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:18:04,315 : INFO : Validation metrics:
+2024-08-12 21:18:04,315 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:18:04,320 : INFO : Accuracy: 0.9544
+2024-08-12 21:18:04,320 : INFO : Precision: 0.9535
+2024-08-12 21:18:04,320 : INFO : Recall: 0.9545
+2024-08-12 21:18:04,320 : INFO : F1 score: 0.9540
+2024-08-12 21:18:04,320 : INFO : EarlyStopping counter: 2 out of 2
+2024-08-12 21:18:04,320 : INFO : Early stopping, loading best model from before and determine score...
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 21:18:05,175 : INFO : Loading model from /data/language_models/pretrained_models_downstreaming/stanford_imdb/electra_base_discriminator/current_split_model/checkpoint.pth
+2024-08-12 21:18:38,375 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:18:38,376 : INFO : Validation metrics after reloading the model before ending this training:
+2024-08-12 21:18:38,376 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:18:38,381 : INFO : Accuracy: 0.9418
+2024-08-12 21:18:38,381 : INFO : Precision: 0.9743
+2024-08-12 21:18:38,381 : INFO : Recall: 0.9063
+2024-08-12 21:18:38,381 : INFO : F1 score: 0.9391
+2024-08-12 21:18:38,381 : INFO : Determined score from best model, ending training.
+2024-08-12 21:18:38,383 : INFO : Split 3 is finished, the score is: 0.9391
+2024-08-12 21:18:38,383 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:18:38,383 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:18:38,383 : INFO : Starting training for split 4
+2024-08-12 21:18:38,391 : INFO : Occurence of labels for training split: (array([0, 1]), array([9421, 9329]))
+2024-08-12 21:18:38,392 : INFO : Occurence of labels for validation split: (array([0, 1]), array([3079, 3171]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 21:18:39,075 : INFO : Starting epoch 1
+2024-08-12 21:18:39,940 : INFO : Current training batch loss: 0.6878 in epoch 1
+2024-08-12 21:18:57,173 : INFO : Current training batch loss: 0.6631 in epoch 1
+2024-08-12 21:19:14,407 : INFO : Current training batch loss: 0.3073 in epoch 1
+2024-08-12 21:19:31,648 : INFO : Current training batch loss: 0.1455 in epoch 1
+2024-08-12 21:19:48,906 : INFO : Current training batch loss: 0.1394 in epoch 1
+2024-08-12 21:20:06,149 : INFO : Current training batch loss: 0.1464 in epoch 1
+2024-08-12 21:20:23,384 : INFO : Current training batch loss: 0.3280 in epoch 1
+2024-08-12 21:20:40,624 : INFO : Current training batch loss: 0.1461 in epoch 1
+2024-08-12 21:20:57,864 : INFO : Current training batch loss: 0.0844 in epoch 1
+2024-08-12 21:21:15,108 : INFO : Current training batch loss: 0.0901 in epoch 1
+2024-08-12 21:21:32,344 : INFO : Current training batch loss: 0.0652 in epoch 1
+2024-08-12 21:21:49,577 : INFO : Current training batch loss: 0.1745 in epoch 1
+2024-08-12 21:22:06,830 : INFO : Current training batch loss: 0.0771 in epoch 1
+2024-08-12 21:22:24,081 : INFO : Current training batch loss: 0.0866 in epoch 1
+2024-08-12 21:22:41,324 : INFO : Current training batch loss: 0.1935 in epoch 1
+2024-08-12 21:22:51,164 : INFO : Epoch finished, average loss over training batches: 0.2322
+2024-08-12 21:22:51,164 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:22:51,164 : INFO : Training metrics:
+2024-08-12 21:22:51,164 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:22:51,674 : INFO : Accuracy: 0.9030
+2024-08-12 21:22:51,674 : INFO : Precision: 0.9116
+2024-08-12 21:22:51,674 : INFO : Recall: 0.8915
+2024-08-12 21:22:51,674 : INFO : F1 score: 0.9014
+2024-08-12 21:23:24,839 : INFO : Average loss over validation batches: 0.1465
+2024-08-12 21:23:24,839 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:23:24,839 : INFO : Validation metrics:
+2024-08-12 21:23:24,839 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:23:24,844 : INFO : Accuracy: 0.9437
+2024-08-12 21:23:24,844 : INFO : Precision: 0.9278
+2024-08-12 21:23:24,844 : INFO : Recall: 0.9640
+2024-08-12 21:23:24,844 : INFO : F1 score: 0.9456
+2024-08-12 21:23:24,844 : INFO : Validation metric decreased (inf --> 0.146518).  Saving model ...
+2024-08-12 21:23:25,455 : INFO : Starting epoch 2
+2024-08-12 21:23:32,353 : INFO : Current training batch loss: 0.1474 in epoch 2
+2024-08-12 21:23:49,596 : INFO : Current training batch loss: 0.1602 in epoch 2
+2024-08-12 21:24:06,863 : INFO : Current training batch loss: 0.0300 in epoch 2
+2024-08-12 21:24:24,115 : INFO : Current training batch loss: 0.1004 in epoch 2
+2024-08-12 21:24:41,375 : INFO : Current training batch loss: 0.0370 in epoch 2
+2024-08-12 21:24:58,632 : INFO : Current training batch loss: 0.0057 in epoch 2
+2024-08-12 21:25:15,891 : INFO : Current training batch loss: 0.0196 in epoch 2
+2024-08-12 21:25:33,149 : INFO : Current training batch loss: 0.1888 in epoch 2
+2024-08-12 21:25:50,406 : INFO : Current training batch loss: 0.0185 in epoch 2
+2024-08-12 21:26:07,672 : INFO : Current training batch loss: 0.0201 in epoch 2
+2024-08-12 21:26:24,928 : INFO : Current training batch loss: 0.0671 in epoch 2
+2024-08-12 21:26:42,196 : INFO : Current training batch loss: 0.0102 in epoch 2
+2024-08-12 21:26:59,488 : INFO : Current training batch loss: 0.0062 in epoch 2
+2024-08-12 21:27:16,766 : INFO : Current training batch loss: 0.0055 in epoch 2
+2024-08-12 21:27:34,040 : INFO : Current training batch loss: 0.1198 in epoch 2
+2024-08-12 21:27:37,848 : INFO : Epoch finished, average loss over training batches: 0.0721
+2024-08-12 21:27:37,849 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:27:37,849 : INFO : Training metrics:
+2024-08-12 21:27:37,849 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:27:38,359 : INFO : Accuracy: 0.9769
+2024-08-12 21:27:38,359 : INFO : Precision: 0.9749
+2024-08-12 21:27:38,359 : INFO : Recall: 0.9788
+2024-08-12 21:27:38,359 : INFO : F1 score: 0.9768
+2024-08-12 21:28:11,552 : INFO : Average loss over validation batches: 0.2235
+2024-08-12 21:28:11,552 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:28:11,552 : INFO : Validation metrics:
+2024-08-12 21:28:11,552 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:28:11,557 : INFO : Accuracy: 0.9270
+2024-08-12 21:28:11,557 : INFO : Precision: 0.9805
+2024-08-12 21:28:11,557 : INFO : Recall: 0.8735
+2024-08-12 21:28:11,557 : INFO : F1 score: 0.9239
+2024-08-12 21:28:11,557 : INFO : EarlyStopping counter: 1 out of 2
+2024-08-12 21:28:11,557 : INFO : Starting epoch 3
+2024-08-12 21:28:24,508 : INFO : Current training batch loss: 0.0219 in epoch 3
+2024-08-12 21:28:41,761 : INFO : Current training batch loss: 0.0204 in epoch 3
+2024-08-12 21:28:59,040 : INFO : Current training batch loss: 0.0029 in epoch 3
+2024-08-12 21:29:16,311 : INFO : Current training batch loss: 0.0292 in epoch 3
+2024-08-12 21:29:33,577 : INFO : Current training batch loss: 0.0055 in epoch 3
+2024-08-12 21:29:50,834 : INFO : Current training batch loss: 0.1010 in epoch 3
+2024-08-12 21:30:08,091 : INFO : Current training batch loss: 0.0970 in epoch 3
+2024-08-12 21:30:25,340 : INFO : Current training batch loss: 0.1271 in epoch 3
+2024-08-12 21:30:42,602 : INFO : Current training batch loss: 0.0024 in epoch 3
+2024-08-12 21:30:59,861 : INFO : Current training batch loss: 0.0066 in epoch 3
+2024-08-12 21:31:17,119 : INFO : Current training batch loss: 0.0937 in epoch 3
+2024-08-12 21:31:34,385 : INFO : Current training batch loss: 0.0061 in epoch 3
+2024-08-12 21:31:51,663 : INFO : Current training batch loss: 0.0025 in epoch 3
+2024-08-12 21:32:08,929 : INFO : Current training batch loss: 0.0021 in epoch 3
+2024-08-12 21:32:23,961 : INFO : Epoch finished, average loss over training batches: 0.0275
+2024-08-12 21:32:23,962 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:32:23,962 : INFO : Training metrics:
+2024-08-12 21:32:23,962 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:32:24,472 : INFO : Accuracy: 0.9926
+2024-08-12 21:32:24,472 : INFO : Precision: 0.9919
+2024-08-12 21:32:24,472 : INFO : Recall: 0.9932
+2024-08-12 21:32:24,472 : INFO : F1 score: 0.9926
+2024-08-12 21:32:57,661 : INFO : Average loss over validation batches: 0.1804
+2024-08-12 21:32:57,662 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:32:57,662 : INFO : Validation metrics:
+2024-08-12 21:32:57,662 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:32:57,667 : INFO : Accuracy: 0.9533
+2024-08-12 21:32:57,667 : INFO : Precision: 0.9520
+2024-08-12 21:32:57,667 : INFO : Recall: 0.9562
+2024-08-12 21:32:57,667 : INFO : F1 score: 0.9541
+2024-08-12 21:32:57,667 : INFO : EarlyStopping counter: 2 out of 2
+2024-08-12 21:32:57,667 : INFO : Early stopping, loading best model from before and determine score...
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 21:32:58,383 : INFO : Loading model from /data/language_models/pretrained_models_downstreaming/stanford_imdb/electra_base_discriminator/current_split_model/checkpoint.pth
+2024-08-12 21:33:31,666 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:33:31,666 : INFO : Validation metrics after reloading the model before ending this training:
+2024-08-12 21:33:31,666 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:33:31,671 : INFO : Accuracy: 0.9437
+2024-08-12 21:33:31,671 : INFO : Precision: 0.9278
+2024-08-12 21:33:31,671 : INFO : Recall: 0.9640
+2024-08-12 21:33:31,671 : INFO : F1 score: 0.9456
+2024-08-12 21:33:31,671 : INFO : Determined score from best model, ending training.
+2024-08-12 21:33:31,673 : INFO : Split 4 is finished, the score is: 0.9456
+2024-08-12 21:33:31,673 : INFO : ----------------------------------------------------------------------------------------------------
+[I 2024-08-12 21:33:31,673] Trial 2 finished with value: 0.9401532921599643 and parameters: {'n_epochs': 3, 'learning_rate': 6.2301867663136e-05, 'classifier_dropout': 0.8818884379446289, 'warmup_step_fraction': 0.08313229682664593, 'use_gradient_clipping': False}. Best is trial 1 with value: 0.950243114073261.
+2024-08-12 21:33:31,674 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:33:31,674 : INFO : Starting training for split 1
+2024-08-12 21:33:31,682 : INFO : Occurence of labels for training split: (array([0, 1]), array([9405, 9345]))
+2024-08-12 21:33:31,683 : INFO : Occurence of labels for validation split: (array([0, 1]), array([3095, 3155]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 21:33:32,464 : INFO : Starting epoch 1
+2024-08-12 21:33:33,330 : INFO : Current training batch loss: 0.6954 in epoch 1
+2024-08-12 21:33:50,586 : INFO : Current training batch loss: 0.6711 in epoch 1
+2024-08-12 21:34:07,840 : INFO : Current training batch loss: 0.3781 in epoch 1
+2024-08-12 21:34:25,093 : INFO : Current training batch loss: 0.2659 in epoch 1
+2024-08-12 21:34:42,339 : INFO : Current training batch loss: 0.1929 in epoch 1
+2024-08-12 21:34:59,596 : INFO : Current training batch loss: 0.1513 in epoch 1
+2024-08-12 21:35:16,847 : INFO : Current training batch loss: 0.2259 in epoch 1
+2024-08-12 21:35:34,106 : INFO : Current training batch loss: 0.1770 in epoch 1
+2024-08-12 21:35:51,377 : INFO : Current training batch loss: 0.1485 in epoch 1
+2024-08-12 21:36:08,632 : INFO : Current training batch loss: 0.0884 in epoch 1
+2024-08-12 21:36:25,893 : INFO : Current training batch loss: 0.1157 in epoch 1
+2024-08-12 21:36:43,149 : INFO : Current training batch loss: 0.1902 in epoch 1
+2024-08-12 21:37:00,415 : INFO : Current training batch loss: 0.1064 in epoch 1
+2024-08-12 21:37:17,659 : INFO : Current training batch loss: 0.1400 in epoch 1
+2024-08-12 21:37:34,935 : INFO : Current training batch loss: 0.1405 in epoch 1
+2024-08-12 21:37:44,781 : INFO : Epoch finished, average loss over training batches: 0.2401
+2024-08-12 21:37:44,782 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:37:44,782 : INFO : Training metrics:
+2024-08-12 21:37:44,782 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:37:45,286 : INFO : Accuracy: 0.9038
+2024-08-12 21:37:45,287 : INFO : Precision: 0.9292
+2024-08-12 21:37:45,287 : INFO : Recall: 0.8735
+2024-08-12 21:37:45,287 : INFO : F1 score: 0.9005
+2024-08-12 21:38:18,478 : INFO : Average loss over validation batches: 0.1501
+2024-08-12 21:38:18,478 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:38:18,478 : INFO : Validation metrics:
+2024-08-12 21:38:18,478 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:38:18,483 : INFO : Accuracy: 0.9453
+2024-08-12 21:38:18,483 : INFO : Precision: 0.9495
+2024-08-12 21:38:18,483 : INFO : Recall: 0.9417
+2024-08-12 21:38:18,483 : INFO : F1 score: 0.9456
+2024-08-12 21:38:18,483 : INFO : Validation metric decreased (inf --> 0.150062).  Saving model ...
+2024-08-12 21:38:19,105 : INFO : Split 1 is finished, the score is: 0.9456
+2024-08-12 21:38:19,105 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:38:19,105 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:38:19,105 : INFO : Starting training for split 2
+2024-08-12 21:38:19,247 : INFO : Occurence of labels for training split: (array([0, 1]), array([9328, 9422]))
+2024-08-12 21:38:19,248 : INFO : Occurence of labels for validation split: (array([0, 1]), array([3172, 3078]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 21:38:20,166 : INFO : Starting epoch 1
+2024-08-12 21:38:21,034 : INFO : Current training batch loss: 0.6896 in epoch 1
+2024-08-12 21:38:38,257 : INFO : Current training batch loss: 0.6703 in epoch 1
+2024-08-12 21:38:55,507 : INFO : Current training batch loss: 0.3317 in epoch 1
+2024-08-12 21:39:12,760 : INFO : Current training batch loss: 0.1497 in epoch 1
+2024-08-12 21:39:30,024 : INFO : Current training batch loss: 0.2172 in epoch 1
+2024-08-12 21:39:47,290 : INFO : Current training batch loss: 0.1773 in epoch 1
+2024-08-12 21:40:04,539 : INFO : Current training batch loss: 0.1853 in epoch 1
+2024-08-12 21:40:21,803 : INFO : Current training batch loss: 0.1835 in epoch 1
+2024-08-12 21:40:39,088 : INFO : Current training batch loss: 0.1133 in epoch 1
+2024-08-12 21:40:56,350 : INFO : Current training batch loss: 0.0912 in epoch 1
+2024-08-12 21:41:13,609 : INFO : Current training batch loss: 0.1282 in epoch 1
+2024-08-12 21:41:30,864 : INFO : Current training batch loss: 0.2189 in epoch 1
+2024-08-12 21:41:48,132 : INFO : Current training batch loss: 0.0884 in epoch 1
+2024-08-12 21:42:05,369 : INFO : Current training batch loss: 0.1266 in epoch 1
+2024-08-12 21:42:22,641 : INFO : Current training batch loss: 0.1622 in epoch 1
+2024-08-12 21:42:32,489 : INFO : Epoch finished, average loss over training batches: 0.2359
+2024-08-12 21:42:32,489 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:42:32,490 : INFO : Training metrics:
+2024-08-12 21:42:32,490 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:42:32,994 : INFO : Accuracy: 0.9081
+2024-08-12 21:42:32,994 : INFO : Precision: 0.9337
+2024-08-12 21:42:32,994 : INFO : Recall: 0.8794
+2024-08-12 21:42:32,994 : INFO : F1 score: 0.9058
+2024-08-12 21:43:06,186 : INFO : Average loss over validation batches: 0.1486
+2024-08-12 21:43:06,186 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:43:06,186 : INFO : Validation metrics:
+2024-08-12 21:43:06,186 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:43:06,192 : INFO : Accuracy: 0.9488
+2024-08-12 21:43:06,192 : INFO : Precision: 0.9426
+2024-08-12 21:43:06,192 : INFO : Recall: 0.9542
+2024-08-12 21:43:06,192 : INFO : F1 score: 0.9483
+2024-08-12 21:43:06,192 : INFO : Validation metric decreased (inf --> 0.148566).  Saving model ...
+2024-08-12 21:43:06,809 : INFO : Split 2 is finished, the score is: 0.9483
+2024-08-12 21:43:06,809 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:43:06,809 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:43:06,809 : INFO : Starting training for split 3
+2024-08-12 21:43:06,866 : INFO : Occurence of labels for training split: (array([0, 1]), array([9346, 9404]))
+2024-08-12 21:43:06,868 : INFO : Occurence of labels for validation split: (array([0, 1]), array([3154, 3096]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 21:43:07,589 : INFO : Starting epoch 1
+2024-08-12 21:43:08,454 : INFO : Current training batch loss: 0.6934 in epoch 1
+2024-08-12 21:43:25,670 : INFO : Current training batch loss: 0.6780 in epoch 1
+2024-08-12 21:43:42,905 : INFO : Current training batch loss: 0.4223 in epoch 1
+2024-08-12 21:44:00,148 : INFO : Current training batch loss: 0.2053 in epoch 1
+2024-08-12 21:44:17,409 : INFO : Current training batch loss: 0.2386 in epoch 1
+2024-08-12 21:44:34,658 : INFO : Current training batch loss: 0.1562 in epoch 1
+2024-08-12 21:44:51,898 : INFO : Current training batch loss: 0.2775 in epoch 1
+2024-08-12 21:45:09,139 : INFO : Current training batch loss: 0.1679 in epoch 1
+2024-08-12 21:45:26,387 : INFO : Current training batch loss: 0.1258 in epoch 1
+2024-08-12 21:45:43,633 : INFO : Current training batch loss: 0.0928 in epoch 1
+2024-08-12 21:46:00,858 : INFO : Current training batch loss: 0.1181 in epoch 1
+2024-08-12 21:46:18,098 : INFO : Current training batch loss: 0.2087 in epoch 1
+2024-08-12 21:46:35,345 : INFO : Current training batch loss: 0.0836 in epoch 1
+2024-08-12 21:46:52,566 : INFO : Current training batch loss: 0.1540 in epoch 1
+2024-08-12 21:47:09,826 : INFO : Current training batch loss: 0.1281 in epoch 1
+2024-08-12 21:47:19,664 : INFO : Epoch finished, average loss over training batches: 0.2489
+2024-08-12 21:47:19,665 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:47:19,665 : INFO : Training metrics:
+2024-08-12 21:47:19,665 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:47:20,170 : INFO : Accuracy: 0.9031
+2024-08-12 21:47:20,170 : INFO : Precision: 0.8989
+2024-08-12 21:47:20,170 : INFO : Recall: 0.9091
+2024-08-12 21:47:20,170 : INFO : F1 score: 0.9039
+2024-08-12 21:47:53,305 : INFO : Average loss over validation batches: 0.1509
+2024-08-12 21:47:53,306 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:47:53,306 : INFO : Validation metrics:
+2024-08-12 21:47:53,306 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:47:53,311 : INFO : Accuracy: 0.9469
+2024-08-12 21:47:53,311 : INFO : Precision: 0.9470
+2024-08-12 21:47:53,311 : INFO : Recall: 0.9457
+2024-08-12 21:47:53,311 : INFO : F1 score: 0.9463
+2024-08-12 21:47:53,311 : INFO : Validation metric decreased (inf --> 0.150877).  Saving model ...
+2024-08-12 21:47:54,008 : INFO : Split 3 is finished, the score is: 0.9463
+2024-08-12 21:47:54,009 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:47:54,009 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:47:54,009 : INFO : Starting training for split 4
+2024-08-12 21:47:54,017 : INFO : Occurence of labels for training split: (array([0, 1]), array([9421, 9329]))
+2024-08-12 21:47:54,018 : INFO : Occurence of labels for validation split: (array([0, 1]), array([3079, 3171]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 21:47:54,724 : INFO : Starting epoch 1
+2024-08-12 21:47:55,589 : INFO : Current training batch loss: 0.6935 in epoch 1
+2024-08-12 21:48:12,817 : INFO : Current training batch loss: 0.6666 in epoch 1
+2024-08-12 21:48:30,060 : INFO : Current training batch loss: 0.3407 in epoch 1
+2024-08-12 21:48:47,305 : INFO : Current training batch loss: 0.1805 in epoch 1
+2024-08-12 21:49:04,566 : INFO : Current training batch loss: 0.2174 in epoch 1
+2024-08-12 21:49:21,819 : INFO : Current training batch loss: 0.1849 in epoch 1
+2024-08-12 21:49:39,063 : INFO : Current training batch loss: 0.2521 in epoch 1
+2024-08-12 21:49:56,309 : INFO : Current training batch loss: 0.1729 in epoch 1
+2024-08-12 21:50:13,552 : INFO : Current training batch loss: 0.1077 in epoch 1
+2024-08-12 21:50:30,796 : INFO : Current training batch loss: 0.0889 in epoch 1
+2024-08-12 21:50:48,033 : INFO : Current training batch loss: 0.0767 in epoch 1
+2024-08-12 21:51:05,269 : INFO : Current training batch loss: 0.2094 in epoch 1
+2024-08-12 21:51:22,519 : INFO : Current training batch loss: 0.0451 in epoch 1
+2024-08-12 21:51:39,781 : INFO : Current training batch loss: 0.0731 in epoch 1
+2024-08-12 21:51:57,029 : INFO : Current training batch loss: 0.2985 in epoch 1
+2024-08-12 21:52:06,879 : INFO : Epoch finished, average loss over training batches: 0.2390
+2024-08-12 21:52:06,880 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:52:06,880 : INFO : Training metrics:
+2024-08-12 21:52:06,880 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:52:07,385 : INFO : Accuracy: 0.9065
+2024-08-12 21:52:07,385 : INFO : Precision: 0.9007
+2024-08-12 21:52:07,385 : INFO : Recall: 0.9126
+2024-08-12 21:52:07,385 : INFO : F1 score: 0.9066
+2024-08-12 21:52:40,556 : INFO : Average loss over validation batches: 0.1534
+2024-08-12 21:52:40,556 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:52:40,557 : INFO : Validation metrics:
+2024-08-12 21:52:40,557 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:52:40,562 : INFO : Accuracy: 0.9470
+2024-08-12 21:52:40,562 : INFO : Precision: 0.9517
+2024-08-12 21:52:40,562 : INFO : Recall: 0.9436
+2024-08-12 21:52:40,562 : INFO : F1 score: 0.9476
+2024-08-12 21:52:40,562 : INFO : Validation metric decreased (inf --> 0.153387).  Saving model ...
+2024-08-12 21:52:41,177 : INFO : Split 4 is finished, the score is: 0.9476
+2024-08-12 21:52:41,177 : INFO : ----------------------------------------------------------------------------------------------------
+[I 2024-08-12 21:52:41,177] Trial 3 finished with value: 0.9469615128257081 and parameters: {'n_epochs': 1, 'learning_rate': 1.314981213684723e-05, 'classifier_dropout': 0.614202714322494, 'warmup_step_fraction': 0.06848176628676511, 'use_gradient_clipping': False}. Best is trial 1 with value: 0.950243114073261.
+2024-08-12 21:52:41,178 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:52:41,178 : INFO : Starting training for split 1
+2024-08-12 21:52:41,186 : INFO : Occurence of labels for training split: (array([0, 1]), array([9405, 9345]))
+2024-08-12 21:52:41,187 : INFO : Occurence of labels for validation split: (array([0, 1]), array([3095, 3155]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 21:52:42,035 : INFO : Starting epoch 1
+2024-08-12 21:52:42,919 : INFO : Current training batch loss: 0.6994 in epoch 1
+2024-08-12 21:53:00,216 : INFO : Current training batch loss: 0.6161 in epoch 1
+2024-08-12 21:53:17,516 : INFO : Current training batch loss: 0.2629 in epoch 1
+2024-08-12 21:53:34,819 : INFO : Current training batch loss: 0.2460 in epoch 1
+2024-08-12 21:53:52,121 : INFO : Current training batch loss: 0.1895 in epoch 1
+2024-08-12 21:54:09,420 : INFO : Current training batch loss: 0.4018 in epoch 1
+2024-08-12 21:54:26,709 : INFO : Current training batch loss: 0.2239 in epoch 1
+2024-08-12 21:54:44,001 : INFO : Current training batch loss: 0.1893 in epoch 1
+2024-08-12 21:55:01,309 : INFO : Current training batch loss: 0.1385 in epoch 1
+2024-08-12 21:55:18,608 : INFO : Current training batch loss: 0.1973 in epoch 1
+2024-08-12 21:55:35,906 : INFO : Current training batch loss: 0.1526 in epoch 1
+2024-08-12 21:55:53,198 : INFO : Current training batch loss: 0.2585 in epoch 1
+2024-08-12 21:56:10,499 : INFO : Current training batch loss: 0.1366 in epoch 1
+2024-08-12 21:56:27,777 : INFO : Current training batch loss: 0.1602 in epoch 1
+2024-08-12 21:56:45,094 : INFO : Current training batch loss: 0.1008 in epoch 1
+2024-08-12 21:56:54,964 : INFO : Epoch finished, average loss over training batches: 0.2519
+2024-08-12 21:56:54,965 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:56:54,965 : INFO : Training metrics:
+2024-08-12 21:56:54,965 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:56:55,470 : INFO : Accuracy: 0.8984
+2024-08-12 21:56:55,470 : INFO : Precision: 0.9076
+2024-08-12 21:56:55,470 : INFO : Recall: 0.8864
+2024-08-12 21:56:55,470 : INFO : F1 score: 0.8969
+2024-08-12 21:57:28,656 : INFO : Average loss over validation batches: 0.1511
+2024-08-12 21:57:28,656 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:57:28,656 : INFO : Validation metrics:
+2024-08-12 21:57:28,656 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 21:57:28,662 : INFO : Accuracy: 0.9390
+2024-08-12 21:57:28,662 : INFO : Precision: 0.9605
+2024-08-12 21:57:28,662 : INFO : Recall: 0.9170
+2024-08-12 21:57:28,662 : INFO : F1 score: 0.9382
+2024-08-12 21:57:28,662 : INFO : Validation metric decreased (inf --> 0.151066).  Saving model ...
+2024-08-12 21:57:29,387 : INFO : Starting epoch 2
+2024-08-12 21:57:36,305 : INFO : Current training batch loss: 0.2473 in epoch 2
+2024-08-12 21:57:53,605 : INFO : Current training batch loss: 0.3174 in epoch 2
+2024-08-12 21:58:10,908 : INFO : Current training batch loss: 0.0719 in epoch 2
+2024-08-12 21:58:28,214 : INFO : Current training batch loss: 0.0571 in epoch 2
+2024-08-12 21:58:45,518 : INFO : Current training batch loss: 0.0965 in epoch 2
+2024-08-12 21:59:02,815 : INFO : Current training batch loss: 0.2724 in epoch 2
+2024-08-12 21:59:20,115 : INFO : Current training batch loss: 0.0131 in epoch 2
+2024-08-12 21:59:37,436 : INFO : Current training batch loss: 0.1355 in epoch 2
+2024-08-12 21:59:54,750 : INFO : Current training batch loss: 0.0224 in epoch 2
+2024-08-12 22:00:12,055 : INFO : Current training batch loss: 0.1715 in epoch 2
+2024-08-12 22:00:29,365 : INFO : Current training batch loss: 0.1139 in epoch 2
+2024-08-12 22:00:46,677 : INFO : Current training batch loss: 0.0696 in epoch 2
+2024-08-12 22:01:03,973 : INFO : Current training batch loss: 0.0593 in epoch 2
+2024-08-12 22:01:21,287 : INFO : Current training batch loss: 0.0135 in epoch 2
+2024-08-12 22:01:38,610 : INFO : Current training batch loss: 0.0138 in epoch 2
+2024-08-12 22:01:42,429 : INFO : Epoch finished, average loss over training batches: 0.0958
+2024-08-12 22:01:42,430 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:01:42,430 : INFO : Training metrics:
+2024-08-12 22:01:42,430 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:01:42,936 : INFO : Accuracy: 0.9703
+2024-08-12 22:01:42,936 : INFO : Precision: 0.9689
+2024-08-12 22:01:42,936 : INFO : Recall: 0.9716
+2024-08-12 22:01:42,936 : INFO : F1 score: 0.9703
+2024-08-12 22:02:16,127 : INFO : Average loss over validation batches: 0.2403
+2024-08-12 22:02:16,127 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:02:16,127 : INFO : Validation metrics:
+2024-08-12 22:02:16,127 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:02:16,132 : INFO : Accuracy: 0.9237
+2024-08-12 22:02:16,132 : INFO : Precision: 0.8852
+2024-08-12 22:02:16,132 : INFO : Recall: 0.9753
+2024-08-12 22:02:16,132 : INFO : F1 score: 0.9281
+2024-08-12 22:02:16,132 : INFO : EarlyStopping counter: 1 out of 2
+2024-08-12 22:02:16,132 : INFO : Starting epoch 3
+2024-08-12 22:02:29,111 : INFO : Current training batch loss: 0.0128 in epoch 3
+2024-08-12 22:02:46,417 : INFO : Current training batch loss: 0.0588 in epoch 3
+2024-08-12 22:03:03,715 : INFO : Current training batch loss: 0.0046 in epoch 3
+2024-08-12 22:03:21,017 : INFO : Current training batch loss: 0.0500 in epoch 3
+2024-08-12 22:03:38,318 : INFO : Current training batch loss: 0.0038 in epoch 3
+2024-08-12 22:03:55,610 : INFO : Current training batch loss: 0.0766 in epoch 3
+2024-08-12 22:04:12,912 : INFO : Current training batch loss: 0.0662 in epoch 3
+2024-08-12 22:04:30,233 : INFO : Current training batch loss: 0.0418 in epoch 3
+2024-08-12 22:04:47,540 : INFO : Current training batch loss: 0.0713 in epoch 3
+2024-08-12 22:05:04,851 : INFO : Current training batch loss: 0.1693 in epoch 3
+2024-08-12 22:05:22,152 : INFO : Current training batch loss: 0.0071 in epoch 3
+2024-08-12 22:05:39,465 : INFO : Current training batch loss: 0.0077 in epoch 3
+2024-08-12 22:05:56,763 : INFO : Current training batch loss: 0.0040 in epoch 3
+2024-08-12 22:06:14,082 : INFO : Current training batch loss: 0.0060 in epoch 3
+2024-08-12 22:06:29,151 : INFO : Epoch finished, average loss over training batches: 0.0365
+2024-08-12 22:06:29,152 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:06:29,152 : INFO : Training metrics:
+2024-08-12 22:06:29,152 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:06:29,657 : INFO : Accuracy: 0.9917
+2024-08-12 22:06:29,657 : INFO : Precision: 0.9912
+2024-08-12 22:06:29,657 : INFO : Recall: 0.9922
+2024-08-12 22:06:29,657 : INFO : F1 score: 0.9917
+2024-08-12 22:07:02,851 : INFO : Average loss over validation batches: 0.1827
+2024-08-12 22:07:02,852 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:07:02,852 : INFO : Validation metrics:
+2024-08-12 22:07:02,852 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:07:02,857 : INFO : Accuracy: 0.9509
+2024-08-12 22:07:02,857 : INFO : Precision: 0.9666
+2024-08-12 22:07:02,857 : INFO : Recall: 0.9350
+2024-08-12 22:07:02,857 : INFO : F1 score: 0.9505
+2024-08-12 22:07:02,857 : INFO : EarlyStopping counter: 2 out of 2
+2024-08-12 22:07:02,857 : INFO : Early stopping, loading best model from before and determine score...
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 22:07:03,533 : INFO : Loading model from /data/language_models/pretrained_models_downstreaming/stanford_imdb/electra_base_discriminator/current_split_model/checkpoint.pth
+2024-08-12 22:07:36,842 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:07:36,842 : INFO : Validation metrics after reloading the model before ending this training:
+2024-08-12 22:07:36,842 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:07:36,847 : INFO : Accuracy: 0.9390
+2024-08-12 22:07:36,848 : INFO : Precision: 0.9605
+2024-08-12 22:07:36,848 : INFO : Recall: 0.9170
+2024-08-12 22:07:36,848 : INFO : F1 score: 0.9382
+2024-08-12 22:07:36,848 : INFO : Determined score from best model, ending training.
+2024-08-12 22:07:36,856 : INFO : Split 1 is finished, the score is: 0.9382
+2024-08-12 22:07:36,856 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:07:36,856 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:07:36,856 : INFO : Starting training for split 2
+2024-08-12 22:07:37,000 : INFO : Occurence of labels for training split: (array([0, 1]), array([9328, 9422]))
+2024-08-12 22:07:37,001 : INFO : Occurence of labels for validation split: (array([0, 1]), array([3172, 3078]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 22:07:37,880 : INFO : Starting epoch 1
+2024-08-12 22:07:38,747 : INFO : Current training batch loss: 0.6871 in epoch 1
+2024-08-12 22:07:56,017 : INFO : Current training batch loss: 0.6042 in epoch 1
+2024-08-12 22:08:13,297 : INFO : Current training batch loss: 0.3181 in epoch 1
+2024-08-12 22:08:30,587 : INFO : Current training batch loss: 0.1819 in epoch 1
+2024-08-12 22:08:47,891 : INFO : Current training batch loss: 0.2266 in epoch 1
+2024-08-12 22:09:05,185 : INFO : Current training batch loss: 0.1621 in epoch 1
+2024-08-12 22:09:22,472 : INFO : Current training batch loss: 0.2126 in epoch 1
+2024-08-12 22:09:39,768 : INFO : Current training batch loss: 0.2097 in epoch 1
+2024-08-12 22:09:57,081 : INFO : Current training batch loss: 0.1546 in epoch 1
+2024-08-12 22:10:14,373 : INFO : Current training batch loss: 0.1301 in epoch 1
+2024-08-12 22:10:31,674 : INFO : Current training batch loss: 0.1311 in epoch 1
+2024-08-12 22:10:48,969 : INFO : Current training batch loss: 0.2080 in epoch 1
+2024-08-12 22:11:06,279 : INFO : Current training batch loss: 0.0809 in epoch 1
+2024-08-12 22:11:23,575 : INFO : Current training batch loss: 0.1627 in epoch 1
+2024-08-12 22:11:40,895 : INFO : Current training batch loss: 0.0601 in epoch 1
+2024-08-12 22:11:50,770 : INFO : Epoch finished, average loss over training batches: 0.2460
+2024-08-12 22:11:50,770 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:11:50,770 : INFO : Training metrics:
+2024-08-12 22:11:50,770 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:11:51,280 : INFO : Accuracy: 0.9030
+2024-08-12 22:11:51,280 : INFO : Precision: 0.9158
+2024-08-12 22:11:51,280 : INFO : Recall: 0.8888
+2024-08-12 22:11:51,280 : INFO : F1 score: 0.9021
+2024-08-12 22:12:24,473 : INFO : Average loss over validation batches: 0.1636
+2024-08-12 22:12:24,473 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:12:24,473 : INFO : Validation metrics:
+2024-08-12 22:12:24,473 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:12:24,479 : INFO : Accuracy: 0.9408
+2024-08-12 22:12:24,479 : INFO : Precision: 0.9223
+2024-08-12 22:12:24,479 : INFO : Recall: 0.9607
+2024-08-12 22:12:24,479 : INFO : F1 score: 0.9411
+2024-08-12 22:12:24,479 : INFO : Validation metric decreased (inf --> 0.163561).  Saving model ...
+2024-08-12 22:12:25,170 : INFO : Starting epoch 2
+2024-08-12 22:12:32,077 : INFO : Current training batch loss: 0.1703 in epoch 2
+2024-08-12 22:12:49,349 : INFO : Current training batch loss: 0.1919 in epoch 2
+2024-08-12 22:13:06,645 : INFO : Current training batch loss: 0.0499 in epoch 2
+2024-08-12 22:13:23,936 : INFO : Current training batch loss: 0.1347 in epoch 2
+2024-08-12 22:13:41,232 : INFO : Current training batch loss: 0.0554 in epoch 2
+2024-08-12 22:13:58,532 : INFO : Current training batch loss: 0.1125 in epoch 2
+2024-08-12 22:14:15,822 : INFO : Current training batch loss: 0.1109 in epoch 2
+2024-08-12 22:14:33,138 : INFO : Current training batch loss: 0.1221 in epoch 2
+2024-08-12 22:14:50,438 : INFO : Current training batch loss: 0.0132 in epoch 2
+2024-08-12 22:15:07,733 : INFO : Current training batch loss: 0.1226 in epoch 2
+2024-08-12 22:15:25,037 : INFO : Current training batch loss: 0.1069 in epoch 2
+2024-08-12 22:15:42,343 : INFO : Current training batch loss: 0.0407 in epoch 2
+2024-08-12 22:15:59,633 : INFO : Current training batch loss: 0.0503 in epoch 2
+2024-08-12 22:16:16,934 : INFO : Current training batch loss: 0.0591 in epoch 2
+2024-08-12 22:16:34,239 : INFO : Current training batch loss: 0.0974 in epoch 2
+2024-08-12 22:16:38,051 : INFO : Epoch finished, average loss over training batches: 0.0994
+2024-08-12 22:16:38,051 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:16:38,051 : INFO : Training metrics:
+2024-08-12 22:16:38,052 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:16:38,559 : INFO : Accuracy: 0.9683
+2024-08-12 22:16:38,559 : INFO : Precision: 0.9674
+2024-08-12 22:16:38,559 : INFO : Recall: 0.9696
+2024-08-12 22:16:38,559 : INFO : F1 score: 0.9685
+2024-08-12 22:17:11,660 : INFO : Average loss over validation batches: 0.1674
+2024-08-12 22:17:11,660 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:17:11,660 : INFO : Validation metrics:
+2024-08-12 22:17:11,660 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:17:11,666 : INFO : Accuracy: 0.9416
+2024-08-12 22:17:11,666 : INFO : Precision: 0.9324
+2024-08-12 22:17:11,666 : INFO : Recall: 0.9503
+2024-08-12 22:17:11,666 : INFO : F1 score: 0.9413
+2024-08-12 22:17:11,666 : INFO : EarlyStopping counter: 1 out of 2
+2024-08-12 22:17:11,666 : INFO : Starting epoch 3
+2024-08-12 22:17:24,626 : INFO : Current training batch loss: 0.0542 in epoch 3
+2024-08-12 22:17:41,893 : INFO : Current training batch loss: 0.1062 in epoch 3
+2024-08-12 22:17:59,174 : INFO : Current training batch loss: 0.0060 in epoch 3
+2024-08-12 22:18:16,447 : INFO : Current training batch loss: 0.0365 in epoch 3
+2024-08-12 22:18:33,718 : INFO : Current training batch loss: 0.0127 in epoch 3
+2024-08-12 22:18:50,980 : INFO : Current training batch loss: 0.1181 in epoch 3
+2024-08-12 22:19:08,252 : INFO : Current training batch loss: 0.0023 in epoch 3
+2024-08-12 22:19:25,540 : INFO : Current training batch loss: 0.0233 in epoch 3
+2024-08-12 22:19:42,803 : INFO : Current training batch loss: 0.0014 in epoch 3
+2024-08-12 22:20:00,078 : INFO : Current training batch loss: 0.1686 in epoch 3
+2024-08-12 22:20:17,344 : INFO : Current training batch loss: 0.0065 in epoch 3
+2024-08-12 22:20:34,621 : INFO : Current training batch loss: 0.0036 in epoch 3
+2024-08-12 22:20:51,884 : INFO : Current training batch loss: 0.0018 in epoch 3
+2024-08-12 22:21:09,165 : INFO : Current training batch loss: 0.0012 in epoch 3
+2024-08-12 22:21:24,195 : INFO : Epoch finished, average loss over training batches: 0.0383
+2024-08-12 22:21:24,195 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:21:24,195 : INFO : Training metrics:
+2024-08-12 22:21:24,195 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:21:24,703 : INFO : Accuracy: 0.9905
+2024-08-12 22:21:24,703 : INFO : Precision: 0.9898
+2024-08-12 22:21:24,703 : INFO : Recall: 0.9912
+2024-08-12 22:21:24,703 : INFO : F1 score: 0.9905
+2024-08-12 22:21:57,777 : INFO : Average loss over validation batches: 0.2342
+2024-08-12 22:21:57,778 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:21:57,778 : INFO : Validation metrics:
+2024-08-12 22:21:57,778 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:21:57,783 : INFO : Accuracy: 0.9486
+2024-08-12 22:21:57,783 : INFO : Precision: 0.9524
+2024-08-12 22:21:57,783 : INFO : Recall: 0.9428
+2024-08-12 22:21:57,783 : INFO : F1 score: 0.9476
+2024-08-12 22:21:57,783 : INFO : EarlyStopping counter: 2 out of 2
+2024-08-12 22:21:57,783 : INFO : Early stopping, loading best model from before and determine score...
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 22:21:58,440 : INFO : Loading model from /data/language_models/pretrained_models_downstreaming/stanford_imdb/electra_base_discriminator/current_split_model/checkpoint.pth
+2024-08-12 22:22:31,711 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:22:31,711 : INFO : Validation metrics after reloading the model before ending this training:
+2024-08-12 22:22:31,711 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:22:31,717 : INFO : Accuracy: 0.9408
+2024-08-12 22:22:31,717 : INFO : Precision: 0.9223
+2024-08-12 22:22:31,717 : INFO : Recall: 0.9607
+2024-08-12 22:22:31,717 : INFO : F1 score: 0.9411
+2024-08-12 22:22:31,717 : INFO : Determined score from best model, ending training.
+2024-08-12 22:22:31,727 : INFO : Split 2 is finished, the score is: 0.9411
+2024-08-12 22:22:31,727 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:22:31,727 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:22:31,727 : INFO : Starting training for split 3
+2024-08-12 22:22:31,872 : INFO : Occurence of labels for training split: (array([0, 1]), array([9346, 9404]))
+2024-08-12 22:22:31,873 : INFO : Occurence of labels for validation split: (array([0, 1]), array([3154, 3096]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 22:22:32,610 : INFO : Starting epoch 1
+2024-08-12 22:22:33,476 : INFO : Current training batch loss: 0.6920 in epoch 1
+2024-08-12 22:22:50,724 : INFO : Current training batch loss: 0.6228 in epoch 1
+2024-08-12 22:23:07,987 : INFO : Current training batch loss: 0.2599 in epoch 1
+2024-08-12 22:23:25,254 : INFO : Current training batch loss: 0.0808 in epoch 1
+2024-08-12 22:23:42,540 : INFO : Current training batch loss: 0.1362 in epoch 1
+2024-08-12 22:23:59,819 : INFO : Current training batch loss: 0.1349 in epoch 1
+2024-08-12 22:24:17,086 : INFO : Current training batch loss: 0.2040 in epoch 1
+2024-08-12 22:24:34,363 : INFO : Current training batch loss: 0.1965 in epoch 1
+2024-08-12 22:24:51,635 : INFO : Current training batch loss: 0.1209 in epoch 1
+2024-08-12 22:25:08,911 : INFO : Current training batch loss: 0.1248 in epoch 1
+2024-08-12 22:25:26,171 : INFO : Current training batch loss: 0.1837 in epoch 1
+2024-08-12 22:25:43,449 : INFO : Current training batch loss: 0.3159 in epoch 1
+2024-08-12 22:26:00,735 : INFO : Current training batch loss: 0.0831 in epoch 1
+2024-08-12 22:26:17,994 : INFO : Current training batch loss: 0.1257 in epoch 1
+2024-08-12 22:26:35,282 : INFO : Current training batch loss: 0.0800 in epoch 1
+2024-08-12 22:26:45,132 : INFO : Epoch finished, average loss over training batches: 0.2514
+2024-08-12 22:26:45,133 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:26:45,133 : INFO : Training metrics:
+2024-08-12 22:26:45,133 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:26:45,662 : INFO : Accuracy: 0.8973
+2024-08-12 22:26:45,662 : INFO : Precision: 0.9148
+2024-08-12 22:26:45,662 : INFO : Recall: 0.8769
+2024-08-12 22:26:45,662 : INFO : F1 score: 0.8954
+2024-08-12 22:27:18,748 : INFO : Average loss over validation batches: 0.1977
+2024-08-12 22:27:18,749 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:27:18,749 : INFO : Validation metrics:
+2024-08-12 22:27:18,749 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:27:18,754 : INFO : Accuracy: 0.9189
+2024-08-12 22:27:18,754 : INFO : Precision: 0.9757
+2024-08-12 22:27:18,754 : INFO : Recall: 0.8576
+2024-08-12 22:27:18,754 : INFO : F1 score: 0.9128
+2024-08-12 22:27:18,754 : INFO : Validation metric decreased (inf --> 0.197678).  Saving model ...
+2024-08-12 22:27:19,440 : INFO : Starting epoch 2
+2024-08-12 22:27:26,351 : INFO : Current training batch loss: 0.1942 in epoch 2
+2024-08-12 22:27:43,628 : INFO : Current training batch loss: 0.1459 in epoch 2
+2024-08-12 22:28:00,925 : INFO : Current training batch loss: 0.0756 in epoch 2
+2024-08-12 22:28:18,216 : INFO : Current training batch loss: 0.1061 in epoch 2
+2024-08-12 22:28:35,516 : INFO : Current training batch loss: 0.0399 in epoch 2
+2024-08-12 22:28:52,823 : INFO : Current training batch loss: 0.0527 in epoch 2
+2024-08-12 22:29:10,127 : INFO : Current training batch loss: 0.0047 in epoch 2
+2024-08-12 22:29:27,431 : INFO : Current training batch loss: 0.1112 in epoch 2
+2024-08-12 22:29:44,727 : INFO : Current training batch loss: 0.0850 in epoch 2
+2024-08-12 22:30:02,042 : INFO : Current training batch loss: 0.0503 in epoch 2
+2024-08-12 22:30:19,336 : INFO : Current training batch loss: 0.1505 in epoch 2
+2024-08-12 22:30:36,650 : INFO : Current training batch loss: 0.0897 in epoch 2
+2024-08-12 22:30:53,961 : INFO : Current training batch loss: 0.0727 in epoch 2
+2024-08-12 22:31:11,284 : INFO : Current training batch loss: 0.0801 in epoch 2
+2024-08-12 22:31:28,615 : INFO : Current training batch loss: 0.0050 in epoch 2
+2024-08-12 22:31:32,432 : INFO : Epoch finished, average loss over training batches: 0.1003
+2024-08-12 22:31:32,433 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:31:32,433 : INFO : Training metrics:
+2024-08-12 22:31:32,433 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:31:32,943 : INFO : Accuracy: 0.9667
+2024-08-12 22:31:32,943 : INFO : Precision: 0.9648
+2024-08-12 22:31:32,943 : INFO : Recall: 0.9689
+2024-08-12 22:31:32,943 : INFO : F1 score: 0.9669
+2024-08-12 22:32:06,139 : INFO : Average loss over validation batches: 0.1909
+2024-08-12 22:32:06,140 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:32:06,140 : INFO : Validation metrics:
+2024-08-12 22:32:06,140 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:32:06,145 : INFO : Accuracy: 0.9424
+2024-08-12 22:32:06,145 : INFO : Precision: 0.9536
+2024-08-12 22:32:06,145 : INFO : Recall: 0.9289
+2024-08-12 22:32:06,145 : INFO : F1 score: 0.9411
+2024-08-12 22:32:06,145 : INFO : Validation metric decreased (0.197678 --> 0.190909).  Saving model ...
+2024-08-12 22:32:06,847 : INFO : Starting epoch 3
+2024-08-12 22:32:19,803 : INFO : Current training batch loss: 0.0187 in epoch 3
+2024-08-12 22:32:37,071 : INFO : Current training batch loss: 0.0531 in epoch 3
+2024-08-12 22:32:54,367 : INFO : Current training batch loss: 0.0031 in epoch 3
+2024-08-12 22:33:11,656 : INFO : Current training batch loss: 0.0524 in epoch 3
+2024-08-12 22:33:28,941 : INFO : Current training batch loss: 0.0327 in epoch 3
+2024-08-12 22:33:46,225 : INFO : Current training batch loss: 0.0994 in epoch 3
+2024-08-12 22:34:03,508 : INFO : Current training batch loss: 0.1035 in epoch 3
+2024-08-12 22:34:20,780 : INFO : Current training batch loss: 0.0502 in epoch 3
+2024-08-12 22:34:38,057 : INFO : Current training batch loss: 0.0029 in epoch 3
+2024-08-12 22:34:55,329 : INFO : Current training batch loss: 0.0507 in epoch 3
+2024-08-12 22:35:12,597 : INFO : Current training batch loss: 0.0709 in epoch 3
+2024-08-12 22:35:29,887 : INFO : Current training batch loss: 0.0031 in epoch 3
+2024-08-12 22:35:47,162 : INFO : Current training batch loss: 0.0084 in epoch 3
+2024-08-12 22:36:04,454 : INFO : Current training batch loss: 0.0014 in epoch 3
+2024-08-12 22:36:19,501 : INFO : Epoch finished, average loss over training batches: 0.0401
+2024-08-12 22:36:19,502 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:36:19,502 : INFO : Training metrics:
+2024-08-12 22:36:19,502 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:36:20,012 : INFO : Accuracy: 0.9894
+2024-08-12 22:36:20,012 : INFO : Precision: 0.9882
+2024-08-12 22:36:20,012 : INFO : Recall: 0.9906
+2024-08-12 22:36:20,012 : INFO : F1 score: 0.9894
+2024-08-12 22:36:53,106 : INFO : Average loss over validation batches: 0.2363
+2024-08-12 22:36:53,107 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:36:53,107 : INFO : Validation metrics:
+2024-08-12 22:36:53,107 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:36:53,112 : INFO : Accuracy: 0.9446
+2024-08-12 22:36:53,112 : INFO : Precision: 0.9302
+2024-08-12 22:36:53,112 : INFO : Recall: 0.9603
+2024-08-12 22:36:53,112 : INFO : F1 score: 0.9450
+2024-08-12 22:36:53,112 : INFO : EarlyStopping counter: 1 out of 2
+2024-08-12 22:36:53,112 : INFO : Starting epoch 4
+2024-08-12 22:36:54,842 : INFO : Current training batch loss: 0.0018 in epoch 4
+2024-08-12 22:37:12,116 : INFO : Current training batch loss: 0.0024 in epoch 4
+2024-08-12 22:37:29,390 : INFO : Current training batch loss: 0.0515 in epoch 4
+2024-08-12 22:37:46,667 : INFO : Current training batch loss: 0.0049 in epoch 4
+2024-08-12 22:38:03,962 : INFO : Current training batch loss: 0.0021 in epoch 4
+2024-08-12 22:38:21,250 : INFO : Current training batch loss: 0.0021 in epoch 4
+2024-08-12 22:38:38,527 : INFO : Current training batch loss: 0.0021 in epoch 4
+2024-08-12 22:38:55,805 : INFO : Current training batch loss: 0.0022 in epoch 4
+2024-08-12 22:39:13,074 : INFO : Current training batch loss: 0.0247 in epoch 4
+2024-08-12 22:39:30,352 : INFO : Current training batch loss: 0.0042 in epoch 4
+2024-08-12 22:39:47,610 : INFO : Current training batch loss: 0.0042 in epoch 4
+2024-08-12 22:40:04,873 : INFO : Current training batch loss: 0.0020 in epoch 4
+2024-08-12 22:40:22,151 : INFO : Current training batch loss: 0.1047 in epoch 4
+2024-08-12 22:40:39,407 : INFO : Current training batch loss: 0.0024 in epoch 4
+2024-08-12 22:40:56,690 : INFO : Current training batch loss: 0.0018 in epoch 4
+2024-08-12 22:41:05,673 : INFO : Epoch finished, average loss over training batches: 0.0167
+2024-08-12 22:41:05,674 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:41:05,674 : INFO : Training metrics:
+2024-08-12 22:41:05,674 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:41:06,184 : INFO : Accuracy: 0.9970
+2024-08-12 22:41:06,184 : INFO : Precision: 0.9962
+2024-08-12 22:41:06,184 : INFO : Recall: 0.9978
+2024-08-12 22:41:06,184 : INFO : F1 score: 0.9970
+2024-08-12 22:41:39,245 : INFO : Average loss over validation batches: 0.2336
+2024-08-12 22:41:39,245 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:41:39,245 : INFO : Validation metrics:
+2024-08-12 22:41:39,245 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:41:39,250 : INFO : Accuracy: 0.9459
+2024-08-12 22:41:39,251 : INFO : Precision: 0.9471
+2024-08-12 22:41:39,251 : INFO : Recall: 0.9435
+2024-08-12 22:41:39,251 : INFO : F1 score: 0.9453
+2024-08-12 22:41:39,251 : INFO : EarlyStopping counter: 2 out of 2
+2024-08-12 22:41:39,251 : INFO : Early stopping, loading best model from before and determine score...
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 22:41:40,104 : INFO : Loading model from /data/language_models/pretrained_models_downstreaming/stanford_imdb/electra_base_discriminator/current_split_model/checkpoint.pth
+2024-08-12 22:42:13,325 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:42:13,325 : INFO : Validation metrics after reloading the model before ending this training:
+2024-08-12 22:42:13,325 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:42:13,331 : INFO : Accuracy: 0.9424
+2024-08-12 22:42:13,331 : INFO : Precision: 0.9536
+2024-08-12 22:42:13,331 : INFO : Recall: 0.9289
+2024-08-12 22:42:13,331 : INFO : F1 score: 0.9411
+2024-08-12 22:42:13,331 : INFO : Determined score from best model, ending training.
+2024-08-12 22:42:13,332 : INFO : Split 3 is finished, the score is: 0.9411
+2024-08-12 22:42:13,332 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:42:13,332 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:42:13,332 : INFO : Starting training for split 4
+2024-08-12 22:42:13,340 : INFO : Occurence of labels for training split: (array([0, 1]), array([9421, 9329]))
+2024-08-12 22:42:13,341 : INFO : Occurence of labels for validation split: (array([0, 1]), array([3079, 3171]))
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 22:42:14,007 : INFO : Starting epoch 1
+2024-08-12 22:42:14,876 : INFO : Current training batch loss: 0.6855 in epoch 1
+2024-08-12 22:42:32,147 : INFO : Current training batch loss: 0.5852 in epoch 1
+2024-08-12 22:42:49,423 : INFO : Current training batch loss: 0.2429 in epoch 1
+2024-08-12 22:43:06,706 : INFO : Current training batch loss: 0.1450 in epoch 1
+2024-08-12 22:43:23,999 : INFO : Current training batch loss: 0.4621 in epoch 1
+2024-08-12 22:43:41,287 : INFO : Current training batch loss: 0.1371 in epoch 1
+2024-08-12 22:43:58,560 : INFO : Current training batch loss: 0.2289 in epoch 1
+2024-08-12 22:44:15,840 : INFO : Current training batch loss: 0.2532 in epoch 1
+2024-08-12 22:44:33,118 : INFO : Current training batch loss: 0.1377 in epoch 1
+2024-08-12 22:44:50,399 : INFO : Current training batch loss: 0.1552 in epoch 1
+2024-08-12 22:45:07,679 : INFO : Current training batch loss: 0.1156 in epoch 1
+2024-08-12 22:45:24,963 : INFO : Current training batch loss: 0.1475 in epoch 1
+2024-08-12 22:45:42,269 : INFO : Current training batch loss: 0.1530 in epoch 1
+2024-08-12 22:45:59,579 : INFO : Current training batch loss: 0.0923 in epoch 1
+2024-08-12 22:46:16,878 : INFO : Current training batch loss: 0.1783 in epoch 1
+2024-08-12 22:46:26,760 : INFO : Epoch finished, average loss over training batches: 0.2524
+2024-08-12 22:46:26,761 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:46:26,761 : INFO : Training metrics:
+2024-08-12 22:46:26,761 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:46:27,270 : INFO : Accuracy: 0.8983
+2024-08-12 22:46:27,270 : INFO : Precision: 0.9141
+2024-08-12 22:46:27,270 : INFO : Recall: 0.8781
+2024-08-12 22:46:27,270 : INFO : F1 score: 0.8957
+2024-08-12 22:47:00,460 : INFO : Average loss over validation batches: 0.1986
+2024-08-12 22:47:00,460 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:47:00,460 : INFO : Validation metrics:
+2024-08-12 22:47:00,460 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:47:00,465 : INFO : Accuracy: 0.9258
+2024-08-12 22:47:00,465 : INFO : Precision: 0.8888
+2024-08-12 22:47:00,465 : INFO : Recall: 0.9757
+2024-08-12 22:47:00,465 : INFO : F1 score: 0.9302
+2024-08-12 22:47:00,465 : INFO : Validation metric decreased (inf --> 0.198604).  Saving model ...
+2024-08-12 22:47:01,184 : INFO : Starting epoch 2
+2024-08-12 22:47:08,098 : INFO : Current training batch loss: 0.1487 in epoch 2
+2024-08-12 22:47:25,379 : INFO : Current training batch loss: 0.0860 in epoch 2
+2024-08-12 22:47:42,685 : INFO : Current training batch loss: 0.0572 in epoch 2
+2024-08-12 22:47:59,991 : INFO : Current training batch loss: 0.0425 in epoch 2
+2024-08-12 22:48:17,298 : INFO : Current training batch loss: 0.0540 in epoch 2
+2024-08-12 22:48:34,603 : INFO : Current training batch loss: 0.0326 in epoch 2
+2024-08-12 22:48:51,900 : INFO : Current training batch loss: 0.0171 in epoch 2
+2024-08-12 22:49:09,190 : INFO : Current training batch loss: 0.2370 in epoch 2
+2024-08-12 22:49:26,480 : INFO : Current training batch loss: 0.0075 in epoch 2
+2024-08-12 22:49:43,783 : INFO : Current training batch loss: 0.0099 in epoch 2
+2024-08-12 22:50:01,082 : INFO : Current training batch loss: 0.0346 in epoch 2
+2024-08-12 22:50:18,382 : INFO : Current training batch loss: 0.0149 in epoch 2
+2024-08-12 22:50:35,712 : INFO : Current training batch loss: 0.0025 in epoch 2
+2024-08-12 22:50:53,040 : INFO : Current training batch loss: 0.0212 in epoch 2
+2024-08-12 22:51:10,366 : INFO : Current training batch loss: 0.0994 in epoch 2
+2024-08-12 22:51:14,189 : INFO : Epoch finished, average loss over training batches: 0.0893
+2024-08-12 22:51:14,190 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:51:14,190 : INFO : Training metrics:
+2024-08-12 22:51:14,190 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:51:14,698 : INFO : Accuracy: 0.9698
+2024-08-12 22:51:14,699 : INFO : Precision: 0.9706
+2024-08-12 22:51:14,699 : INFO : Recall: 0.9687
+2024-08-12 22:51:14,699 : INFO : F1 score: 0.9696
+2024-08-12 22:51:47,892 : INFO : Average loss over validation batches: 0.1697
+2024-08-12 22:51:47,893 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:51:47,893 : INFO : Validation metrics:
+2024-08-12 22:51:47,893 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:51:47,898 : INFO : Accuracy: 0.9461
+2024-08-12 22:51:47,898 : INFO : Precision: 0.9571
+2024-08-12 22:51:47,898 : INFO : Recall: 0.9357
+2024-08-12 22:51:47,898 : INFO : F1 score: 0.9463
+2024-08-12 22:51:47,898 : INFO : Validation metric decreased (0.198604 --> 0.169660).  Saving model ...
+2024-08-12 22:51:48,599 : INFO : Starting epoch 3
+2024-08-12 22:52:01,588 : INFO : Current training batch loss: 0.1525 in epoch 3
+2024-08-12 22:52:18,908 : INFO : Current training batch loss: 0.0046 in epoch 3
+2024-08-12 22:52:36,246 : INFO : Current training batch loss: 0.0079 in epoch 3
+2024-08-12 22:52:53,580 : INFO : Current training batch loss: 0.0066 in epoch 3
+2024-08-12 22:53:10,909 : INFO : Current training batch loss: 0.0352 in epoch 3
+2024-08-12 22:53:28,238 : INFO : Current training batch loss: 0.0999 in epoch 3
+2024-08-12 22:53:45,562 : INFO : Current training batch loss: 0.0894 in epoch 3
+2024-08-12 22:54:02,882 : INFO : Current training batch loss: 0.0709 in epoch 3
+2024-08-12 22:54:20,212 : INFO : Current training batch loss: 0.0045 in epoch 3
+2024-08-12 22:54:37,530 : INFO : Current training batch loss: 0.0020 in epoch 3
+2024-08-12 22:54:54,840 : INFO : Current training batch loss: 0.0861 in epoch 3
+2024-08-12 22:55:12,170 : INFO : Current training batch loss: 0.0530 in epoch 3
+2024-08-12 22:55:29,504 : INFO : Current training batch loss: 0.0017 in epoch 3
+2024-08-12 22:55:46,822 : INFO : Current training batch loss: 0.0033 in epoch 3
+2024-08-12 22:56:01,906 : INFO : Epoch finished, average loss over training batches: 0.0312
+2024-08-12 22:56:01,906 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:56:01,907 : INFO : Training metrics:
+2024-08-12 22:56:01,907 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:56:02,414 : INFO : Accuracy: 0.9921
+2024-08-12 22:56:02,414 : INFO : Precision: 0.9912
+2024-08-12 22:56:02,415 : INFO : Recall: 0.9929
+2024-08-12 22:56:02,415 : INFO : F1 score: 0.9921
+2024-08-12 22:56:35,617 : INFO : Average loss over validation batches: 0.2066
+2024-08-12 22:56:35,618 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:56:35,618 : INFO : Validation metrics:
+2024-08-12 22:56:35,618 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 22:56:35,623 : INFO : Accuracy: 0.9478
+2024-08-12 22:56:35,623 : INFO : Precision: 0.9373
+2024-08-12 22:56:35,623 : INFO : Recall: 0.9615
+2024-08-12 22:56:35,623 : INFO : F1 score: 0.9493
+2024-08-12 22:56:35,623 : INFO : EarlyStopping counter: 1 out of 2
+2024-08-12 22:56:35,623 : INFO : Starting epoch 4
+2024-08-12 22:56:37,359 : INFO : Current training batch loss: 0.0020 in epoch 4
+2024-08-12 22:56:54,682 : INFO : Current training batch loss: 0.0024 in epoch 4
+2024-08-12 22:57:12,005 : INFO : Current training batch loss: 0.0024 in epoch 4
+2024-08-12 22:57:29,334 : INFO : Current training batch loss: 0.0022 in epoch 4
+2024-08-12 22:57:46,672 : INFO : Current training batch loss: 0.0012 in epoch 4
+2024-08-12 22:58:04,009 : INFO : Current training batch loss: 0.0014 in epoch 4
+2024-08-12 22:58:21,333 : INFO : Current training batch loss: 0.0015 in epoch 4
+2024-08-12 22:58:38,659 : INFO : Current training batch loss: 0.0015 in epoch 4
+2024-08-12 22:58:55,968 : INFO : Current training batch loss: 0.0014 in epoch 4
+2024-08-12 22:59:13,277 : INFO : Current training batch loss: 0.0016 in epoch 4
+2024-08-12 22:59:30,573 : INFO : Current training batch loss: 0.0014 in epoch 4
+2024-08-12 22:59:47,850 : INFO : Current training batch loss: 0.0011 in epoch 4
+2024-08-12 23:00:05,145 : INFO : Current training batch loss: 0.0636 in epoch 4
+2024-08-12 23:00:22,434 : INFO : Current training batch loss: 0.0569 in epoch 4
+2024-08-12 23:00:39,710 : INFO : Current training batch loss: 0.0012 in epoch 4
+2024-08-12 23:00:48,708 : INFO : Epoch finished, average loss over training batches: 0.0114
+2024-08-12 23:00:48,709 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:00:48,709 : INFO : Training metrics:
+2024-08-12 23:00:48,709 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:00:49,216 : INFO : Accuracy: 0.9979
+2024-08-12 23:00:49,216 : INFO : Precision: 0.9970
+2024-08-12 23:00:49,216 : INFO : Recall: 0.9987
+2024-08-12 23:00:49,216 : INFO : F1 score: 0.9979
+2024-08-12 23:01:22,318 : INFO : Average loss over validation batches: 0.2351
+2024-08-12 23:01:22,318 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:01:22,319 : INFO : Validation metrics:
+2024-08-12 23:01:22,319 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:01:22,324 : INFO : Accuracy: 0.9502
+2024-08-12 23:01:22,324 : INFO : Precision: 0.9569
+2024-08-12 23:01:22,324 : INFO : Recall: 0.9445
+2024-08-12 23:01:22,324 : INFO : F1 score: 0.9506
+2024-08-12 23:01:22,324 : INFO : EarlyStopping counter: 2 out of 2
+2024-08-12 23:01:22,324 : INFO : Early stopping, loading best model from before and determine score...
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 23:01:22,994 : INFO : Loading model from /data/language_models/pretrained_models_downstreaming/stanford_imdb/electra_base_discriminator/current_split_model/checkpoint.pth
+2024-08-12 23:01:56,351 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:01:56,351 : INFO : Validation metrics after reloading the model before ending this training:
+2024-08-12 23:01:56,351 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:01:56,356 : INFO : Accuracy: 0.9461
+2024-08-12 23:01:56,356 : INFO : Precision: 0.9571
+2024-08-12 23:01:56,356 : INFO : Recall: 0.9357
+2024-08-12 23:01:56,356 : INFO : F1 score: 0.9463
+2024-08-12 23:01:56,356 : INFO : Determined score from best model, ending training.
+2024-08-12 23:01:56,358 : INFO : Split 4 is finished, the score is: 0.9463
+2024-08-12 23:01:56,358 : INFO : ----------------------------------------------------------------------------------------------------
+[I 2024-08-12 23:01:56,358] Trial 4 finished with value: 0.9416749755451564 and parameters: {'n_epochs': 4, 'learning_rate': 9.802229827118964e-05, 'classifier_dropout': 0.8945317576843511, 'warmup_step_fraction': 0.05896642294684737, 'use_gradient_clipping': True}. Best is trial 1 with value: 0.950243114073261.
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 23:01:57,027 : INFO : Starting epoch 1
+2024-08-12 23:01:57,467 : INFO : Current training batch loss: 0.6989 in epoch 1
+2024-08-12 23:02:06,240 : INFO : Current training batch loss: 0.6916 in epoch 1
+2024-08-12 23:02:15,016 : INFO : Current training batch loss: 0.6742 in epoch 1
+2024-08-12 23:02:23,793 : INFO : Current training batch loss: 0.4914 in epoch 1
+2024-08-12 23:02:32,576 : INFO : Current training batch loss: 0.5162 in epoch 1
+2024-08-12 23:02:41,359 : INFO : Current training batch loss: 0.4514 in epoch 1
+2024-08-12 23:02:50,138 : INFO : Current training batch loss: 0.1210 in epoch 1
+2024-08-12 23:02:58,935 : INFO : Current training batch loss: 0.1613 in epoch 1
+2024-08-12 23:03:07,718 : INFO : Current training batch loss: 0.1103 in epoch 1
+2024-08-12 23:03:16,495 : INFO : Current training batch loss: 0.1072 in epoch 1
+2024-08-12 23:03:25,288 : INFO : Current training batch loss: 0.1992 in epoch 1
+2024-08-12 23:03:34,064 : INFO : Current training batch loss: 0.1301 in epoch 1
+2024-08-12 23:03:42,847 : INFO : Current training batch loss: 0.1109 in epoch 1
+2024-08-12 23:03:51,633 : INFO : Current training batch loss: 0.1040 in epoch 1
+2024-08-12 23:04:00,412 : INFO : Current training batch loss: 0.2209 in epoch 1
+2024-08-12 23:04:09,194 : INFO : Current training batch loss: 0.1259 in epoch 1
+2024-08-12 23:04:17,975 : INFO : Current training batch loss: 0.0811 in epoch 1
+2024-08-12 23:04:26,760 : INFO : Current training batch loss: 0.1311 in epoch 1
+2024-08-12 23:04:35,548 : INFO : Current training batch loss: 0.0802 in epoch 1
+2024-08-12 23:04:44,331 : INFO : Current training batch loss: 0.1917 in epoch 1
+2024-08-12 23:04:53,112 : INFO : Current training batch loss: 0.0407 in epoch 1
+2024-08-12 23:05:01,893 : INFO : Current training batch loss: 0.2909 in epoch 1
+2024-08-12 23:05:10,673 : INFO : Current training batch loss: 0.2288 in epoch 1
+2024-08-12 23:05:19,464 : INFO : Current training batch loss: 0.1678 in epoch 1
+2024-08-12 23:05:28,250 : INFO : Current training batch loss: 0.0396 in epoch 1
+2024-08-12 23:05:37,048 : INFO : Current training batch loss: 0.2337 in epoch 1
+2024-08-12 23:05:45,828 : INFO : Current training batch loss: 0.1154 in epoch 1
+2024-08-12 23:05:54,612 : INFO : Current training batch loss: 0.2723 in epoch 1
+2024-08-12 23:06:03,385 : INFO : Current training batch loss: 0.4287 in epoch 1
+2024-08-12 23:06:12,177 : INFO : Current training batch loss: 0.2417 in epoch 1
+2024-08-12 23:06:20,956 : INFO : Current training batch loss: 0.2334 in epoch 1
+2024-08-12 23:06:29,736 : INFO : Current training batch loss: 0.3514 in epoch 1
+2024-08-12 23:06:38,528 : INFO : Current training batch loss: 0.0349 in epoch 1
+2024-08-12 23:06:47,313 : INFO : Current training batch loss: 0.1097 in epoch 1
+2024-08-12 23:06:56,097 : INFO : Current training batch loss: 0.1421 in epoch 1
+2024-08-12 23:07:04,865 : INFO : Current training batch loss: 0.3116 in epoch 1
+2024-08-12 23:07:13,658 : INFO : Current training batch loss: 0.1391 in epoch 1
+2024-08-12 23:07:22,445 : INFO : Current training batch loss: 0.0541 in epoch 1
+2024-08-12 23:07:31,233 : INFO : Current training batch loss: 0.0385 in epoch 1
+2024-08-12 23:07:40,027 : INFO : Current training batch loss: 0.0636 in epoch 1
+2024-08-12 23:07:40,091 : INFO : Epoch finished, average loss over training batches: 0.2151
+2024-08-12 23:07:40,093 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:07:40,093 : INFO : Training metrics:
+2024-08-12 23:07:40,093 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:07:40,168 : INFO : Accuracy: 0.9126
+2024-08-12 23:07:40,168 : INFO : Precision: 0.9083
+2024-08-12 23:07:40,168 : INFO : Recall: 0.9178
+2024-08-12 23:07:40,168 : INFO : F1 score: 0.9131
+2024-08-12 23:09:51,188 : INFO : Average loss over validation batches: 0.1340
+2024-08-12 23:09:51,189 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:09:51,190 : INFO : Validation metrics:
+2024-08-12 23:09:51,190 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:09:51,204 : INFO : Accuracy: 0.9514
+2024-08-12 23:09:51,204 : INFO : Precision: 0.9674
+2024-08-12 23:09:51,204 : INFO : Recall: 0.9342
+2024-08-12 23:09:51,204 : INFO : F1 score: 0.9505
+2024-08-12 23:09:51,204 : INFO : Validation metric decreased (inf --> 0.134024).  Saving model ...
+2024-08-12 23:09:51,643 : INFO : Starting epoch 2
+2024-08-12 23:09:59,977 : INFO : Current training batch loss: 0.1178 in epoch 2
+2024-08-12 23:10:08,744 : INFO : Current training batch loss: 0.1024 in epoch 2
+2024-08-12 23:10:17,521 : INFO : Current training batch loss: 0.0338 in epoch 2
+2024-08-12 23:10:26,300 : INFO : Current training batch loss: 0.0576 in epoch 2
+2024-08-12 23:10:35,094 : INFO : Current training batch loss: 0.0685 in epoch 2
+2024-08-12 23:10:43,868 : INFO : Current training batch loss: 0.0491 in epoch 2
+2024-08-12 23:10:52,656 : INFO : Current training batch loss: 0.0456 in epoch 2
+2024-08-12 23:11:01,439 : INFO : Current training batch loss: 0.0691 in epoch 2
+2024-08-12 23:11:10,226 : INFO : Current training batch loss: 0.0060 in epoch 2
+2024-08-12 23:11:19,018 : INFO : Current training batch loss: 0.2426 in epoch 2
+2024-08-12 23:11:27,797 : INFO : Current training batch loss: 0.0231 in epoch 2
+2024-08-12 23:11:36,577 : INFO : Current training batch loss: 0.2311 in epoch 2
+2024-08-12 23:11:45,368 : INFO : Current training batch loss: 0.0521 in epoch 2
+2024-08-12 23:11:54,139 : INFO : Current training batch loss: 0.0779 in epoch 2
+2024-08-12 23:12:02,921 : INFO : Current training batch loss: 0.0414 in epoch 2
+2024-08-12 23:12:11,700 : INFO : Current training batch loss: 0.1798 in epoch 2
+2024-08-12 23:12:20,483 : INFO : Current training batch loss: 0.1737 in epoch 2
+2024-08-12 23:12:29,274 : INFO : Current training batch loss: 0.1344 in epoch 2
+2024-08-12 23:12:38,063 : INFO : Current training batch loss: 0.0228 in epoch 2
+2024-08-12 23:12:46,835 : INFO : Current training batch loss: 0.1628 in epoch 2
+2024-08-12 23:12:55,614 : INFO : Current training batch loss: 0.0359 in epoch 2
+2024-08-12 23:13:04,396 : INFO : Current training batch loss: 0.0200 in epoch 2
+2024-08-12 23:13:13,185 : INFO : Current training batch loss: 0.0083 in epoch 2
+2024-08-12 23:13:21,963 : INFO : Current training batch loss: 0.0162 in epoch 2
+2024-08-12 23:13:30,761 : INFO : Current training batch loss: 0.0385 in epoch 2
+2024-08-12 23:13:39,540 : INFO : Current training batch loss: 0.0058 in epoch 2
+2024-08-12 23:13:48,326 : INFO : Current training batch loss: 0.0036 in epoch 2
+2024-08-12 23:13:57,101 : INFO : Current training batch loss: 0.0256 in epoch 2
+2024-08-12 23:14:05,889 : INFO : Current training batch loss: 0.0492 in epoch 2
+2024-08-12 23:14:14,670 : INFO : Current training batch loss: 0.0159 in epoch 2
+2024-08-12 23:14:23,452 : INFO : Current training batch loss: 0.1387 in epoch 2
+2024-08-12 23:14:32,229 : INFO : Current training batch loss: 0.0493 in epoch 2
+2024-08-12 23:14:41,016 : INFO : Current training batch loss: 0.0221 in epoch 2
+2024-08-12 23:14:49,795 : INFO : Current training batch loss: 0.1409 in epoch 2
+2024-08-12 23:14:58,561 : INFO : Current training batch loss: 0.0093 in epoch 2
+2024-08-12 23:15:07,346 : INFO : Current training batch loss: 0.0099 in epoch 2
+2024-08-12 23:15:16,136 : INFO : Current training batch loss: 0.0068 in epoch 2
+2024-08-12 23:15:24,920 : INFO : Current training batch loss: 0.0033 in epoch 2
+2024-08-12 23:15:33,711 : INFO : Current training batch loss: 0.0109 in epoch 2
+2024-08-12 23:15:34,651 : INFO : Epoch finished, average loss over training batches: 0.0706
+2024-08-12 23:15:34,653 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:15:34,653 : INFO : Training metrics:
+2024-08-12 23:15:34,653 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:15:34,728 : INFO : Accuracy: 0.9772
+2024-08-12 23:15:34,728 : INFO : Precision: 0.9767
+2024-08-12 23:15:34,728 : INFO : Recall: 0.9777
+2024-08-12 23:15:34,728 : INFO : F1 score: 0.9772
+2024-08-12 23:17:45,736 : INFO : Average loss over validation batches: 0.1340
+2024-08-12 23:17:45,738 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:17:45,738 : INFO : Validation metrics:
+2024-08-12 23:17:45,738 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:17:45,753 : INFO : Accuracy: 0.9557
+2024-08-12 23:17:45,753 : INFO : Precision: 0.9517
+2024-08-12 23:17:45,753 : INFO : Recall: 0.9601
+2024-08-12 23:17:45,753 : INFO : F1 score: 0.9559
+2024-08-12 23:17:45,753 : INFO : Validation metric decreased (0.134024 --> 0.133953).  Saving model ...
+2024-08-12 23:17:46,454 : INFO : Starting epoch 3
+2024-08-12 23:17:53,921 : INFO : Current training batch loss: 0.1465 in epoch 3
+2024-08-12 23:18:02,699 : INFO : Current training batch loss: 0.0083 in epoch 3
+2024-08-12 23:18:11,483 : INFO : Current training batch loss: 0.1245 in epoch 3
+2024-08-12 23:18:20,264 : INFO : Current training batch loss: 0.0133 in epoch 3
+2024-08-12 23:18:29,064 : INFO : Current training batch loss: 0.0034 in epoch 3
+2024-08-12 23:18:37,843 : INFO : Current training batch loss: 0.0022 in epoch 3
+2024-08-12 23:18:46,636 : INFO : Current training batch loss: 0.0241 in epoch 3
+2024-08-12 23:18:55,423 : INFO : Current training batch loss: 0.0268 in epoch 3
+2024-08-12 23:19:04,213 : INFO : Current training batch loss: 0.0066 in epoch 3
+2024-08-12 23:19:13,001 : INFO : Current training batch loss: 0.0021 in epoch 3
+2024-08-12 23:19:21,786 : INFO : Current training batch loss: 0.0031 in epoch 3
+2024-08-12 23:19:30,572 : INFO : Current training batch loss: 0.0397 in epoch 3
+2024-08-12 23:19:39,357 : INFO : Current training batch loss: 0.0038 in epoch 3
+2024-08-12 23:19:48,142 : INFO : Current training batch loss: 0.0061 in epoch 3
+2024-08-12 23:19:56,931 : INFO : Current training batch loss: 0.0263 in epoch 3
+2024-08-12 23:20:05,715 : INFO : Current training batch loss: 0.0074 in epoch 3
+2024-08-12 23:20:14,504 : INFO : Current training batch loss: 0.0040 in epoch 3
+2024-08-12 23:20:23,293 : INFO : Current training batch loss: 0.0052 in epoch 3
+2024-08-12 23:20:32,084 : INFO : Current training batch loss: 0.0037 in epoch 3
+2024-08-12 23:20:40,865 : INFO : Current training batch loss: 0.0026 in epoch 3
+2024-08-12 23:20:49,647 : INFO : Current training batch loss: 0.0024 in epoch 3
+2024-08-12 23:20:58,434 : INFO : Current training batch loss: 0.0072 in epoch 3
+2024-08-12 23:21:07,222 : INFO : Current training batch loss: 0.0030 in epoch 3
+2024-08-12 23:21:16,009 : INFO : Current training batch loss: 0.0018 in epoch 3
+2024-08-12 23:21:24,811 : INFO : Current training batch loss: 0.0015 in epoch 3
+2024-08-12 23:21:33,595 : INFO : Current training batch loss: 0.1194 in epoch 3
+2024-08-12 23:21:42,383 : INFO : Current training batch loss: 0.2057 in epoch 3
+2024-08-12 23:21:51,165 : INFO : Current training batch loss: 0.0020 in epoch 3
+2024-08-12 23:21:59,949 : INFO : Current training batch loss: 0.0017 in epoch 3
+2024-08-12 23:22:08,730 : INFO : Current training batch loss: 0.0082 in epoch 3
+2024-08-12 23:22:17,516 : INFO : Current training batch loss: 0.0019 in epoch 3
+2024-08-12 23:22:26,297 : INFO : Current training batch loss: 0.0038 in epoch 3
+2024-08-12 23:22:35,088 : INFO : Current training batch loss: 0.0030 in epoch 3
+2024-08-12 23:22:43,877 : INFO : Current training batch loss: 0.0026 in epoch 3
+2024-08-12 23:22:52,641 : INFO : Current training batch loss: 0.0028 in epoch 3
+2024-08-12 23:23:01,431 : INFO : Current training batch loss: 0.0049 in epoch 3
+2024-08-12 23:23:10,227 : INFO : Current training batch loss: 0.0028 in epoch 3
+2024-08-12 23:23:19,009 : INFO : Current training batch loss: 0.0046 in epoch 3
+2024-08-12 23:23:27,803 : INFO : Current training batch loss: 0.2054 in epoch 3
+2024-08-12 23:23:29,621 : INFO : Epoch finished, average loss over training batches: 0.0246
+2024-08-12 23:23:29,623 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:23:29,624 : INFO : Training metrics:
+2024-08-12 23:23:29,624 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:23:29,698 : INFO : Accuracy: 0.9943
+2024-08-12 23:23:29,698 : INFO : Precision: 0.9941
+2024-08-12 23:23:29,698 : INFO : Recall: 0.9945
+2024-08-12 23:23:29,698 : INFO : F1 score: 0.9943
+2024-08-12 23:25:40,640 : INFO : Average loss over validation batches: 0.1632
+2024-08-12 23:25:40,642 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:25:40,642 : INFO : Validation metrics:
+2024-08-12 23:25:40,642 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:25:40,657 : INFO : Accuracy: 0.9558
+2024-08-12 23:25:40,657 : INFO : Precision: 0.9522
+2024-08-12 23:25:40,657 : INFO : Recall: 0.9598
+2024-08-12 23:25:40,657 : INFO : F1 score: 0.9560
+2024-08-12 23:25:40,657 : INFO : EarlyStopping counter: 1 out of 2
+2024-08-12 23:25:40,657 : INFO : Last epoch reached, validation loss was better before, loading best model during training.
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 23:25:41,310 : INFO : Loading model from /data/language_models/pretrained_models_downstreaming/stanford_imdb/electra_base_discriminator/checkpoint.pth
+2024-08-12 23:27:52,499 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:27:52,499 : INFO : Validation metrics after reloading the model before ending this training:
+2024-08-12 23:27:52,499 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-12 23:27:52,513 : INFO : Accuracy: 0.9557
+2024-08-12 23:27:52,513 : INFO : Precision: 0.9517
+2024-08-12 23:27:52,513 : INFO : Recall: 0.9601
+2024-08-12 23:27:52,513 : INFO : F1 score: 0.9559
+2024-08-12 23:27:52,513 : INFO : Determined score from best model, ending training.
+Some weights of ElectraForSequenceClassification were not initialized from the model checkpoint at google/electra-base-discriminator and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-12 23:27:53,116 : INFO : Loading model finetuned model from checkpoint.
+2024-08-12 23:27:53,718 : INFO : Determining training scores of final model.
+2024-08-12 23:30:05,654 : INFO : Accuracy: 0.9931
+2024-08-12 23:30:05,654 : INFO : Precision: 0.9922
+2024-08-12 23:30:05,654 : INFO : Recall: 0.9940
+2024-08-12 23:30:05,654 : INFO : F1 score: 0.9931
+2024-08-12 23:30:05,654 : INFO : Determining test scores of final model.
+2024-08-12 23:32:17,724 : INFO : Accuracy: 0.9557
+2024-08-12 23:32:17,725 : INFO : Precision: 0.9517
+2024-08-12 23:32:17,725 : INFO : Recall: 0.9601
+2024-08-12 23:32:17,725 : INFO : F1 score: 0.9559
+Traceback (most recent call last):
+  File "/home/ralf/language_models/03_downstreaming/stanford_imdb/stanford_imdb.py", line 30, in <module>
+    model.train_optuna_optimized_cv_model(n_trials=5)
+  File "/home/ralf/language_models/finlm/finlm/downstreaming.py", line 291, in train_optuna_optimized_cv_model
+    training_scores["precision_scores"] = training_scores["precision_scores"].tolist()
+KeyError: 'precision_scores'
