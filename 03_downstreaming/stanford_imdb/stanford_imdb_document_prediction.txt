@@ -1,0 +1,18 @@
+2024-08-15 18:04:47,016 : INFO : Counting occurences of labels...
+2024-08-15 18:05:17,756 : INFO : Occurence of labels for training data: (array([0, 1]), array([12500, 12500]))
+2024-08-15 18:05:47,907 : INFO : Occurence of labels for test data: (array([0, 1]), array([12500, 12500]))
+[I 2024-08-15 18:05:47,908] A new study created in memory with name: no-name-760e85e4-9c70-4ecd-b6b5-2d8df97cd0d7
+2024-08-15 18:05:47,908 : INFO : ----------------------------------------------------------------------------------------------------
+2024-08-15 18:05:47,908 : INFO : Starting training for split 1
+2024-08-15 18:05:48,177 : INFO : Counting occurences of labels...
+2024-08-15 18:06:11,167 : INFO : Occurence of labels for training data: (array([0, 1]), array([9405, 9345]))
+2024-08-15 18:06:18,848 : INFO : Occurence of labels for test data: (array([0, 1]), array([3095, 3155]))
+Some weights of ElectraDocumentClassification were not initialized from the model checkpoint at google/electra-small-discriminator and are newly initialized: ['LayerNorm.bias', 'LayerNorm.weight', 'attention.output.LayerNorm.bias', 'attention.output.LayerNorm.weight', 'attention.output.dense.bias', 'attention.output.dense.weight', 'attention.self.key.bias', 'attention.self.key.weight', 'attention.self.query.bias', 'attention.self.query.weight', 'attention.self.value.bias', 'attention.self.value.weight', 'out_projection.bias', 'out_projection.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2024-08-15 18:06:19,618 : INFO : Starting epoch 1
+2024-08-15 18:06:20,492 : INFO : Current training batch loss: 0.6926 in epoch 1
+2024-08-15 18:06:31,163 : INFO : Current training batch loss: 0.6767 in epoch 1
+2024-08-15 18:06:41,884 : INFO : Current training batch loss: 0.7867 in epoch 1
+2024-08-15 18:06:52,655 : INFO : Current training batch loss: 0.5528 in epoch 1
+2024-08-15 18:07:03,460 : INFO : Current training batch loss: 0.5633 in epoch 1
+2024-08-15 18:07:14,304 : INFO : Current training batch loss: 0.3064 in epoch 1

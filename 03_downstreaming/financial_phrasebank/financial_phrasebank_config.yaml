@@ -1,4 +1,4 @@
-model_path: "/data/language_models/pretrained_models/electra_01/discriminator_model"
+model_path: "/data/language_models/pretrained_models/mlm_00/mlm_model"
 num_labels: 3
 tokenizer_path: "/data/language_models/tokenizers/finlm-wordpiece-tokenizer.json"
 max_sequence_length: 256
@@ -9,6 +9,7 @@ training_data_fraction: 0.8
 batch_size: 32
 n_splits: 5
 early_stopping_patience: 3
+max_sequences: None
 n_epochs:
   name: "n_epochs"
   dtype: int
@@ -39,4 +40,4 @@ use_gradient_clipping:
   low: None
   high: None
   default: False
-save_path: "/data/language_models/pretrained_models_downstreaming/financial_phrasebank/electra_01"
+save_path: "/data/language_models/pretrained_models_downstreaming/financial_phrasebank/mlm_00"

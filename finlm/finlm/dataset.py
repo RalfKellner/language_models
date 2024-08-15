@@ -8,6 +8,7 @@ from torch.utils.data import Dataset as TorchDataset
 from torch.utils.data import DataLoader
 from finlm.tokenizer import FinLMTokenizer
 from transformers import AutoTokenizer
+import numpy as np
 import logging
 datasets.disable_progress_bars()
 
@@ -316,10 +317,7 @@ class FinetuningDataset:
             max_sequence_length: int,
             dataset: Dataset,
             text_column: str,
-            dataset_columns: list[str],
-            shuffle_data: bool = True,
-            shuffle_data_random_seed: Optional[int] = None,
-            training_data_fraction: float = 0.80
+            dataset_columns: list[str]
         ):
 
         """
@@ -365,10 +363,27 @@ class FinetuningDataset:
         self.dataset = dataset
         self.text_column = text_column
         self.dataset_columns = dataset_columns
-        self.training_data_fraction = training_data_fraction
         self.logger = logging.getLogger(self.__class__.__name__)
-        self._prepare_training_and_test_data()
+        self._map_dataset()
 
+    def __len__(self):
+        return len(self.dataset)
+
+    def __getitem__(self, idx):
+        """
+        Returns a single tokenized item at the specified index.
+
+        Parameters
+        ----------
+        idx : int
+            The index of the item to retrieve.
+
+        Returns
+        -------
+        dict
+            A dictionary containing the tokenized input data and labels for the item.
+        """
+        return {key: self.dataset[idx][key] for key in self.dataset_columns}
 
     def _tokenization(self, text_sequence: list[str]):
 
@@ -407,51 +422,22 @@ class FinetuningDataset:
         self.logger.info("Tokenization is finished.")
         self.dataset.set_format(type="torch", columns=self.dataset_columns)
 
-    def _prepare_training_and_test_data(self):
-        
-        """
-        Prepares the training and test datasets by tokenizing, shuffling, and splitting the dataset.
-
-        This method first tokenizes the entire dataset using `_map_dataset`, and then optionally 
-        shuffles the dataset based on the `shuffle_data` attribute. Finally, it splits the dataset 
-        into training and test subsets based on the `training_data_fraction` attribute.
-
-        Attributes Updated
-        ------------------
-        train_size : int
-            The number of samples in the training dataset.
-        training_data : Dataset
-            The tokenized and processed training dataset.
-        test_data : Dataset
-            The tokenized and processed test dataset.
-        """
-
-        self._map_dataset()
-        self.train_size = int(len(self.dataset) * self.training_data_fraction)
-        self.training_data = self.dataset.select(range(self.train_size))
-        self.test_data = self.dataset.select(range(self.train_size, len(self.dataset)))
+    def num_labels(self):
+        return np.unique(self.dataset["label"], return_counts=True)
+    
+    def select(self, indices):
+        new_finetuning_dataset = FinetuningDataset(
+            self.tokenizer_path,
+            self.max_sequence_length,
+            self.dataset.select(indices),
+            self.text_column,
+            self.dataset_columns
+        )
+        return new_finetuning_dataset
 
 
-class AggregatedDocumentDataset(TorchDataset):
-    def __init__(self, documents, labels, tokenizer_path, sequence_length, sequence_limit=128, device='cpu'):
-        """
-        Initializes the `AggregatedDocumentDataset` with documents, labels, tokenizer settings, and device.
-
-        Parameters
-        ----------
-        documents : list[list[str]]
-            A list where each element is a document, and each document is a list of sequences (strings).
-        labels : list
-            A list of labels, one for each document.
-        tokenizer_path : str
-            Path to the pretrained tokenizer to be used for tokenization.
-        sequence_length : int
-            The length to which each sequence should be padded or truncated.
-        sequence_limit : int
-            The maximum number of sequences to accumulate across multiple documents.
-        device : str
-            The device on which the tensors should be placed, e.g., 'cpu' or 'cuda'.
-        """
+class FinetuningDocumentDataset(TorchDataset):
+    def __init__(self, documents, labels, tokenizer_path, sequence_length):
         self.documents = documents
         self.labels = labels
         self.tokenizer_path = tokenizer_path
@@ -460,8 +446,6 @@ class AggregatedDocumentDataset(TorchDataset):
         except:
             self.tokenizer = AutoTokenizer.from_pretrained(self.tokenizer_path)
         self.sequence_length = sequence_length
-        self.sequence_limit = sequence_limit
-        self.device = device
 
     def __len__(self):
         return len(self.documents)
@@ -470,11 +454,8 @@ class AggregatedDocumentDataset(TorchDataset):
         document = self.documents[idx]
         label = self.labels[idx]
 
-        input_ids = []
+        encoded_sequences = []
         attention_masks = []
-
-        if len(document) > self.sequence_limit:
-            document = document[:self.sequence_limit]
 
         for sequence in document:
             encoded = self.tokenizer(
@@ -484,87 +465,62 @@ class AggregatedDocumentDataset(TorchDataset):
                 max_length=self.sequence_length,
                 return_tensors='pt'
             )
-            input_ids.append(encoded['input_ids'].squeeze().to(self.device))
-            attention_masks.append(encoded['attention_mask'].squeeze().to(self.device))
+            encoded_sequences.append(encoded['input_ids'].squeeze(0))
+            attention_masks.append(encoded['attention_mask'].squeeze(0))
 
         return {
-            'input_ids': input_ids,
-            'attention_mask': attention_masks,
-            'labels': torch.tensor(label, dtype=torch.float).to(self.device)
+            'input_ids': torch.stack(encoded_sequences),
+            'attention_mask': torch.stack(attention_masks),
+            'label': torch.tensor(label, dtype=torch.long)
         }
-
-    @staticmethod
-    def _collate_fn(batch):
+    
+    def select(self, indices):
         """
-        Collates a batch of documents into a format suitable for model input, 
-        preserving the original shape (i.e., the number of sequences per document),
-        and moving them to the specified device.
-
-        Parameters
-        ----------
-        batch : list[dict]
-            A list of dictionaries, each containing tokenized input IDs, attention masks, and labels.
-
-        Returns
-        -------
-        dict
-            A dictionary with the following keys:
-            - 'input_ids': list of lists of tensors, where each list represents the sequences of a document
-            - 'attention_mask': list of lists of tensors, where each list represents the attention masks of a document
-            - 'labels': Tensor containing the labels for the batch
+        Returns a new DocumentDataset with only the selected indices.
         """
-        input_ids = [item['input_ids'] for item in batch]
-        attention_masks = [item['attention_mask'] for item in batch]
-        labels = torch.tensor([item['labels'] for item in batch], dtype=torch.float).to(batch[0]['labels'].device)
+        selected_documents = [self.documents[i] for i in indices]
+        selected_labels = [self.labels[i] for i in indices]
+        return FinetuningDocumentDataset(selected_documents, selected_labels, self.tokenizer_path, self.sequence_length)
+    
+    def num_labels(self):
+        labels = np.array([batch["label"].item() for batch in self])
+        return np.unique(labels, return_counts=True)
+    
 
-        return {
-            'input_ids': input_ids,  # List of lists of tensors
-            'attention_mask': attention_masks,  # List of lists of tensors
-            'labels': labels
-        }
+def collate_fn_fixed_sequences(batch, max_sequences=4):
+    max_sequence_length = max([item['input_ids'].shape[1] for item in batch])
 
-    def __iter__(self):
-        self.current_idx = 0
-        return self
+    input_ids_batch = []
+    attention_mask_batch = []
+    labels_batch = []
+    sequences_mask_batch = []
 
-    def __next__(self):
-        accumulated_input_ids = []
-        accumulated_attention_masks = []
-        accumulated_labels = []
-        accumulated_sequences = 0
+    for item in batch:
+        input_ids = item['input_ids']
+        attention_mask = item['attention_mask']
+        label = item['label']
 
-        while self.current_idx < len(self.documents) and accumulated_sequences < self.sequence_limit:
-            document = self.documents[self.current_idx]
-            label = self.labels[self.current_idx]
-            self.current_idx += 1
+        # Adjust the number of sequences to match num_sequences
+        n_sequences = input_ids.shape[0]
+        n_sequence_mask = [0] * max_sequences
+        n_sequence_mask[:n_sequences] = [1] * n_sequences
+        if n_sequences > max_sequences:
+            input_ids = input_ids[:max_sequences, :]
+            attention_mask = attention_mask[:max_sequences, :]
+            n_sequence_mask = n_sequence_mask[:max_sequences]
+        elif n_sequences < max_sequences:
+            padding = torch.zeros((max_sequences - input_ids.shape[0], max_sequence_length), dtype=torch.long)
+            input_ids = torch.cat([input_ids, padding], dim=0)
+            attention_mask = torch.cat([attention_mask, padding], dim=0)
 
-            if len(document) > self.sequence_limit:
-                document = document[:self.sequence_limit]
+        input_ids_batch.append(input_ids)
+        attention_mask_batch.append(attention_mask)
+        labels_batch.append(label)
+        sequences_mask_batch.append(n_sequence_mask)
 
-            input_ids = []
-            attention_masks = []
-            for sequence in document:
-                encoded = self.tokenizer(
-                    sequence,
-                    truncation=True,
-                    padding='max_length',
-                    max_length=self.sequence_length,
-                    return_tensors='pt'
-                )
-                input_ids.append(encoded['input_ids'].squeeze().to(self.device))
-                attention_masks.append(encoded['attention_mask'].squeeze().to(self.device))
-
-            accumulated_input_ids.append(input_ids)
-            accumulated_attention_masks.append(attention_masks)
-            accumulated_labels.append(torch.tensor(label, dtype=torch.float).to(self.device))
-
-            accumulated_sequences += len(document)
-
-        if not accumulated_input_ids:
-            raise StopIteration
-
-        return {
-            'input_ids': accumulated_input_ids,
-            'attention_mask': accumulated_attention_masks,
-            'labels': torch.stack(accumulated_labels)
-        }
+    return {
+        'input_ids': torch.stack(input_ids_batch),
+        'attention_mask': torch.stack(attention_mask_batch),
+        'label': torch.tensor(labels_batch, dtype=torch.long),
+        'sequence_mask': torch.tensor(sequences_mask_batch, dtype = torch.long)
+    }

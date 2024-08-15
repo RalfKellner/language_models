@@ -6,4 +6,4 @@ It is important to look for a consistent name giving for the save_path in the co
 
 Huggingface datasets are often in odd order. For instance if we split the financial phrasebank dataset without shuffling, the classes in training and test data have very different balances. Or, the stanford imdb data first includes 0 labels and afterwards 1 labels. This is why the import and shuffling of the datasets must be done specifically in the training script. 
 
-Furthermore, in the script you find a model_loader which must be defined. This implementation generates flexibilty w.r.t the pretraining model, however, also make sure this is specified consistent. I.e., if we pretrain a model with Electra classes, we need to use Electra classes when importing pretrained models for finetuning. 
+Furthermore, in the script you find a model_loader which must be defined. This implementation generates flexibilty w.r.t the pretraining model, however, also make sure this is specified consistently. I.e., if we pretrain a model with Electra classes, we need to use Electra classes when defining the model_loader which is importing pretrained models for finetuning. 
