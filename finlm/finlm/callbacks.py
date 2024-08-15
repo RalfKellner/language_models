@@ -1,6 +1,36 @@
 import torch
 import os
 import logging
+from enum import Enum
+
+class CallbackTypes(Enum):
+    BEFORE_TRAINING = "before_training"
+    AFTER_EVAL = "after_eval"
+    AFTER_EPOCH = "after_epoch"
+    ON_BATCH_START = "on_batch_start"
+    ON_BATCH_END = "on_batch_end"
+    ON_EVAL = "on_eval"
+
+class CallbackManager:
+    def __init__(self):
+        self.callbacks = {
+            "on_eval": [],
+            "before_training": [],
+            "after_eval": [],
+            "after_epoch": [],
+            "on_batch_start": [],
+            "on_batch_end": [],
+        }
+
+    def add_callback(self, event, callback):
+        if event in self.callbacks:
+            self.callbacks[event].append(callback)
+        else:
+            raise ValueError(f"Event {event} not supported.")
+
+    def execute_callbacks(self, event, *args, **kwargs):
+        for callback in self.callbacks.get(event, []):
+            callback(*args, **kwargs)
 
 class EarlyStopping:
 

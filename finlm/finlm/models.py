@@ -5,15 +5,19 @@ from finlm.dataset import FinLMDataset
 from transformers import ElectraConfig, ElectraForMaskedLM, ElectraForPreTraining, ElectraPreTrainedModel, ElectraModel
 from transformers import get_linear_schedule_with_warmup
 from finlm.config import FinLMConfig
+from finlm.callbacks import CallbackManager, CallbackTypes
 import pandas as pd
 import numpy as np
+import datasets
 import matplotlib.pylab as plt
 import torch
+from tqdm import tqdm
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 from torcheval.metrics.functional import binary_precision, binary_recall
 from torch import nn, Tensor
-from typing import Optional, Any, List
+from typing import Optional, Any, List, Callable
 import math
+from torch.utils.data import DataLoader
 import logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
@@ -193,14 +197,13 @@ class PretrainLM:
         else:
             self.device = torch.device("cuda")
 
-
 class PretrainMLM(PretrainLM):
 
     """
     A class for pretraining a Masked Language Model (MLM) using the FinLM framework.
 
-    This class inherits from `PretrainLM` and provides specific implementations for 
-    preparing data, loading the model, and training the Masked Language Model (MLM). 
+    This class inherits from `PretrainLM` and provides specific implementations for
+    preparing data, loading the model, and training the Masked Language Model (MLM).
 
     Attributes
     ----------
@@ -245,22 +248,30 @@ class PretrainMLM(PretrainLM):
         """
 
         super().__init__(config)
+        self.callback_manager = CallbackManager()
         self.prepare_data_model_optimizer()
+
+        self.training_state = None
+
+    def add_callback(self, event: CallbackTypes | str, callback: Callable):
+        if isinstance(event, str):
+            event = CallbackTypes(event)
+        self.callback_manager.add_callabe(event, callback)
 
     def load_model(self):
 
         """
         Loads and configures the Electra model for masked language modeling.
 
-        This method initializes the Electra model using the configuration settings, 
-        including vocabulary size, embedding size, hidden size, and other model parameters. 
+        This method initializes the Electra model using the configuration settings,
+        including vocabulary size, embedding size, hidden size, and other model parameters.
         The model is then moved to the appropriate device (CPU or GPU).
         """
-            
+
         self.model_config = ElectraConfig(
             vocab_size = self.dataset.tokenizer.vocab_size,
             embedding_size = self.model_config.embedding_size,
-            hidden_size = self.model_config.hidden_size, 
+            hidden_size = self.model_config.hidden_size,
             num_hidden_layers = self.model_config.num_hidden_layers,
             num_attention_heads = self.model_config.num_attention_heads,
             intermediate_size = self.model_config.intermediate_size,
@@ -275,7 +286,7 @@ class PretrainMLM(PretrainLM):
         """
         Sets up the optimizer and learning rate scheduler based on the optimization configuration.
 
-        This method calculates the total number of training steps, initializes the AdamW optimizer, 
+        This method calculates the total number of training steps, initializes the AdamW optimizer,
         and configures a linear learning rate scheduler with warm-up steps.
         """
 
@@ -284,8 +295,8 @@ class PretrainMLM(PretrainLM):
             n_sequences += self.dataset.database_retrieval[key]["limit"]
 
         self.iteration_steps_per_epoch = int(np.ceil(n_sequences / self.dataset.batch_size))
-        total_steps = self.iteration_steps_per_epoch * self.optimization_config.n_epochs  
-        self.optimizer = torch.optim.AdamW(self.model.parameters(), lr = self.optimization_config.learning_rate) 
+        total_steps = self.iteration_steps_per_epoch * self.optimization_config.n_epochs
+        self.optimizer = torch.optim.AdamW(self.model.parameters(), lr = self.optimization_config.learning_rate)
         self.scheduler = get_linear_schedule_with_warmup(self.optimizer, num_warmup_steps = self.optimization_config.lr_scheduler_warm_up_steps, num_training_steps = total_steps)
 
     def prepare_data_model_optimizer(self):
@@ -293,72 +304,125 @@ class PretrainMLM(PretrainLM):
         """
         Prepares the dataset, model, and optimizer for training.
 
-        This method calls the appropriate methods to load the dataset, load the model, 
+        This method calls the appropriate methods to load the dataset, load the model,
         and set up the optimizer and learning rate scheduler.
         """
-            
+
         self.load_dataset()
         self.load_model()
         self.load_optimization()
 
+    def evaluate(self, dataset: datasets.Dataset,  metric_key_prefix: str = "eval"):
+        """
+        Runs evaluation on n steps. Requires eval dataset.
+        Returns
+        -------
+
+        """
+        self.logger.info("Starting with evaluation...")
+        eval_steps = 100 #TODO: Make this variable
+        self.eval_batch_size = 4 #TODO: Make this variable
+        eval_inds = np.random.random_integers(0, len(dataset), eval_steps)
+        sampled_dataset = dataset.select(eval_inds)
+        dataloader = DataLoader(sampled_dataset, batch_size=self.eval_batch_size, shuffle=False)
+        self.model.eval()
+        eval_loss = 0
+        eval_accuracy = 0
+        n_batches = 0
+        with torch.no_grad():
+            runs = 0
+            with tqdm(eval_steps, desc=f"Evaluation Loop at training step {self.global_step}") as iterator:
+                for batch in dataloader:
+                    inputs, attention_mask = batch["input_ids"].to(self.device), batch["attention_mask"].to(self.device)
+                    inputs, labels = self.mask_tokens(
+                        inputs,
+                        mlm_probability=self.optimization_config.mlm_probability,
+                        mask_token_id=self.dataset.mask_token_id,
+                        special_token_ids=self.dataset.special_token_ids,
+                        n_tokens=self.dataset.tokenizer.vocab_size)
+
+                    mlm_output = self.model(input_ids=inputs, attention_mask=attention_mask, labels=labels)
+                    loss, logits = mlm_output.loss, mlm_output.logits
+                    masked_ids_mask = inputs == self.dataset.tokenizer.mask_token_id
+                    predictions = logits.argmax(-1)
+                    eval_accuracy += (predictions[masked_ids_mask] == labels[masked_ids_mask]).float().mean()
+                    eval_loss += loss.item()
+                    iterator.update(self.eval_batch_size)
+                    runs += 1
+
+            final_accuracy = eval_accuracy / runs
+            final_loss = eval_loss / runs
+
+            if len(self.training_state) == 0:
+                self.training_state.append({"step": self.global_step})
+            elif self.training_state[-1]["step"] != self.global_step:
+                self.training_state.append({"step": self.global_step})
+            self.training_state[-1][f"{metric_key_prefix}_loss"] = final_loss
+            self.training_state[-1][f"{metric_key_prefix}_acc"] = final_accuracy
+
+            self.callback_manager.execute_callbacks("after_eval", final_accuracy, final_loss, self.global_step)
+            self.logger.info(f"Evaluation results at step [{self.global_step}] of {metric_key_prefix} dataset: "
+                             f"MLM Accuracy: {final_accuracy:.4f} --- MLM Loss: {final_loss:.4f}")
+
     def train(self):
-
-        """
-        Trains the masked language model and saves the results and model.
-
-        This method handles the training loop, including masking input tokens, calculating 
-        the MLM loss, updating model parameters, and logging training metrics. After training 
-        is complete, it saves the model, training metrics, and plots of the loss and accuracy.
-        """
-
         self.logger.info("Starting with training...")
-        training_metrics = {}
-        training_metrics["loss"] = []
-        training_metrics["accuracy"] = []
-        training_metrics["gradient_norms"] = []
-        training_metrics["learning_rates"] = []
+        self.training_state = []
+        eval_step = 1000 # TODO: make variable
+        info_step = 100 # TODO: make variable
+        training_metrics = {
+            "loss": [],
+            "accuracy": [],
+            "gradient_norms": [],
+            "learning_rates": []
+        }
 
-        for epoch in range(self.optimization_config.n_epochs): 
+        self.callback_manager.execute_callbacks("before_training")
 
-            # update the offset for database retrieval, epoch = 0 -> offset = 0, epoch = 1 -> offset = 1 * limit, epoch = 2 -> offset = 2 * limit, ...    
+        self.global_step = 0 # use global steps instead of epochs and batches
+        total_steps = len(self.dataset) * self.optimization_config.n_epochs
+        self.logger.info(f"Training for {total_steps} steps")
+
+        for epoch in range(self.optimization_config.n_epochs):
             self.dataset.set_dataset_offsets(epoch)
             self.dataset.prepare_data_loader()
+            self.callback_manager.execute_callbacks("on_epoch_start", epoch)
 
             for batch_id, batch in enumerate(self.dataset):
+
                 inputs, attention_mask = batch["input_ids"].to(self.device), batch["attention_mask"].to(self.device)
 
                 inputs, labels = self.mask_tokens(
                     inputs,
-                    mlm_probability = self.optimization_config.mlm_probability,
-                    mask_token_id = self.dataset.mask_token_id,
-                    special_token_ids = self.dataset.special_token_ids,
-                    n_tokens = self.dataset.tokenizer.vocab_size)
+                    mlm_probability=self.optimization_config.mlm_probability,
+                    mask_token_id=self.dataset.mask_token_id,
+                    special_token_ids=self.dataset.special_token_ids,
+                    n_tokens=self.dataset.tokenizer.vocab_size)
 
-                mlm_output = self.model(input_ids = inputs, attention_mask = attention_mask, labels = labels)
+                mlm_output = self.model(input_ids=inputs, attention_mask=attention_mask, labels=labels)
                 mlm_loss, mlm_logits = mlm_output.loss, mlm_output.logits
                 training_metrics["loss"].append(mlm_loss.item())
 
-                # gradient determination and update
                 self.optimizer.zero_grad()
-
-                # determine gradients
                 mlm_loss.backward()
 
                 if self.optimization_config.use_gradient_clipping:
-                    torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm = 1.0)
+                    torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
 
-                # determine gradient norms, equal to one if use_gradient_clipping is set to True
                 mlm_grads = [p.grad.detach().flatten() for p in self.model.parameters()]
                 mlm_grad_norm = torch.cat(mlm_grads).norm()
 
-                # update parameters        
                 self.optimizer.step()
-                # update learning rate
                 self.scheduler.step()
 
-                # determine accuracy metrics, (maybe check for correctness later, has been implemented quickly;))
+                if self.global_step % eval_step == 0:
+                    # TODO: Activate if needed. Training dataset evaluation can be useful as it samples randomly some
+                    # sequences and computes the loss and accuracy on them
+                    self.logger.info("Running evaluation on training dataset")
+                    self.evaluate(self.dataset.hf_dataset, metric_key_prefix="training")
+                    #logging.info("Running evaluation on eval dataset")
+                    #self.evaluate(self.dataset.dataloader, metric_key_prefix="eval")
+
                 with torch.no_grad():
-                    # mask to identify ids which have been masked before
                     masked_ids_mask = inputs == self.dataset.tokenizer.mask_token_id
                     predictions = mlm_logits.argmax(-1)
                     mlm_accuracy = (predictions[masked_ids_mask] == labels[masked_ids_mask]).float().mean()
@@ -368,19 +432,25 @@ class PretrainMLM(PretrainLM):
                 current_lr = self.scheduler.get_last_lr()[0]
                 training_metrics["learning_rates"].append(current_lr)
 
-                if batch_id % 100 == 0:
-                    self.logger.info(f"Results after {batch_id/self.iteration_steps_per_epoch:.4%} iterations of epoch {epoch+1}:")
+                self.callback_manager.execute_callbacks("on_step_end", self.global_step, mlm_loss, mlm_accuracy.item(),
+                                                        mlm_grad_norm.item(), current_lr)
+
+                if batch_id % info_step == 0:
+                    self.logger.info(
+                        f"Results after {batch_id / self.iteration_steps_per_epoch:.4%} iterations of epoch {epoch + 1}:")
                     self.logger.info(f"MLM loss: {mlm_loss.item():.4f}")
                     self.logger.info(f"Gradient norm: {mlm_grad_norm:.4f}")
                     self.logger.info(f"Current learning rate: {current_lr}")
                     self.logger.info(f"Accuracy for masking task: {mlm_accuracy.item():.4f}")
-                    self.logger.info("-"*100)   
+                    self.logger.info("-" * 100)
+
+            self.callback_manager.execute_callbacks("after_epoch", epoch, training_metrics)
 
         self.logger.info("...training is finished, saving results and model.")
 
-        save_path = self._create_directory_and_return_save_path(model_type = "mlm")
+        save_path = self._create_directory_and_return_save_path(model_type="mlm")
         training_metrics_df = pd.DataFrame(training_metrics)
-        training_metrics_df.to_csv(save_path + "training_metrics.csv", index = False)
+        training_metrics_df.to_csv(save_path + "training_metrics.csv", index=False)
         training_metrics_df.loc[:, ["loss"]].plot()
         plt.savefig(save_path + "loss.png")
         training_metrics_df.loc[:, ["accuracy"]].plot()

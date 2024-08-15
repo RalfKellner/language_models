@@ -1,7 +1,8 @@
 import sqlite3
+import os
 from typing import Dict, Any, Optional
 import random
-from datasets import Dataset
+from datasets import Dataset, DatasetInfo, Features, Value
 import datasets
 import torch
 from torch.utils.data import Dataset as TorchDataset
@@ -43,7 +44,9 @@ class FinLMDataset:
             max_sequence_length: int,
             db_name: str,
             database_retrieval: dict[str, dict[str, int]],
-            batch_size: int
+            batch_size: int,
+            save_dir: str = "/home/lukasb/data/lms",
+            save_name: str = "fin_default"
             ) -> None:
         
         """
@@ -62,7 +65,6 @@ class FinLMDataset:
         batch_size : int
             The number of sequences to return in each batch.
         """
-
         self.logger = logging.getLogger(self.__class__.__name__)
         self.tokenizer = FinLMTokenizer(tokenizer_path)
         self.mask_token_id = self.tokenizer.mask_token_id
@@ -72,8 +74,26 @@ class FinLMDataset:
         self.database_retrieval = database_retrieval
         self.table_names = list(self.database_retrieval.keys())
         self.batch_size = batch_size
+        self.hf_dataset = None
         if not hasattr(self, "n_total_sequences"):
             self._get_n_dataset_sequences()
+
+        # TODO: Gibt es dadurch irgendwelche Nachteile?
+        self._retrieve_sequences_from_database()
+
+        #TODO:  idee! --> Kommt es zum Konflikten, wenn andere Datenbank geladen wird als hier sequences geladen werden? Eigentlich nicht, da ja der name unique ist vom cahce_dir
+        self.cache_dir = save_dir + save_name + "_maxseqlength=" + str(max_sequence_length) + "_database=" + os.path.basename(db_name).split(".")[0]
+        ds_feature = Features({
+            "max_sequence_length": str(max_sequence_length),
+            "db_name": db_name,
+            "tokenizer": str(self.tokenizer),
+            "total_sequences_length": str(len(self.sequences))
+        })
+        self.dataset_info = DatasetInfo(description="FinLM base dataset", features=ds_feature)
+        if os.path.exists(self.cache_dir):
+            self.logger.info("Loading presaved tokenized dataset from: " + self.cache_dir)
+            self.hf_dataset = datasets.load_from_disk(self.cache_dir)
+
 
     def _get_n_dataset_sequences(self):
         
@@ -172,8 +192,6 @@ class FinLMDataset:
         ------------------
         hf_dataset : datasets.Dataset
             The Hugging Face `Dataset` containing the tokenized sequences.
-        data_loader : torch.utils.data.DataLoader
-            A PyTorch DataLoader created from the tokenized dataset for batching during training.
         """
 
         self.hf_dataset = Dataset.from_list([{"text": text} for text in self.sequences])
@@ -181,7 +199,15 @@ class FinLMDataset:
         self.hf_dataset = self.hf_dataset.map(self._tokenization)
         self.logger.info("Tokenization is finished.")
         self.hf_dataset.set_format(type="torch", columns=["input_ids", "token_type_ids", "attention_mask"])
-        self.data_loader = DataLoader(self.hf_dataset, batch_size = self.batch_size, shuffle = False)
+
+
+    def save_dataset(self):
+        if not os.path.exists(self.cache_dir):
+            os.makedirs(self.cache_dir)
+
+        self.hf_dataset.save_to_disk(self.cache_dir)
+        #self.dataset_info.write_to_directory(self.cache_dir)
+        self.logger.info(f"Saved dataset to {(self.cache_dir)}")
 
     @classmethod
     def from_dict(cls, data_config: Dict[str, Any]) -> 'FinLMDataset':
@@ -219,8 +245,11 @@ class FinLMDataset:
         data_loader : torch.utils.data.DataLoader
             A PyTorch DataLoader created from the tokenized dataset.
         """
-        self._retrieve_sequences_from_database()
-        self._create_hf_dataset()
+        #self._retrieve_sequences_from_database() #TODO: warum nicht direkt im init callen? macht einiges einfacher --> Update: Ist verschoben
+
+        if self.hf_dataset is None:
+            self._create_hf_dataset()
+        self.data_loader = DataLoader(self.hf_dataset, batch_size=self.batch_size, shuffle=False) # TODO: Warum nicht shufflen?
 
     def set_dataset_offsets(self, epoch):
 
@@ -262,7 +291,8 @@ class FinLMDataset:
         for batch in self.data_loader:
             yield batch
 
-
+    def __len__(self):
+        return len(self.sequences)
 
 class FinetuningDataset:
 
