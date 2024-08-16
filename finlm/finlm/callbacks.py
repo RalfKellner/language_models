@@ -15,10 +15,15 @@ class CallbackTypes(Enum):
     ON_BATCH_END = "on_batch_end"
     ON_EVAL = "on_eval"
 
+
 class AbstractCallback(ABC):
+    def __init__(self, type: CallbackTypes):
+        self.type = type
+
     @abstractmethod
     def __call__(self, *args, **kwargs):
         raise NotImplementedError("Not implemented yet")
+
 
 class CallbackManager:
     def __init__(self):
@@ -31,11 +36,11 @@ class CallbackManager:
             "on_batch_end": [],
         }
 
-    def add_callback(self, event: CallbackTypes, callback: AbstractCallback):
-        if event.value in self.callbacks:
-            self.callbacks[event.value].append(callback)
+    def add_callback(self, callback: AbstractCallback):
+        if callback.type.value in self.callbacks:
+            self.callbacks[callback.type.value].append(callback)
         else:
-            raise ValueError(f"Event {event} not supported.")
+            raise ValueError(f"Event {callback.type.value} not supported.")
 
     def execute_callbacks(self, event, *args, **kwargs):
         for callback in self.callbacks.get(event, []):
@@ -195,13 +200,16 @@ class EarlyStopping:
 
 
 class MlMWandBTrackerCallback(AbstractCallback):
-    def __init__(self, project_name: str, api_key: str, **params):
+    def __init__(self, type: CallbackTypes, project_name: str, api_key: str, **params):
         """
         Initializes the W&B tracker.
 
         :param project_name: The name of the W&B project.
         :param params: Additional parameters to be logged as config in W&B.
         """
+
+        super().__init__(type)
+
         # Initialize W&B
         wandb.login(key=api_key)
         wandb.init(project=project_name)
