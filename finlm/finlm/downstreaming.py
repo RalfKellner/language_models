@@ -193,7 +193,7 @@ class FinetuningEncoderClassifier:
             self,
             config: FintuningConfig,
             device: torch.device,
-            dataset: Union[Dataset, FinetuningDocumentDataset],
+            dataset: Union[FinetuningDataset, FinetuningDocumentDataset],
             model_loader: callable
         ):
 
@@ -231,24 +231,15 @@ class FinetuningEncoderClassifier:
             self.aggregated_document_model = True
             self.dataset = dataset
             self.collate_fn = lambda x: collate_fn_fixed_sequences(x, max_sequences = self.config.max_sequences)
-            self.train_size = int(len(self.dataset) * self.config.training_data_fraction)
-            self.training_data = self.dataset.select(range(self.train_size))
-            self.test_data = self.dataset.select(range(self.train_size, len(self.dataset)))
         else:
         # common case
             self.aggregated_document_model = False
-            self.dataset = FinetuningDataset(
-                self.config.tokenizer_path,
-                self.config.max_sequence_length,
-                dataset,
-                self.config.text_column,
-                self.config.dataset_columns
-            )
+            self.dataset = dataset
             self.collate_fn = None
-            self.train_size = int(len(self.dataset) * self.config.training_data_fraction)
-            self.training_data = self.dataset.select(range(self.train_size))
-            self.test_data = self.dataset.select(range(self.train_size, len(self.dataset)))
-            
+
+        self.train_size = int(len(self.dataset) * self.config.training_data_fraction)
+        self.training_data = self.dataset.select(range(self.train_size))
+        self.test_data = self.dataset.select(range(self.train_size, len(self.dataset)))
 
         self.batch_size = self.config.batch_size
         self.n_splits = self.config.n_splits

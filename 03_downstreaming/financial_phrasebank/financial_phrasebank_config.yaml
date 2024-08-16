@@ -1,6 +1,6 @@
-model_path: "/data/language_models/pretrained_models/mlm_00/mlm_model"
+model_path: "google/electra-small-discriminator" #"/data/language_models/pretrained_models/mlm_00/mlm_model"
 num_labels: 3
-tokenizer_path: "/data/language_models/tokenizers/finlm-wordpiece-tokenizer.json"
+tokenizer_path: "google/electra-small-discriminator" #"/data/language_models/tokenizers/finlm-wordpiece-tokenizer.json"
 max_sequence_length: 256
 dataset_name: "financial_phrasebank"
 text_column: "sentence"
@@ -40,4 +40,4 @@ use_gradient_clipping:
   low: None
   high: None
   default: False
-save_path: "/data/language_models/pretrained_models_downstreaming/financial_phrasebank/mlm_00"
+save_path: "/data/language_models/pretrained_models_downstreaming/financial_phrasebank/google_electra_small_discriminator"
