@@ -5,7 +5,7 @@ from finlm.dataset import FinLMDataset
 from transformers import ElectraConfig, ElectraForMaskedLM, ElectraForPreTraining, ElectraPreTrainedModel, ElectraModel
 from transformers import get_linear_schedule_with_warmup
 from finlm.config import FinLMConfig
-from finlm.callbacks import CallbackManager, CallbackTypes
+from finlm.callbacks import CallbackManager, CallbackTypes, AbstractCallback
 import pandas as pd
 import numpy as np
 import datasets
@@ -253,10 +253,8 @@ class PretrainMLM(PretrainLM):
 
         self.training_state = None
 
-    def add_callback(self, event: CallbackTypes | str, callback: Callable):
-        if isinstance(event, str):
-            event = CallbackTypes(event)
-        self.callback_manager.add_callback(event, callback)
+    def add_callback(self, callback: AbstractCallback):
+        self.callback_manager.add_callback(callback)
 
     def load_model(self):
 
