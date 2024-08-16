@@ -2,6 +2,7 @@ import torch
 import os
 import logging
 from enum import Enum
+from typing import Callable
 
 class CallbackTypes(Enum):
     BEFORE_TRAINING = "before_training"
@@ -10,6 +11,7 @@ class CallbackTypes(Enum):
     ON_BATCH_START = "on_batch_start"
     ON_BATCH_END = "on_batch_end"
     ON_EVAL = "on_eval"
+
 
 class CallbackManager:
     def __init__(self):
@@ -22,7 +24,7 @@ class CallbackManager:
             "on_batch_end": [],
         }
 
-    def add_callback(self, event, callback):
+    def add_callback(self, event: CallbackTypes, callback: Callable):
         if event in self.callbacks:
             self.callbacks[event].append(callback)
         else:
