@@ -256,7 +256,7 @@ class PretrainMLM(PretrainLM):
     def add_callback(self, event: CallbackTypes | str, callback: Callable):
         if isinstance(event, str):
             event = CallbackTypes(event)
-        self.callback_manager.add_callabe(event, callback)
+        self.callback_manager.add_callback(event, callback)
 
     def load_model(self):
 
@@ -367,7 +367,7 @@ class PretrainMLM(PretrainLM):
     def train(self):
         self.logger.info("Starting with training...")
         self.training_state = []
-        eval_step = 1000 # TODO: make variable
+        eval_step = 1000 # TODO: make variable --- currently not used --> later for evaluation
         info_step = 100 # TODO: make variable
         training_metrics = {
             "loss": [],
@@ -379,9 +379,6 @@ class PretrainMLM(PretrainLM):
         self.callback_manager.execute_callbacks("before_training")
 
         self.global_step = 0 # use global steps instead of epochs and batches
-        total_steps = len(self.dataset) * self.optimization_config.n_epochs
-        self.logger.info(f"Training for {total_steps} steps")
-
         for epoch in range(self.optimization_config.n_epochs):
             self.dataset.set_dataset_offsets(epoch)
             self.dataset.prepare_data_loader()
@@ -414,14 +411,6 @@ class PretrainMLM(PretrainLM):
                 self.optimizer.step()
                 self.scheduler.step()
 
-                if self.global_step % eval_step == 0:
-                    # TODO: Activate if needed. Training dataset evaluation can be useful as it samples randomly some
-                    # sequences and computes the loss and accuracy on them
-                    self.logger.info("Running evaluation on training dataset")
-                    self.evaluate(self.dataset.hf_dataset, metric_key_prefix="training")
-                    #logging.info("Running evaluation on eval dataset")
-                    #self.evaluate(self.dataset.dataloader, metric_key_prefix="eval")
-
                 with torch.no_grad():
                     masked_ids_mask = inputs == self.dataset.tokenizer.mask_token_id
                     predictions = mlm_logits.argmax(-1)
@@ -432,8 +421,9 @@ class PretrainMLM(PretrainLM):
                 current_lr = self.scheduler.get_last_lr()[0]
                 training_metrics["learning_rates"].append(current_lr)
 
-                self.callback_manager.execute_callbacks("on_step_end", self.global_step, mlm_loss, mlm_accuracy.item(),
+                self.callback_manager.execute_callbacks("on_batch_end", self.global_step, mlm_loss, mlm_accuracy.item(),
                                                         mlm_grad_norm.item(), current_lr)
+                self.global_step += 1
 
                 if batch_id % info_step == 0:
                     self.logger.info(

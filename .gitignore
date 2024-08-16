@@ -8,3 +8,4 @@ electra_pretraining.ipynb
 finlm/finlm.egg-info/
 venv/
 lukas_test/
+wandb/

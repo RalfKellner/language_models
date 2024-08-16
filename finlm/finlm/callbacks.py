@@ -3,6 +3,7 @@ import os
 import logging
 from enum import Enum
 from typing import Callable
+import wandb
 
 class CallbackTypes(Enum):
     BEFORE_TRAINING = "before_training"
@@ -25,8 +26,8 @@ class CallbackManager:
         }
 
     def add_callback(self, event: CallbackTypes, callback: Callable):
-        if event in self.callbacks:
-            self.callbacks[event].append(callback)
+        if event.value in self.callbacks:
+            self.callbacks[event.value].append(callback)
         else:
             raise ValueError(f"Event {event} not supported.")
 
@@ -184,3 +185,46 @@ class EarlyStopping:
                 self.logger.info(f'Validation metric increased ({self.val_metric_max:.6f} --> {val_metric:.6f}).  Saving model ...')
                 self.val_metric_max = val_metric
         torch.save(model.state_dict(), os.path.join(self.save_path, 'checkpoint.pth'))
+
+
+class MlMWandBTrackerCallback:
+    def __init__(self, project_name: str, api_key:str, **params):
+        """
+        Initializes the W&B tracker.
+
+        :param project_name: The name of the W&B project.
+        :param params: Additional parameters to be logged as config in W&B.
+        """
+        # Initialize W&B
+        wandb.login(key=api_key)
+        wandb.init(project=project_name)
+
+        # Log the initial parameters as config
+        for k, v in params.items():
+            wandb.config[k] = v
+
+    def log_metrics(self, global_step: int, mlm_loss: float, mlm_accuracy: float, mlm_grad_norm: float,
+                    current_lr: float):
+        """
+        Logs metrics to W&B.
+
+        :param global_step: The current global step of the training process.
+        :param mlm_loss: The loss value for the current batch.
+        :param mlm_accuracy: The accuracy for the current batch.
+        :param mlm_grad_norm: The gradient norm for the current batch.
+        :param current_lr: The learning rate for the current batch.
+        """
+        # Log the metrics to W&B
+        wandb.log({
+            "step": global_step,
+            "mlm_loss": mlm_loss,
+            "mlm_accuracy": mlm_accuracy,
+            "mlm_grad_norm": mlm_grad_norm,
+            "learning_rate": current_lr,
+        }, step=global_step)
+
+
+    def __call__(self, global_step: int, mlm_loss: float, mlm_accuracy: float, mlm_grad_norm: float,
+                    current_lr: float):
+
+        self.log_metrics(global_step, mlm_loss, mlm_accuracy, mlm_grad_norm, current_lr)
