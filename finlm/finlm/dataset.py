@@ -316,12 +316,12 @@ class FinetuningDataset:
     """
 
     def __init__(self,
-                 tokenizer_path: str,
-                 max_sequence_length: int,
-                 dataset: Dataset,
-                 text_column: str,
-                 dataset_columns: list[str]
-                 ):
+            tokenizer_path: str,
+            max_sequence_length: int,
+            dataset: Dataset,
+            text_column: str,
+            dataset_columns: list[str]
+        ):
 
         """
         Initializes the `FinetuningDataset` with the necessary parameters.
@@ -428,7 +428,7 @@ class FinetuningDataset:
 
     def num_labels(self):
         return np.unique(self.dataset["label"], return_counts=True)
-
+      
     def select(self, indices):
         new_finetuning_dataset = FinetuningDataset(
             self.tokenizer_path,
@@ -485,11 +485,11 @@ class FinetuningDocumentDataset(TorchDataset):
         selected_documents = [self.documents[i] for i in indices]
         selected_labels = [self.labels[i] for i in indices]
         return FinetuningDocumentDataset(selected_documents, selected_labels, self.tokenizer_path, self.sequence_length)
-
+    
     def num_labels(self):
         labels = np.array([batch["label"].item() for batch in self])
         return np.unique(labels, return_counts=True)
-
+    
 
 def collate_fn_fixed_sequences(batch, max_sequences=4):
     max_sequence_length = max([item['input_ids'].shape[1] for item in batch])
@@ -526,5 +526,5 @@ def collate_fn_fixed_sequences(batch, max_sequences=4):
         'input_ids': torch.stack(input_ids_batch),
         'attention_mask': torch.stack(attention_mask_batch),
         'label': torch.tensor(labels_batch, dtype=torch.long),
-        'sequence_mask': torch.tensor(sequences_mask_batch, dtype=torch.long)
+        'sequence_mask': torch.tensor(sequences_mask_batch, dtype = torch.long)
     }

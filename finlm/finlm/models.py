@@ -1,5 +1,4 @@
 import os
-from dataclasses import dataclass
 from dataclasses import asdict
 from finlm.dataset import FinLMDataset
 from transformers import ElectraConfig, ElectraForMaskedLM, ElectraForPreTraining, ElectraPreTrainedModel, ElectraModel
@@ -12,14 +11,19 @@ import datasets
 import matplotlib.pylab as plt
 import torch
 from tqdm import tqdm
-from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
-from torcheval.metrics.functional import binary_precision, binary_recall
 from torch import nn, Tensor
 from typing import Optional, Any, List, Callable
 import math
 from torch.utils.data import DataLoader
+from transformers.models.electra.modeling_electra import ElectraAttention, SequenceClassifierOutput
+from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
+from torcheval.metrics.functional import binary_precision, binary_recall
+from typing import Optional, Any, List
+import copy
+
 import logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+
 
 #########################################################################################################################
 # Models for pretraining
@@ -1042,549 +1046,67 @@ class PretrainElectra(PretrainLM):
 # Models for finetuning
 #########################################################################################################################
 
-class ElectraSimpleAttention(nn.Module):
-    
-    """
-    A single-head attention layer for use in the Electra model.
+# to do:
+#   a model for comparison which simply adds a dense layer on top of the embeddings and uses an output projection afterwards
+#   experiment with extensions of the attention model: add a dense layer after attention, maybe replace mean aggreagation by 2D convolution
 
-    This class implements a simple attention mechanism, where attention scores are computed 
-    using a single attention head. The attention layer includes dropout and can optionally 
-    return attention probabilities.
 
-    Attributes
-    ----------
-    hidden_size : int
-        The size of the hidden layer in the attention mechanism.
-    query : nn.Linear
-        The linear layer that projects the input to the query space.
-    key : nn.Linear
-        The linear layer that projects the input to the key space.
-    value : nn.Linear
-        The linear layer that projects the input to the value space.
-    dropout : nn.Dropout
-        Dropout applied to the attention probabilities.
+class ElectraDocumentClassification(ElectraPreTrainedModel):
+    def __init__(self, config, **kwargs):
+        super().__init__(config)
+        self.config = config
+        self.num_labels = self.config.num_labels
 
-    Methods
-    -------
-    forward(sequence_embeddings: torch.Tensor, return_attention: bool = True) -> Tuple[torch.Tensor, ...]
-        Performs the forward pass, calculating the attention output and optionally returning the attention probabilities.
-    """
-
-    def __init__(self, config):
-
-        """
-        Initializes the ElectraSimpleAttention layer with the provided configuration.
-
-        Parameters
-        ----------
-        config : ElectraConfig
-            The configuration object containing the hidden size and dropout probability.
-        """
-
-        super().__init__()
-        self.hidden_size = config.hidden_size
-        self.query = nn.Linear(self.hidden_size, self.hidden_size)
-        self.key = nn.Linear(self.hidden_size, self.hidden_size)
-        self.value = nn.Linear(self.hidden_size, self.hidden_size)
-        self.dropout = nn.Dropout(config.attention_probs_dropout_prob)
-
-    def forward(self, sequence_embeddings, return_attention = True):
-
-        """
-        Performs the forward pass of the attention layer.
-
-        Parameters
-        ----------
-        sequence_embeddings : torch.Tensor
-            The input sequence embeddings of shape (number of sequences over all batched documents, hidden_size).
-            Before this mechanism is applied the nested document sequences are flattened and sequence embeddings are extracted.
-        return_attention : bool, optional
-            If True, returns the attention probabilities along with the context layer (default is True).
-
-        Returns
-        -------
-        Tuple[torch.Tensor, ...]
-            The context layer and, optionally, the attention probabilities.
-        """
-
-        query_layer = self.query(sequence_embeddings)
-        key_layer = self.key(sequence_embeddings)
-        value_layer = self.value(sequence_embeddings)
-
-        # determine attention scores and weights
-        attention_scores = torch.matmul(query_layer, key_layer.transpose(0, 1))
-        attention_scores = attention_scores / math.sqrt(self.hidden_size)
-
-        attention_probs = nn.functional.softmax(attention_scores, dim=-1)
-        attention_probs = self.dropout(attention_probs)
-
-        context_layer = torch.matmul(attention_probs, value_layer) 
-
-        output = (context_layer, attention_probs) if return_attention else (context_layer, )
-
-        return output
-
-class ElectraSimpleAttentionOutput(nn.Module):
-    
-    """
-    Outputs from the ElectraSimpleAttention layer, with residual connections and aggregation.
-
-    This class applies a dense layer, dropout, and LayerNorm to the sequence attention embeddings.
-    It also aggregates sequence embeddings by averaging and applies a residual connection.
-
-    Attributes
-    ----------
-    dense : nn.Linear
-        A linear layer applied to the attention output.
-    dropout : nn.Dropout
-        Dropout applied to the attention output.
-    LayerNorm : nn.LayerNorm
-        Layer normalization applied after adding the residual connection.
-    out_projection : nn.Linear
-        A linear layer that projects the aggregated embeddings to the number of labels.
-
-    Methods
-    -------
-    forward(sequence_attention_embeddings: torch.Tensor, sequence_embeddings: torch.Tensor, original_shapes: List[int]) -> torch.Tensor
-        Performs the forward pass, applying the dense layer, residual connection, and aggregation.
-    """
-
-    def __init__(self, config):
-
-        """
-        Initializes the ElectraSimpleAttentionOutput layer with the provided configuration.
-
-        Parameters
-        ----------
-        config : ElectraConfig
-            The configuration object containing the hidden size, dropout probability, and number of labels.
-        """
-
-        super().__init__()
-        self.dense = nn.Linear(config.hidden_size, config.hidden_size)
-        # dropout
+        self.electra = ElectraModel(self.config)
+        self.attention_config = copy.deepcopy(self.config)
+        if "num_sequence_attention_heads" in kwargs:
+            self.attention_config.num_attention_heads = kwargs["num_sequence_attention_heads"]
+        self.attention = ElectraAttention(self.attention_config)
         aggregation_head_dropout = (
             config.classifier_dropout if config.classifier_dropout is not None else config.hidden_dropout_prob
         )
-        self.dropout = nn.Dropout(aggregation_head_dropout)
         self.LayerNorm = nn.LayerNorm(config.hidden_size, eps=config.layer_norm_eps)
-        self.out_projection = nn.Linear(config.hidden_size, config.num_labels)
-
-
-    def forward(self, sequence_attention_embeddings, sequence_embeddings, original_shapes):
-        
-        """
-        Performs the forward pass of the attention output layer.
-
-        Parameters
-        ----------
-        sequence_attention_embeddings : torch.Tensor
-            The embeddings output from the attention layer.
-        sequence_embeddings : torch.Tensor
-            The original sequence embeddings for the residual connection.
-        original_shapes : List[int]
-            The original shapes of the sequences before flattening.
-
-        Returns
-        -------
-        torch.Tensor
-            The logits for each aggregated sequence.
-        """
-
-        # sequence attention embeddings are the ones coming from the simple attention layer
-        sequence_attention_embeddings = self.dense(sequence_attention_embeddings)
-        sequence_attention_embeddings = self.dropout(sequence_attention_embeddings)
-        # residual connection with the original sequence embeddings
-        sequence_attention_embeddings = self.LayerNorm(sequence_attention_embeddings + sequence_embeddings)
-        sequence_attention_embeddings_original_shapes = torch.split(sequence_attention_embeddings, original_shapes, dim = 0)
-        sequence_attention_embeddings_aggregated = torch.stack([torch_tensor.mean(dim = 0) for torch_tensor in sequence_attention_embeddings_original_shapes])
-        logits = self.out_projection(sequence_attention_embeddings_aggregated)
- 
-        return logits
-
-
-class ElectraSimpleAttentionHead(nn.Module):
-    
-    """
-    A combination of simple attention and output layers with aggregation.
-
-    This class combines the ElectraSimpleAttention and ElectraSimpleAttentionOutput layers 
-    to produce a final prediction for a sequence, with optional attention probability output.
-
-    Attributes
-    ----------
-    simple_attention : ElectraSimpleAttention
-        The simple attention layer.
-    attention_output : ElectraSimpleAttentionOutput
-        The output layer that processes and aggregates the attention embeddings.
-
-    Methods
-    -------
-    forward(sequence_embeddings: torch.Tensor, original_shapes: List[int], return_attention: bool = True) -> Tuple[torch.Tensor, ...]
-        Performs the forward pass through the attention and output layers.
-    """
-
-    def __init__(self, config):
-
-        """
-        Initializes the ElectraSimpleAttentionHead with the provided configuration.
-
-        Parameters
-        ----------
-        config : ElectraConfig
-            The configuration object containing the necessary model parameters.
-        """
-
-        super().__init__()
-        self.simple_attention = ElectraSimpleAttention(config)
-        self.attention_output = ElectraSimpleAttentionOutput(config)
-
-    def forward(self, sequence_embeddings, original_shapes, return_attention = True):
-
-        """
-        Performs the forward pass through the attention and output layers.
-
-        Parameters
-        ----------
-        sequence_embeddings : torch.Tensor
-            The flattened input sequence embeddings of shape (number of sequences over all batched documents, hidden_size).
-        original_shapes : List[int]
-            The original shapes of the sequences before flattening.
-        return_attention : bool, optional
-            If True, returns the attention probabilities along with the logits (default is True).
-
-        Returns
-        -------
-        Tuple[torch.Tensor, ...]
-            The logits for each sequence and, optionally, the attention probabilities.
-        """
-
-
-        # determine simple attention output and attention probabilities (if return_attention is set to True)
-        simple_attention_output = self.simple_attention(sequence_embeddings, return_attention = return_attention)
-
-        # get sequence attention embeddings after simple attention layer
-        sequence_attention_embeddings = simple_attention_output[0]
-
-        if return_attention:
-            attention_probs = simple_attention_output[1]
-
-        # process sequence attention embeddings through a dense layer and create a residual connection with the original sequence embeddings
-        logits = self.attention_output(sequence_attention_embeddings, sequence_embeddings, original_shapes)
-        
-        # output prediction and optionally the attention probabilities
-        output = (logits, attention_probs) if return_attention else (logits,)
-        return output
-
-
-class ElectraForAggregatePredictionWithAttention(ElectraPreTrainedModel):
-
-    """
-    An Electra model with aggregate prediction using attention mechanisms.
-
-    This class extends the Electra model by adding a custom head for aggregate prediction.
-    It combines token embeddings into sequence embeddings, applies attention, and makes 
-    predictions for entire documents which consist of sequences.
-
-    Attributes
-    ----------
-    config : ElectraConfig
-        The configuration object for the Electra model.
-    num_labels : int
-        The number of labels for classification tasks.
-    electra : ElectraModel
-        The Electra encoder model for generating token embeddings.
-    head : ElectraSimpleAttentionHead
-        The custom head for making aggregate predictions with attention.
-
-    Methods
-    -------
-    forward(input_ids: List[List[Tensor]], attention_mask: List[List[Tensor]], labels: Optional[torch.Tensor] = None, return_attention: bool = True) -> Any
-        Performs the forward pass, generating sequence embeddings and making predictions.
-    """
-
-    def __init__(self, config):
-
-        """
-        Initializes the ElectraForAggregatePredictionWithAttention model.
-
-        Parameters
-        ----------
-        config : ElectraConfig
-            The configuration object for the Electra model.
-        """
-
-        super().__init__(config)
-        self.config = config
-        self.num_labels = config.num_labels
-        # the encoder for creating token embeddings
-        self.electra = ElectraModel(config)
-        # the head for creating a single prediction for a batch of embeddings, in our case a batch of sequence embeddings
-        self.head = ElectraSimpleAttentionHead(config)
-
-        self.post_init()
+        self.out_projection = nn.Linear(self.config.hidden_size, self.num_labels)
+        self.dropout = nn.Dropout(aggregation_head_dropout)
 
     def forward(
-        self, 
-        input_ids: List[List[Tensor]] = None,
-        attention_mask: List[List[Tensor]] = None,
-        labels: Optional[torch.Tensor] = None,
-        return_attention = True
-    ) -> Any:
-        
-        """
-        Performs the forward pass of the Electra model with aggregate prediction.
-
-        Parameters
-        ----------
-        input_ids : List[List[Tensor]]
-            A batch of input token IDs.
-        attention_mask : List[List[Tensor]]
-            A batch of attention masks corresponding to the input IDs.
-        labels : Optional[torch.Tensor], optional
-            Ground truth labels for the input sequences (default is None).
-        return_attention : bool, optional
-            If True, returns attention probabilities along with the logits (default is True).
-
-        Returns
-        -------
-        Any
-            The loss (if labels are provided), logits, and optionally the attention probabilities.
-        """
-
-       
-        input_id_tensors = [torch.stack(batch_input_ids) for batch_input_ids in input_ids]
-        attention_mask_tensors = [torch.stack(batch_attention_mask) for batch_attention_mask in attention_mask]
-        # Store the original shapes
-        original_shapes = [input_ids_tensor.shape[0] for input_ids_tensor in input_id_tensors]
-
-        # Step 2: Concatenate the tensors along the first dimension
-        flattened_input_ids = torch.cat(input_id_tensors, dim=0)
-        flattened_attention_mask = torch.cat(attention_mask_tensors, dim=0)
-
-        discriminator_hidden_states = self.electra(
-            input_ids = flattened_input_ids,
-            attention_mask=flattened_attention_mask,
-        )
-
-        # collect all token embeddings 
-        sequence_output = discriminator_hidden_states[0]
-        # collect the sequence embeddings, only assuming the first token is a seq token
-        sequence_embeddings = sequence_output[:, 0, :]
-
-        # logits is the real valued prediction
-        output = self.head(sequence_embeddings, original_shapes, return_attention = return_attention)
-    
-        logits = output[0]
-    
-        if return_attention:
-            attention_probabilities = output[1]
-
-        loss = None
-        if labels is not None:
-            if self.config.problem_type is None:
-                if self.num_labels == 1:
-                    self.config.problem_type = "regression"
-                elif self.num_labels > 1 and (labels.dtype == torch.long or labels.dtype == torch.int):
-                    self.config.problem_type = "single_label_classification"
-                else:
-                    self.config.problem_type = "multi_label_classification"
-
-            if self.config.problem_type == "regression":
-                loss_fct = MSELoss()
-                if self.num_labels == 1:
-                    loss = loss_fct(logits.squeeze(), labels.squeeze())
-                else:
-                    loss = loss_fct(logits, labels)
-            elif self.config.problem_type == "single_label_classification":
-                loss_fct = CrossEntropyLoss()
-                loss = loss_fct(logits.view(-1, self.num_labels), labels.view(-1))
-            elif self.config.problem_type == "multi_label_classification":
-                loss_fct = BCEWithLogitsLoss()
-                loss = loss_fct(logits, labels)
-
-        if return_attention:
-            output = AggregatedPredictionOutput(loss = loss, logits = logits, attention = attention_probabilities)
-        else:
-            output = AggregatedPredictionOutput(loss = loss, logits = logits)
-
-        return output, original_shapes
-
-
-class ElectraAggregationHead(nn.Module):
-    
-    """
-    Head to aggregate sequence embeddings of a batch of documents with sequences into predictions for each document.
-
-    This class takes sequence embeddings as input and aggregates them by averaging. 
-    It then passes the aggregated embeddings through a dense layer, applies dropout 
-    and activation, and finally projects the result to the number of output labels.
-
-    Attributes
-    ----------
-    dense : nn.Linear
-        A linear layer that densely connects all sequence embeddings.
-    dropout : nn.Dropout
-        Dropout applied to the output of the dense layer.
-    activation : nn.GELU
-        Activation function applied after the dropout.
-    out_projection : nn.Linear
-        A linear layer that projects the aggregated embeddings to the number of labels.
-
-    Methods
-    -------
-    forward(hidden_states: torch.Tensor, original_shapes: List[int]) -> torch.Tensor
-        Performs the forward pass, aggregating the sequence embeddings and generating logits.
-    """
-
-
-    def __init__(self, config):
-
-        """
-        Initializes the ElectraAggregationHead with the provided configuration.
-
-        Parameters
-        ----------
-        config : ElectraConfig
-            The configuration object containing the hidden size, dropout probability, 
-            and number of labels.
-        """
-
-        super().__init__()
-        # densely connect all sequence embeddings
-        self.dense = nn.Linear(config.hidden_size, config.hidden_size)
-        # dropout
-        aggregation_head_dropout = (
-            config.classifier_dropout if config.classifier_dropout is not None else config.hidden_dropout_prob
-        )
-        self.dropout = nn.Dropout(aggregation_head_dropout)
-        self.activation = nn.GELU()
-        self.LayerNorm = nn.LayerNorm(config.hidden_size, eps=config.layer_norm_eps)
-        # project the average aggregate of sequence embeddings after the dense layer
-        self.out_projection = nn.Linear(config.hidden_size, config.num_labels)
-
-    def forward(self, hidden_states, original_shapes):
-
-        """
-        Performs the forward pass, aggregating the sequence embeddings and generating logits.
-
-        Parameters
-        ----------
-        hidden_states : torch.Tensor
-            The input sequence embeddings of shape (batch_size, hidden_size).
-        original_shapes : List[int]
-            The original shapes of the sequences before flattening.
-
-        Returns
-        -------
-        torch.Tensor
-            The logits for each aggregated sequence.
-        """
-
-        # process flattened input embedding states through dense layer
-        x = self.dense(hidden_states)
-        x = self.dropout(x)
-        x = self.activation(x)
-        x_original_shapes = torch.split(x, original_shapes, dim = 0)
-        x_aggregated = torch.stack([torch_tensor.mean(dim = 0) for torch_tensor in x_original_shapes])
-        x_aggregated = self.LayerNorm(x_aggregated)
-        logits = self.out_projection(x_aggregated)
-        return logits
-    
-
-class ElectraForAggregatePrediction(ElectraPreTrainedModel):
-
-    """
-    An Electra model with aggregate prediction for sequence embeddings.
-
-    This class extends the Electra model by adding a custom head for aggregate prediction.
-    It takes token embeddings, aggregates sequence embeddings, and makes predictions 
-    for entire sequences or documents.
-
-    Attributes
-    ----------
-    config : ElectraConfig
-        The configuration object for the Electra model.
-    num_labels : int
-        The number of labels for classification tasks.
-    electra : ElectraModel
-        The Electra encoder model for generating token embeddings.
-    head : ElectraAggregationHead
-        The custom head for making aggregate predictions with sequence embeddings.
-
-    Methods
-    -------
-    forward(input_ids: List[List[Tensor]], attention_mask: List[List[Tensor]], labels: Optional[torch.Tensor] = None) -> Any
-        Performs the forward pass, generating sequence embeddings and making predictions.
-    """
-
-    
-    def __init__(self, config):
-
-        """
-        Initializes the ElectraForAggregatePrediction model.
-
-        Parameters
-        ----------
-        config : ElectraConfig
-            The configuration object for the Electra model.
-        """
-
-        super().__init__(config)
-        self.config = config
-        self.num_labels = config.num_labels
-        # the encoder for creating token embeddings
-        self.electra = ElectraModel(config)
-        # the head for creating a single prediction for a batch of embeddings, in our case a batch of sequence embeddings
-        self.head = ElectraAggregationHead(config)
-
-        self.post_init()
-
-    def forward(
-        self, 
-        input_ids: List[List[Tensor]] = None,
-        attention_mask: List[List[Tensor]] = None,
+        self,
+        input_ids: Optional[torch.Tensor] = None,
+        attention_mask: Optional[torch.Tensor] = None,
+        sequence_mask: Optional[torch.Tensor] = None,
         labels: Optional[torch.Tensor] = None
-    ) -> Any:
-        
-        """
-        Performs the forward pass of the Electra model with aggregate prediction.
+    ):
 
-        Parameters
-        ----------
-        input_ids : List[List[Tensor]]
-            A batch of input token IDs.
-        attention_mask : List[List[Tensor]]
-            A batch of attention masks corresponding to the input IDs.
-        labels : Optional[torch.Tensor], optional
-            Ground truth labels for the input sequences (default is None).
+        original_normalized_shape = input_ids.size()
+        flattened_input_ids = input_ids.view(-1, original_normalized_shape[-1])
+        flattened_attention_mask = attention_mask.view(-1, original_normalized_shape[-1])
 
-        Returns
-        -------
-        Any
-            The loss (if labels are provided) and logits.
-        """
-       
-        input_id_tensors = [torch.stack(batch_input_ids) for batch_input_ids in input_ids]
-        attention_mask_tensors = [torch.stack(batch_attention_mask) for batch_attention_mask in attention_mask]
-        # Store the original shapes
-        original_shapes = [input_ids_tensor.shape[0] for input_ids_tensor in input_id_tensors]
+        hidden_states = self.electra(input_ids = flattened_input_ids, attention_mask = flattened_attention_mask)
+        encoder_embeddings = hidden_states.last_hidden_state
+        sequence_embeddings = encoder_embeddings[:, 0, :]
+        document_sequences_shape = original_normalized_shape[:2] + torch.Size([self.config.hidden_size])
+        sequence_embeddings = sequence_embeddings.view(document_sequences_shape)
 
-        # Step 2: Concatenate the tensors along the first dimension
-        flattened_input_ids = torch.cat(input_id_tensors, dim=0)
-        flattened_attention_mask = torch.cat(attention_mask_tensors, dim=0)
+        # the shape gets adjusted internally if we write it like this
+        extended_sequence_mask = self.get_extended_attention_mask(sequence_mask, sequence_mask.shape)
 
-        discriminator_hidden_states = self.electra(
-            input_ids = flattened_input_ids,
-            attention_mask=flattened_attention_mask,
-        )
+        # in my understanding the output of this layer is a number_of_sequences x hidden size representation
+        # where the padded sequences are ignored, for instance if a attention probability matrix looks like
+        # att_probs         value_repr.
+        # 0.5, 0.5, 0       v_11, v_12
+        # 0.5, 0.5, 0       v_21, v_22
+        # 0.5, 0.5, 0       v_31, v_32
+        #
+        # a matrix of size n_sequences times hidden_dim is generated where only values of the first two rows are used
+        # accordingly, we can average attention states in the next step and project them to the desired output dimension
 
-        # collect all token embeddings 
-        sequence_output = discriminator_hidden_states[0]
-        # collect the sequence embeddings, only assuming the first token is a seq token
-        sequence_embeddings = sequence_output[:, 0, :]
-        # logits is the real valued prediction
-        logits = self.head(sequence_embeddings, original_shapes)
+        attention_embeddings, attention_probs = self.attention(hidden_states = sequence_embeddings, attention_mask = extended_sequence_mask, output_attentions = True)
+        aggregated_attention_embeddings = attention_embeddings.mean(dim = 1)
+
+        # do we need this or another form of normalization, because of the averaging from the previous step
+        aggregated_attention_embeddings = self.LayerNorm(aggregated_attention_embeddings)
+        aggregated_attention_embeddings = self.dropout(aggregated_attention_embeddings)
+        logits = self.out_projection(aggregated_attention_embeddings)
 
         loss = None
         if labels is not None:
@@ -1609,12 +1131,9 @@ class ElectraForAggregatePrediction(ElectraPreTrainedModel):
                 loss_fct = BCEWithLogitsLoss()
                 loss = loss_fct(logits, labels)
 
-        return AggregatedPredictionOutput(loss = loss, logits = logits)
-    
-
-
-@dataclass
-class AggregatedPredictionOutput:
-    loss: Optional[torch.FloatTensor] = None
-    logits: torch.FloatTensor = None
-    attention: Optional[torch.FloatTensor] = None
+        return SequenceClassifierOutput(
+            loss = loss,
+            logits = logits,
+            hidden_states = None,
+            attentions = attention_probs,
+        )
