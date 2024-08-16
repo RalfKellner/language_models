@@ -1013,7 +1013,7 @@ class ElectraDocumentClassification(ElectraPreTrainedModel):
         sequence_mask: Optional[torch.Tensor] = None,
         labels: Optional[torch.Tensor] = None
     ):
-        
+
         original_normalized_shape = input_ids.size()
         flattened_input_ids = input_ids.view(-1, original_normalized_shape[-1])
         flattened_attention_mask = attention_mask.view(-1, original_normalized_shape[-1])
@@ -1038,8 +1038,8 @@ class ElectraDocumentClassification(ElectraPreTrainedModel):
         # accordingly, we can average attention states in the next step and project them to the desired output dimension
 
         attention_embeddings, attention_probs = self.attention(hidden_states = sequence_embeddings, attention_mask = extended_sequence_mask, output_attentions = True)
-
         aggregated_attention_embeddings = attention_embeddings.mean(dim = 1)
+
         # do we need this or another form of normalization, because of the averaging from the previous step
         aggregated_attention_embeddings = self.LayerNorm(aggregated_attention_embeddings)
         aggregated_attention_embeddings = self.dropout(aggregated_attention_embeddings)
