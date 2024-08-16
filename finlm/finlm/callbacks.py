@@ -4,6 +4,8 @@ import logging
 from enum import Enum
 from typing import Callable
 import wandb
+from abc import ABC, abstractmethod
+
 
 class CallbackTypes(Enum):
     BEFORE_TRAINING = "before_training"
@@ -13,6 +15,10 @@ class CallbackTypes(Enum):
     ON_BATCH_END = "on_batch_end"
     ON_EVAL = "on_eval"
 
+class AbstractCallback(ABC):
+    @abstractmethod
+    def __call__(self, *args, **kwargs):
+        raise NotImplementedError("Not implemented yet")
 
 class CallbackManager:
     def __init__(self):
@@ -25,7 +31,7 @@ class CallbackManager:
             "on_batch_end": [],
         }
 
-    def add_callback(self, event: CallbackTypes, callback: Callable):
+    def add_callback(self, event: CallbackTypes, callback: AbstractCallback):
         if event.value in self.callbacks:
             self.callbacks[event.value].append(callback)
         else:
@@ -35,8 +41,8 @@ class CallbackManager:
         for callback in self.callbacks.get(event, []):
             callback(*args, **kwargs)
 
-class EarlyStopping:
 
+class EarlyStopping:
     """
     Early stopping utility to stop training when a monitored metric has stopped improving.
 
@@ -71,8 +77,8 @@ class EarlyStopping:
         Maximum value of the validation metric observed (used in 'max' mode).
     """
 
-    def __init__(self, patience = 5, verbose = False, delta = 0, mode = 'min', save_path = 'checkpoints'):
-        
+    def __init__(self, patience=5, verbose=False, delta=0, mode='min', save_path='checkpoints'):
+
         """
         Initializes the EarlyStopping instance with the specified configuration.
 
@@ -127,7 +133,7 @@ class EarlyStopping:
         model : torch.nn.Module
             The model to be saved if the validation metric improves.
         """
-        
+
         if self.mode == 'min':
             score = -val_metric
             if self.best_score is None:
@@ -158,11 +164,9 @@ class EarlyStopping:
                 self.best_score = score
                 self.save_checkpoint(val_metric, model)
                 self.counter = 0
-        
-
 
     def save_checkpoint(self, val_metric, model):
-        
+
         """
         Saves the model when the validation metric improves.
 
@@ -176,19 +180,22 @@ class EarlyStopping:
         model : torch.nn.Module
             The model to be saved.
         """
-        
+
         if self.verbose:
             if self.mode == 'min':
-                self.logger.info(f'Validation metric decreased ({self.val_metric_min:.6f} --> {val_metric:.6f}).  Saving model ...')
+                self.logger.info(
+                    f'Validation metric decreased ({self.val_metric_min:.6f} --> {val_metric:.6f}).  Saving model ...')
                 self.val_metric_min = val_metric
             elif self.mode == 'max':
-                self.logger.info(f'Validation metric increased ({self.val_metric_max:.6f} --> {val_metric:.6f}).  Saving model ...')
+                self.logger.info(
+                    f'Validation metric increased ({self.val_metric_max:.6f} --> {val_metric:.6f}).  Saving model ...')
                 self.val_metric_max = val_metric
         torch.save(model.state_dict(), os.path.join(self.save_path, 'checkpoint.pth'))
 
 
-class MlMWandBTrackerCallback:
-    def __init__(self, project_name: str, api_key:str, **params):
+
+class MlMWandBTrackerCallback(AbstractCallback):
+    def __init__(self, project_name: str, api_key: str, **params):
         """
         Initializes the W&B tracker.
 
@@ -223,8 +230,6 @@ class MlMWandBTrackerCallback:
             "learning_rate": current_lr,
         }, step=global_step)
 
-
     def __call__(self, global_step: int, mlm_loss: float, mlm_accuracy: float, mlm_grad_norm: float,
-                    current_lr: float):
-
+                 current_lr: float):
         self.log_metrics(global_step, mlm_loss, mlm_accuracy, mlm_grad_norm, current_lr)
