@@ -8,9 +8,9 @@ import json
 from transformers import get_linear_schedule_with_warmup
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, r2_score, mean_absolute_error, mean_squared_error
 from sklearn.model_selection import KFold
-from finlm.dataset import FinetuningDataset
+from finlm.dataset import FinetuningDataset, FinetuningDocumentDataset, collate_fn_fixed_sequences
 from finlm.callbacks import EarlyStopping
-from typing import Dict, Any
+from typing import Dict, Any, Union
 import os
 import logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -193,7 +193,7 @@ class FinetuningEncoderClassifier:
             self,
             config: FintuningConfig,
             device: torch.device,
-            dataset: Dataset,
+            dataset: Union[FinetuningDataset, FinetuningDocumentDataset],
             model_loader: callable
         ):
 
@@ -219,23 +219,33 @@ class FinetuningEncoderClassifier:
         self.model_path = self.config.model_path
         self.num_labels = self.config.num_labels
         if self.num_labels == 1:
+            # check if the argmax logic from the current implementation can be used for regression type problems as well
             self.task = "regression"
         elif self.num_labels == 2:
             self.task = "binary_classification"
         else:
             self.task = "multi_classification"
         self.device = device
-        self.dataset = FinetuningDataset(
-            self.config.tokenizer_path,
-            self.config.max_sequence_length,
-            dataset,
-            self.config.text_column,
-            self.config.dataset_columns,
-            self.config.training_data_fraction
-        )
+        # this is the special case with the sequence embedding head
+        if isinstance(dataset, FinetuningDocumentDataset):
+            self.aggregated_document_model = True
+            self.dataset = dataset
+            self.collate_fn = lambda x: collate_fn_fixed_sequences(x, max_sequences = self.config.max_sequences)
+        else:
+        # common case
+            self.aggregated_document_model = False
+            self.dataset = dataset
+            self.collate_fn = None
+
+        self.train_size = int(len(self.dataset) * self.config.training_data_fraction)
+        self.training_data = self.dataset.select(range(self.train_size))
+        self.test_data = self.dataset.select(range(self.train_size, len(self.dataset)))
+
         self.batch_size = self.config.batch_size
         self.n_splits = self.config.n_splits
         self.early_stopping_patience = self.config.early_stopping_patience
+        # each hyperparameter has a name, dtype, low, high and default value, the default value is used for the first trial
+        # depending on the data type, trials for all further trials are sampled according to the appropriate data type
         self.n_epochs = Hyperparameter.from_dict(self.config.n_epochs)
         self.learning_rate = Hyperparameter.from_dict(self.config.learning_rate)
         self.classifier_dropout = Hyperparameter.from_dict(self.config.classifier_dropout)
@@ -245,10 +255,26 @@ class FinetuningEncoderClassifier:
         if os.path.exists(self.save_path):
             raise ValueError("It seems you already trained this model, check the save path or delete the current one.")
         self.logger = logging.getLogger(self.__class__.__name__)
-        self.logger.info(f"Occurence of labels for training data: {np.unique(self.dataset.training_data['label'], return_counts=True)}")
-        self.logger.info(f"Occurence of labels for test data: {np.unique(self.dataset.test_data['label'], return_counts=True)}")
+        # this is logged to examine if training and test label balances are approximately equal
+        # for regression, we need to take a look at descriptive statistics instead of class occurrences
+        self.logger.info(f"Counting occurences of labels...")
+        self.logger.info(f"Occurence of labels for training data: {self.training_data.num_labels()}")
+        self.logger.info(f"Occurence of labels for test data: {self.test_data.num_labels()}")
+
+        # this is a callable which loads the model from a pretrained model before training the hyperparameters
+        # during the training it is used to initialize new classifier models with a specified classifier dropout
+        # it also includes the possibility to load parameters from a checkpoint.pth file. This is included and mostly
+        # used during training to load the best model over all epochs, especially, if the early stopping mechanism is met
+        # the model_loader is defined in the finetuning specific python scripts
         self.model_loader = model_loader
 
+
+    # this function combines most of the methods from below, it uses a optuna hyperparameter search for an optuna objective
+    # which derives a performance from a cross validation over training data where each split is trained using the train method
+    # so from top to bottom we have: train_optuna_optimized_cv_model -> optuna_optimize -> optuna_objective -> cross_validate -> train
+    # so maybe it helps to start from bottom to the top, if you want to understand the whole training mechanism
+    # after hyperparameters have been optimized, the model is trained on the full training sample and evaluated on the test sample
+    # the final model and its performance is saved in the self.save_path which is set in the yaml-configuration file
     def train_optuna_optimized_cv_model(self, n_trials):
 
         """
@@ -265,13 +291,15 @@ class FinetuningEncoderClassifier:
         - Saves the final trained model and evaluation metrics.
         """
 
+        # derive the best hyperparameters for a cross validation metric, only training data is used for cross validation
         best_params = self.optuna_optimize(n_trials = n_trials)
 
         with open(os.path.join(self.save_path, "best_hyperparameters.json"), "w") as file:
             json.dump(best_params, file, indent = 4)
 
-        full_training_split = DataLoader(self.dataset.training_data, batch_size = 32, shuffle = False)
-        test_split = DataLoader(self.dataset.test_data, batch_size = 32, shuffle = False)
+        # once the hyperparameters are found the model is trained on the full training data set and evaluated for the new and unseen test data
+        full_training_split = DataLoader(self.training_data, batch_size = self.batch_size, shuffle = False, collate_fn = self.collate_fn)
+        test_split = DataLoader(self.test_data, batch_size = self.batch_size, shuffle = False, collate_fn = self.collate_fn)
 
         self.train(
             full_training_split,
@@ -284,11 +312,16 @@ class FinetuningEncoderClassifier:
             save_best_model_path = self.save_path           
         )
 
+        # self._load_model initializes the model from pretraining
         model = self._load_model(classifier_dropout = best_params["classifier_dropout"])        
-        self.logger.info(f"Loading model finetuned model from checkpoint.")
+        self.logger.info(f"Loading finetuned model from checkpoint.")
+        # during the training call from above parameters have been saved in the ..../self.save_path/checkpoint.pth file, these are loaded here
         model.load_state_dict(torch.load(os.path.join(self.save_path, "checkpoint.pth")))
+        # this saves the model in the common huggingface format, creating a folder in ..../self.save_path/fintuned_model which includes the model config and parameter as tensors
         model.save_pretrained(os.path.join(self.save_path, "finetuned_model"))
+        # this saves the configuation info from the hyperparameter tuning
         self.config.to_json(os.path.join(self.save_path, "finetuning_config.json"))
+        # save final scores
         training_scores, test_scores = self.final_evaluation(os.path.join(self.save_path, "finetuned_model"), classifier_dropout=best_params["classifier_dropout"])
         
         if self.task == "multi_classification":
@@ -319,14 +352,21 @@ class FinetuningEncoderClassifier:
         Tuple[Dict[str, Any], float]
             The best hyperparameters and the corresponding score.
         """
+
+        # creates an optuna hyperparameter optimization using the training data, currently hyperparameter optimization is supposed to
+        # maximize the f1_score for classification and the r2_score for regression tasks
+        # the first trial uses default values which can be set in the config file
             
         study = optuna.create_study(direction = "maximize")
-        study.optimize(self.optuna_objective, n_trials = n_trials)      
+        study.optimize(self.optuna_objective, n_trials = n_trials)  
+
+        # if the best trial was the first with default parameters, we save them    
         if study.best_trial.number == 0:
             hyperparameters = [self.n_epochs, self.learning_rate, self.classifier_dropout, self.warmup_step_fraction, self.use_gradient_clipping]
             best_params = {}
             for hyperparameter in hyperparameters:
                 best_params[hyperparameter.name] = hyperparameter.default
+        # otherwise we save the ones from the best trial after the first trial
         else:
             best_params = study.best_params
         best_params["best_value"] = study.best_value 
@@ -355,11 +395,15 @@ class FinetuningEncoderClassifier:
             If the data type of a hyperparameter is not one of float, int, or bool.
         """
 
+        # these are the current hyperparameters, we may want to change this towards a higher level of generalizaton and flexibility
+        # by automatically deriving the self.attributes which are of instance type Hyperparameter
         hyperparameters = [self.n_epochs, self.learning_rate, self.classifier_dropout, self.warmup_step_fraction, self.use_gradient_clipping]
         hyperparameter_dictionary = {}
         for hyperparameter in hyperparameters:
+            # for the first optimization trial use default values defined in the yaml configuration file
             if trial.number == 0:
                 hyperparameter_dictionary[hyperparameter.name] = hyperparameter.default
+            # for the remaining trials sample hyperparameters according to their definition in the yaml configuration file and their data type
             else:
                 if hyperparameter.dtype == float:
                     hyperparameter_dictionary[hyperparameter.name] = trial.suggest_float(hyperparameter.name, hyperparameter.low, hyperparameter.high)
@@ -370,9 +414,10 @@ class FinetuningEncoderClassifier:
                 else:
                     raise ValueError("Data type of the hyperparameters must be one of float, int or bool")
         
+        # for a given set of hyperparameters, conduct cross validation for the training data
         cross_validation_score = self.cross_validate(
             n_folds = self.n_splits,
-            training_data = self.dataset.training_data,
+            training_data = self.training_data,
             training_batch_size = self.batch_size,
             validation_batch_size = self.batch_size,
             n_epochs = hyperparameter_dictionary["n_epochs"],
@@ -438,11 +483,12 @@ class FinetuningEncoderClassifier:
             training_split = training_data.select(training_index)
             validation_split = training_data.select(validation_index)
 
-            self.logger.info(f"Occurence of labels for training split: {np.unique(training_split['label'], return_counts=True)}")
-            self.logger.info(f"Occurence of labels for validation split: {np.unique(validation_split['label'], return_counts=True)}")
+            self.logger.info(f"Counting occurences of labels...")
+            self.logger.info(f"Occurence of labels for training data: {training_split.num_labels()}")
+            self.logger.info(f"Occurence of labels for test data: {validation_split.num_labels()}")
 
-            training_split = DataLoader(training_split, batch_size = training_batch_size, shuffle = False)
-            validation_split = DataLoader(validation_split, batch_size = validation_batch_size, shuffle = False)
+            training_split = DataLoader(training_split, batch_size = training_batch_size, shuffle = False, collate_fn=self.collate_fn)
+            validation_split = DataLoader(validation_split, batch_size = validation_batch_size, shuffle = False, collate_fn=self.collate_fn)
 
             split_score = self.train(training_split, validation_split, n_epochs, learning_rate, classifier_dropout, warmup_step_fraction, use_gradient_clipping, os.path.join(self.save_path, f"current_split_model"))
             self.logger.info(f"Split {split + 1} is finished, the score is: {split_score:.4f}")
@@ -482,12 +528,21 @@ class FinetuningEncoderClassifier:
         """
 
         # Early stopping instance with specified save path
+        # during training the best model is saved temporarily as a checkpoint.pth file in the self.save_path/current_split_model folder
+        # if a model has a lower loss during training in comparison to the loss of the last episode or if its performance was better
+        # before early stopping, than, its parameters are reloaded from the best state saved in self.save_path/current_split_model/checkpoint.pth
+        # I am not sure, if this is really the best way to do this, by manual checks if often happens that the score from the cross validation
+        # would be higher if we do not reload the previous model, maybe one should also use the validation score to be optimized for early stopping and not 
+        # the validation loss
         early_stopping = EarlyStopping(patience = self.early_stopping_patience, verbose = True, mode = 'min', save_path = save_best_model_path)
 
+        # this initializes a pretrained model with new parameters for the classification head
         model = self._load_model(classifier_dropout)
         model.to(self.device)
 
+        # warmup_step_fraction is the part of all iterations with a warm-up learning rate, it is a hyperparameter
         n_warmup = int(n_epochs * len(training_data) * warmup_step_fraction)
+        # the learning rate is currently also specified as a hyperparameter
         optimizer = torch.optim.AdamW(model.parameters(), lr = learning_rate)
         lr_scheduler = get_linear_schedule_with_warmup(optimizer, num_training_steps = n_epochs * len(training_data), num_warmup_steps = n_warmup)
 
@@ -498,11 +553,18 @@ class FinetuningEncoderClassifier:
             training_loss = 0
             for batch in training_data:
                 inputs, attention_mask, labels = batch["input_ids"].to(self.device), batch["attention_mask"].to(self.device), batch["label"].to(self.device)
-                model_output = model(input_ids = inputs, attention_mask = attention_mask, labels = labels)
+                # if we want to train a model with an aggregation head, we need sequence_mask values in addition
+                # which flag sequences in a document to 1 and padded sequence embeddings to 0
+                if self.aggregated_document_model:
+                    sequence_mask = batch["sequence_mask"].to(self.device)
+                    model_output = model(input_ids = inputs, attention_mask = attention_mask, sequence_mask = sequence_mask, labels = labels)
+                else:
+                    model_output = model(input_ids = inputs, attention_mask = attention_mask, labels = labels)
                 loss = model_output.loss
                 training_loss += loss.item()
                 optimizer.zero_grad()
                 loss.backward()
+                # hyperparameter
                 if use_gradient_clipping:
                     torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm = 1.0)
                 optimizer.step()
@@ -516,6 +578,7 @@ class FinetuningEncoderClassifier:
                 training_labels.append(labels)
                 iteration += 1
 
+            # after training an epochs, determine training metrics
             training_loss /= len(training_data)
             self.logger.info(f"Epoch finished, average loss over training batches: {training_loss:.4f}")
             training_predictions = torch.cat(training_predictions, dim = 0)
@@ -524,17 +587,23 @@ class FinetuningEncoderClassifier:
             self.logger.info("-"*100)
             self.logger.info("Training metrics:")
             self.logger.info("-"*100)
+            # the self._determine_scores function returns task specific metrics for regression, binary and multi-classification
             if self.device.type == "cuda":
                 self._determine_scores(training_labels.cpu().numpy(), training_predictions.cpu().numpy())
             else:
                 self._determine_scores(training_labels.numpy(), training_predictions.numpy())
             
+            # determine metrics for validation data
             validation_predictions, validation_labels = [], []
             validation_loss = 0
             with torch.no_grad():
                 for batch in validation_data:
                     inputs, attention_mask, labels = batch["input_ids"].to(self.device), batch["attention_mask"].to(self.device), batch["label"].to(self.device)
-                    model_output = model(input_ids = inputs, attention_mask = attention_mask, labels = labels)
+                    if self.aggregated_document_model:
+                        sequence_mask = batch["sequence_mask"].to(self.device)
+                        model_output = model(input_ids = inputs, attention_mask = attention_mask, sequence_mask = sequence_mask, labels = labels)
+                    else:
+                        model_output = model(input_ids = inputs, attention_mask = attention_mask, labels = labels)
                     validation_loss += model_output.loss.item()
                     batch_predictions = model_output.logits.argmax(dim = 1)
                     validation_predictions.append(batch_predictions)
@@ -554,8 +623,12 @@ class FinetuningEncoderClassifier:
                 validation_scores = self._determine_scores(validation_labels.numpy(), validation_predictions.numpy())
             max_score = validation_scores['max_score']
 
+            # uptdate early stopping, if the model improved the improved model is saved temporarily, if not we increase the patience value 
+            # until early stopping is triggered
             early_stopping(validation_loss, model)
 
+            # this whole block loads the best model during training (according to its loss)
+            # (early_stopping.best_score > -validatio_loss) indicates that during training a smaller loss has been found than in the last epoch
             if early_stopping.early_stop or (epoch == n_epochs - 1) and (early_stopping.best_score > -validation_loss):
                 if early_stopping.early_stop:
                     self.logger.info("Early stopping, loading best model from before and determine score...")
@@ -569,7 +642,11 @@ class FinetuningEncoderClassifier:
                 with torch.no_grad():
                     for batch in validation_data:
                         inputs, attention_mask, labels = batch["input_ids"].to(self.device), batch["attention_mask"].to(self.device), batch["label"].to(self.device)
-                        model_output = model(input_ids = inputs, attention_mask = attention_mask, labels = labels)
+                        if self.aggregated_document_model:
+                            sequence_mask = batch["sequence_mask"].to(self.device)
+                            model_output = model(input_ids = inputs, attention_mask = attention_mask, sequence_mask = sequence_mask, labels = labels)
+                        else:
+                            model_output = model(input_ids = inputs, attention_mask = attention_mask, labels = labels)
                         validation_loss += model_output.loss.item()
                         batch_predictions = model_output.logits.argmax(dim = 1)
                         validation_predictions.append(batch_predictions)
@@ -594,7 +671,7 @@ class FinetuningEncoderClassifier:
 
         return max_score
     
-    def final_evaluation(self, fintuned_model_path, classifier_dropout):
+    def final_evaluation(self, finetuned_model_path, classifier_dropout):
         
         """
         Evaluates the final trained model on both the training and test datasets, returning performance metrics.
@@ -610,18 +687,26 @@ class FinetuningEncoderClassifier:
             The training and test performance metrics.
         """
 
-        model = self.model_loader(model_path = fintuned_model_path, num_labels = self.num_labels, classifier_dropout = classifier_dropout) 
+        # it is important to understand that this is called after hyperparameter optimization and training the model on the full
+        # training data, once this is finished, the final model is saved to the finetuned path from were the model_loader imports 
+        # the final model here to evaluate it for one more time for training and test data
+        model = self.model_loader(model_path = finetuned_model_path, num_labels = self.num_labels, classifier_dropout = classifier_dropout) 
+        self.logger.info(f"Final model from {finetuned_model_path} is loaded.")
         model.to(self.device)
 
-        training_data = DataLoader(self.dataset.training_data, self.batch_size, False)
-        test_data = DataLoader(self.dataset.test_data, self.batch_size, False)
+        training_data = DataLoader(self.training_data, self.batch_size, False, collate_fn=self.collate_fn)
+        test_data = DataLoader(self.test_data, self.batch_size, False, collate_fn=self.collate_fn)
 
         self.logger.info("Determining training scores of final model.")
         with torch.no_grad():
             training_predictions, training_labels = [], []
             for batch in training_data:
                 inputs, attention_mask, labels = batch["input_ids"].to(self.device), batch["attention_mask"].to(self.device), batch["label"].to(self.device)
-                model_output = model(input_ids = inputs, attention_mask = attention_mask, labels = labels)
+                if self.aggregated_document_model:
+                    sequence_mask = batch["sequence_mask"].to(self.device)
+                    model_output = model(input_ids = inputs, attention_mask = attention_mask, sequence_mask = sequence_mask, labels = labels)
+                else:
+                    model_output = model(input_ids = inputs, attention_mask = attention_mask, labels = labels)
                 batch_predictions = model_output.logits.argmax(dim = 1)
                 training_predictions.append(batch_predictions)
                 training_labels.append(labels)
@@ -638,7 +723,11 @@ class FinetuningEncoderClassifier:
         with torch.no_grad():
             for batch in test_data:
                 inputs, attention_mask, labels = batch["input_ids"].to(self.device), batch["attention_mask"].to(self.device), batch["label"].to(self.device)
-                model_output = model(input_ids = inputs, attention_mask = attention_mask, labels = labels)
+                if self.aggregated_document_model:
+                    sequence_mask = batch["sequence_mask"].to(self.device)
+                    model_output = model(input_ids = inputs, attention_mask = attention_mask, sequence_mask = sequence_mask, labels = labels)
+                else:
+                    model_output = model(input_ids = inputs, attention_mask = attention_mask, labels = labels)
                 batch_predictions = model_output.logits.argmax(dim = 1)
                 test_predictions.append(batch_predictions)
                 test_labels.append(labels)
@@ -747,7 +836,9 @@ class FinetuningEncoderClassifier:
             The loaded ELECTRA model, ready for training or evaluation.
         """
 
+        # by calling the model_loader and use the self.model_path, the pretrained model gets imported with the classifier_dropout which is a hyperparameter
         model = self.model_loader(self.model_path, num_labels = self.num_labels, classifier_dropout = classifier_dropout)
+        # the save_path option is used only during training if the best model over all epochs is imported at the end of all epochs or after early stopping
         if save_path:
             self.logger.info(f"Loading model from {save_path}")
             model.load_state_dict(torch.load(save_path))

@@ -1,14 +1,14 @@
-model_path: "google/electra-base-discriminator" #"/data/language_models/pretrained_models/mlm_00/mlm_model"
+model_path: "google/electra-small-discriminator" #"/data/language_models/pretrained_models/mlm_00/mlm_model"
 num_labels: 2
-tokenizer_path: "google/electra-base-discriminator" #"/data/language_models/tokenizers/finlm-wordpiece-tokenizer.json"
-max_sequence_length: 512
+tokenizer_path: "google/electra-small-discriminator" #"/data/language_models/tokenizers/finlm-wordpiece-tokenizer.json"
+max_sequence_length: 128
 dataset_name: "stanford_imbd"
 text_column: "text"
 dataset_columns: ["input_ids", "attention_mask", "label"]
-shuffle_data: False
-shuffle_data_random_seed: 42 
 training_data_fraction: 0.5    
-batch_size: 64
+batch_size: 32
+max_sequences: 32
+early_stopping_patience: 3
 n_splits: 4
 n_epochs:
   name: "n_epochs"
@@ -19,9 +19,9 @@ n_epochs:
 learning_rate:
   name: "learning_rate"
   dtype: float
-  low:  0.00001
-  high: 0.0001
-  default: 0.0005
+  low:  0.0001
+  high: 0.0002
+  default: 0.00015
 classifier_dropout: 
   name: "classifier_dropout"
   dtype: float
@@ -40,4 +40,4 @@ use_gradient_clipping:
   low: None
   high: None
   default: False
-save_path: "/data/language_models/pretrained_models_downstreaming/stanford_imdb/electra_base_discriminator"
+save_path: "/data/language_models/pretrained_models_downstreaming/stanford_imdb/electra_small_discriminator_document_predictions"
