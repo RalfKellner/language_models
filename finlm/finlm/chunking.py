@@ -458,7 +458,7 @@ class TRNewsChunker(Chunker):
         conn_in.close()
 
 
-class ESGChunker(Chunker):
+class EnvironmentalChunkerNew(Chunker):
 
     def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None) -> None:
         
@@ -466,6 +466,7 @@ class ESGChunker(Chunker):
         super().__init__(db_in, sheet_in, limit, offset)
 
     def __iter__(self):
+        print("hello new")
         pass
 
 
