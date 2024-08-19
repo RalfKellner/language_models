@@ -6,6 +6,8 @@ import json
 # The DatasetConfig, ModelConfig and OptimizationConfig are united in the FinLMConfig which is used for pretraining
 # The FinetuningConfig is used for downstreaming tasks
 
+
+
 @dataclass
 class DatasetConfig:
 
@@ -37,24 +39,7 @@ class DatasetConfig:
     batch_size: int 
     database_retrieval: dict[str, dict[str, int]]
 
-    @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'DatasetConfig':
 
-        """
-        Creates an instance of DatasetConfig from a dictionary.
-
-        Parameters
-        ----------
-        data : Dict[str, Any]
-            A dictionary containing the configuration parameters.
-
-        Returns
-        -------
-        DatasetConfig
-            An instance of DatasetConfig initialized with the provided data.
-        """
-
-        return cls(**data)
 
 @dataclass
 class ModelConfig:
@@ -96,25 +81,6 @@ class ModelConfig:
     generator_size: float = 0.25
     generator_layer_size: float = 1.0
 
-    @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'ModelConfig':
-
-        """
-        Creates an instance of ModelConfig from a dictionary.
-
-        Parameters
-        ----------
-        data : Dict[str, Any]
-            A dictionary containing the configuration parameters.
-
-        Returns
-        -------
-        ModelConfig
-            An instance of ModelConfig initialized with the provided data.
-        """
-
-        return cls(**data)
-
 @dataclass
 class OptimizationConfig:
 
@@ -151,25 +117,6 @@ class OptimizationConfig:
     use_gradient_clipping: bool = True
     discriminator_weight: int = 50
     discriminator_sampling: str = "multinomial"
-
-    @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'OptimizationConfig':
-
-        """
-        Creates an instance of OptimizationConfig from a dictionary.
-
-        Parameters
-        ----------
-        data : Dict[str, Any]
-            A dictionary containing the optimization configuration parameters.
-
-        Returns
-        -------
-        OptimizationConfig
-            An instance of OptimizationConfig initialized with the provided data.
-        """
-
-        return cls(**data)
 
 @dataclass
 class FinLMConfig:
@@ -225,9 +172,9 @@ class FinLMConfig:
         with open(config_file_path, 'r') as file:
             config_data = yaml.safe_load(file)
 
-        dataset_config = DatasetConfig.from_dict(config_data.get('dataset_config', {}))
-        model_config = ModelConfig.from_dict(config_data.get('model_config', {}))
-        optimization_config = OptimizationConfig.from_dict(config_data.get('optimization_config', {}))
+        dataset_config = DatasetConfig(**config_data.get('dataset_config', {}))
+        model_config = ModelConfig(**config_data.get('model_config', {}))
+        optimization_config = OptimizationConfig(**config_data.get('optimization_config', {}))
 
         return cls(
             dataset_config=dataset_config,

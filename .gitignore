@@ -4,3 +4,8 @@ pretrained_models/
 pretrained_models_downstreaming/
 playground.ipynb
 electra_pretraining.ipynb
+.idea/
+finlm/finlm.egg-info/
+venv/
+lukas_test/
+wandb/

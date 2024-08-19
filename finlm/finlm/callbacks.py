@@ -1,9 +1,53 @@
 import torch
 import os
 import logging
+from enum import Enum
+from typing import Callable
+import wandb
+from abc import ABC, abstractmethod
+
+
+class CallbackTypes(Enum):
+    BEFORE_TRAINING = "before_training"
+    AFTER_EVAL = "after_eval"
+    AFTER_EPOCH = "after_epoch"
+    ON_BATCH_START = "on_batch_start"
+    ON_BATCH_END = "on_batch_end"
+    ON_EVAL = "on_eval"
+
+
+class AbstractCallback(ABC):
+    def __init__(self, type: CallbackTypes):
+        self.type = type
+
+    @abstractmethod
+    def __call__(self, *args, **kwargs):
+        raise NotImplementedError("Not implemented yet")
+
+
+class CallbackManager:
+    def __init__(self):
+        self.callbacks = {
+            "on_eval": [],
+            "before_training": [],
+            "after_eval": [],
+            "after_epoch": [],
+            "on_batch_start": [],
+            "on_batch_end": [],
+        }
+
+    def add_callback(self, callback: AbstractCallback):
+        if callback.type.value in self.callbacks:
+            self.callbacks[callback.type.value].append(callback)
+        else:
+            raise ValueError(f"Event {callback.type.value} not supported.")
+
+    def execute_callbacks(self, event, *args, **kwargs):
+        for callback in self.callbacks.get(event, []):
+            callback(*args, **kwargs)
+
 
 class EarlyStopping:
-
     """
     Early stopping utility to stop training when a monitored metric has stopped improving.
 
@@ -38,8 +82,8 @@ class EarlyStopping:
         Maximum value of the validation metric observed (used in 'max' mode).
     """
 
-    def __init__(self, patience = 5, verbose = False, delta = 0, mode = 'min', save_path = 'checkpoints'):
-        
+    def __init__(self, patience=5, verbose=False, delta=0, mode='min', save_path='checkpoints'):
+
         """
         Initializes the EarlyStopping instance with the specified configuration.
 
@@ -94,7 +138,7 @@ class EarlyStopping:
         model : torch.nn.Module
             The model to be saved if the validation metric improves.
         """
-        
+
         if self.mode == 'min':
             score = -val_metric
             if self.best_score is None:
@@ -125,11 +169,9 @@ class EarlyStopping:
                 self.best_score = score
                 self.save_checkpoint(val_metric, model)
                 self.counter = 0
-        
-
 
     def save_checkpoint(self, val_metric, model):
-        
+
         """
         Saves the model when the validation metric improves.
 
@@ -143,12 +185,59 @@ class EarlyStopping:
         model : torch.nn.Module
             The model to be saved.
         """
-        
+
         if self.verbose:
             if self.mode == 'min':
-                self.logger.info(f'Validation metric decreased ({self.val_metric_min:.6f} --> {val_metric:.6f}).  Saving model ...')
+                self.logger.info(
+                    f'Validation metric decreased ({self.val_metric_min:.6f} --> {val_metric:.6f}).  Saving model ...')
                 self.val_metric_min = val_metric
             elif self.mode == 'max':
-                self.logger.info(f'Validation metric increased ({self.val_metric_max:.6f} --> {val_metric:.6f}).  Saving model ...')
+                self.logger.info(
+                    f'Validation metric increased ({self.val_metric_max:.6f} --> {val_metric:.6f}).  Saving model ...')
                 self.val_metric_max = val_metric
         torch.save(model.state_dict(), os.path.join(self.save_path, 'checkpoint.pth'))
+
+
+
+class MlMWandBTrackerCallback(AbstractCallback):
+    def __init__(self, type: CallbackTypes, project_name: str, api_key: str, **params):
+        """
+        Initializes the W&B tracker.
+
+        :param project_name: The name of the W&B project.
+        :param params: Additional parameters to be logged as config in W&B.
+        """
+
+        super().__init__(type)
+
+        # Initialize W&B
+        wandb.login(key=api_key)
+        wandb.init(project=project_name)
+
+        # Log the initial parameters as config
+        for k, v in params.items():
+            wandb.config[k] = v
+
+    def log_metrics(self, global_step: int, mlm_loss: float, mlm_accuracy: float, mlm_grad_norm: float,
+                    current_lr: float):
+        """
+        Logs metrics to W&B.
+
+        :param global_step: The current global step of the training process.
+        :param mlm_loss: The loss value for the current batch.
+        :param mlm_accuracy: The accuracy for the current batch.
+        :param mlm_grad_norm: The gradient norm for the current batch.
+        :param current_lr: The learning rate for the current batch.
+        """
+        # Log the metrics to W&B
+        wandb.log({
+            "step": global_step,
+            "mlm_loss": mlm_loss,
+            "mlm_accuracy": mlm_accuracy,
+            "mlm_grad_norm": mlm_grad_norm,
+            "learning_rate": current_lr,
+        }, step=global_step)
+
+    def __call__(self, global_step: int, mlm_loss: float, mlm_accuracy: float, mlm_grad_norm: float,
+                 current_lr: float):
+        self.log_metrics(global_step, mlm_loss, mlm_accuracy, mlm_grad_norm, current_lr)

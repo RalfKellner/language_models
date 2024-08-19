@@ -10,10 +10,11 @@ from finlm.tokenizer import FinLMTokenizer
 from transformers import AutoTokenizer
 import numpy as np
 import logging
+
 datasets.disable_progress_bars()
 
-class FinLMDataset:
 
+class FinLMDataset:
     """
         A class for defining a dataset which retrieves chunked text sequences, tokenizes them and returns batches of
         input_ids and attention_mask tensors which are needed for pretraining financial models.
@@ -37,7 +38,7 @@ class FinLMDataset:
         batch_size : int
             The number of sequences returned per batch.
     """
-     
+
     def __init__(
             self,
             tokenizer_path: str,
@@ -45,8 +46,8 @@ class FinLMDataset:
             db_name: str,
             database_retrieval: dict[str, dict[str, int]],
             batch_size: int
-            ) -> None:
-        
+    ) -> None:
+
         """
         Initializes the FinLMDataset with necessary parameters.
 
@@ -77,7 +78,7 @@ class FinLMDataset:
             self._get_n_dataset_sequences()
 
     def _get_n_dataset_sequences(self):
-        
+
         """
         Determines the total number of sequences available in each table of the database.
 
@@ -100,20 +101,21 @@ class FinLMDataset:
             self.n_total_sequences[t_name] = n_seqs_tmp[0][0]
         conn.close()
 
-        self.logger.info("-"*100)
-        self.logger.info(f"The database includes {len(self.table_names)} sheets with the following names and number of sequences:")
+        self.logger.info("-" * 100)
+        self.logger.info(
+            f"The database includes {len(self.table_names)} sheets with the following names and number of sequences:")
         for t_name, n_seq in self.n_total_sequences.items():
             self.logger.info(f"{t_name}: {n_seq}")
-        self.logger.info("-"*100)
+        self.logger.info("-" * 100)
 
-    def _retrieve_sequences_from_database(self):    
+    def _retrieve_sequences_from_database(self):
 
         """
         Retrieves sequences from the database based on the `database_retrieval` dictionary.
 
         This method queries the database to collect sequences as specified in `database_retrieval`. 
         The sequences are then shuffled and stored in `self.sequences`. 
-        
+
         Together with the self.set_dataset_offsets method this method is used to update sequences in the dataset during training.
         For instance, if the LIMIT = 1000, in the first epoch data is collected with sequences 0,...,999 and OFFSET = 0. In the
         next epoch, the OFFSET can be updated to OFFSET = 1000 and sequences 1000,...,1999 are collected. By this means, new 
@@ -158,7 +160,8 @@ class FinLMDataset:
             A dictionary containing the tokenized `input_ids`, `attention_mask`, and other relevant information.
         """
 
-        return self.tokenizer(text_sequence["text"], padding='max_length', truncation=True, max_length=self.max_sequence_length)
+        return self.tokenizer(text_sequence["text"], padding='max_length', truncation=True,
+                              max_length=self.max_sequence_length)
 
     def _create_hf_dataset(self):
 
@@ -182,7 +185,7 @@ class FinLMDataset:
         self.hf_dataset = self.hf_dataset.map(self._tokenization)
         self.logger.info("Tokenization is finished.")
         self.hf_dataset.set_format(type="torch", columns=["input_ids", "token_type_ids", "attention_mask"])
-        self.data_loader = DataLoader(self.hf_dataset, batch_size = self.batch_size, shuffle = False)
+        self.data_loader = DataLoader(self.hf_dataset, batch_size=self.batch_size, shuffle=False)
 
     @classmethod
     def from_dict(cls, data_config: Dict[str, Any]) -> 'FinLMDataset':
@@ -207,7 +210,7 @@ class FinLMDataset:
         return cls(**data_config)
 
     def prepare_data_loader(self):
-        
+
         """
         Prepares the data loader by retrieving sequences and creating a Hugging Face dataset.
 
@@ -240,12 +243,14 @@ class FinLMDataset:
 
         for key in self.database_retrieval.keys():
             self.database_retrieval[key]["offset"] = epoch * self.database_retrieval[key]["limit"]
-            if (self.database_retrieval[key]["offset"] + self.database_retrieval[key]["offset"]) > self.n_total_sequences[key]:
-                logging.info(f"Remaining number of sequences for table {key} is too little, starting to retrieve sentences from the start.")
+            if (self.database_retrieval[key]["offset"] + self.database_retrieval[key]["offset"]) > \
+                    self.n_total_sequences[key]:
+                logging.info(
+                    f"Remaining number of sequences for table {key} is too little, starting to retrieve sentences from the start.")
                 self.database_retrieval[key]["offset"] = 0
 
     def __iter__(self):
-        
+
         """
         Iterates over the dataset using the PyTorch DataLoader.
 
@@ -264,9 +269,7 @@ class FinLMDataset:
             yield batch
 
 
-
 class FinetuningDataset:
-
     """
     A dataset class designed for fine-tuning language models.
 
@@ -405,7 +408,8 @@ class FinetuningDataset:
             A dictionary containing the tokenized `input_ids`, `attention_mask`, and other relevant information.
         """
 
-        return self.tokenizer(text_sequence[self.text_column], padding='max_length', truncation=True, max_length=self.max_sequence_length)
+        return self.tokenizer(text_sequence[self.text_column], padding='max_length', truncation=True,
+                              max_length=self.max_sequence_length)
 
     def _map_dataset(self):
 
@@ -424,7 +428,7 @@ class FinetuningDataset:
 
     def num_labels(self):
         return np.unique(self.dataset["label"], return_counts=True)
-    
+      
     def select(self, indices):
         new_finetuning_dataset = FinetuningDataset(
             self.tokenizer_path,
@@ -473,7 +477,7 @@ class FinetuningDocumentDataset(TorchDataset):
             'attention_mask': torch.stack(attention_masks),
             'label': torch.tensor(label, dtype=torch.long)
         }
-    
+
     def select(self, indices):
         """
         Returns a new DocumentDataset with only the selected indices.
