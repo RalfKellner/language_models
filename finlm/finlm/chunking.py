@@ -458,6 +458,19 @@ class TRNewsChunker(Chunker):
         conn_in.close()
 
 
+class ESGChunker(Chunker):
+
+    def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None) -> None:
+        
+        
+        super().__init__(db_in, sheet_in, limit, offset)
+
+    def __iter__(self):
+        pass
+
+
+
+
 def rename_table(database, old_table_name, new_table_name, retries=5, delay=1):
 
     """
