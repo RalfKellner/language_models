@@ -8,25 +8,69 @@ from abc import ABC, abstractmethod
 
 
 class CallbackTypes(Enum):
+    """
+    Enum representing the different types of callback events in a training process.
+
+    Attributes:
+        BEFORE_TRAINING: Event type triggered before the training process starts.
+        AFTER_EVAL: Event type triggered after the evaluation phase.
+        AFTER_EPOCH: Event type triggered after the completion of an epoch.
+        ON_BATCH_START: Event type triggered at the start of each batch.
+        ON_BATCH_END: Event type triggered at the end of each batch.
+        ON_EVAL: Event type triggered during the evaluation phase.
+    """
     BEFORE_TRAINING = "before_training"
     AFTER_EVAL = "after_eval"
     AFTER_EPOCH = "after_epoch"
     ON_BATCH_START = "on_batch_start"
     ON_BATCH_END = "on_batch_end"
     ON_EVAL = "on_eval"
+    AFTER_INIT = "after_init"
+    AFTER_LOAD_MODEL = "after_load_model"
+    AFTER_OPTIM_LOAD = "after_optim_load"
+    BEFORE_BATCH_PROCESSING = "before_batch_processing"
+    AFTER_BATCH_PROCESSING = "after_batch_processing"
 
 
 class AbstractCallback(ABC):
+    """
+    Abstract base class for defining custom callbacks.
+
+    Attributes:
+        type (CallbackTypes): The type of event the callback is associated with.
+    """
+
     def __init__(self, type: CallbackTypes):
+        """
+        Initializes the callback with a specific event type.
+
+        :param type: The type of the callback event (must be an instance of CallbackTypes).
+        """
         self.type = type
 
     @abstractmethod
     def __call__(self, *args, **kwargs):
+        """
+        Abstract method that must be implemented by subclasses to define the callback behavior.
+
+        :param args: Positional arguments to be passed to the callback.
+        :param kwargs: Keyword arguments to be passed to the callback.
+        :raises NotImplementedError: If the method is not implemented by a subclass.
+        """
         raise NotImplementedError("Not implemented yet")
 
-
 class CallbackManager:
+    """
+    Manages the registration and execution of callbacks during the training process.
+
+    Attributes:
+        callbacks (dict): A dictionary holding lists of callbacks for each event type.
+    """
+
     def __init__(self):
+        """
+        Initializes the CallbackManager with empty callback lists for each event type.
+        """
         self.callbacks = {
             "on_eval": [],
             "before_training": [],
@@ -37,12 +81,25 @@ class CallbackManager:
         }
 
     def add_callback(self, callback: AbstractCallback):
+        """
+        Registers a callback to a specific event type.
+
+        :param callback: An instance of AbstractCallback to be added.
+        :raises ValueError: If the callback's event type is not supported.
+        """
         if callback.type.value in self.callbacks:
             self.callbacks[callback.type.value].append(callback)
         else:
             raise ValueError(f"Event {callback.type.value} not supported.")
 
     def execute_callbacks(self, event, *args, **kwargs):
+        """
+        Executes all callbacks associated with a specific event.
+
+        :param event: The event type as a string.
+        :param args: Positional arguments to be passed to each callback.
+        :param kwargs: Keyword arguments to be passed to each callback.
+        """
         for callback in self.callbacks.get(event, []):
             callback(*args, **kwargs)
 
@@ -198,21 +255,31 @@ class EarlyStopping:
         torch.save(model.state_dict(), os.path.join(self.save_path, 'checkpoint.pth'))
 
 
-
 class MlMWandBTrackerCallback(AbstractCallback):
-    def __init__(self, type: CallbackTypes, project_name: str, api_key: str, **params):
+    """
+    Callback for logging metrics to Weights & Biases (W&B) during the training process.
+
+    Attributes:
+        project_name (str): The name of the W&B project.
+        api_key (str): The API key for authenticating with W&B.
+        params (dict): Additional parameters to be logged as config in W&B.
+    """
+
+    def __init__(self, type: CallbackTypes, project_name: str, api_key: str, entity: str = None, name:str = None,
+                 **params):
         """
         Initializes the W&B tracker.
 
+        :param type: The type of the callback event (must be an instance of CallbackTypes).
         :param project_name: The name of the W&B project.
+        :param api_key: The API key for W&B authentication.
         :param params: Additional parameters to be logged as config in W&B.
         """
-
         super().__init__(type)
 
         # Initialize W&B
         wandb.login(key=api_key)
-        wandb.init(project=project_name)
+        wandb.init(project=project_name, entity=entity, name=name)
 
         # Log the initial parameters as config
         for k, v in params.items():
@@ -240,4 +307,13 @@ class MlMWandBTrackerCallback(AbstractCallback):
 
     def __call__(self, global_step: int, mlm_loss: float, mlm_accuracy: float, mlm_grad_norm: float,
                  current_lr: float):
+        """
+        Executes the callback, logging the metrics to W&B.
+
+        :param global_step: The current global step of the training process.
+        :param mlm_loss: The loss value for the current batch.
+        :param mlm_accuracy: The accuracy for the current batch.
+        :param mlm_grad_norm: The gradient norm for the current batch.
+        :param current_lr: The learning rate for the current batch.
+        """
         self.log_metrics(global_step, mlm_loss, mlm_accuracy, mlm_grad_norm, current_lr)
