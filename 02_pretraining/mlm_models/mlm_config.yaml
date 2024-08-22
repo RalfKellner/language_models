@@ -5,16 +5,16 @@ dataset_config:
   batch_size: 128
   database_retrieval:
     form_tenk:
-      limit: 1000000
+      limit: 1000
       offset: 0
     form_eightk:
-      limit: 1000000
+      limit: 1000
       offset: 0
     earning_calls:
-      limit: 1000000
+      limit: 1000
       offset: 0
     tr_news: 
-      limit: 1000000
+      limit: 1000
       offset: 0 
 model_config:
   embedding_size: 128
