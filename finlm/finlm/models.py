@@ -85,6 +85,7 @@ class PretrainLM:
         self.save_root_path = config.save_models_and_results_to
         self.logger = logging.getLogger(self.__class__.__name__)
         self._set_device()
+        self.callback_manager = CallbackManager()
 
     def load_dataset(self):
 
@@ -96,6 +97,29 @@ class PretrainLM:
         """
             
         self.dataset = FinLMDataset.from_dict(asdict(self.dataset_config))
+
+    def load_optimization(self):
+
+        """
+        Sets up the optimizer and learning rate scheduler based on the optimization configuration.
+
+        This method calculates the total number of training steps, initializes the AdamW optimizer,
+        and configures a linear learning rate scheduler with warm-up steps.
+        """
+
+        n_sequences = 0
+        for key in self.dataset.database_retrieval.keys():
+            n_sequences += self.dataset.database_retrieval[key]["limit"]
+
+        self.iteration_steps_per_epoch = int(np.ceil(n_sequences / self.dataset.batch_size))
+        total_steps = self.iteration_steps_per_epoch * self.optimization_config.n_epochs
+        self.optimizer = torch.optim.AdamW(self.model.parameters(), lr=self.optimization_config.learning_rate)
+        self.scheduler = get_linear_schedule_with_warmup(self.optimizer,
+                                                         num_warmup_steps=self.optimization_config.lr_scheduler_warm_up_steps,
+                                                         num_training_steps=total_steps)
+
+        self.callback_manager.execute_callbacks("after_optim_load", self.iteration_steps_per_epoch, self.optimizer,
+                                                self.scheduler)
 
     @staticmethod
     def mask_tokens(inputs, mlm_probability, mask_token_id, special_token_ids, n_tokens, ignore_index = -100, hard_masking = False):
@@ -201,6 +225,12 @@ class PretrainLM:
         else:
             self.device = torch.device("cuda")
 
+    def add_callback(self, callback: AbstractCallback):
+        if not isinstance(callback, AbstractCallback):
+            raise TypeError(f"Callback must be of type 'AbstractCallback'. Got {type(callback)}")
+        self.callback_manager.add_callback(callback)
+
+
 class PretrainMLM(PretrainLM):
 
     """
@@ -252,13 +282,10 @@ class PretrainMLM(PretrainLM):
         """
 
         super().__init__(config)
-        self.callback_manager = CallbackManager()
         self.prepare_data_model_optimizer()
 
         self.training_state = None
-
-    def add_callback(self, callback: AbstractCallback):
-        self.callback_manager.add_callback(callback)
+        self.callback_manager.execute_callbacks("after_init", self)
 
     def load_model(self):
 
@@ -282,24 +309,7 @@ class PretrainMLM(PretrainLM):
 
         self.model = ElectraForMaskedLM(self.model_config)
         self.model.to(self.device)
-
-    def load_optimization(self):
-
-        """
-        Sets up the optimizer and learning rate scheduler based on the optimization configuration.
-
-        This method calculates the total number of training steps, initializes the AdamW optimizer,
-        and configures a linear learning rate scheduler with warm-up steps.
-        """
-
-        n_sequences = 0
-        for key in self.dataset.database_retrieval.keys():
-            n_sequences += self.dataset.database_retrieval[key]["limit"]
-
-        self.iteration_steps_per_epoch = int(np.ceil(n_sequences / self.dataset.batch_size))
-        total_steps = self.iteration_steps_per_epoch * self.optimization_config.n_epochs
-        self.optimizer = torch.optim.AdamW(self.model.parameters(), lr = self.optimization_config.learning_rate)
-        self.scheduler = get_linear_schedule_with_warmup(self.optimizer, num_warmup_steps = self.optimization_config.lr_scheduler_warm_up_steps, num_training_steps = total_steps)
+        self.callback_manager.execute_callbacks("after_load_modal", self.model)
 
     def prepare_data_model_optimizer(self):
 
@@ -371,12 +381,13 @@ class PretrainMLM(PretrainLM):
         self.training_state = []
         eval_step = 1000 # TODO: make variable --- currently not used --> later for evaluation
         info_step = 100 # TODO: make variable
-        training_metrics = {
-            "loss": [],
-            "accuracy": [],
-            "gradient_norms": [],
-            "learning_rates": []
-        }
+        training_metrics = {}
+        training_metrics["loss"] = []
+        training_metrics["accuracy"] = []
+        training_metrics["precision"] = []
+        training_metrics["recall"] = []
+        training_metrics["gradient_norms"] = []
+        training_metrics["learning_rates"] = []
 
         self.callback_manager.execute_callbacks("before_training")
 
@@ -387,7 +398,7 @@ class PretrainMLM(PretrainLM):
             self.callback_manager.execute_callbacks("on_epoch_start", epoch)
 
             for batch_id, batch in enumerate(self.dataset):
-
+                self.callback_manager.execute_callbacks("before_batch_processing", batch_id, batch)
                 inputs, attention_mask = batch["input_ids"].to(self.device), batch["attention_mask"].to(self.device)
 
                 inputs, labels = self.mask_tokens(
@@ -436,7 +447,7 @@ class PretrainMLM(PretrainLM):
                     self.logger.info(f"Accuracy for masking task: {mlm_accuracy.item():.4f}")
                     self.logger.info("-" * 100)
 
-            self.callback_manager.execute_callbacks("after_epoch", epoch, training_metrics)
+            self.callback_manager.execute_callbacks("after_epoch", epoch, training_metrics, self.model)
 
         self.logger.info("...training is finished, saving results and model.")
 
@@ -506,7 +517,9 @@ class PretrainDiscriminator(PretrainLM):
         """
 
         super().__init__(config)
+        self.callback_manager.execute_callbacks("after_init", self)
         self.prepare_data_model_optimizer()
+
 
     def load_model(self):
 
@@ -530,23 +543,7 @@ class PretrainDiscriminator(PretrainLM):
         self.model = ElectraForPreTraining(self.model_config)
         self.model.to(self.device)
 
-    def load_optimization(self):
-
-        """
-        Sets up the optimizer and learning rate scheduler based on the optimization configuration.
-
-        This method calculates the total number of training steps, initializes the AdamW optimizer, 
-        and configures a linear learning rate scheduler with warm-up steps.
-    """
-
-        n_sequences = 0
-        for key in self.dataset.database_retrieval.keys():
-            n_sequences += self.dataset.database_retrieval[key]["limit"]
-
-        self.iteration_steps_per_epoch = int(np.ceil(n_sequences / self.dataset.batch_size))
-        total_steps = self.iteration_steps_per_epoch * self.optimization_config.n_epochs  
-        self.optimizer = torch.optim.AdamW(self.model.parameters(), lr = self.optimization_config.learning_rate) 
-        self.scheduler = get_linear_schedule_with_warmup(self.optimizer, num_warmup_steps = self.optimization_config.lr_scheduler_warm_up_steps, num_training_steps = total_steps)
+        self.callback_manager.execute_callbacks("after_load_modal", self.model)
 
     def prepare_data_model_optimizer(self):
 
@@ -623,7 +620,7 @@ class PretrainDiscriminator(PretrainLM):
         training is complete, it saves the model, training metrics, and plots of the loss, accuracy, 
         precision, and recall.
         """
-        
+
         self.logger.info("Starting with training...")
 
         training_metrics = {}
@@ -634,13 +631,16 @@ class PretrainDiscriminator(PretrainLM):
         training_metrics["gradient_norms"] = []
         training_metrics["learning_rates"] = []
 
+        self.global_step = 0 # use global steps instead of epochs and batches
         for epoch in range(self.optimization_config.n_epochs): 
 
             # update the offset for database retrieval, epoch = 0 -> offset = 0, epoch = 1 -> offset = 1 * limit, epoch = 2 -> offset = 2 * limit, ...    
             self.dataset.set_dataset_offsets(epoch)
             self.dataset.prepare_data_loader()
+            self.callback_manager.execute_callbacks("on_epoch_start", epoch) #TODO: What to include here?
 
             for batch_id, batch in enumerate(self.dataset):
+                self.callback_manager.execute_callbacks("before_batch_processing", batch_id, batch)
                 inputs, attention_mask = batch["input_ids"].to(self.device), batch["attention_mask"].to(self.device)
 
                 inputs, labels = self.replace_masked_tokens_randomly(
@@ -700,7 +700,15 @@ class PretrainDiscriminator(PretrainLM):
                     self.logger.info(f"Accuracy for replacement task: {discriminator_accuracy.item():.4f}")
                     self.logger.info(f"Precision for replacement task: {discriminator_precision.item():.4f}")
                     self.logger.info(f"Recall for replacement task: {discriminator_recall.item():.4f}")
-                    self.logger.info("-"*100)   
+                    self.logger.info("-"*100)
+
+                self.callback_manager.execute_callbacks("on_batch_end", self.global_step, discriminator_loss,
+                                                        discriminator_accuracy.item(),
+                                                        discriminator_grad_norm.item(), current_lr)
+
+                self.global_step += 1
+
+            self.callback_manager.execute_callbacks("after_epoch", epoch, training_metrics, self.model)
 
         self.logger.info("...training is finished, saving results and model.")
         
@@ -813,6 +821,8 @@ class PretrainElectra(PretrainLM):
         self.generator.to(self.device)
         self.discriminator.to(self.device)
 
+        self.callback_manager.execute_callbacks("after_load_modal", self.generator, self.discriminator)
+
     def load_optimization(self):
 
         """
@@ -842,6 +852,9 @@ class PretrainElectra(PretrainLM):
         total_steps = self.iteration_steps_per_epoch * self.optimization_config.n_epochs 
         self.optimizer = torch.optim.AdamW(self.model_parameters, lr = self.optimization_config.learning_rate) 
         self.scheduler = get_linear_schedule_with_warmup(self.optimizer, num_warmup_steps = self.optimization_config.lr_scheduler_warm_up_steps, num_training_steps = total_steps)
+
+        self.callback_manager.execute_callbacks("after_optim_load", self.iteration_steps_per_epoch, self.optimizer,
+                                                self.scheduler)
 
     def prepare_data_model_optimizer(self):
 
@@ -928,13 +941,18 @@ class PretrainElectra(PretrainLM):
         training_metrics["gradient_norm"] = []
         training_metrics["learning_rates"] = []
 
+        self.global_step = 0
+
         for epoch in range(self.optimization_config.n_epochs): 
             
             # update the offset for database retrieval, epoch = 0 -> offset = 0, epoch = 1 -> offset = 1 * limit, epoch = 2 -> offset = 2 * limit, ...    
             self.dataset.set_dataset_offsets(epoch)
             self.dataset.prepare_data_loader()
+            self.callback_manager.execute_callbacks("on_epoch_start", epoch) #TODO: What to include here?
+
 
             for batch_id, batch in enumerate(self.dataset):
+                self.callback_manager.execute_callbacks("before_batch_processing", batch_id, batch)
                 inputs, attention_mask = batch["input_ids"].to(self.device), batch["attention_mask"].to(self.device)
 
                 original_inputs = inputs.clone()
@@ -999,7 +1017,6 @@ class PretrainElectra(PretrainLM):
                     discriminator_precision = binary_precision(active_predictions.long(), active_labels.long())
                     discriminator_recall = binary_recall(active_predictions.long(), active_labels.long())
 
-
                 training_metrics["mlm_accuracy"].append(mlm_accuracy.item())
                 training_metrics["discriminator_accuracy"].append(discriminator_accuracy.item())
                 training_metrics["discriminator_precision"].append(discriminator_precision.item())
@@ -1020,7 +1037,14 @@ class PretrainElectra(PretrainLM):
                     self.logger.info(f"Accuracy for replacement task: {discriminator_accuracy.item():.4f}")
                     self.logger.info(f"Precision for replacement task: {discriminator_precision.item():.4f}")
                     self.logger.info(f"Recall for replacement task: {discriminator_recall.item():.4f}")
-                    self.logger.info("-"*100)   
+                    self.logger.info("-"*100)
+
+                self.callback_manager.execute_callbacks("on_batch_end", self.global_step, mlm_loss, mlm_accuracy,
+                                                        discriminator_loss, discriminator_precision,
+                                                        discriminator_recall, current_lr)
+                self.global_step += 1
+
+            self.callback_manager.execute_callbacks("after_epoch", epoch, training_metrics, self.generator, self.discriminator)
 
         self.logger.info("...training is finished, saving results and model.")
 
@@ -1044,7 +1068,7 @@ class PretrainElectra(PretrainLM):
 # Models for finetuning
 #########################################################################################################################
 
-# to do:
+#TODO:
 #   a model for comparison which simply adds a dense layer on top of the embeddings and uses an output projection afterwards
 #   experiment with extensions of the attention model: add a dense layer after attention, maybe replace mean aggreagation by 2D convolution
 
