@@ -151,7 +151,8 @@ class Chunker:
         """
 
             # Split the text into sentences using a regular expression
-        sentences = re.split(r'(?<=[.!?]) +', text)
+        sentence_pattern = r'(?<!\d)(?<!\w\.\w)(?<![A-Z][a-z]\.)(?<=\.|\?)(?<!\d\.)\s'
+        sentences = re.split(sentence_pattern, text) # old sentence pattern: r'(?<=[.!?]) +'
 
         if ignore_first_sentences and not(ignore_last_sentences):
             assert ignore_first_sentences < len(sentences), "The number of sentences must be larger than the number of sentences to be ignored"
@@ -458,18 +459,55 @@ class TRNewsChunker(Chunker):
         conn_in.close()
 
 
-class EnvironmentalChunkerNew(Chunker):
+class EsgReportChunker(Chunker):
 
     def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None) -> None:
-        
-        
         super().__init__(db_in, sheet_in, limit, offset)
 
     def __iter__(self):
-        print("hello new")
-        pass
+        conn_in = sqlite3.connect(self.db_in)
 
+        sql_query = f"SELECT * FROM {self.sheet_in}"
+        if self.limit:
+            sql_query += f" LIMIT {self.limit}"
+        if self.offset:
+            sql_query += f" OFFSET {self.offset}"
 
+        res = conn_in.execute(sql_query)
+        
+        yield_esg_reports = True
+        while yield_esg_reports:
+            row = res.fetchone()
+            if row:
+                content = row[4].replace("\n", " ")
+                sentence_pattern = r'(?<!\d)(?<!\w\.\w)(?<![A-Z][a-z]\.)(?<=\.|\?)(?<!\d\.)\s'
+                sentences = re.split(sentence_pattern, content)
+                sentences = [sentence.strip() for sentence in sentences]
+                filtered_sentences = self.filter_sentences(sentences)
+                filtered_text = " ".join(filtered_sentences)
+                yield filtered_text
+            else:
+                yield_esg_reports = False
+        conn_in.close()
+
+    @staticmethod
+    def calculate_numeric_percentage(sentence):
+        # Calculate the percentage of numeric content in the sentence
+        total_chars = len(sentence)
+        numeric_chars = sum(1 for char in sentence if char.isdigit())
+        return (numeric_chars / total_chars) * 100
+
+    def filter_sentences(self, sentences, max_numeric_percentage=15, max_percent_symbols=5):
+        filtered_sentences = []
+        for sentence in sentences:
+            if len(sentence.strip()) > 0:
+                numeric_percentage = self.calculate_numeric_percentage(sentence)
+                percent_symbol_count = sentence.count("%")
+                
+                if percent_symbol_count <= max_percent_symbols and numeric_percentage <= max_numeric_percentage:
+                    filtered_sentences.append(sentence)
+        
+        return filtered_sentences
 
 
 def rename_table(database, old_table_name, new_table_name, retries=5, delay=1):
