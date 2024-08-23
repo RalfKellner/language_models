@@ -24,6 +24,7 @@ class ParameterTypes(Enum):
     OPTIMIZER = "optimizer"
     LEARNING_RATE = "learning_rate"
 
+
 class AbstractHyperParameter(ABC):
     def __init__(self, name, dtype, low=None, high=None, default=None, options: Tuple[Any]=()):
         """
@@ -86,7 +87,166 @@ class HiddenSizeHyperparam(AbstractHyperParameter):
 
     def handle_value_assignment(self, value: Any, trainer: PretrainMLM):
         trainer.model_config.hidden_size = value
-        trainer.load_model()
+        trainer.load_model(rebuild_model_config=False)
+
+
+class BatchSize(AbstractHyperParameter):
+    def handle_trial(self, trial):
+        if self.low is not None and self.high is not None:
+            return trial.suggest_int(self.name, self.low, self.high)
+        elif self.options:
+            return trial.suggest_categorical(self.name, self.options)
+        else:
+            raise ValueError("BatchSize must have a valid range or categorical options")
+
+    def handle_value_assignment(self, value, trainer):
+        trainer.batch_size = value
+
+
+class WarmupSteps(AbstractHyperParameter):
+    def handle_trial(self, trial):
+        if self.low is not None and self.high is not None:
+            return trial.suggest_int(self.name, self.low, self.high)
+        elif self.options:
+            return trial.suggest_categorical(self.name, self.options)
+        else:
+            raise ValueError("WarmupSteps must have a valid range or categorical options")
+
+    def handle_value_assignment(self, value, trainer):
+        trainer.warmup_steps = value
+
+
+class DropoutRate(AbstractHyperParameter):
+    def handle_trial(self, trial):
+        if self.low is not None and self.high is not None:
+            return trial.suggest_uniform(self.name, self.low, self.high)
+        elif self.options:
+            return trial.suggest_categorical(self.name, self.options)
+        else:
+            raise ValueError("DropoutRate must have a valid range or categorical options")
+
+    def handle_value_assignment(self, value, trainer):
+        trainer.dropout_rate = value
+
+
+class WeightDecay(AbstractHyperParameter):
+    def handle_trial(self, trial):
+        if self.low is not None and self.high is not None:
+            return trial.suggest_loguniform(self.name, self.low, self.high)
+        elif self.options:
+            return trial.suggest_categorical(self.name, self.options)
+        else:
+            raise ValueError("WeightDecay must have a valid range or categorical options")
+
+    def handle_value_assignment(self, value, trainer):
+        trainer.weight_decay = value
+
+
+class GradientClipping(AbstractHyperParameter):
+    def handle_trial(self, trial):
+        if self.low is not None and self.high is not None:
+            return trial.suggest_uniform(self.name, self.low, self.high)
+        elif self.options:
+            return trial.suggest_categorical(self.name, self.options)
+        else:
+            raise ValueError("GradientClipping must have a valid range or categorical options")
+
+    def handle_value_assignment(self, value, trainer):
+        trainer.gradient_clipping = value
+
+class AttentionHeads(AbstractHyperParameter):
+    def handle_trial(self, trial):
+        if self.low is not None and self.high is not None:
+            return trial.suggest_int(self.name, self.low, self.high)
+        elif self.options:
+            return trial.suggest_categorical(self.name, self.options)
+        else:
+            raise ValueError("AttentionHeads must have a valid range or categorical options")
+
+    def handle_value_assignment(self, value, trainer):
+        trainer.model_config.num_attention_heads = value
+        trainer.load_model(rebuild_model_config=False)
+
+
+class NumberHiddenLayers(AbstractHyperParameter):
+    def handle_trial(self, trial: optuna.Trial) -> Union[int, float, str]:
+        if self.low is not None and self.high is not None:
+            return trial.suggest_int(self.name, self.low, self.high)
+        elif self.options:
+            return trial.suggest_categorical(self.name, self.options)
+        else:
+            raise ValueError("NumberHiddenLayers must have a valid range or categorical options")
+
+    def handle_value_assignment(self, value: Any, trainer: PretrainMLM):
+        trainer.model_config.num_attention_heads = value
+        trainer.load_model(rebuild_model_config=False)
+
+
+class LayerNormEpsilon(AbstractHyperParameter):
+    def handle_trial(self, trial):
+        if self.low is not None and self.high is not None:
+            return trial.suggest_loguniform(self.name, self.low, self.high)
+        elif self.options:
+            return trial.suggest_categorical(self.name, self.options)
+        else:
+            raise ValueError("LayerNormEpsilon must have a valid range or categorical options")
+
+    def handle_value_assignment(self, value, trainer):
+        trainer.model_config.layer_norm_epsilon = value
+        trainer.load_model(rebuild_model_config=False
+                           )
+
+class EmbeddingSize(AbstractHyperParameter):
+    def handle_trial(self, trial):
+        if len(self.options) > 0:
+            embedding_size = trial.suggest_categorical(self.name, self.options)
+        else:
+            embedding_size = trial.suggest_int(self.name, self.low, self.high)
+
+        return embedding_size
+
+    def handle_value_assignment(self, value, trainer):
+        trainer.model_config.embedding_size = value
+        trainer.load_model(rebuild_model_config=False)
+
+
+class WeightInitialization(AbstractHyperParameter):
+    def handle_trial(self, trial):
+        if len(self.options) > 0:
+            return trial.suggest_categorical(self.name, self.options)
+        else:
+            raise ValueError("WeightInitialization must have categorical options")
+
+    def handle_value_assignment(self, value, trainer):
+        raise NotImplementedError("Still to do!")
+
+
+class WeightInitRange(AbstractHyperParameter):
+    def handle_trial(self, trial: optuna.Trial) -> Union[int, float, str]:
+        value = trial.suggest_loguniform(self.low, self.high)
+        return value
+
+    def handle_value_assignment(self, value: Any, trainer: PretrainMLM):
+        trainer.model_config.initializer_range = value
+        trainer.load_model(rebuild_model_config=False)
+
+
+class ActivationFunction(AbstractHyperParameter):
+    def __init__(self, name, dtype, low=None, high=None, default=None, options: Tuple[Any]=()):
+        super().__init__(name, dtype, low, high, default, options)
+        for item in options:
+            if item not in ("gelu", "relu", "silu", "gelu_new"):
+                raise ValueError("Only gelu, relu, silu and gelu_new are allowed")
+        
+    def handle_trial(self, trial):
+        if len(self.options) > 0:
+            return trial.suggest_categorical(self.name, self.options)
+        else:
+            raise ValueError("ActivationFunction must have categorical options")
+
+    def handle_value_assignment(self, value, trainer):
+        trainer.model_config.activation_function = value
+        trainer.load_model(rebuild_model_config=False)
 
 
 class PretrainingHyperparamTuner:
@@ -385,6 +545,7 @@ class PretrainingHyperparamTuner:
         # Extract embeddings using the frozen model
         if len(self.downstream_datasets) == 0:
             raise ValueError("No downstream datasets available. Call inject_downstream_data method")
+
         embeddings = []
         labels = []
         for batch in DataLoader(dataset, batch_size=32, shuffle=False):

@@ -265,7 +265,7 @@ class PretrainMLM(PretrainLM):
     def add_callback(self, callback: AbstractCallback):
         self.callback_manager.add_callback(callback)
 
-    def load_model(self):
+    def load_model(self, rebuild_model_config: bool = True):
 
         """
         Loads and configures the Electra model for masked language modeling.
@@ -275,15 +275,16 @@ class PretrainMLM(PretrainLM):
         The model is then moved to the appropriate device (CPU or GPU).
         """
 
-        self.model_config = ElectraConfig(
-            vocab_size=self.dataset.tokenizer.vocab_size,
-            embedding_size=self.model_config.embedding_size,
-            hidden_size=self.model_config.hidden_size,
-            num_hidden_layers=self.model_config.num_hidden_layers,
-            num_attention_heads=self.model_config.num_attention_heads,
-            intermediate_size=self.model_config.intermediate_size,
-            max_position_embeddings=self.model_config.max_position_embeddings
-        )
+        if rebuild_model_config:
+            self.model_config = ElectraConfig(
+                vocab_size=self.dataset.tokenizer.vocab_size,
+                embedding_size=self.model_config.embedding_size,
+                hidden_size=self.model_config.hidden_size,
+                num_hidden_layers=self.model_config.num_hidden_layers,
+                num_attention_heads=self.model_config.num_attention_heads,
+                intermediate_size=self.model_config.intermediate_size,
+                max_position_embeddings=self.model_config.max_position_embeddings
+            )
 
         self.model = ElectraForMaskedLM(self.model_config)
         self.model.to(self.device)
