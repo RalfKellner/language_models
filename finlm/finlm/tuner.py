@@ -237,7 +237,7 @@ class ActivationFunction(AbstractHyperParameter):
         for item in options:
             if item not in ("gelu", "relu", "silu", "gelu_new"):
                 raise ValueError("Only gelu, relu, silu and gelu_new are allowed")
-        
+
     def handle_trial(self, trial):
         if len(self.options) > 0:
             return trial.suggest_categorical(self.name, self.options)
@@ -343,9 +343,11 @@ class PretrainingHyperparamTuner:
         return training_metrics
 
     def objective(self, trial: optuna.Trial):
+        log_dict = {}
         for hyperparam in self.params:
             value = hyperparam.handle_trial(trial)
             hyperparam.handle_value_assignment(value, self.trainer)
+            log_dict[hyperparam.name] = value
 
 
         training_metrics = self.train_model(self.train_steps)
@@ -363,7 +365,7 @@ class PretrainingHyperparamTuner:
                             self.eval_accuracy_weight * eval_metrics["eval_accuracy"][-1]
                             )
 
-        wandb.log({
+        wandb.log({**log_dict,
             "trial_loss": training_summary["final_loss"],
             "trial_accuracy": training_summary["final_accuracy"],
             "eval_loss": eval_metrics["eval_loss"][-1],
