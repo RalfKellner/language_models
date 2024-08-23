@@ -96,7 +96,8 @@ class FinLMDataset:
         conn = sqlite3.connect(self.db_name)
         self.n_total_sequences = {}
         for t_name in self.table_names:
-            res = conn.execute(f"SELECT COUNT(*) FROM {t_name}")
+            #res = conn.execute(f"SELECT COUNT(*) FROM {t_name}")
+            res = conn.execute(f"SELECT MAX(ROWID) FROM {t_name}")
             n_seqs_tmp = res.fetchall()
             self.n_total_sequences[t_name] = n_seqs_tmp[0][0]
         conn.close()

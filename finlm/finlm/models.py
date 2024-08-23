@@ -260,6 +260,7 @@ class PretrainMLM(PretrainLM):
         self.prepare_data_model_optimizer()
 
         self.training_state = None
+        self.global_step = 0
 
     def add_callback(self, callback: AbstractCallback):
         self.callback_manager.add_callback(callback)
@@ -323,7 +324,8 @@ class PretrainMLM(PretrainLM):
     def evaluate(self, eval_metrics = dict,
                  dataset: datasets.Dataset = None,
                  metric_key_prefix: str = "eval",
-                 num_steps: int =None):
+                 num_steps: int =None,
+                 verbose: bool = True):
         """
         Runs evaluation on n steps. Requires eval dataset.
         Returns
@@ -331,7 +333,7 @@ class PretrainMLM(PretrainLM):
 
         """
         if dataset is None:
-            dataset = self.dataset
+            dataset = self.dataset.hf_dataset
 
         self.logger.info("Starting with evaluation...")
         eval_steps = num_steps  #TODO: Make this variable
@@ -371,16 +373,15 @@ class PretrainMLM(PretrainLM):
             eval_metrics[metric_key_prefix + "_loss"].append(final_loss)
 
             self.callback_manager.execute_callbacks("after_eval", final_accuracy, final_loss, self.global_step)
-            self.logger.info(f"Evaluation results at step [{self.global_step}] of {metric_key_prefix} dataset: "
-                             f"MLM Accuracy: {final_accuracy:.4f} --- MLM Loss: {final_loss:.4f}")
+
+            if verbose:
+                self.logger.info(f"Evaluation results at step [{self.global_step}] of {metric_key_prefix} dataset: "
+                                 f"MLM Accuracy: {final_accuracy:.4f} --- MLM Loss: {final_loss:.4f}")
 
             return eval_metrics
 
     def train_epoch(self, epoch: int, training_metrics: dict, info_step: int = 100, num_steps: int = None,
                     verbose: bool = True):
-        self.dataset.set_dataset_offsets(epoch)
-        self.dataset.prepare_data_loader()
-        self.callback_manager.execute_callbacks("on_epoch_start", epoch)
 
         internal_steps = 0
 
@@ -465,6 +466,10 @@ class PretrainMLM(PretrainLM):
 
         self.global_step = 0  # use global steps instead of epochs and batches
         for epoch in range(self.optimization_config.n_epochs):
+            self.dataset.set_dataset_offsets(epoch)
+            self.dataset.prepare_data_loader()
+            self.callback_manager.execute_callbacks("on_epoch_start", epoch)
+
             self.train_epoch(epoch, training_metrics, info_step)
 
         self.logger.info("...training is finished, saving results and model.")

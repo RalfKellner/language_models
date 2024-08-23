@@ -2,7 +2,7 @@ import optuna
 import wandb
 import torch.nn as nn
 import torch
-from typing import Dict, Any, Tuple, List
+from typing import Dict, Any, Tuple, List, Union, Iterable
 from enum import Enum
 import logging
 from abc import ABC, abstractmethod
@@ -11,8 +11,9 @@ import datasets
 from torch.utils.data import DataLoader
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
+from optuna.integration.wandb import WeightsAndBiasesCallback
 
-from finlm.finlm.models import PretrainMLM
+from finlm.models import PretrainMLM
 
 #TODO: merge the Hyperparam class of downstream, such that we have two Hyperparam tuner classes, each with different
 # objectives
@@ -55,7 +56,7 @@ class AbstractHyperParameter(ABC):
 
 
     @abstractmethod
-    def handle_trial(self, trial: optuna.Trial):
+    def handle_trial(self, trial: optuna.Trial) -> Union[int, float, str]:
         raise NotImplementedError
 
     @abstractmethod
@@ -64,8 +65,9 @@ class AbstractHyperParameter(ABC):
 
 
 class LearningRateHyperparam(AbstractHyperParameter):
-    def handle_trial(self, trial: optuna.Trial):
-        trial.suggest_loguniform(self.name, self.low, self.high)
+    def handle_trial(self, trial: optuna.Trial) -> Union[int, float, str]:
+        lr = trial.suggest_loguniform(self.name, self.low, self.high)
+        return lr
 
     def handle_value_assignment(self, value: Any, trainer: PretrainMLM):
         trainer.optimization_config.learning_rate = value
@@ -74,25 +76,81 @@ class LearningRateHyperparam(AbstractHyperParameter):
 
 
 class HiddenSizeHyperparam(AbstractHyperParameter):
-    def handle_trial(self, trial: optuna.Trial):
+    def handle_trial(self, trial: optuna.Trial) -> Union[int, float, str]:
         if len(self.options) > 0:
-            trial.suggest_categorical(self.name, self.options)
+            hidden_size = trial.suggest_categorical(self.name, self.options)
         else:
-            trial.suggest_int(self.low, self.high, )
+            hidden_size = trial.suggest_int(self.name, self.low, self.high)
+
+        return hidden_size
+
+    def handle_value_assignment(self, value: Any, trainer: PretrainMLM):
+        trainer.model_config.hidden_size = value
+        trainer.load_model()
 
 
 class PretrainingHyperparamTuner:
-    def __init__(self, trainer: PretrainMLM, params: Tuple[AbstractHyperParameter],
-                 train_steps: int = 30_000, eval_steps: int = 1000):
+    def __init__(self,
+                 trainer: PretrainMLM,
+                 params: Tuple[AbstractHyperParameter],
+                 train_steps: int = 30_000,
+                 eval_steps: int = 1000,
+                 training_loss_weight: float = 1.0,
+                 training_accuracy_weight: float = 0.0,
+                 std_loss_weight: float = 0.1,
+                 std_accuracy_weight: float = 0.0,
+                 mean_loss_delta_weight: float = 0.1,
+                 std_loss_delta_weight: float = 0.1,
+                 eval_loss_weight: float = 0.1,
+                 eval_accuracy_weight: float = 1):
+        """
+        Initializes the PretrainingHyperparamTuner with the specified parameters and weights.
+
+        Parameters
+        ----------
+        trainer : PretrainMLM
+            The trainer instance responsible for training the model.
+        params : Tuple[AbstractHyperParameter]
+            A tuple of hyperparameter objects to be tuned.
+        train_steps : int, optional
+            The number of steps for training, by default 30_000.
+        eval_steps : int, optional
+            The number of steps for evaluation, by default 1000.
+        training_loss_weight : float, optional
+            The weight assigned to the final training loss in the objective function, by default 1.0.
+        training_accuracy_weight : float, optional
+            The weight assigned to the final training accuracy in the objective function, by default 0.0.
+        std_loss_weight : float, optional
+            The weight assigned to the standard deviation of the training loss in the objective function, by default 0.1.
+        std_accuracy_weight : float, optional
+            The weight assigned to the standard deviation of the training accuracy in the objective function, by default 0.0.
+        mean_loss_delta_weight : float, optional
+            The weight assigned to the mean change in loss between steps in the objective function, by default 0.1.
+        std_loss_delta_weight : float, optional
+            The weight assigned to the standard deviation of the change in loss between steps in the objective function, by default 0.1.
+        """
         self.trainer = trainer
         self.params = params
         self.train_steps = train_steps
         self.eval_steps = eval_steps
 
+        self.training_loss_weight = training_loss_weight
+        self.training_accuracy_weight = training_accuracy_weight
+        self.std_loss_weight = std_loss_weight
+        self.std_accuracy_weight = std_accuracy_weight
+        self.mean_loss_delta_weight = mean_loss_delta_weight
+        self.std_loss_delta_weight = std_loss_delta_weight
+        self.eval_accuracy_weight = eval_accuracy_weight
+        self.eval_loss_weight = eval_loss_weight
+
         self.logger = logging.getLogger(self.__class__.__name__)
 
+        self._prepare_trainer_data()
 
-   def add_linear_classifier_head_and_freeze(self, children_to_remove: int, last_output_dim: int,
+        self.downstream_datasets: List[datasets.Dataset] = []
+
+    def add_linear_classifier_head_and_freeze(self, children_to_remove: int,
+                                             last_output_dim: int,
                                              num_classes: int) -> nn.Module:
        linear_head = nn.Linear(last_output_dim, num_classes)
        new_layer_list = list(self.trainer.model.children)[:-children_to_remove]
@@ -106,6 +164,10 @@ class PretrainingHyperparamTuner:
 
        return new_model
 
+    def _prepare_trainer_data(self):
+        self.trainer.dataset.set_dataset_offsets(0)
+        self.trainer.dataset.prepare_data_loader()
+
     def train_model(self, steps: int):
         self.logger.info("Running one parameter setting...")
         info_step = 100  # TODO: make variable
@@ -116,21 +178,40 @@ class PretrainingHyperparamTuner:
             "learning_rates": []
         }
 
-        self.trainer.run_epoch(training_metrics, info_step, steps, verbose=False)
+        self.trainer.train_epoch(0, training_metrics, info_step, steps, verbose=False)
 
         return training_metrics
 
     def objective(self, trial: optuna.Trial):
         for hyperparam in self.params:
-            hyperparam.handle_trial(trial)
-            hyperparam.handle_value_assignment(self.trainer)
+            value = hyperparam.handle_trial(trial)
+            hyperparam.handle_value_assignment(value, self.trainer)
 
 
         training_metrics = self.train_model(self.train_steps)
         training_summary = self._postprocess_training_metrics(training_metrics)
         eval_metrics = self.evaluate_model(self.eval_steps)
 
+        objective_value = (self.training_loss_weight * training_summary["final_loss"] +
+                           self.training_accuracy_weight * training_summary["final_accuracy"] +
+                           self.std_loss_weight * training_summary["std_loss"] +
+                           self.std_accuracy_weight * training_summary["std_accuracy"] +
+                           self.mean_loss_delta_weight * training_summary["mean_loss_delta"] +
+                           self.std_loss_delta_weight * training_summary["std_loss_delta"])
 
+        objective_value += (self.eval_loss_weight * eval_metrics["eval_loss"][-1] +
+                            self.eval_accuracy_weight * eval_metrics["eval_accuracy"][-1]
+                            )
+
+        wandb.log({
+            "trial_loss": training_summary["final_loss"],
+            "trial_accuracy": training_summary["final_accuracy"],
+            "eval_loss": eval_metrics["eval_loss"][-1],
+            "eval_accuracy": eval_metrics["eval_accuracy"][-1],
+            "objective_value": objective_value
+        })
+
+        return objective_value.item()
 
     def _postprocess_training_metrics(self, metrics: Dict[str, List[float]]):
         """
@@ -197,13 +278,25 @@ class PretrainingHyperparamTuner:
 
     def evaluate_model(self, steps):
         eval_metrics = {
-            "loss": [],
-            "accuracy": [],
+            "eval_loss": [],
+            "eval_accuracy": [],
         }
 
-        self.trainer.evaluate(eval_metrics, num_steps=steps)
+        self.trainer.evaluate(eval_metrics, num_steps=steps, verbose=False)
 
         return eval_metrics
+
+    def optimize(self, n_trials: int = 100):
+        wandb_callback = WeightsAndBiasesCallback(
+            metric_name='val_loss',
+            wandb_kwargs={'project': 'mlm-test'}
+        )
+        wandb.init(project="mlm-test")
+        study = optuna.create_study(direction='minimize')
+        study.optimize(self.objective, n_trials=n_trials, callbacks=[wandb_callback])
+
+        self.logger.info(f"Best trial: {study.best_trial.params}")
+        return study.best_trial
 
     def evaluate_linear_separability(self, dataset: datasets.Dataset, num_classes: int, num_steps: int = 1000):
         """
@@ -224,6 +317,9 @@ class PretrainingHyperparamTuner:
             The accuracy of the linear classifier, which indicates how linearly separable the embeddings are.
         """
         # Freeze the model and add a linear head
+        if len(self.downstream_datasets) == 0:
+            raise ValueError("No downstream datasets available. Call inject_downstream_data method")
+            
         last_output_dim = self.trainer.model_config.hidden_size  # Assuming hidden_size is the last layer's output dim
         classifier_model = self.add_linear_classifier_head_and_freeze(
             children_to_remove=2,
@@ -268,50 +364,55 @@ class PretrainingHyperparamTuner:
         accuracy = correct / total
         return accuracy
 
+    def evaluate_svm_separability(self, dataset: datasets.Dataset, num_classes: int, kernel: str = 'linear'):
+        """
+        Evaluates the separability of the model's embeddings using a Support Vector Machine (SVM).
 
-def evaluate_svm_separability(self, dataset: datasets.Dataset, num_classes: int, kernel: str = 'linear'):
-    """
-    Evaluates the separability of the model's embeddings using a Support Vector Machine (SVM).
+        Parameters
+        ----------
+        dataset : datasets.Dataset
+            The dataset to be used for evaluating separability.
+        num_classes : int
+            The number of classes in the classification task.
+        kernel : str, optional
+            The kernel type to be used in the SVM (e.g., 'linear', 'rbf'), by default 'linear'.
 
-    Parameters
-    ----------
-    dataset : datasets.Dataset
-        The dataset to be used for evaluating separability.
-    num_classes : int
-        The number of classes in the classification task.
-    kernel : str, optional
-        The kernel type to be used in the SVM (e.g., 'linear', 'rbf'), by default 'linear'.
+        Returns
+        -------
+        float
+            The accuracy of the SVM, indicating the separability of the embeddings.
+        """
+        # Extract embeddings using the frozen model
+        if len(self.downstream_datasets) == 0:
+            raise ValueError("No downstream datasets available. Call inject_downstream_data method")
+        embeddings = []
+        labels = []
+        for batch in DataLoader(dataset, batch_size=32, shuffle=False):
+            inputs, batch_labels = batch["input_ids"].to(self.trainer.device), batch["labels"]
+            with torch.no_grad():
+                model_output = self.trainer.model(inputs)
+            embeddings.append(model_output.cpu().numpy())
+            labels.append(batch_labels.numpy())
 
-    Returns
-    -------
-    float
-        The accuracy of the SVM, indicating the separability of the embeddings.
-    """
-    # Extract embeddings using the frozen model
-    embeddings = []
-    labels = []
-    for batch in DataLoader(dataset, batch_size=32, shuffle=False):
-        inputs, batch_labels = batch["input_ids"].to(self.trainer.device), batch["labels"]
-        with torch.no_grad():
-            model_output = self.trainer.model(inputs)
-        embeddings.append(model_output.cpu().numpy())
-        labels.append(batch_labels.numpy())
+        embeddings = np.concatenate(embeddings, axis=0)
+        labels = np.concatenate(labels, axis=0)
 
-    embeddings = np.concatenate(embeddings, axis=0)
-    labels = np.concatenate(labels, axis=0)
+        # Train SVM on the embeddings
+        svm = SVC(kernel=kernel)
+        svm.fit(embeddings, labels)
 
-    # Train SVM on the embeddings
-    svm = SVC(kernel=kernel)
-    svm.fit(embeddings, labels)
+        # Predict and evaluate
+        predictions = svm.predict(embeddings)
+        accuracy = accuracy_score(labels, predictions)
 
-    # Predict and evaluate
-    predictions = svm.predict(embeddings)
-    accuracy = accuracy_score(labels, predictions)
+        return accuracy
 
-    return accuracy
-
-
-
+    def inject_downstream_data(self, datasets: datasets.Dataset | Iterable[datasets.Dataset]):
+        if isinstance(datasets, tuple) or isinstance(datasets, list):
+            for ds in datasets:
+                self.downstream_datasets.append(ds)
+        else:
+            self.downstream_datasets.append(datasets)
 
 
 class DownstreamHyperparamTuner:
