@@ -12,7 +12,7 @@ import matplotlib.pylab as plt
 import torch
 from tqdm import tqdm
 from torch import nn, Tensor
-from typing import Optional, Any, List, Callable
+from typing import Optional, Any, List, Callable, Dict
 import math
 from torch.utils.data import DataLoader
 from transformers.models.electra.modeling_electra import ElectraAttention, SequenceClassifierOutput
@@ -22,6 +22,7 @@ from typing import Optional, Any, List
 import copy
 
 import logging
+
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 
@@ -30,7 +31,6 @@ logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=lo
 #########################################################################################################################
 
 class PretrainLM:
-
     """
     A class for pretraining a language model using the configurations provided in FinLMConfig.
 
@@ -95,7 +95,7 @@ class PretrainLM:
         This method initializes the FinLMDataset using the dataset configuration provided in 
         the FinLMConfig object.
         """
-            
+
         self.dataset = FinLMDataset.from_dict(asdict(self.dataset_config))
 
     def load_optimization(self):
@@ -122,7 +122,8 @@ class PretrainLM:
                                                 self.scheduler)
 
     @staticmethod
-    def mask_tokens(inputs, mlm_probability, mask_token_id, special_token_ids, n_tokens, ignore_index = -100, hard_masking = False):
+    def mask_tokens(inputs, mlm_probability, mask_token_id, special_token_ids, n_tokens, ignore_index=-100,
+                    hard_masking=False):
 
         """
         Applies masked language modeling (MLM) to the input tokens.
@@ -153,12 +154,12 @@ class PretrainLM:
         Tuple[torch.Tensor, torch.Tensor]
             A tuple containing the masked input tensor and the corresponding labels tensor.
         """
-        
+
         device = inputs.device
         labels = inputs.clone()
         probability_matrix = torch.full(labels.shape, mlm_probability, device=device)
         # create special_token_mask, first set all entries to false
-        special_tokens_mask = torch.full(labels.shape, False, dtype = torch.bool, device = device)
+        special_tokens_mask = torch.full(labels.shape, False, dtype=torch.bool, device=device)
         # flag all special tokens as true
         for sp_id in special_token_ids:
             special_tokens_mask = special_tokens_mask | (inputs == sp_id)
@@ -172,12 +173,13 @@ class PretrainLM:
             inputs[masked_indices] = mask_token_id
         else:
             # 80% of the time, we replace masked input tokens with tokenizer.mask_token ([MASK])
-            indices_replaced = torch.bernoulli(torch.full(labels.shape, 0.8, device = device)).bool() & masked_indices
-            inputs[indices_replaced] = mask_token_id 
+            indices_replaced = torch.bernoulli(torch.full(labels.shape, 0.8, device=device)).bool() & masked_indices
+            inputs[indices_replaced] = mask_token_id
 
             # 10% of the time, we replace masked input tokens with random word
-            indices_random = torch.bernoulli(torch.full(labels.shape, 0.5, device = device)).bool() & masked_indices & ~indices_replaced
-            random_words = torch.randint(n_tokens, labels.shape, dtype=torch.long, device = device)
+            indices_random = torch.bernoulli(
+                torch.full(labels.shape, 0.5, device=device)).bool() & masked_indices & ~indices_replaced
+            random_words = torch.randint(n_tokens, labels.shape, dtype=torch.long, device=device)
             inputs[indices_random] = random_words[indices_random]
 
         return inputs, labels
@@ -200,11 +202,13 @@ class PretrainLM:
         str
             The path to the newly created directory.
         """
-            
+
         current_model_folder_paths = os.listdir(self.save_root_path)
-        current_model_type_folder_names = [model for model in current_model_folder_paths if model.startswith(model_type)]
+        current_model_type_folder_names = [model for model in current_model_folder_paths if
+                                           model.startswith(model_type)]
         if len(current_model_type_folder_names) > 0:
-            current_model_type_index = max([int(model_name.split("_")[1]) for model_name in current_model_type_folder_names])
+            current_model_type_index = max(
+                [int(model_name.split("_")[1]) for model_name in current_model_type_folder_names])
             new_model_path = self.save_root_path + model_type + "_" + str(current_model_type_index + 1).zfill(2) + "/"
         else:
             new_model_path = self.save_root_path + model_type + "_00/"
@@ -219,20 +223,20 @@ class PretrainLM:
         This method checks if a GPU is available and sets the device accordingly. If a GPU is not 
         available, a warning is logged and the device is set to CPU.
         """
-        
-        if not(torch.cuda.is_available()):
+
+        if not (torch.cuda.is_available()):
             logging.warning("GPU seems to be unavailable.")
         else:
             self.device = torch.device("cuda")
 
-    def add_callback(self, callback: AbstractCallback):
+            
+    def add_callback: AbstractCallback):
         if not isinstance(callback, AbstractCallback):
             raise TypeError(f"Callback must be of type 'AbstractCallback'. Got {type(callback)}")
         self.callback_manager.add_callback(callback)
 
 
 class PretrainMLM(PretrainLM):
-
     """
     A class for pretraining a Masked Language Model (MLM) using the FinLM framework.
 
@@ -285,9 +289,14 @@ class PretrainMLM(PretrainLM):
         self.prepare_data_model_optimizer()
 
         self.training_state = None
+        self.global_step = 0
+        
         self.callback_manager.execute_callbacks("after_init", self)
 
-    def load_model(self):
+    def add_callback(self, callback: AbstractCallback):
+        self.callback_manager.add_callback(callback)
+
+    def load_model(self, rebuild_model_config: bool = True):
 
         """
         Loads and configures the Electra model for masked language modeling.
@@ -297,19 +306,21 @@ class PretrainMLM(PretrainLM):
         The model is then moved to the appropriate device (CPU or GPU).
         """
 
-        self.model_config = ElectraConfig(
-            vocab_size = self.dataset.tokenizer.vocab_size,
-            embedding_size = self.model_config.embedding_size,
-            hidden_size = self.model_config.hidden_size,
-            num_hidden_layers = self.model_config.num_hidden_layers,
-            num_attention_heads = self.model_config.num_attention_heads,
-            intermediate_size = self.model_config.intermediate_size,
-            max_position_embeddings = self.model_config.max_position_embeddings
-        )
+        if rebuild_model_config:
+            self.model_config = ElectraConfig(
+                vocab_size=self.dataset.tokenizer.vocab_size,
+                embedding_size=self.model_config.embedding_size,
+                hidden_size=self.model_config.hidden_size,
+                num_hidden_layers=self.model_config.num_hidden_layers,
+                num_attention_heads=self.model_config.num_attention_heads,
+                intermediate_size=self.model_config.intermediate_size,
+                max_position_embeddings=self.model_config.max_position_embeddings
+            )
 
         self.model = ElectraForMaskedLM(self.model_config)
         self.model.to(self.device)
         self.callback_manager.execute_callbacks("after_load_modal", self.model)
+
 
     def prepare_data_model_optimizer(self):
 
@@ -324,16 +335,23 @@ class PretrainMLM(PretrainLM):
         self.load_model()
         self.load_optimization()
 
-    def evaluate(self, dataset: datasets.Dataset,  metric_key_prefix: str = "eval"):
+    def evaluate(self, eval_metrics = dict,
+                 dataset: datasets.Dataset = None,
+                 metric_key_prefix: str = "eval",
+                 num_steps: int =None,
+                 verbose: bool = True):
         """
         Runs evaluation on n steps. Requires eval dataset.
         Returns
         -------
 
         """
+        if dataset is None:
+            dataset = self.dataset.hf_dataset
+
         self.logger.info("Starting with evaluation...")
-        eval_steps = 100 #TODO: Make this variable
-        self.eval_batch_size = 4 #TODO: Make this variable
+        eval_steps = num_steps  #TODO: Make this variable
+        self.eval_batch_size = 4  #TODO: Make this variable
         eval_inds = np.random.random_integers(0, len(dataset), eval_steps)
         sampled_dataset = dataset.select(eval_inds)
         dataloader = DataLoader(sampled_dataset, batch_size=self.eval_batch_size, shuffle=False)
@@ -343,7 +361,7 @@ class PretrainMLM(PretrainLM):
         n_batches = 0
         with torch.no_grad():
             runs = 0
-            with tqdm(eval_steps, desc=f"Evaluation Loop at training step {self.global_step}") as iterator:
+            with tqdm(range(eval_steps), desc=f"Evaluation Loop at training step {self.global_step}") as iterator:
                 for batch in dataloader:
                     inputs, attention_mask = batch["input_ids"].to(self.device), batch["attention_mask"].to(self.device)
                     inputs, labels = self.mask_tokens(
@@ -365,37 +383,26 @@ class PretrainMLM(PretrainLM):
             final_accuracy = eval_accuracy / runs
             final_loss = eval_loss / runs
 
-            if len(self.training_state) == 0:
-                self.training_state.append({"step": self.global_step})
-            elif self.training_state[-1]["step"] != self.global_step:
-                self.training_state.append({"step": self.global_step})
-            self.training_state[-1][f"{metric_key_prefix}_loss"] = final_loss
-            self.training_state[-1][f"{metric_key_prefix}_acc"] = final_accuracy
+            eval_metrics[metric_key_prefix + "_accuracy"].append(final_accuracy)
+            eval_metrics[metric_key_prefix + "_loss"].append(final_loss)
 
             self.callback_manager.execute_callbacks("after_eval", final_accuracy, final_loss, self.global_step)
-            self.logger.info(f"Evaluation results at step [{self.global_step}] of {metric_key_prefix} dataset: "
-                             f"MLM Accuracy: {final_accuracy:.4f} --- MLM Loss: {final_loss:.4f}")
 
-    def train(self):
-        self.logger.info("Starting with training...")
-        self.training_state = []
-        eval_step = 1000 # TODO: make variable --- currently not used --> later for evaluation
-        info_step = 100 # TODO: make variable
-        training_metrics = {}
-        training_metrics["loss"] = []
-        training_metrics["accuracy"] = []
-        training_metrics["precision"] = []
-        training_metrics["recall"] = []
-        training_metrics["gradient_norms"] = []
-        training_metrics["learning_rates"] = []
 
-        self.callback_manager.execute_callbacks("before_training")
+            if verbose:
+                self.logger.info(f"Evaluation results at step [{self.global_step}] of {metric_key_prefix} dataset: "
+                                 f"MLM Accuracy: {final_accuracy:.4f} --- MLM Loss: {final_loss:.4f}")
 
-        self.global_step = 0 # use global steps instead of epochs and batches
-        for epoch in range(self.optimization_config.n_epochs):
-            self.dataset.set_dataset_offsets(epoch)
-            self.dataset.prepare_data_loader()
-            self.callback_manager.execute_callbacks("on_epoch_start", epoch)
+            return eval_metrics
+          
+
+    def train_epoch(self, epoch: int, training_metrics: dict, info_step: int = 100, num_steps: int = None,
+                    verbose: bool = True):
+
+        internal_steps = 0
+
+        while internal_steps < num_steps:
+            break_flag = True if num_steps is None else False
 
             for batch_id, batch in enumerate(self.dataset):
                 self.callback_manager.execute_callbacks("before_batch_processing", batch_id, batch)
@@ -437,8 +444,9 @@ class PretrainMLM(PretrainLM):
                 self.callback_manager.execute_callbacks("on_batch_end", self.global_step, mlm_loss, mlm_accuracy.item(),
                                                         mlm_grad_norm.item(), current_lr)
                 self.global_step += 1
+                internal_steps += 1
 
-                if batch_id % info_step == 0:
+                if batch_id % info_step == 0 and verbose:
                     self.logger.info(
                         f"Results after {batch_id / self.iteration_steps_per_epoch:.4%} iterations of epoch {epoch + 1}:")
                     self.logger.info(f"MLM loss: {mlm_loss.item():.4f}")
@@ -447,7 +455,38 @@ class PretrainMLM(PretrainLM):
                     self.logger.info(f"Accuracy for masking task: {mlm_accuracy.item():.4f}")
                     self.logger.info("-" * 100)
 
-            self.callback_manager.execute_callbacks("after_epoch", epoch, training_metrics, self.model)
+                if batch_id > internal_steps:
+                    break_flag = True
+                    break
+
+            if break_flag:
+                break
+
+            self.callback_manager.execute_callbacks("after_epoch", epoch, training_metrics)
+
+            return training_metrics
+
+    def train(self):
+        self.logger.info("Starting with training...")
+        self.training_state = []
+        eval_step = 1000  # TODO: make variable --- currently not used --> later for evaluation
+        info_step = 100  # TODO: make variable
+        training_metrics = {
+            "loss": [],
+            "accuracy": [],
+            "gradient_norms": [],
+            "learning_rates": []
+        }
+ 
+        self.callback_manager.execute_callbacks("before_training")
+
+        self.global_step = 0  # use global steps instead of epochs and batches
+        for epoch in range(self.optimization_config.n_epochs):
+            self.dataset.set_dataset_offsets(epoch)
+            self.dataset.prepare_data_loader()
+            self.callback_manager.execute_callbacks("on_epoch_start", epoch)
+
+            self.train_epoch(epoch, training_metrics, info_step)
 
         self.logger.info("...training is finished, saving results and model.")
 
@@ -465,7 +504,6 @@ class PretrainMLM(PretrainLM):
 
 
 class PretrainDiscriminator(PretrainLM):
-
     """
     A class for pretraining a discriminator model in the Electra framework using the FinLM setup.
 
@@ -530,20 +568,21 @@ class PretrainDiscriminator(PretrainLM):
         including vocabulary size, embedding size, hidden size, and other model parameters. The model is then moved 
         to the appropriate device (CPU or GPU).
         """
-        
+
         self.model_config = ElectraConfig(
-            vocab_size = self.dataset.tokenizer.vocab_size,
-            embedding_size = self.model_config.embedding_size,
-            hidden_size = self.model_config.hidden_size, 
-            num_hidden_layers = self.model_config.num_hidden_layers,
-            num_attention_heads = self.model_config.num_attention_heads,
-            max_position_embeddings = self.model_config.max_position_embeddings
+            vocab_size=self.dataset.tokenizer.vocab_size,
+            embedding_size=self.model_config.embedding_size,
+            hidden_size=self.model_config.hidden_size,
+            num_hidden_layers=self.model_config.num_hidden_layers,
+            num_attention_heads=self.model_config.num_attention_heads,
+            max_position_embeddings=self.model_config.max_position_embeddings
         )
 
         self.model = ElectraForPreTraining(self.model_config)
         self.model.to(self.device)
 
         self.callback_manager.execute_callbacks("after_load_modal", self.model)
+
 
     def prepare_data_model_optimizer(self):
 
@@ -553,13 +592,13 @@ class PretrainDiscriminator(PretrainLM):
         This method calls the appropriate methods to load the dataset, load the model, 
         and set up the optimizer and learning rate scheduler.
         """
-        
+
         self.load_dataset()
         self.load_model()
         self.load_optimization()
 
-
-    def replace_masked_tokens_randomly(self, inputs, mlm_probability, mask_token_id, special_token_ids, n_tokens, hard_masking = True):
+    def replace_masked_tokens_randomly(self, inputs, mlm_probability, mask_token_id, special_token_ids, n_tokens,
+                                       hard_masking=True):
 
         """
         Replaces masked tokens with random tokens and generates labels for discriminator training.
@@ -589,20 +628,20 @@ class PretrainDiscriminator(PretrainLM):
         Tuple[torch.Tensor, torch.Tensor]
             A tuple containing the corrupted input tensor and the corresponding labels tensor.
         """
-         
+
         device = inputs.device
         masked_inputs, original_inputs = self.mask_tokens(
-            inputs = inputs,
-            mlm_probability = mlm_probability,
-            mask_token_id = mask_token_id,
-            special_token_ids = special_token_ids,
-            n_tokens = n_tokens,
-            ignore_index = None,
-            hard_masking = hard_masking
-            )
-        
+            inputs=inputs,
+            mlm_probability=mlm_probability,
+            mask_token_id=mask_token_id,
+            special_token_ids=special_token_ids,
+            n_tokens=n_tokens,
+            ignore_index=None,
+            hard_masking=hard_masking
+        )
+
         masked_indices = torch.where(masked_inputs == mask_token_id, True, False)
-        random_words = torch.randint(n_tokens, original_inputs.shape, dtype=torch.long, device = device)
+        random_words = torch.randint(n_tokens, original_inputs.shape, dtype=torch.long, device=device)
         corrupted_inputs = original_inputs.clone()
         corrupted_inputs[masked_indices] = random_words[masked_indices]
         labels = torch.full(corrupted_inputs.shape, False, dtype=torch.bool, device=device)
@@ -631,8 +670,8 @@ class PretrainDiscriminator(PretrainLM):
         training_metrics["gradient_norms"] = []
         training_metrics["learning_rates"] = []
 
-        self.global_step = 0 # use global steps instead of epochs and batches
-        for epoch in range(self.optimization_config.n_epochs): 
+
+        for epoch in range(self.optimization_config.n_epochs):
 
             # update the offset for database retrieval, epoch = 0 -> offset = 0, epoch = 1 -> offset = 1 * limit, epoch = 2 -> offset = 2 * limit, ...    
             self.dataset.set_dataset_offsets(epoch)
@@ -644,15 +683,15 @@ class PretrainDiscriminator(PretrainLM):
                 inputs, attention_mask = batch["input_ids"].to(self.device), batch["attention_mask"].to(self.device)
 
                 inputs, labels = self.replace_masked_tokens_randomly(
-                    inputs, 
-                    mlm_probability = self.optimization_config.mlm_probability,
-                    mask_token_id = self.dataset.mask_token_id,
-                    special_token_ids = self.dataset.special_token_ids,
-                    n_tokens = self.dataset.tokenizer.vocab_size,
-                    hard_masking = True
+                    inputs,
+                    mlm_probability=self.optimization_config.mlm_probability,
+                    mask_token_id=self.dataset.mask_token_id,
+                    special_token_ids=self.dataset.special_token_ids,
+                    n_tokens=self.dataset.tokenizer.vocab_size,
+                    hard_masking=True
                 )
 
-                discriminator_output = self.model(input_ids = inputs, attention_mask = attention_mask, labels = labels)
+                discriminator_output = self.model(input_ids=inputs, attention_mask=attention_mask, labels=labels)
                 discriminator_loss, discriminator_logits = discriminator_output.loss, discriminator_output.logits
                 training_metrics["loss"].append(discriminator_loss.item())
 
@@ -663,7 +702,7 @@ class PretrainDiscriminator(PretrainLM):
                 discriminator_loss.backward()
 
                 if self.optimization_config.use_gradient_clipping:
-                    torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm = 1.0)
+                    torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
 
                 # determine gradient norms, equal to one if use_gradient_clipping is set to True
                 discriminator_grads = [p.grad.detach().flatten() for p in self.model.parameters()]
@@ -693,13 +732,15 @@ class PretrainDiscriminator(PretrainLM):
                 training_metrics["learning_rates"].append(current_lr)
 
                 if batch_id % 100 == 0:
-                    self.logger.info(f"Results after {batch_id/self.iteration_steps_per_epoch:.4%} iterations of epoch {epoch+1}:")
+                    self.logger.info(
+                        f"Results after {batch_id / self.iteration_steps_per_epoch:.4%} iterations of epoch {epoch + 1}:")
                     self.logger.info(f"Discriminator loss: {discriminator_loss.item():.4f}")
                     self.logger.info(f"Gradient norm: {discriminator_grad_norm:.4f}")
                     self.logger.info(f"Current learning rate: {current_lr}")
                     self.logger.info(f"Accuracy for replacement task: {discriminator_accuracy.item():.4f}")
                     self.logger.info(f"Precision for replacement task: {discriminator_precision.item():.4f}")
                     self.logger.info(f"Recall for replacement task: {discriminator_recall.item():.4f}")
+
                     self.logger.info("-"*100)
 
                 self.callback_manager.execute_callbacks("on_batch_end", self.global_step, discriminator_loss,
@@ -711,22 +752,21 @@ class PretrainDiscriminator(PretrainLM):
             self.callback_manager.execute_callbacks("after_epoch", epoch, training_metrics, self.model)
 
         self.logger.info("...training is finished, saving results and model.")
-        
-        save_path = self._create_directory_and_return_save_path(model_type = "discriminator")
+
+        save_path = self._create_directory_and_return_save_path(model_type="discriminator")
         training_metrics_df = pd.DataFrame(training_metrics)
-        training_metrics_df.to_csv(save_path + "training_metrics.csv", index = False)
+        training_metrics_df.to_csv(save_path + "training_metrics.csv", index=False)
         training_metrics_df.loc[:, ["loss"]].plot()
         plt.savefig(save_path + "loss.png")
-        training_metrics_df.loc[:, ["accuracy", "precision", "recall"]].plot(subplots = True)
+        training_metrics_df.loc[:, ["accuracy", "precision", "recall"]].plot(subplots=True)
         plt.savefig(save_path + "accuracy.png")
         self.model.save_pretrained(save_path + "discriminator_model")
         self.config.to_json(save_path + "model_config.json")
 
         self.logger.info("Results and model are saved.")
-        
+
 
 class PretrainElectra(PretrainLM):
-
     """
     A class for pretraining the Electra model using the FinLM setup.
 
@@ -792,24 +832,24 @@ class PretrainElectra(PretrainLM):
         configuration settings, including vocabulary size, embedding size, hidden size, 
         and other model parameters. The models are then moved to the appropriate device (CPU or GPU).
         """
-            
+
         self.generator_model_config = ElectraConfig(
-            vocab_size = self.dataset.tokenizer.vocab_size,
-            embedding_size = self.model_config.embedding_size,
-            hidden_size = int(self.model_config.hidden_size * self.model_config.generator_size), 
-            intermediate_size = int(self.model_config.intermediate_size * self.model_config.generator_size),
-            num_hidden_layers = int(self.model_config.num_hidden_layers * self.model_config.generator_layer_size),
-            num_attention_heads = int(self.model_config.num_attention_heads * self.model_config.generator_size),
-            max_position_embeddings = self.model_config.max_position_embeddings
+            vocab_size=self.dataset.tokenizer.vocab_size,
+            embedding_size=self.model_config.embedding_size,
+            hidden_size=int(self.model_config.hidden_size * self.model_config.generator_size),
+            intermediate_size=int(self.model_config.intermediate_size * self.model_config.generator_size),
+            num_hidden_layers=int(self.model_config.num_hidden_layers * self.model_config.generator_layer_size),
+            num_attention_heads=int(self.model_config.num_attention_heads * self.model_config.generator_size),
+            max_position_embeddings=self.model_config.max_position_embeddings
         )
 
         self.discriminator_model_config = ElectraConfig(
-            vocab_size = self.dataset.tokenizer.vocab_size,
-            embedding_size = self.model_config.embedding_size,
-            hidden_size = self.model_config.hidden_size, 
-            num_hidden_layers = self.model_config.num_hidden_layers,
-            num_attention_heads = self.model_config.num_attention_heads,
-            max_position_embeddings = self.model_config.max_position_embeddings
+            vocab_size=self.dataset.tokenizer.vocab_size,
+            embedding_size=self.model_config.embedding_size,
+            hidden_size=self.model_config.hidden_size,
+            num_hidden_layers=self.model_config.num_hidden_layers,
+            num_attention_heads=self.model_config.num_attention_heads,
+            max_position_embeddings=self.model_config.max_position_embeddings
         )
 
         self.generator = ElectraForMaskedLM(self.generator_model_config)
@@ -832,7 +872,7 @@ class PretrainElectra(PretrainLM):
         are not duplicated. It then calculates the total number of training steps, initializes the AdamW 
         optimizer, and configures a linear learning rate scheduler with warm-up steps.
         """
-        
+
         # identify trainable parameters without duplicating the embedding and position parameters
         self.model_parameters = []
         # generator
@@ -844,14 +884,16 @@ class PretrainElectra(PretrainLM):
                 continue
             else:
                 self.model_parameters.append(params)
-        
+
         n_sequences = 0
         for key in self.dataset.database_retrieval.keys():
             n_sequences += self.dataset.database_retrieval[key]["limit"]
         self.iteration_steps_per_epoch = int(np.ceil(n_sequences / self.dataset.batch_size))
-        total_steps = self.iteration_steps_per_epoch * self.optimization_config.n_epochs 
-        self.optimizer = torch.optim.AdamW(self.model_parameters, lr = self.optimization_config.learning_rate) 
-        self.scheduler = get_linear_schedule_with_warmup(self.optimizer, num_warmup_steps = self.optimization_config.lr_scheduler_warm_up_steps, num_training_steps = total_steps)
+        total_steps = self.iteration_steps_per_epoch * self.optimization_config.n_epochs
+        self.optimizer = torch.optim.AdamW(self.model_parameters, lr=self.optimization_config.learning_rate)
+        self.scheduler = get_linear_schedule_with_warmup(self.optimizer,
+                                                         num_warmup_steps=self.optimization_config.lr_scheduler_warm_up_steps,
+                                                         num_training_steps=total_steps)
 
         self.callback_manager.execute_callbacks("after_optim_load", self.iteration_steps_per_epoch, self.optimizer,
                                                 self.scheduler)
@@ -870,8 +912,9 @@ class PretrainElectra(PretrainLM):
         self.load_optimization()
 
     @staticmethod
-    def replace_masked_tokens_from_generator(masked_inputs, original_inputs, logits, special_mask_id, discriminator_sampling = "gumbel_softmax"):
-    
+    def replace_masked_tokens_from_generator(masked_inputs, original_inputs, logits, special_mask_id,
+                                             discriminator_sampling="gumbel_softmax"):
+
         """
         Replaces masked tokens with tokens sampled from the generator and generates labels for discriminator training.
 
@@ -896,7 +939,7 @@ class PretrainElectra(PretrainLM):
         Tuple[torch.Tensor, torch.Tensor]
             A tuple containing the discriminator inputs (with replaced tokens) and the corresponding labels tensor.
         """
-            
+
         device = masked_inputs.device
         discriminator_inputs = masked_inputs.clone()
         mask_indices = masked_inputs == special_mask_id
@@ -904,9 +947,9 @@ class PretrainElectra(PretrainLM):
         if discriminator_sampling == "aggressive":
             sampled_ids = logits[mask_indices].argmax(-1)
         elif discriminator_sampling == "gumbel_softmax":
-            sampled_ids = torch.nn.functional.gumbel_softmax(logits[mask_indices], hard = False).argmax(-1)
+            sampled_ids = torch.nn.functional.gumbel_softmax(logits[mask_indices], hard=False).argmax(-1)
         else:
-            sampled_ids = torch.multinomial(torch.nn.functional.softmax(logits[mask_indices], dim = -1), 1).squeeze()
+            sampled_ids = torch.multinomial(torch.nn.functional.softmax(logits[mask_indices], dim=-1), 1).squeeze()
 
         discriminator_inputs[mask_indices] = sampled_ids
         # initialize discriminator labels with False
@@ -941,8 +984,6 @@ class PretrainElectra(PretrainLM):
         training_metrics["gradient_norm"] = []
         training_metrics["learning_rates"] = []
 
-        self.global_step = 0
-
         for epoch in range(self.optimization_config.n_epochs): 
             
             # update the offset for database retrieval, epoch = 0 -> offset = 0, epoch = 1 -> offset = 1 * limit, epoch = 2 -> offset = 2 * limit, ...    
@@ -958,24 +999,26 @@ class PretrainElectra(PretrainLM):
                 original_inputs = inputs.clone()
                 generator_inputs, generator_labels = self.mask_tokens(
                     inputs,
-                    mlm_probability = self.optimization_config.mlm_probability,
-                    mask_token_id = self.dataset.mask_token_id,
-                    special_token_ids = self.dataset.special_token_ids,
-                    n_tokens = self.dataset.tokenizer.vocab_size)
+                    mlm_probability=self.optimization_config.mlm_probability,
+                    mask_token_id=self.dataset.mask_token_id,
+                    special_token_ids=self.dataset.special_token_ids,
+                    n_tokens=self.dataset.tokenizer.vocab_size)
 
-                mlm_output = self.generator(input_ids = generator_inputs, attention_mask = attention_mask, labels = generator_labels)
+                mlm_output = self.generator(input_ids=generator_inputs, attention_mask=attention_mask,
+                                            labels=generator_labels)
                 mlm_loss, mlm_logits = mlm_output.loss, mlm_output.logits
 
                 sampling_logits = mlm_logits.detach()
                 discriminator_inputs, discriminator_labels = self.replace_masked_tokens_from_generator(
-                    masked_inputs = generator_inputs,
-                    original_inputs = original_inputs,
-                    logits = sampling_logits,
-                    special_mask_id = self.dataset.tokenizer.mask_token_id,
-                    discriminator_sampling = self.optimization_config.discriminator_sampling
-                    )
-                
-                discriminator_output = self.discriminator(input_ids = discriminator_inputs, attention_mask = attention_mask, labels = discriminator_labels)
+                    masked_inputs=generator_inputs,
+                    original_inputs=original_inputs,
+                    logits=sampling_logits,
+                    special_mask_id=self.dataset.tokenizer.mask_token_id,
+                    discriminator_sampling=self.optimization_config.discriminator_sampling
+                )
+
+                discriminator_output = self.discriminator(input_ids=discriminator_inputs, attention_mask=attention_mask,
+                                                          labels=discriminator_labels)
                 discriminator_loss, discriminator_logits = discriminator_output.loss, discriminator_output.logits
 
                 loss = mlm_loss + self.optimization_config.discriminator_weight * discriminator_loss
@@ -991,14 +1034,13 @@ class PretrainElectra(PretrainLM):
                 loss.backward()
 
                 if self.optimization_config.use_gradient_clipping:
-                    torch.nn.utils.clip_grad_norm_(self.model_parameters, max_norm = 1.0)
+                    torch.nn.utils.clip_grad_norm_(self.model_parameters, max_norm=1.0)
 
                 # determine gradient norms, equal to one if use_gradient_clipping is set to True
                 grads = [p.grad.detach().flatten() for p in self.model_parameters]
                 grad_norm = torch.cat(grads).norm()
 
-
-                # update parameters        
+                # update parameters
                 self.optimizer.step()
                 # update learning rate
                 self.scheduler.step()
@@ -1027,7 +1069,8 @@ class PretrainElectra(PretrainLM):
                 training_metrics["learning_rates"].append(current_lr)
 
                 if batch_id % 100 == 0:
-                    self.logger.info(f"Results after {batch_id/self.iteration_steps_per_epoch:.4%} iterations of epoch {epoch+1}:")
+                    self.logger.info(
+                        f"Results after {batch_id / self.iteration_steps_per_epoch:.4%} iterations of epoch {epoch + 1}:")
                     self.logger.info(f"Loss: {loss.item():.4f}")
                     self.logger.info(f"MLM Loss: {mlm_loss.item():.4f}")
                     self.logger.info(f"Discriminator Loss: {discriminator_loss.item():.4f}")
@@ -1049,13 +1092,15 @@ class PretrainElectra(PretrainLM):
         self.logger.info("...training is finished, saving results and model.")
 
         training_metrics_df = pd.DataFrame(training_metrics)
-        
-        save_path = self._create_directory_and_return_save_path(model_type = "electra")
+
+        save_path = self._create_directory_and_return_save_path(model_type="electra")
         # create a function for making an output directory which creates it and saves the csv and model
-        training_metrics_df.to_csv(save_path + "training_metrics.csv", index = False)
-        training_metrics_df.loc[:, ["loss", "mlm_loss", "discriminator_loss"]].plot(subplots = True)
+        training_metrics_df.to_csv(save_path + "training_metrics.csv", index=False)
+        training_metrics_df.loc[:, ["loss", "mlm_loss", "discriminator_loss"]].plot(subplots=True)
         plt.savefig(save_path + "loss.png")
-        training_metrics_df.loc[:, ["mlm_accuracy", "discriminator_accuracy", "discriminator_precision", "discriminator_recall"]].plot(subplots = True)
+        training_metrics_df.loc[:,
+        ["mlm_accuracy", "discriminator_accuracy", "discriminator_precision", "discriminator_recall"]].plot(
+            subplots=True)
         plt.savefig(save_path + "accuracy.png")
         self.generator.save_pretrained(save_path + "mlm_model")
         self.discriminator.save_pretrained(save_path + "discriminator_model")
@@ -1092,18 +1137,18 @@ class ElectraDocumentClassification(ElectraPreTrainedModel):
         self.dropout = nn.Dropout(aggregation_head_dropout)
 
     def forward(
-        self,
-        input_ids: Optional[torch.Tensor] = None,
-        attention_mask: Optional[torch.Tensor] = None,
-        sequence_mask: Optional[torch.Tensor] = None,
-        labels: Optional[torch.Tensor] = None
+            self,
+            input_ids: Optional[torch.Tensor] = None,
+            attention_mask: Optional[torch.Tensor] = None,
+            sequence_mask: Optional[torch.Tensor] = None,
+            labels: Optional[torch.Tensor] = None
     ):
 
         original_normalized_shape = input_ids.size()
         flattened_input_ids = input_ids.view(-1, original_normalized_shape[-1])
         flattened_attention_mask = attention_mask.view(-1, original_normalized_shape[-1])
 
-        hidden_states = self.electra(input_ids = flattened_input_ids, attention_mask = flattened_attention_mask)
+        hidden_states = self.electra(input_ids=flattened_input_ids, attention_mask=flattened_attention_mask)
         encoder_embeddings = hidden_states.last_hidden_state
         sequence_embeddings = encoder_embeddings[:, 0, :]
         document_sequences_shape = original_normalized_shape[:2] + torch.Size([self.config.hidden_size])
@@ -1122,8 +1167,10 @@ class ElectraDocumentClassification(ElectraPreTrainedModel):
         # a matrix of size n_sequences times hidden_dim is generated where only values of the first two rows are used
         # accordingly, we can average attention states in the next step and project them to the desired output dimension
 
-        attention_embeddings, attention_probs = self.attention(hidden_states = sequence_embeddings, attention_mask = extended_sequence_mask, output_attentions = True)
-        aggregated_attention_embeddings = attention_embeddings.mean(dim = 1)
+        attention_embeddings, attention_probs = self.attention(hidden_states=sequence_embeddings,
+                                                               attention_mask=extended_sequence_mask,
+                                                               output_attentions=True)
+        aggregated_attention_embeddings = attention_embeddings.mean(dim=1)
 
         # do we need this or another form of normalization, because of the averaging from the previous step
         aggregated_attention_embeddings = self.LayerNorm(aggregated_attention_embeddings)
@@ -1154,8 +1201,8 @@ class ElectraDocumentClassification(ElectraPreTrainedModel):
                 loss = loss_fct(logits, labels)
 
         return SequenceClassifierOutput(
-            loss = loss,
-            logits = logits,
-            hidden_states = None,
-            attentions = attention_probs,
+            loss=loss,
+            logits=logits,
+            hidden_states=None,
+            attentions=attention_probs,
         )

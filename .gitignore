@@ -9,3 +9,5 @@ finlm/finlm.egg-info/
 venv/
 lukas_test/
 wandb/
+test_*
+
