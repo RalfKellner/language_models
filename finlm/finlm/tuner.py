@@ -12,8 +12,11 @@ from torch.utils.data import DataLoader
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
 from optuna.integration.wandb import WeightsAndBiasesCallback
-
+from dataclasses import dataclass
+from tqdm import tqdm
 from finlm.models import PretrainMLM
+from finlm.config import FinLMConfig
+from finlm.callbacks import MlMWandBTrackerCallback, CallbackTypes
 
 #TODO: merge the Hyperparam class of downstream, such that we have two Hyperparam tuner classes, each with different
 # objectives
@@ -26,7 +29,7 @@ class ParameterTypes(Enum):
 
 
 class AbstractHyperParameter(ABC):
-    def __init__(self, name, dtype, low=None, high=None, default=None, options: Tuple[Any]=()):
+    def __init__(self, name, dtype, need_trainer, low=None, high=None, default=None, options: Tuple[Any]=()):
         """
         Initializes a Hyperparameter instance with the specified attributes.
 
@@ -46,34 +49,34 @@ class AbstractHyperParameter(ABC):
 
         self.name = name
         self.dtype = dtype
+        self.need_trainer = need_trainer
         self.low = low
         self.high = high
         self.default = default
 
         self.options = options
 
-        if self.low is not None or self.high is not None and len(self.options) > 0:
-            raise ValueError("Either take options or a low and a high. Received both")
-
 
     @abstractmethod
     def handle_trial(self, trial: optuna.Trial) -> Union[int, float, str]:
         raise NotImplementedError
 
     @abstractmethod
-    def handle_value_assignment(self, value: Any, trainer: PretrainMLM):
+    def handle_value_assignment(self, value: Any, trainer_config: FinLMConfig, trainer: PretrainMLM = None):
         raise NotImplementedError
 
 
 class LearningRateHyperparam(AbstractHyperParameter):
     def handle_trial(self, trial: optuna.Trial) -> Union[int, float, str]:
-        lr = trial.suggest_loguniform(self.name, self.low, self.high)
-        return lr
+        if self.low is not None and self.high is not None:
+            return trial.suggest_uniform(self.name, self.low, self.high)
+        elif self.options:
+            return trial.suggest_categorical(self.name, self.options)
+        else:
+            raise ValueError("DropoutRate must have a valid range or categorical options")
 
-    def handle_value_assignment(self, value: Any, trainer: PretrainMLM):
-        trainer.optimization_config.learning_rate = value
-        for g in trainer.optimizer.param_groups:
-            g['lr'] = value
+    def handle_value_assignment(self, value: Any, trainer_config: FinLMConfig, trainer: PretrainMLM = None):
+        trainer_config.optimization_config.learning_rate = value
 
 
 class HiddenSizeHyperparam(AbstractHyperParameter):
@@ -85,9 +88,8 @@ class HiddenSizeHyperparam(AbstractHyperParameter):
 
         return hidden_size
 
-    def handle_value_assignment(self, value: Any, trainer: PretrainMLM):
-        trainer.model_config.hidden_size = value
-        trainer.load_model(rebuild_model_config=False)
+    def handle_value_assignment(self, value: Any, trainer_config: FinLMConfig, trainer: PretrainMLM = None):
+        trainer_config.model_config.hidden_size = value
 
 
 class BatchSize(AbstractHyperParameter):
@@ -99,8 +101,8 @@ class BatchSize(AbstractHyperParameter):
         else:
             raise ValueError("BatchSize must have a valid range or categorical options")
 
-    def handle_value_assignment(self, value, trainer):
-        trainer.batch_size = value
+    def handle_value_assignment(self, value: Any, trainer_config: FinLMConfig, trainer: PretrainMLM = None):
+        trainer_config.dataset_config.batch_size = value
 
 
 class WarmupSteps(AbstractHyperParameter):
@@ -112,8 +114,8 @@ class WarmupSteps(AbstractHyperParameter):
         else:
             raise ValueError("WarmupSteps must have a valid range or categorical options")
 
-    def handle_value_assignment(self, value, trainer):
-        trainer.warmup_steps = value
+    def handle_value_assignment(self, value: Any, trainer_config: FinLMConfig, trainer: PretrainMLM = None):
+        trainer_config.optimization_config.lr_scheduler_warm_up_steps = value
 
 
 class DropoutRate(AbstractHyperParameter):
@@ -125,21 +127,8 @@ class DropoutRate(AbstractHyperParameter):
         else:
             raise ValueError("DropoutRate must have a valid range or categorical options")
 
-    def handle_value_assignment(self, value, trainer):
-        trainer.dropout_rate = value
-
-
-class WeightDecay(AbstractHyperParameter):
-    def handle_trial(self, trial):
-        if self.low is not None and self.high is not None:
-            return trial.suggest_loguniform(self.name, self.low, self.high)
-        elif self.options:
-            return trial.suggest_categorical(self.name, self.options)
-        else:
-            raise ValueError("WeightDecay must have a valid range or categorical options")
-
-    def handle_value_assignment(self, value, trainer):
-        trainer.weight_decay = value
+    def handle_value_assignment(self, value: Any, trainer_config: FinLMConfig, trainer: PretrainMLM = None):
+        trainer_config.model_config.dropout_rate = value
 
 
 class GradientClipping(AbstractHyperParameter):
@@ -151,8 +140,8 @@ class GradientClipping(AbstractHyperParameter):
         else:
             raise ValueError("GradientClipping must have a valid range or categorical options")
 
-    def handle_value_assignment(self, value, trainer):
-        trainer.gradient_clipping = value
+    def handle_value_assignment(self, value: Any, trainer_config: FinLMConfig, trainer: PretrainMLM = None):
+        trainer_config.optimization_config.gradient_clipping = value
 
 class AttentionHeads(AbstractHyperParameter):
     def handle_trial(self, trial):
@@ -163,9 +152,8 @@ class AttentionHeads(AbstractHyperParameter):
         else:
             raise ValueError("AttentionHeads must have a valid range or categorical options")
 
-    def handle_value_assignment(self, value, trainer):
-        trainer.model_config.num_attention_heads = value
-        trainer.load_model(rebuild_model_config=False)
+    def handle_value_assignment(self, value: Any, trainer_config: FinLMConfig, trainer: PretrainMLM = None):
+        trainer_config.model_config.num_attention_heads = value
 
 
 class NumberHiddenLayers(AbstractHyperParameter):
@@ -177,9 +165,8 @@ class NumberHiddenLayers(AbstractHyperParameter):
         else:
             raise ValueError("NumberHiddenLayers must have a valid range or categorical options")
 
-    def handle_value_assignment(self, value: Any, trainer: PretrainMLM):
-        trainer.model_config.num_attention_heads = value
-        trainer.load_model(rebuild_model_config=False)
+    def handle_value_assignment(self, value: Any, trainer_config: FinLMConfig, trainer: PretrainMLM = None):
+        trainer_config.model_config.num_hidden_layers = value
 
 
 class LayerNormEpsilon(AbstractHyperParameter):
@@ -191,10 +178,9 @@ class LayerNormEpsilon(AbstractHyperParameter):
         else:
             raise ValueError("LayerNormEpsilon must have a valid range or categorical options")
 
-    def handle_value_assignment(self, value, trainer):
-        trainer.model_config.layer_norm_epsilon = value
-        trainer.load_model(rebuild_model_config=False
-                           )
+    def handle_value_assignment(self, value: Any, trainer_config: FinLMConfig, trainer: PretrainMLM = None):
+        trainer_config.model_config.layer_norm_epsilon = value
+
 
 class EmbeddingSize(AbstractHyperParameter):
     def handle_trial(self, trial):
@@ -205,9 +191,8 @@ class EmbeddingSize(AbstractHyperParameter):
 
         return embedding_size
 
-    def handle_value_assignment(self, value, trainer):
-        trainer.model_config.embedding_size = value
-        trainer.load_model(rebuild_model_config=False)
+    def handle_value_assignment(self, value: Any, trainer_config: FinLMConfig, trainer: PretrainMLM = None):
+        trainer_config.model_config.embedding_size = value
 
 
 class WeightInitialization(AbstractHyperParameter):
@@ -217,7 +202,7 @@ class WeightInitialization(AbstractHyperParameter):
         else:
             raise ValueError("WeightInitialization must have categorical options")
 
-    def handle_value_assignment(self, value, trainer):
+    def handle_value_assignment(self, value: Any, trainer_config: FinLMConfig, trainer: PretrainMLM = None):
         raise NotImplementedError("Still to do!")
 
 
@@ -226,14 +211,13 @@ class WeightInitRange(AbstractHyperParameter):
         value = trial.suggest_loguniform(self.low, self.high)
         return value
 
-    def handle_value_assignment(self, value: Any, trainer: PretrainMLM):
-        trainer.model_config.initializer_range = value
-        trainer.load_model(rebuild_model_config=False)
+    def handle_value_assignment(self, value: Any, trainer_config: FinLMConfig, trainer: PretrainMLM = None):
+        trainer_config.model_config.initializer_range = value
 
 
 class ActivationFunction(AbstractHyperParameter):
-    def __init__(self, name, dtype, low=None, high=None, default=None, options: Tuple[Any]=()):
-        super().__init__(name, dtype, low, high, default, options)
+    def __init__(self, name, dtype, need_trainer, low=None, high=None, default=None, options: Tuple[Any]=()):
+        super().__init__(name, dtype, need_trainer, low, high, default, options)
         for item in options:
             if item not in ("gelu", "relu", "silu", "gelu_new"):
                 raise ValueError("Only gelu, relu, silu and gelu_new are allowed")
@@ -244,25 +228,33 @@ class ActivationFunction(AbstractHyperParameter):
         else:
             raise ValueError("ActivationFunction must have categorical options")
 
-    def handle_value_assignment(self, value, trainer):
-        trainer.model_config.activation_function = value
-        trainer.load_model(rebuild_model_config=False)
+    def handle_value_assignment(self, value: Any, trainer_config: FinLMConfig, trainer: PretrainMLM = None):
+        trainer_config.model_config.hidden_act = value
+
+
+@dataclass
+class HyperparamTunerConfig:
+    trainer_config: FinLMConfig
+    params: Tuple[AbstractHyperParameter]
+    train_steps: int = 30_000
+    eval_steps: int = 1000
+    training_loss_weight: float = 1.0
+    training_accuracy_weight: float = 0.0
+    std_loss_weight: float = 0.5
+    std_accuracy_weight: float = 0.0
+    mean_loss_delta_weight: float = 10.0
+    std_loss_delta_weight: float = 10.0
+    eval_loss_weight: float = 1
+    eval_accuracy_weight: float = 10
+    use_wandb: bool = True
+    wandb_api_key: str = None
+    wandb_project_name: str = None
+    wandb_run_name: str = None
+    entity: str = None
 
 
 class PretrainingHyperparamTuner:
-    def __init__(self,
-                 trainer: PretrainMLM,
-                 params: Tuple[AbstractHyperParameter],
-                 train_steps: int = 30_000,
-                 eval_steps: int = 1000,
-                 training_loss_weight: float = 1.0,
-                 training_accuracy_weight: float = 0.0,
-                 std_loss_weight: float = 0.1,
-                 std_accuracy_weight: float = 0.0,
-                 mean_loss_delta_weight: float = 0.1,
-                 std_loss_delta_weight: float = 0.1,
-                 eval_loss_weight: float = 0.1,
-                 eval_accuracy_weight: float = 1):
+    def __init__(self, config: HyperparamTunerConfig):
         """
         Initializes the PretrainingHyperparamTuner with the specified parameters and weights.
 
@@ -289,25 +281,36 @@ class PretrainingHyperparamTuner:
         std_loss_delta_weight : float, optional
             The weight assigned to the standard deviation of the change in loss between steps in the objective function, by default 0.1.
         """
-        self.trainer = trainer
-        self.params = params
-        self.train_steps = train_steps
-        self.eval_steps = eval_steps
+        self.trainer_config = config.trainer_config
+        self.params = config.params
 
-        self.training_loss_weight = training_loss_weight
-        self.training_accuracy_weight = training_accuracy_weight
-        self.std_loss_weight = std_loss_weight
-        self.std_accuracy_weight = std_accuracy_weight
-        self.mean_loss_delta_weight = mean_loss_delta_weight
-        self.std_loss_delta_weight = std_loss_delta_weight
-        self.eval_accuracy_weight = eval_accuracy_weight
-        self.eval_loss_weight = eval_loss_weight
+        self.params_for_config = list(filter(lambda x: not x.need_trainer, self.params))
+        self.params_for_trainer = list(filter(lambda x: x.need_trainer, self.params))
+
+        self.train_steps = config.train_steps
+        self.eval_steps = config.eval_steps
+
+        self.apikey = config.wandb_api_key
+        self.project_name = config.wandb_project_name
+        self.run_name = config.wandb_run_name
+        self.wb_entity = config.entity
+
+        self.training_loss_weight = config.training_loss_weight
+        self.training_accuracy_weight = config.training_accuracy_weight
+        self.std_loss_weight = config.std_loss_weight
+        self.std_accuracy_weight = config.std_accuracy_weight
+        self.mean_loss_delta_weight = config.mean_loss_delta_weight
+        self.std_loss_delta_weight = config.std_loss_delta_weight
+        self.eval_accuracy_weight = config.eval_accuracy_weight
+        self.eval_loss_weight = config.eval_loss_weight
+
+        self.use_wandb = config.use_wandb
 
         self.logger = logging.getLogger(self.__class__.__name__)
 
-        self._prepare_trainer_data()
-
         self.downstream_datasets: List[datasets.Dataset] = []
+
+        self.trainer = None
 
     def add_linear_classifier_head_and_freeze(self, children_to_remove: int,
                                              last_output_dim: int,
@@ -337,18 +340,32 @@ class PretrainingHyperparamTuner:
             "gradient_norms": [],
             "learning_rates": []
         }
-
-        self.trainer.train_epoch(0, training_metrics, info_step, steps, verbose=False)
-
+        iterator = tqdm(range(steps), desc="Training loop running...")
+        self.trainer.train_epoch(0, training_metrics, info_step, steps, verbose=False, tqdm_iterator=iterator)
         return training_metrics
 
     def objective(self, trial: optuna.Trial):
         log_dict = {}
-        for hyperparam in self.params:
+        for hyperparam in self.params_for_config:
             value = hyperparam.handle_trial(trial)
-            hyperparam.handle_value_assignment(value, self.trainer)
+            hyperparam.handle_value_assignment(value, self.trainer_config)
             log_dict[hyperparam.name] = value
 
+        for hyperparam in self.params_for_trainer:
+            value = hyperparam.handle_trial(trial)
+            hyperparam.handle_value_assignment(value, self.trainer_config, self.trainer)
+            log_dict[hyperparam.name] = value
+
+        self.trainer = PretrainMLM(self.trainer_config)
+
+        if self.use_wandb:
+            cb = MlMWandBTrackerCallback(CallbackTypes.ON_BATCH_END, project_name=self.project_name,
+                                         name=self.run_name + "_" + str(trial.number),
+                                         api_key=self.apikey, entity=self.wb_entity,
+                                         **log_dict)
+            self.trainer.add_callback(cb)
+
+        self._prepare_trainer_data()
 
         training_metrics = self.train_model(self.train_steps)
         training_summary = self._postprocess_training_metrics(training_metrics)
@@ -365,13 +382,27 @@ class PretrainingHyperparamTuner:
                             self.eval_accuracy_weight * eval_metrics["eval_accuracy"][-1]
                             )
 
-        wandb.log({**log_dict,
-            "trial_loss": training_summary["final_loss"],
-            "trial_accuracy": training_summary["final_accuracy"],
-            "eval_loss": eval_metrics["eval_loss"][-1],
-            "eval_accuracy": eval_metrics["eval_accuracy"][-1],
-            "objective_value": objective_value
-        })
+        if self.use_wandb:
+            metrics = {
+                "trial_loss": training_summary["final_loss"],
+                "trial_accuracy": training_summary["final_accuracy"],
+                "eval_loss": eval_metrics["eval_loss"][-1],
+                "eval_accuracy": eval_metrics["eval_accuracy"][-1],
+                "objective_value": objective_value,
+                "loss_trend_slope": training_summary.get("loss_trend_slope", None),
+                "loss_delta_std": training_summary["std_loss_delta"],
+                "loss_delta_mean": training_summary["mean_loss_delta"],
+                "trial_number": trial.number,  # Optionally log the trial number
+            }
+            wandb.log(metrics)
+
+            table = wandb.Table(columns=["trial_loss", "trial_accuracy", "eval_loss", "eval_accuracy",
+                                         "objective_value", "loss_trend_slope", "loss_delta_std", "loss_delta_mean"])
+            table.add_data(training_summary["final_loss"], training_summary["final_accuracy"],
+                           eval_metrics["eval_loss"][-1], eval_metrics["eval_accuracy"][-1],
+                           objective_value, training_summary.get("loss_trend_slope", None),
+                           training_summary["std_loss_delta"], training_summary["mean_loss_delta"])
+            wandb.log({"trial_results": table})
 
         return objective_value.item()
 
@@ -449,15 +480,31 @@ class PretrainingHyperparamTuner:
         return eval_metrics
 
     def optimize(self, n_trials: int = 100):
-        wandb_callback = WeightsAndBiasesCallback(
-            metric_name='val_loss',
-            wandb_kwargs={'project': 'mlm-test'}
-        )
-        wandb.init(project="mlm-test")
+
         study = optuna.create_study(direction='minimize')
-        study.optimize(self.objective, n_trials=n_trials, callbacks=[wandb_callback])
+        study.optimize(self.objective, n_trials=n_trials, catch=(RuntimeError, torch.OutOfMemoryError, TypeError),
+                    )
 
         self.logger.info(f"Best trial: {study.best_trial.params}")
+
+        summary = wandb.init(project="optuna",
+                             name="summary",
+                             job_type="logging")
+
+        trials = study.trials
+
+        """
+        for step, trial in enumerate(trials):
+            # Logging the loss.
+            summary.log({"run_objective": trial.value}, step=step)
+
+            # Logging the parameters.
+            for k, v in trial.params.items():
+                summary.log({k: v}, step=step)
+        """
+
+        self.logger.info(str(study.best_trial))
+
         return study.best_trial
 
     def evaluate_linear_separability(self, dataset: datasets.Dataset, num_classes: int, num_steps: int = 1000):
