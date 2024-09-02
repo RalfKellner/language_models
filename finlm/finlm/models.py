@@ -230,7 +230,7 @@ class PretrainLM:
             self.device = torch.device("cuda")
 
             
-    def add_callback: AbstractCallback):
+    def add_callback(self, callback: AbstractCallback):
         if not isinstance(callback, AbstractCallback):
             raise TypeError(f"Callback must be of type 'AbstractCallback'. Got {type(callback)}")
         self.callback_manager.add_callback(callback)
@@ -822,6 +822,8 @@ class PretrainElectra(PretrainLM):
 
         super().__init__(config)
         self.prepare_data_model_optimizer()
+
+        self.global_step = 0
 
     def load_model(self):
 

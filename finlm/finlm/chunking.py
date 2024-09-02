@@ -5,6 +5,8 @@ import pandas as pd
 import logging
 import sqlite3
 import time
+import string
+
 
 class Chunker:
     
@@ -86,7 +88,8 @@ class Chunker:
             sheet_out: str, 
             chunk_size_in_words: int, 
             ignore_first_sentences: int, 
-            ignore_last_sentences: int) -> None:
+            ignore_last_sentences: int,
+            filter_numbers_and_punctuation: float = 0.15) -> None:
 
         """
         Chunks the documents into equal text chunks and saves them to a new database.
@@ -110,15 +113,29 @@ class Chunker:
 
         conn_out = sqlite3.connect(db_out)
         documents_excluded = 0
+        n_raw_chunks = 0
+        number_and_punctuation_frac = 0
         for doc_id, document in enumerate(self): # self is an element from the database from which documents are retrieved by the generator functions as defined in children classes
             try:
+                # get raw text chunks
                 text_chunks = self.split_text_into_chunks_by_words(document, chunk_size_in_words, ignore_first_sentences, ignore_last_sentences)
-                text_chunks_df = pd.DataFrame({"sequence": text_chunks}, index = list(range(len(text_chunks))))
-                text_chunks_df.to_sql(sheet_out, conn_out, if_exists="append", index = False)
+                # count the number of chunks before filtering
+                n_raw_chunks += len(text_chunks)
+                # determine the fraction of numbers and punctuation for each chunk
+                chunk_numbers_and_punctution = [self.count_numbers_and_punctuation(chunk) for chunk in text_chunks]
+                # count this value as well for averaging at the end of the loop
+                number_and_punctuation_frac += sum(chunk_numbers_and_punctution)
+                # filter chunks with large fraction of numbers and punctuation
+                text_chunks = [chunk for chunk_i, chunk in enumerate(text_chunks) if chunk_numbers_and_punctution[chunk_i] <= filter_numbers_and_punctuation]
+                if len(text_chunks) > 0:
+                    text_chunks_df = pd.DataFrame({"sequence": text_chunks}, index = list(range(len(text_chunks))))
+                    text_chunks_df.to_sql(sheet_out, conn_out, if_exists="append", index = False)
             except Exception as e:
                 documents_excluded += 1
             if doc_id % 5000 == 0:
                 self.logger.info(f"{doc_id/self.n_documents:.2%} of all documents have been chunked.")
+        average_number_and_punctuation = number_and_punctuation_frac/n_raw_chunks
+        self.logger.info(f"The average of numbers and punctuation over all raw chunks was {average_number_and_punctuation}. Chunks with a fraction higher than {filter_numbers_and_punctuation} have been removed before export to sequence database.")
         conn_out.close()
         self.logger.info(f"A fraction of {documents_excluded/self.n_documents:.4f} has been excluded while chunking.")
 
@@ -188,6 +205,12 @@ class Chunker:
             chunks.append(' '.join(current_chunk))
         
         return chunks
+
+    @staticmethod
+    def count_numbers_and_punctuation(text):
+        count = len(text)
+        count_np = sum(1 for char in text if char.isdigit() or char in string.punctuation)
+        return count_np/count
 
 
 class Form10KChunker(Chunker):
@@ -392,7 +415,12 @@ class EarningCallChunker(Chunker):
                 else:
                     try:
                         # this makes sure that names of earning call participants are excluded and each sentence has more than 5 string symbols
-                        sentences = [sentence.split(':', maxsplit = 1)[1][1:] for sentence in sentences if len(sentence) > 5]
+                        #sentences = [sentence.split(':', maxsplit = 1)[1][1:] for sentence in sentences if len(sentence) > 5]
+                        sentences = [
+                            sentence.split(':', maxsplit=1)[1] if ':' in sentence[:20] else sentence
+                            for sentence in sentences
+                            if len(sentence) > 10
+                        ]
                         ec_text = " ".join(sentences)
                         id_ec += 1
                         yield ec_text
@@ -451,9 +479,8 @@ class TRNewsChunker(Chunker):
         while yield_news:
             row = res.fetchone()
             if row:
-                text = row[1]
-                news_text = " ".join(text.split("\n"))
-                yield news_text
+                # check before starting new chunking
+                yield row[1].replace("\n", " ")
             else:
                 yield_news = False
         conn_in.close()
@@ -463,6 +490,8 @@ class EsgReportChunker(Chunker):
 
     def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None) -> None:
         super().__init__(db_in, sheet_in, limit, offset)
+        self.sentence_pattern = r'(?<!\d)(?<!\w\.\w)(?<![A-Z][a-z]\.)(?<=\.|\?)(?<!\d\.)\s'
+
 
     def __iter__(self):
         conn_in = sqlite3.connect(self.db_in)
@@ -474,18 +503,22 @@ class EsgReportChunker(Chunker):
             sql_query += f" OFFSET {self.offset}"
 
         res = conn_in.execute(sql_query)
-        
+
         yield_esg_reports = True
+        count = 0
         while yield_esg_reports:
             row = res.fetchone()
             if row:
-                content = row[4].replace("\n", " ")
-                sentence_pattern = r'(?<!\d)(?<!\w\.\w)(?<![A-Z][a-z]\.)(?<=\.|\?)(?<!\d\.)\s'
-                sentences = re.split(sentence_pattern, content)
-                sentences = [sentence.strip() for sentence in sentences]
-                filtered_sentences = self.filter_sentences(sentences)
-                filtered_text = " ".join(filtered_sentences)
-                yield filtered_text
+                count += 1
+                try:
+                    content = row[4].replace("\n", " ")
+                    sentences = re.split(self.sentence_pattern, content)
+                    sentences = [sentence.strip() for sentence in sentences]
+                    filtered_sentences = self.filter_sentences(sentences)
+                    filtered_text = " ".join(filtered_sentences)
+                    yield filtered_text
+                except:
+                    self.logger.info(f"Problem with report number: {count}")
             else:
                 yield_esg_reports = False
         conn_in.close()

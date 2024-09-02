@@ -6,9 +6,9 @@ import logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 chunk_size = 200
-database_out = "/data/language_models/test_outputs/01_chunking_results/chunked_sequences.sqlite"
+database_out = "/data/finlm_sequences/finlm_chunks_2.sqlite"
 if os.path.exists(database_out):
-    raise ValueError("Database for chunked sequences already exists, empty test folder or rename database.")
+    raise ValueError("Database for chunked sequences already exists, delete or rename database.")
 
 # 10Ks
 logging.info("Start with 10k chunking.")
@@ -24,14 +24,14 @@ logging.info("8k chunking is finished.")
 
 # ECs
 logging.info("Start with earning call chunking.")
-ec_chunker = EarningCallChunker("/data/ecs/fmp/ec_fmp_full_2024.sqlite", "earningcalls")
+ec_chunker = EarningCallChunker("/data/ecs/fmp/ec_fmp_full_2024.sqlite", "earningcalls_extended")
 ec_chunker.chunk_to_database(database_out, "earning_calls", chunk_size, ignore_first_sentences=10, ignore_last_sentences=10)
 logging.info("Earning call chunking is finished.")
 
 # TR News
 logging.info("Start with TR news chunking.")
-news_chunker = TRNewsChunker("/data/trnews/trnews.sqlite", "trnews")
-news_chunker.chunk_to_database(database_out, "tr_news", chunk_size, ignore_first_sentences=None, ignore_last_sentences=None)
+news_chunker = TRNewsChunker("/data/trnews/trnews.sqlite", "news")
+news_chunker.chunk_to_database(database_out, "tr_news", chunk_size, ignore_first_sentences=2, ignore_last_sentences=3)
 logging.info("TR news chunking is finished.")
 
 # ESG
