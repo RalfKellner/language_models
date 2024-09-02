@@ -847,6 +847,8 @@ class PretrainElectra(PretrainLM):
         super().__init__(config)
         self.prepare_data_model_optimizer()
 
+        self.global_step = 0
+
     def load_model(self):
 
         """

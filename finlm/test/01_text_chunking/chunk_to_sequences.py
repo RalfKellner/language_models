@@ -24,14 +24,14 @@ logging.info("8k chunking is finished.")
 
 # ECs
 logging.info("Start with earning call chunking.")
-ec_chunker = EarningCallChunker("/data/ecs/fmp/ec_fmp_full_2024.sqlite", "earningcalls", limit = 5)
+ec_chunker = EarningCallChunker("/data/ecs/fmp/ec_fmp_full_2024.sqlite", "earningcalls_extended", limit = 5)
 ec_chunker.chunk_to_database(database_out, "earning_calls", chunk_size, ignore_first_sentences=10, ignore_last_sentences=10)
 logging.info("Earning call chunking is finished.")
 
 # TR News
 logging.info("Start with TR news chunking.")
-news_chunker = TRNewsChunker("/data/trnews/trnews.sqlite", "trnews", limit = 5)
-news_chunker.chunk_to_database(database_out, "tr_news", chunk_size, ignore_first_sentences=None, ignore_last_sentences=None)
+news_chunker = TRNewsChunker("/data/trnews/trnews.sqlite", "news", limit = 5)
+news_chunker.chunk_to_database(database_out, "tr_news", chunk_size, ignore_first_sentences=2, ignore_last_sentences=3)
 logging.info("TR news chunking is finished.")
 
 # ESG

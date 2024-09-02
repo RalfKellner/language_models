@@ -1,7 +1,7 @@
 dataset_config:
   tokenizer_path: "/data/language_models/tokenizers/finlm-wordpiece-tokenizer.json"
   max_sequence_length: 256
-  db_name: "/data/finlm_sequences/finlm_chunks.sqlite"
+  db_name: "/data/finlm_sequences/finlm_chunks_2.sqlite"
   batch_size: 128
   database_retrieval:
     form_tenk:
@@ -15,7 +15,10 @@ dataset_config:
       offset: 0
     tr_news: 
       limit: 512
-      offset: 0 
+      offset: 0
+    esg_reports:
+      limit: 512
+      offset: 0
 model_config:
   embedding_size: 64
   hidden_size: 128

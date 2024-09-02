@@ -12,11 +12,13 @@ def raw_text_generator():
     conn_filings = sqlite3.connect("/data/edgar/filings_data/filings.sqlite", check_same_thread=False)
     conn_trnews = sqlite3.connect("/data/trnews/trnews.sqlite", check_same_thread=False)
     conn_ecs = sqlite3.connect("/data/ecs/fmp/ec_fmp_full_2024.sqlite", check_same_thread=False)
+    conn_esg = sqlite3.connect("/data/esg_reports/Raw_pdf_data.sqlite", check_same_thread=False)
 
     res_10k = conn_filings.execute("SELECT * FROM form_tenk;")
     res_8k = conn_filings.execute("SELECT * FROM form_eightk;")
-    res_trnews = conn_trnews.execute("SELECT * FROM trnews;")
-    res_ecs = conn_ecs.execute("SELECT * FROM earningcalls;")
+    res_trnews = conn_trnews.execute("SELECT * FROM news;")
+    res_ecs = conn_ecs.execute("SELECT * FROM earningcalls_extended;")
+    res_esg = conn_esg.execute("SELECT * FROM Raw_pdf_data")
 
     yield_10ks = True
     while yield_10ks:
@@ -38,7 +40,7 @@ def raw_text_generator():
     while yield_trnews:
         row = res_trnews.fetchone()
         if row:
-            yield row[1]
+            yield row[1].replace("\n", " ")
         else:
             yield_trnews = False
 
@@ -50,9 +52,18 @@ def raw_text_generator():
         else:
             yield_ecs = False
 
+    yield_esg = True
+    while yield_esg:
+        row = res_esg.fetchone()
+        if row and not(row[4] == None):
+            yield row[4].replace("\n", " ")
+        else:
+            yield_esg = False
+
     conn_filings.close()
     conn_trnews.close()
     conn_ecs.close()
+    conn_esg.close()
 
 # initialize generator 
 raw_texts = raw_text_generator()
