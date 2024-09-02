@@ -1,4 +1,5 @@
 import os
+import warnings
 from dataclasses import asdict
 from finlm.dataset import FinLMDataset
 from transformers import ElectraConfig, ElectraForMaskedLM, ElectraForPreTraining, ElectraPreTrainedModel, ElectraModel
@@ -229,7 +230,6 @@ class PretrainLM:
         else:
             self.device = torch.device("cuda")
 
-            
     def add_callback(self, callback: AbstractCallback):
         if not isinstance(callback, AbstractCallback):
             raise TypeError(f"Callback must be of type 'AbstractCallback'. Got {type(callback)}")
@@ -290,6 +290,8 @@ class PretrainMLM(PretrainLM):
 
         self.training_state = None
         self.global_step = 0
+
+        self.config_change = False
         
         self.callback_manager.execute_callbacks("after_init", self)
 
@@ -307,20 +309,34 @@ class PretrainMLM(PretrainLM):
         """
 
         if rebuild_model_config:
-            self.model_config = ElectraConfig(
-                vocab_size=self.dataset.tokenizer.vocab_size,
-                embedding_size=self.model_config.embedding_size,
-                hidden_size=self.model_config.hidden_size,
-                num_hidden_layers=self.model_config.num_hidden_layers,
-                num_attention_heads=self.model_config.num_attention_heads,
-                intermediate_size=self.model_config.intermediate_size,
-                max_position_embeddings=self.model_config.max_position_embeddings
-            )
+            self.model_config = ElectraConfig(**self.model_config.__dict__)
+            self.model_config.vocab_size = self.dataset.tokenizer.vocab_size
 
         self.model = ElectraForMaskedLM(self.model_config)
+        self.config_change = False
         self.model.to(self.device)
         self.callback_manager.execute_callbacks("after_load_modal", self.model)
 
+    def adjust_config(self, key, value):
+        """
+        Adjusts the model configuration with a new value for a specified key.
+
+        This method allows for modifying any of the model configuration parameters
+        such as `embedding_size`, `hidden_size`, `num_hidden_layers`, and others.
+
+        Args:
+            key (str): The configuration parameter to be adjusted.
+            value (any): The new value to be set for the specified parameter.
+
+        Raises:
+            ValueError: If the specified key does not exist in the model configuration.
+        """
+        self.config_change = True
+        if hasattr(self.model_config, key):
+            setattr(self.model_config, key, value)
+            self.logger.info(f"Model configuration '{key}' updated to {value}.")
+        else:
+            raise ValueError(f"Key '{key}' does not exist in the model configuration.")
 
     def prepare_data_model_optimizer(self):
 
@@ -338,7 +354,7 @@ class PretrainMLM(PretrainLM):
     def evaluate(self, eval_metrics = dict,
                  dataset: datasets.Dataset = None,
                  metric_key_prefix: str = "eval",
-                 num_steps: int =None,
+                 num_steps: int = None,
                  verbose: bool = True):
         """
         Runs evaluation on n steps. Requires eval dataset.
@@ -361,7 +377,7 @@ class PretrainMLM(PretrainLM):
         n_batches = 0
         with torch.no_grad():
             runs = 0
-            with tqdm(range(eval_steps), desc=f"Evaluation Loop at training step {self.global_step}") as iterator:
+            with tqdm(range(eval_steps), desc=f"Evaluation Loop: " ) as iterator:
                 for batch in dataloader:
                     inputs, attention_mask = batch["input_ids"].to(self.device), batch["attention_mask"].to(self.device)
                     inputs, labels = self.mask_tokens(
@@ -369,7 +385,8 @@ class PretrainMLM(PretrainLM):
                         mlm_probability=self.optimization_config.mlm_probability,
                         mask_token_id=self.dataset.mask_token_id,
                         special_token_ids=self.dataset.special_token_ids,
-                        n_tokens=self.dataset.tokenizer.vocab_size)
+                        n_tokens=self.dataset.tokenizer.vocab_size
+                    )
 
                     mlm_output = self.model(input_ids=inputs, attention_mask=attention_mask, labels=labels)
                     loss, logits = mlm_output.loss, mlm_output.logits
@@ -388,7 +405,6 @@ class PretrainMLM(PretrainLM):
 
             self.callback_manager.execute_callbacks("after_eval", final_accuracy, final_loss, self.global_step)
 
-
             if verbose:
                 self.logger.info(f"Evaluation results at step [{self.global_step}] of {metric_key_prefix} dataset: "
                                  f"MLM Accuracy: {final_accuracy:.4f} --- MLM Loss: {final_loss:.4f}")
@@ -397,12 +413,19 @@ class PretrainMLM(PretrainLM):
           
 
     def train_epoch(self, epoch: int, training_metrics: dict, info_step: int = 100, num_steps: int = None,
-                    verbose: bool = True):
+                    verbose: bool = True, tqdm_iterator: tqdm = None):
 
         internal_steps = 0
 
+        if self.config_change:
+            warnings.warn("You changed the model config but did not reload the model. Your changes did therefore not "
+                          "affect the model architecture.")
+
+        break_flag = True if num_steps is None else False
+        if num_steps is None:
+            num_steps = float("inf")
+
         while internal_steps < num_steps:
-            break_flag = True if num_steps is None else False
 
             for batch_id, batch in enumerate(self.dataset):
                 self.callback_manager.execute_callbacks("before_batch_processing", batch_id, batch)
@@ -446,6 +469,9 @@ class PretrainMLM(PretrainLM):
                 self.global_step += 1
                 internal_steps += 1
 
+                if tqdm_iterator is not None:
+                    tqdm_iterator.update()
+
                 if batch_id % info_step == 0 and verbose:
                     self.logger.info(
                         f"Results after {batch_id / self.iteration_steps_per_epoch:.4%} iterations of epoch {epoch + 1}:")
@@ -455,16 +481,16 @@ class PretrainMLM(PretrainLM):
                     self.logger.info(f"Accuracy for masking task: {mlm_accuracy.item():.4f}")
                     self.logger.info("-" * 100)
 
-                if batch_id > internal_steps:
+                if internal_steps > num_steps:
                     break_flag = True
                     break
 
             if break_flag:
                 break
 
-            self.callback_manager.execute_callbacks("after_epoch", epoch, training_metrics)
+        self.callback_manager.execute_callbacks("after_epoch", epoch, training_metrics)
 
-            return training_metrics
+        return training_metrics
 
     def train(self):
         self.logger.info("Starting with training...")
@@ -558,7 +584,6 @@ class PretrainDiscriminator(PretrainLM):
         self.callback_manager.execute_callbacks("after_init", self)
         self.prepare_data_model_optimizer()
 
-
     def load_model(self):
 
         """
@@ -594,7 +619,6 @@ class PretrainDiscriminator(PretrainLM):
         """
 
         self.load_dataset()
-        self.load_model()
         self.load_optimization()
 
     def replace_masked_tokens_randomly(self, inputs, mlm_probability, mask_token_id, special_token_ids, n_tokens,

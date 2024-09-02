@@ -279,7 +279,7 @@ class MlMWandBTrackerCallback(AbstractCallback):
 
         # Initialize W&B
         wandb.login(key=api_key)
-        wandb.init(project=project_name, entity=entity, name=name)
+        wandb.init(project=project_name, entity=entity, name=name, reinit=True)
 
         # Log the initial parameters as config
         for k, v in params.items():
