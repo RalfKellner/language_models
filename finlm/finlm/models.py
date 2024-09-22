@@ -410,7 +410,6 @@ class PretrainMLM(PretrainLM):
                                  f"MLM Accuracy: {final_accuracy:.4f} --- MLM Loss: {final_loss:.4f}")
 
             return eval_metrics
-          
 
     def train_epoch(self, epoch: int, training_metrics: dict, info_step: int = 100, num_steps: int = None,
                     verbose: bool = True, tqdm_iterator: tqdm = None):
@@ -987,36 +986,20 @@ class PretrainElectra(PretrainLM):
 
         return discriminator_inputs, discriminator_labels
 
-    def train(self):
+    def train_epoch(self, epoch: int, training_metrics: dict, info_step: int = 100, num_steps: int = None,
+                    verbose: bool = True, tqdm_iterator: tqdm = None):
 
-        """
-        Trains the Electra model, which includes both the generator and discriminator, and saves the results and models.
+        internal_steps = 0
 
-        This method handles the training loop, including masking input tokens, generating replacements using the generator, 
-        training the discriminator on identifying the replaced tokens, calculating losses, updating model parameters, and 
-        logging training metrics. After training is complete, it saves the models, training metrics, and plots of the loss, 
-        accuracy, precision, and recall.
-        """
+        if self.config_change:
+            warnings.warn("You changed the model config but did not reload the model. Your changes did therefore not "
+                          "affect the model architecture.")
 
-        self.logger.info("Starting with training...")
-        training_metrics = {}
-        training_metrics["loss"] = []
-        training_metrics["mlm_loss"] = []
-        training_metrics["discriminator_loss"] = []
-        training_metrics["mlm_accuracy"] = []
-        training_metrics["discriminator_accuracy"] = []
-        training_metrics["discriminator_precision"] = []
-        training_metrics["discriminator_recall"] = []
-        training_metrics["gradient_norm"] = []
-        training_metrics["learning_rates"] = []
+        break_flag = True if num_steps is None else False
+        if num_steps is None:
+            num_steps = float("inf")
 
-        for epoch in range(self.optimization_config.n_epochs): 
-            
-            # update the offset for database retrieval, epoch = 0 -> offset = 0, epoch = 1 -> offset = 1 * limit, epoch = 2 -> offset = 2 * limit, ...    
-            self.dataset.set_dataset_offsets(epoch)
-            self.dataset.prepare_data_loader()
-            self.callback_manager.execute_callbacks("on_epoch_start", epoch) #TODO: What to include here?
-
+        while internal_steps < num_steps:
 
             for batch_id, batch in enumerate(self.dataset):
                 self.callback_manager.execute_callbacks("before_batch_processing", batch_id, batch)
@@ -1050,7 +1033,7 @@ class PretrainElectra(PretrainLM):
                 loss = mlm_loss + self.optimization_config.discriminator_weight * discriminator_loss
 
                 training_metrics["loss"].append(loss.item())
-                training_metrics["mlm_loss"].append(mlm_loss.item())
+                training_metrics["generator_loss"].append(mlm_loss.item())
                 training_metrics["discriminator_loss"].append(discriminator_loss.item())
 
                 # gradient determination and update
@@ -1085,7 +1068,7 @@ class PretrainElectra(PretrainLM):
                     discriminator_precision = binary_precision(active_predictions.long(), active_labels.long())
                     discriminator_recall = binary_recall(active_predictions.long(), active_labels.long())
 
-                training_metrics["mlm_accuracy"].append(mlm_accuracy.item())
+                training_metrics["generator_accuracy"].append(mlm_accuracy.item())
                 training_metrics["discriminator_accuracy"].append(discriminator_accuracy.item())
                 training_metrics["discriminator_precision"].append(discriminator_precision.item())
                 training_metrics["discriminator_recall"].append(discriminator_recall.item())
@@ -1094,11 +1077,14 @@ class PretrainElectra(PretrainLM):
                 current_lr = self.scheduler.get_last_lr()[0]
                 training_metrics["learning_rates"].append(current_lr)
 
+                if tqdm_iterator is not None:
+                    tqdm_iterator.update()
+
                 if batch_id % 100 == 0:
                     self.logger.info(
                         f"Results after {batch_id / self.iteration_steps_per_epoch:.4%} iterations of epoch {epoch + 1}:")
                     self.logger.info(f"Loss: {loss.item():.4f}")
-                    self.logger.info(f"MLM Loss: {mlm_loss.item():.4f}")
+                    self.logger.info(f"MLM Generator Loss: {mlm_loss.item():.4f}")
                     self.logger.info(f"Discriminator Loss: {discriminator_loss.item():.4f}")
                     self.logger.info(f"Gradient norm: {grad_norm:.4f}")
                     self.logger.info(f"Current learning rate: {current_lr}")
@@ -1106,13 +1092,59 @@ class PretrainElectra(PretrainLM):
                     self.logger.info(f"Accuracy for replacement task: {discriminator_accuracy.item():.4f}")
                     self.logger.info(f"Precision for replacement task: {discriminator_precision.item():.4f}")
                     self.logger.info(f"Recall for replacement task: {discriminator_recall.item():.4f}")
-                    self.logger.info("-"*100)
+                    self.logger.info("-" * 100)
 
                 self.callback_manager.execute_callbacks("on_batch_end", self.global_step, mlm_loss, mlm_accuracy,
                                                         discriminator_loss, discriminator_precision,
                                                         discriminator_recall, current_lr)
                 self.global_step += 1
+                self.callback_manager.execute_callbacks("before_batch_processing", batch_id, batch)
 
+                if internal_steps > num_steps:
+                    break_flag = True
+                    break
+
+            if break_flag:
+                break
+
+        self.callback_manager.execute_callbacks("after_epoch", epoch, training_metrics)
+
+        return training_metrics
+
+
+    def train(self):
+
+        """
+        Trains the Electra model, which includes both the generator and discriminator, and saves the results and models.
+
+        This method handles the training loop, including masking input tokens, generating replacements using the generator, 
+        training the discriminator on identifying the replaced tokens, calculating losses, updating model parameters, and 
+        logging training metrics. After training is complete, it saves the models, training metrics, and plots of the loss, 
+        accuracy, precision, and recall.
+        """
+
+        self.logger.info("Starting with training...")
+        info_step = 100
+        training_metrics = {
+            "loss": [],
+            "generator_loss": [],
+            "discriminator_loss": [],
+            "generator_accuracy": [],
+            "discriminator_accuracy": [],
+            "discriminator_precision": [],
+            "discriminator_recall": [],
+            "gradient_norm": [],
+            "learning_rates": []
+        }
+
+        for epoch in range(self.optimization_config.n_epochs): 
+            
+            # update the offset for database retrieval, epoch = 0 -> offset = 0, epoch = 1 -> offset = 1 * limit, epoch = 2 -> offset = 2 * limit, ...    
+            self.dataset.set_dataset_offsets(epoch)
+            self.dataset.prepare_data_loader()
+            self.callback_manager.execute_callbacks("on_epoch_start", epoch) #TODO: What to include here?
+
+            self.train_epoch(epoch, training_metrics, info_step=info_step)
             self.callback_manager.execute_callbacks("after_epoch", epoch, training_metrics, self.generator, self.discriminator)
 
         self.logger.info("...training is finished, saving results and model.")
