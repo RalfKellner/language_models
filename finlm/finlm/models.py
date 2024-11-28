@@ -1,10 +1,11 @@
 import os
+import random
 import warnings
 from dataclasses import asdict
 from finlm.dataset import FinLMDataset
 from transformers import ElectraConfig, ElectraForMaskedLM, ElectraForPreTraining, ElectraPreTrainedModel, ElectraModel
 from transformers import get_linear_schedule_with_warmup
-from finlm.config import FinLMConfig, EncoderConfig
+from finlm.config import FinLMConfig
 from finlm.callbacks import CallbackManager, CallbackTypes, AbstractCallback
 import pandas as pd
 import numpy as np
@@ -20,8 +21,15 @@ from transformers.models.electra.modeling_electra import ElectraAttention, Seque
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
 from torcheval.metrics.functional import binary_precision, binary_recall
 from typing import Optional, Any, List
+from itertools import combinations
+from functools import reduce
+from operator import mul
 import copy
-from transformers import PreTrainedModel, RoFormerForMaskedLM, RoFormerConfig, LongformerForMaskedLM, LongformerConfig
+from transformers import (PreTrainedModel, RoFormerForMaskedLM, RoFormerConfig,
+                          LongformerForMaskedLM, LongformerConfig,
+                          ReformerConfig, ReformerForMaskedLM,
+                          FunnelForMaskedLM, FunnelConfig,
+                          BigBirdForMaskedLM, BigBirdConfig)
 import logging
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -41,15 +49,19 @@ def transformer_lm_factory(model_name: str, config: FinLMConfig, dataset: FinLMD
                                           num_hidden_layers=config.model_config.num_hidden_layers,
                                           num_attention_heads=config.model_config.num_attention_heads,
                                           intermediate_size=config.model_config.intermediate_size,
-                                          max_position_embeddings=config.model_config.max_position_embeddings,
+                                          max_position_embeddings=config.model_config.max_position_embeddings + 1, #this is needed because of the padding token
                                           pad_token_id=dataset.tokenizer.pad_token_id,
                                           eos_token_id=dataset.tokenizer.eos_token_id,
                                           bos_token_id=dataset.tokenizer.bos_token_id, # Check what ahppens when none
-                                          sep_token_id=dataset.tokenizer.sep_token_id,)
+                                          sep_token_id=dataset.tokenizer.sep_token_id,
+                                          hidden_act=config.model_config.hidden_act,)
 
             lm = RoFormerForMaskedLM(model_config)
 
         case "longformer":
+            #TODO Fix the model: Currently there is an index error in the model. Probably embedding size is not correct.
+            #raise NotImplementedError("Has a bug in the model, will be fixed soon.\n "
+            #                          "If you want to fix it, comment out this line.")
 
             if not hasattr(config.model_config, "attention_window"):
                 raise ValueError("Attention window must be specified for Longformer model.")
@@ -60,12 +72,13 @@ def transformer_lm_factory(model_name: str, config: FinLMConfig, dataset: FinLMD
                                             num_hidden_layers=config.model_config.num_hidden_layers,
                                             num_attention_heads=config.model_config.num_attention_heads,
                                             intermediate_size=config.model_config.intermediate_size,
-                                            max_position_embeddings=config.model_config.max_position_embeddings,
+                                            max_position_embeddings=config.model_config.max_position_embeddings + 1,
                                             attention_window=config.model_config.attention_window,
                                             pad_token_id=dataset.tokenizer.pad_token_id,
                                             eos_token_id=dataset.tokenizer.eos_token_id,
                                             bos_token_id=dataset.tokenizer.bos_token_id, # Check what ahppens when none
-                                            sep_token_id=dataset.tokenizer.sep_token_id,)
+                                            sep_token_id=dataset.tokenizer.sep_token_id,
+                                            hidden_act=config.model_config.hidden_act,)
 
             lm = LongformerForMaskedLM(model_config)
 
@@ -75,13 +88,132 @@ def transformer_lm_factory(model_name: str, config: FinLMConfig, dataset: FinLMD
                                          hidden_size=config.model_config.hidden_size,
                                          num_hidden_layers=config.model_config.num_hidden_layers,
                                          num_attention_heads=config.model_config.num_attention_heads,
-                                         max_position_embeddings=config.model_config.max_position_embeddings,
+                                         max_position_embeddings=config.model_config.max_position_embeddings + 1,
                                          eos_token_id=dataset.tokenizer.eos_token_id,
                                          bos_token_id=dataset.tokenizer.bos_token_id,
                                          sep_token_id=dataset.tokenizer.sep_token_id,
-                                         pad_token_id=dataset.tokenizer.pad_token_id,)
+                                         pad_token_id=dataset.tokenizer.pad_token_id,
+                                         hidden_act=config.model_config.hidden_act,)
 
             lm = ElectraForMaskedLM(model_config)
+
+        case "reformer":
+            def find_factor_tuples(x):
+                factors = [i for i in range(1, x + 1) if x % i == 0]
+
+                result = []
+                for r in range(2, len(factors) + 1):
+                    for combo in combinations(factors, r):
+                        if reduce(mul, combo) == x:
+                            result.append(combo)
+                return result
+
+            if not hasattr(config.model_config, "attn_layers"):
+                raise ValueError("Number of attention layers must be specified for Reformer model.")
+
+            if not hasattr(config.model_config, "axial_pos_embds"):
+                raise ValueError("Axial position embeddings must be specified for Reformer model.")
+
+            if sum(config.model_config.axial_pos_embds_dim) != config.model_config.hidden_size:
+                first_axial = int(config.model_config.hidden_size / 3)
+                second_axial = config.model_config.hidden_size - first_axial
+
+                config.model_config.axial_pos_embds_dim = [first_axial, second_axial]
+                warnings.warn(f"Axial position embeddings do not sum up to hidden size. "
+                              f"Setting axial_pos_embds to {config.model_config.axial_pos_embds_dim}. If this behavior is not desired, "
+                              f"make sure you set the axial_pos_embds correctly.")
+
+            if config.model_config.axial_pos_shape[0] * config.model_config.axial_pos_shape[1] != config.model_config.max_position_embeddings:
+                common_divisors = find_factor_tuples(config.model_config.max_position_embeddings)
+                selected_tuple = random.choice(list(filter(lambda x: len(x) == 2 and x[0] != 1 and x[1] != 1, common_divisors, )))
+                config.model_config.axial_pos_shape = selected_tuple
+                warnings.warn(f"Axial position shape does not match max position embeddings. It should multiply to sequence length."
+                              f"Input was {config.model_config.axial_pos_shape} for max_position_embeddings {config.model_config.max_position_embeddings}."
+                              f"Setting axial_pos_shape to {config.model_config.axial_pos_shape}. If this behavior is not desired, "
+                              f"make sure you set the axial_pos_shape correctly.")
+
+            model_config = ReformerConfig(vocab_size=dataset.tokenizer.vocab_size,
+                                          embedding_size=config.model_config.embedding_size,
+                                          hidden_size=config.model_config.hidden_size,
+                                          num_hidden_layers=config.model_config.num_hidden_layers,
+                                          num_attention_heads=config.model_config.num_attention_heads,
+                                          max_position_embeddings=config.model_config.max_position_embeddings + 1,
+                                          eos_token_id=dataset.tokenizer.eos_token_id,
+                                          bos_token_id=dataset.tokenizer.bos_token_id,
+                                          sep_token_id=dataset.tokenizer.sep_token_id,
+                                          pad_token_id=dataset.tokenizer.pad_token_id,
+                                          hidden_act=config.model_config.hidden_act,
+                                          attn_layers=config.model_config.attn_layers,
+                                          axial_pos_embds=config.model_config.axial_pos_embds,
+                                          axial_pos_embds_dim=config.model_config.axial_pos_embds_dim,
+                                          axial_pos_shape=config.model_config.axial_pos_shape,
+                                          )
+
+            lm = ReformerForMaskedLM(model_config)
+
+        case "funnel":
+            # TODO Fix the model: Currently there is an index error in the model. AttributeError: 'FunnelEmbeddings' object has no attribute 'padding_idx' ????
+            raise NotImplementedError("Has a bug in the model, will be fixed soon.\n "
+                                      "If you want to fix it, comment out this line.")
+
+            if not hasattr(config.model_config, "block_sizes"):
+                raise ValueError("Block sizes must be specified for Funnel model.")
+
+            if not hasattr(config.model_config, "hidden_act"):
+                raise ValueError("Hidden activation function must be specified for Funnel model.")
+
+            model_config = FunnelConfig(vocab_size=dataset.tokenizer.vocab_size,
+                                        embedding_size=config.model_config.embedding_size,
+                                        d_inner=config.model_config.hidden_size * 3,
+                                        d_model = config.model_config.hidden_size,
+                                        d_head=config.model_config.hidden_size // config.model_config.num_attention_heads,
+                                        n_head=config.model_config.num_attention_heads,
+                                        max_position_embeddings=config.model_config.max_position_embeddings + 1,
+                                        eos_token_id=dataset.tokenizer.eos_token_id,
+                                        bos_token_id=dataset.tokenizer.bos_token_id,
+                                        sep_token_id=dataset.tokenizer.sep_token_id,
+                                        pad_token_id=dataset.tokenizer.pad_token_id,
+                                        block_sizes=config.model_config.block_sizes,
+                                        hidden_act=config.model_config.hidden_act,
+                                        )
+
+            lm = FunnelForMaskedLM(model_config)
+
+        case "bigbird":
+
+            if not hasattr(config.model_config, "num_random_blocks"):
+                raise ValueError("Number of random blocks must be specified for BigBird model.")
+
+            if not hasattr(config.model_config, "block_size"):
+                raise ValueError("Block size must be specified for BigBird model.")
+
+            if not hasattr(config.model_config, "attention_type"):
+                raise ValueError("Attention type must be specified for BigBird model.")
+
+            if config.model_config.max_position_embeddings % config.model_config.block_size != 0:
+                raise ValueError("Max position embeddings must be divisible by block size for BigBird model."
+                                 f"Got {config.model_config.max_position_embeddings} and {config.model_config.block_size}.")
+
+            #if config.model_config.max_position_embeddings < 1024 and config.model_config.attention_type == "block_sparse":
+            #    raise ValueError("Max position embeddings must be at least 1024 for block sparse attention.")
+
+            model_config = BigBirdConfig(vocab_size=dataset.tokenizer.vocab_size,
+                                         embedding_size=config.model_config.embedding_size,
+                                         hidden_size=config.model_config.hidden_size,
+                                         num_hidden_layers=config.model_config.num_hidden_layers,
+                                         num_attention_heads=config.model_config.num_attention_heads,
+                                         max_position_embeddings=config.model_config.max_position_embeddings + 1,
+                                         eos_token_id=dataset.tokenizer.eos_token_id,
+                                         bos_token_id=dataset.tokenizer.bos_token_id,
+                                         sep_token_id=dataset.tokenizer.sep_token_id,
+                                         pad_token_id=dataset.tokenizer.pad_token_id,
+                                         attention_type=config.model_config.attention_type,
+                                         num_random_blocks=config.model_config.num_random_blocks,
+                                         block_size=config.model_config.block_size,
+                                         hidden_act=config.model_config.hidden_act,
+                                         )
+
+            lm = BigBirdForMaskedLM(model_config)
 
         case _:
             raise ValueError(f"Model name {model_name} not supported.")
@@ -89,17 +221,17 @@ def transformer_lm_factory(model_name: str, config: FinLMConfig, dataset: FinLMD
     return lm, model_config
 
 
-def generator_lm_factory(discriminator_config: FinLMConfig, dataset:FinLMDataset,
+def generator_lm_factory(discriminator_config: FinLMConfig, dataset: FinLMDataset,
                          generator_size: float = 0.25, model_name: str = "electra"):
     generator_config = copy.deepcopy(discriminator_config)
     generator_config.model_config.hidden_size = int(generator_config.model_config.hidden_size * generator_size)
     generator_config.model_config.intermediate_size = int(generator_config.model_config.intermediate_size * generator_size)
     generator_config.model_config.num_hidden_layers = int(generator_config.model_config.num_hidden_layers * generator_config.model_config.generator_layer_size)
     generator_config.model_config.num_attention_heads = int(generator_config.model_config.num_attention_heads * generator_size)
-
     generator, generator_config = transformer_lm_factory(model_name, generator_config, dataset)
 
     return generator, generator_config
+
 
 class PretrainLM:
     """
@@ -189,7 +321,9 @@ class PretrainLM:
                                                          num_warmup_steps=self.optimization_config.lr_scheduler_warm_up_steps,
                                                          num_training_steps=total_steps)
 
-        self.callback_manager.execute_callbacks("after_optim_load", self.iteration_steps_per_epoch, self.optimizer,
+        self.callback_manager.execute_callbacks("after_optim_load",
+                                                self.iteration_steps_per_epoch,
+                                                self.optimizer,
                                                 self.scheduler)
 
     @staticmethod

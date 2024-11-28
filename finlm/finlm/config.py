@@ -69,6 +69,20 @@ class ModelConfig:
         Name of the model architecture (default is "electra").
     attention_window: int, optional
         Size of the attention window (default is 256). Only used for Longformer.
+    axial_pos_shape: tuple[int], optional
+        Shape of the axial position embeddings (default is (64, 64)). Only used for Reformer
+    axial_pos_embds: bool, optional
+        Whether to use axial position embeddings (default is True). Only used for Reformer
+    axial_pos_embds_dim: tuple[int], optional
+        Dimension of the axial position embeddings (default is (64, 292)). Only used for Reformer
+    attn_layers: list[str], optional
+        List of attention layers to use (default is ["local" if i % 2 == 0 else "lsh" for i in range(num_hidden_layers)]). Only used for Reformer
+    attention_type: str, optional
+        Type of attention to use (default is "block_sparse"). Only used for BigBird
+    num_random_blocks: int, optional
+        Number of random blocks to use (default is 3). Only used for BigBird
+    block_size: int, optional
+        Size of the blocks (default is 64). Only used for BigBird
 
     Methods
     -------
@@ -86,19 +100,16 @@ class ModelConfig:
     generator_layer_size: float = 1.0
     model_name: str = "electra"
     attention_window: int = 128
-
-
-@dataclass
-class EncoderConfig:
-    model_name: str
-    embedding_size: int = 128
-    hidden_size: int = 256
-    num_hidden_layers: int = 12
-    num_attention_heads: int = 4
-    intermediate_size: int = 1024
-    max_position_embeddings: int = 256
     hidden_act: str = "gelu"
-    hidden_dropout_prob: float = 0.1
+    axial_pos_shape: tuple[int] = (64, 64)
+    axial_pos_embds: bool = True
+    axial_pos_embds_dim: tuple[int] = (64, 292)
+    attn_layers: list[str] = tuple(["local" if i % 2 == 0 else "lsh" for i in range(num_hidden_layers)])
+    block_sizes : tuple[int] = (4,4,4,4)
+    attention_type : str = "block_sparse"
+    num_random_blocks : int = 3
+    block_size : int = 64
+
 
 
 @dataclass
