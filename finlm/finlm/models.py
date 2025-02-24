@@ -3,7 +3,8 @@ import random
 import warnings
 from dataclasses import asdict
 from finlm.dataset import FinLMDataset
-from transformers import ElectraConfig, ElectraForMaskedLM, ElectraForPreTraining, ElectraPreTrainedModel, ElectraModel
+from transformers import ElectraConfig, ElectraForMaskedLM, ElectraForPreTraining, ElectraPreTrainedModel, ElectraModel, \
+    AutoModelForMaskedLM
 from transformers import get_linear_schedule_with_warmup
 from finlm.config import FinLMConfig
 from finlm.callbacks import CallbackManager, CallbackTypes, AbstractCallback
@@ -25,11 +26,12 @@ from itertools import combinations
 from functools import reduce
 from operator import mul
 import copy
-from transformers import (PreTrainedModel, RoFormerForMaskedLM, RoFormerConfig,
+from transformers import (RoFormerForMaskedLM, RoFormerConfig,
                           LongformerForMaskedLM, LongformerConfig,
                           ReformerConfig, ReformerForMaskedLM,
                           FunnelForMaskedLM, FunnelConfig,
-                          BigBirdForMaskedLM, BigBirdConfig)
+                          BigBirdForMaskedLM, BigBirdConfig,
+                          ModernBertForMaskedLM, ModernBertConfig)
 import logging
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -215,14 +217,43 @@ def transformer_lm_factory(model_name: str, config: FinLMConfig, dataset: FinLMD
 
             lm = BigBirdForMaskedLM(model_config)
 
+        case "modernbert":
+            model_config = ModernBertConfig(vocab_size=dataset.tokenizer.vocab_size,
+                                            embedding_size=config.model_config.embedding_size,
+                                            hidden_size=config.model_config.hidden_size,
+                                            intermediate_size=config.model_config.intermediate_size,
+                                            num_hidden_layers=config.model_config.num_hidden_layers,
+                                            num_attention_heads=config.model_config.num_attention_heads,
+                                            max_position_embeddings=config.model_config.max_position_embeddings + 1,
+                                            eos_token_id=dataset.tokenizer.eos_token_id,
+                                            bos_token_id=dataset.tokenizer.bos_token_id,
+                                            sep_token_id=dataset.tokenizer.sep_token_id,
+                                            pad_token_id=dataset.tokenizer.pad_token_id,
+                                            hidden_act=config.model_config.hidden_act,)
+
+            lm = ModernBertForMaskedLM(model_config)
+
         case _:
             raise ValueError(f"Model name {model_name} not supported.")
 
     return lm, model_config
 
+def discriminator_factory(discriminator: nn.Module):
+    if isinstance(discriminator, LongformerForMaskedLM):
+        discriminator = discriminator.longformer
+
+    elif isinstance(discriminator, RoFormerForMaskedLM):
+        discriminator = discriminator.roformer
+
+    elif isinstance(discriminator, ModernBertForMaskedLM):
+        discriminator = discriminator.model
+
+    discriminator.decoder = nn.Linear(discriminator.config.hidden_size, 1)
+
+    return discriminator
 
 def generator_lm_factory(discriminator_config: FinLMConfig, dataset: FinLMDataset,
-                         generator_size: float = 0.25, model_name: str = "electra"):
+                         generator_size: float = 0.25, model_name: str = "bert"):
     generator_config = copy.deepcopy(discriminator_config)
     generator_config.model_config.hidden_size = int(generator_config.model_config.hidden_size * generator_size)
     generator_config.model_config.intermediate_size = int(generator_config.model_config.intermediate_size * generator_size)
@@ -231,6 +262,14 @@ def generator_lm_factory(discriminator_config: FinLMConfig, dataset: FinLMDatase
     generator, generator_config = transformer_lm_factory(model_name, generator_config, dataset)
 
     return generator, generator_config
+
+def embedding_matcher(generator: nn.Module, discriminator: nn.Module):
+    if isinstance(generator, ModernBertForMaskedLM):
+        generator.model.embeddings.tok_embeddings = discriminator.model.embeddings.tok_embeddings
+        generator.model.embeddings.norm = generator.model.embeddings.tok_embeddings
+
+    else:
+        raise ValueError(f"Model type: {generator.__class__} not supported")
 
 
 class PretrainLM:
@@ -1729,5 +1768,331 @@ class PretrainMLM2(PretrainLM):
         self.logger.info("Results and model are saved.")
 
 
+class PretrainElectraExtended(PretrainLM):
+    """
+    A class for pretraining the Electra model using the FinLM setup.
 
+    This class inherits from `PretrainLM` and provides specific implementations for
+    preparing data, loading both the generator and discriminator models, and training
+    the Electra model, which includes both components.
+
+    Attributes
+    ----------
+    config : FinLMConfig
+        Configuration object containing dataset, model, and optimization configurations.
+    dataset : FinLMDataset
+        The dataset prepared for Electra model training.
+    generator : ElectraForMaskedLM
+        The generator model in the Electra framework configured for masked language modeling.
+    discriminator : ElectraForPreTraining
+        The discriminator model in the Electra framework configured for identifying replaced tokens.
+    optimizer : torch.optim.Optimizer
+        The optimizer used for training.
+    scheduler : torch.optim.lr_scheduler.LambdaLR
+        The learning rate scheduler used during training.
+    iteration_steps_per_epoch : int
+        Number of iteration steps per training epoch.
+    logger : logging.Logger
+        Logger instance for logging messages related to training.
+    device : torch.device
+        Device on which computations will be performed (CPU or CUDA).
+
+    Methods
+    -------
+    load_model() -> None
+        Loads and configures the Electra generator and discriminator models.
+    load_optimization() -> None
+        Sets up the optimizer and learning rate scheduler based on the optimization configuration.
+    prepare_data_model_optimizer() -> None
+        Prepares the dataset, models, and optimizer for training.
+    replace_masked_tokens_from_generator(masked_inputs: torch.Tensor, original_inputs: torch.Tensor, logits: torch.Tensor, special_mask_id: int, discriminator_sampling: str = "multinomial") -> Tuple[torch.Tensor, torch.Tensor]
+        Replaces masked tokens with tokens sampled from the generator and generates labels for discriminator training.
+    train() -> None
+        Trains the Electra model, which includes both the generator and discriminator, and saves the results and models.
+    """
+
+    def __init__(self, config):
+
+        """
+        Initializes the PretrainElectra class with the given configuration.
+
+        Parameters
+        ----------
+        config : FinLMConfig
+            Configuration object containing dataset, model, and optimization configurations.
+        """
+
+        super().__init__(config)
+        self.prepare_data_model_optimizer()
+
+        self.global_step = 0
+
+    def load_model(self):
+
+        """
+        Loads and configures the Electra generator and discriminator models.
+
+        This method initializes the Electra generator and discriminator models using the
+        configuration settings, including vocabulary size, embedding size, hidden size,
+        and other model parameters. The models are then moved to the appropriate device (CPU or GPU).
+        """
+
+        self.discriminator, self.discriminator_model_config = transformer_lm_factory(self.config.model_config.model_name, self.config, self.dataset)
+        self.discriminator = discriminator_factory(self.discriminator)
+        self.generator, self.generator_config = generator_lm_factory(self.config,
+                                                                     self.dataset,
+                                                                     generator_size=0.25, #TODO: remove hard code
+                                                                     model_name=self.model_config.model_name
+                                                                 )
+        # tie word and position embeddings
+        #embedding_matcher(self.generator, self.discriminator) #TODO: check if neccesary
+
+        self.generator.to(self.device)
+        self.discriminator.to(self.device)
+
+        self.callback_manager.execute_callbacks("after_load_modal", self.generator, self.discriminator)
+
+    def load_optimization(self):
+
+        """
+        Sets up the optimizer and learning rate scheduler based on the optimization configuration.
+
+        This method identifies the trainable parameters, ensuring that the word and position embeddings
+        are not duplicated. It then calculates the total number of training steps, initializes the AdamW
+        optimizer, and configures a linear learning rate scheduler with warm-up steps.
+        """
+
+        # identify trainable parameters without duplicating the embedding and position parameters
+        self.model_parameters = []
+        # generator
+        for name, params in self.discriminator.named_parameters():
+            self.model_parameters.append(params)
+        # discriminator
+        for name, params in self.generator.named_parameters():
+            if name.endswith("word_embeddings.weight") | name.endswith("position_embeddings.weight"):
+                continue
+            else:
+                self.model_parameters.append(params)
+
+        n_sequences = 0
+        for key in self.dataset.database_retrieval.keys():
+            n_sequences += self.dataset.database_retrieval[key]["limit"]
+        self.iteration_steps_per_epoch = int(np.ceil(n_sequences / self.dataset.batch_size))
+        total_steps = self.iteration_steps_per_epoch * self.optimization_config.n_epochs
+        self.optimizer = torch.optim.AdamW(self.model_parameters, lr=self.optimization_config.learning_rate)
+        self.scheduler = get_linear_schedule_with_warmup(self.optimizer,
+                                                         num_warmup_steps=self.optimization_config.lr_scheduler_warm_up_steps,
+                                                         num_training_steps=total_steps)
+
+        self.callback_manager.execute_callbacks("after_optim_load", self.iteration_steps_per_epoch, self.optimizer,
+                                                self.scheduler)
+
+    def prepare_data_model_optimizer(self):
+
+        """
+        Prepares the dataset, models, and optimizer for training.
+
+        This method calls the appropriate methods to load the dataset, load the generator and
+        discriminator models, and set up the optimizer and learning rate scheduler.
+        """
+
+        self.load_dataset()
+        self.load_model()
+        self.load_optimization()
+
+    @staticmethod
+    def replace_masked_tokens_from_generator(masked_inputs, original_inputs, logits, special_mask_id,
+                                             discriminator_sampling="gumbel_softmax"):
+
+        """
+        Replaces masked tokens with tokens sampled from the generator and generates labels for discriminator training.
+
+        This method uses the generator's output logits to replace masked tokens in the input. It generates labels
+        indicating whether a token has been replaced and whether the replacement matches the original token.
+
+        Parameters
+        ----------
+        masked_inputs : torch.Tensor
+            Tensor containing the masked input token IDs.
+        original_inputs : torch.Tensor
+            Tensor containing the original input token IDs before masking.
+        logits : torch.Tensor
+            Logits output by the generator model.
+        special_mask_id : int
+            The token ID used for masking (typically the ID for the [MASK] token).
+        discriminator_sampling : str, optional
+            The sampling strategy for selecting replacement tokens, either "multinomial" or another strategy like "aggressive" or "gumbel_softmax" (default is "gumbel_softmax").
+
+        Returns
+        -------
+        Tuple[torch.Tensor, torch.Tensor]
+            A tuple containing the discriminator inputs (with replaced tokens) and the corresponding labels tensor.
+        """
+
+        device = masked_inputs.device
+        discriminator_inputs = masked_inputs.clone()
+        mask_indices = masked_inputs == special_mask_id
+
+        if discriminator_sampling == "aggressive":
+            sampled_ids = logits[mask_indices].argmax(-1)
+        elif discriminator_sampling == "gumbel_softmax":
+            sampled_ids = torch.nn.functional.gumbel_softmax(logits[mask_indices], hard=False).argmax(-1)
+        else:
+            sampled_ids = torch.multinomial(torch.nn.functional.softmax(logits[mask_indices], dim=-1), 1).squeeze()
+
+        discriminator_inputs[mask_indices] = sampled_ids
+        # initialize discriminator labels with False
+        discriminator_labels = torch.full(masked_inputs.shape, False, dtype=torch.bool, device=device)
+        # replace False with True if an id is sampled and not the same as the original one
+        discriminator_labels[mask_indices] = discriminator_inputs[mask_indices] != original_inputs[mask_indices]
+        # convert to float
+        discriminator_labels = discriminator_labels.float()
+
+        return discriminator_inputs, discriminator_labels
+
+    def train(self):
+
+        """
+        Trains the Electra model, which includes both the generator and discriminator, and saves the results and models.
+
+        This method handles the training loop, including masking input tokens, generating replacements using the generator,
+        training the discriminator on identifying the replaced tokens, calculating losses, updating model parameters, and
+        logging training metrics. After training is complete, it saves the models, training metrics, and plots of the loss,
+        accuracy, precision, and recall.
+        """
+
+        self.logger.info("Starting with training...")
+        training_metrics = {}
+        training_metrics["loss"] = []
+        training_metrics["mlm_loss"] = []
+        training_metrics["discriminator_loss"] = []
+        training_metrics["mlm_accuracy"] = []
+        training_metrics["discriminator_accuracy"] = []
+        training_metrics["discriminator_precision"] = []
+        training_metrics["discriminator_recall"] = []
+        training_metrics["gradient_norm"] = []
+        training_metrics["learning_rates"] = []
+
+        for epoch in range(self.optimization_config.n_epochs):
+
+            # update the offset for database retrieval, epoch = 0 -> offset = 0, epoch = 1 -> offset = 1 * limit, epoch = 2 -> offset = 2 * limit, ...
+            self.dataset.set_dataset_offsets(epoch)
+            self.dataset.prepare_data_loader()
+            self.callback_manager.execute_callbacks("on_epoch_start", epoch)  # TODO: What to include here?
+
+            for batch_id, batch in enumerate(self.dataset):
+                self.callback_manager.execute_callbacks("before_batch_processing", batch_id, batch)
+                inputs, attention_mask = batch["input_ids"].to(self.device), batch["attention_mask"].to(self.device)
+
+                original_inputs = inputs.clone()
+                generator_inputs, generator_labels = self.mask_tokens(
+                    inputs,
+                    mlm_probability=self.optimization_config.mlm_probability,
+                    mask_token_id=self.dataset.mask_token_id,
+                    special_token_ids=self.dataset.special_token_ids,
+                    n_tokens=self.dataset.tokenizer.vocab_size)
+
+                mlm_output = self.generator(input_ids=generator_inputs, attention_mask=attention_mask,
+                                            labels=generator_labels)
+                mlm_loss, mlm_logits = mlm_output.loss, mlm_output.logits
+
+                sampling_logits = mlm_logits.detach()
+                discriminator_inputs, discriminator_labels = self.replace_masked_tokens_from_generator(
+                    masked_inputs=generator_inputs,
+                    original_inputs=original_inputs,
+                    logits=sampling_logits,
+                    special_mask_id=self.dataset.tokenizer.mask_token_id,
+                    discriminator_sampling=self.optimization_config.discriminator_sampling
+                )
+
+                discriminator_outputs = self.discriminator(input_ids=discriminator_inputs, attention_mask=attention_mask,)[0]
+                discriminator_logits = self.discriminator.decoder(discriminator_outputs)
+                discriminator_loss = torch.nn.functional.binary_cross_entropy_with_logits(discriminator_logits.squeeze(), discriminator_labels)
+                loss = mlm_loss + self.optimization_config.discriminator_weight * discriminator_loss
+
+                training_metrics["loss"].append(loss.item())
+                training_metrics["mlm_loss"].append(mlm_loss.item())
+                training_metrics["discriminator_loss"].append(discriminator_loss.item())
+
+                # gradient determination and update
+                self.optimizer.zero_grad()
+
+                # determine gradients
+                loss.backward()
+
+                if self.optimization_config.use_gradient_clipping:
+                    torch.nn.utils.clip_grad_norm_(self.model_parameters, max_norm=1.0)
+
+                # determine gradient norms, equal to one if use_gradient_clipping is set to True
+                grads = [p.grad.detach().flatten() for p in self.model_parameters]
+                grad_norm = torch.cat(grads).norm()
+
+                # update parameters
+                self.optimizer.step()
+                # update learning rate
+                self.scheduler.step()
+
+                # determine accuracy metrics, (maybe check for correctness later, has been implemented quickly;))
+                with torch.no_grad():
+                    # mask to identify ids which have been masked before
+                    masked_ids_mask = inputs == self.dataset.tokenizer.mask_token_id
+                    predictions = mlm_logits.argmax(-1)
+                    mlm_accuracy = (predictions[masked_ids_mask] == generator_labels[masked_ids_mask]).float().mean()
+                    active_loss = attention_mask == 1
+                    active_logits = discriminator_logits[active_loss]
+                    active_predictions = (torch.sign(active_logits) + 1.0) * 0.5
+                    active_labels = discriminator_labels[active_loss]
+                    discriminator_accuracy = (active_predictions == active_labels).float().mean()
+                    discriminator_precision = binary_precision(active_predictions.long(), active_labels.long())
+                    discriminator_recall = binary_recall(active_predictions.long(), active_labels.long())
+
+                training_metrics["mlm_accuracy"].append(mlm_accuracy.item())
+                training_metrics["discriminator_accuracy"].append(discriminator_accuracy.item())
+                training_metrics["discriminator_precision"].append(discriminator_precision.item())
+                training_metrics["discriminator_recall"].append(discriminator_recall.item())
+
+                training_metrics["gradient_norm"] = grad_norm.item()
+                current_lr = self.scheduler.get_last_lr()[0]
+                training_metrics["learning_rates"].append(current_lr)
+
+                if batch_id % 100 == 0:
+                    self.logger.info(
+                        f"Results after {batch_id / self.iteration_steps_per_epoch:.4%} iterations of epoch {epoch + 1}:")
+                    self.logger.info(f"Loss: {loss.item():.4f}")
+                    self.logger.info(f"MLM Loss: {mlm_loss.item():.4f}")
+                    self.logger.info(f"Discriminator Loss: {discriminator_loss.item():.4f}")
+                    self.logger.info(f"Gradient norm: {grad_norm:.4f}")
+                    self.logger.info(f"Current learning rate: {current_lr}")
+                    self.logger.info(f"Accuracy for masking task: {mlm_accuracy.item():.4f}")
+                    self.logger.info(f"Accuracy for replacement task: {discriminator_accuracy.item():.4f}")
+                    self.logger.info(f"Precision for replacement task: {discriminator_precision.item():.4f}")
+                    self.logger.info(f"Recall for replacement task: {discriminator_recall.item():.4f}")
+                    self.logger.info("-" * 100)
+
+                self.callback_manager.execute_callbacks("on_batch_end", self.global_step, mlm_loss, mlm_accuracy,
+                                                        discriminator_loss, discriminator_precision,
+                                                        discriminator_recall, current_lr)
+                self.global_step += 1
+
+            self.callback_manager.execute_callbacks("after_epoch", epoch, training_metrics, self.generator,
+                                                    self.discriminator)
+
+        self.logger.info("...training is finished, saving results and model.")
+
+        training_metrics_df = pd.DataFrame(training_metrics)
+
+        save_path = self._create_directory_and_return_save_path(model_type="electra")
+        # create a function for making an output directory which creates it and saves the csv and model
+        training_metrics_df.to_csv(save_path + "training_metrics.csv", index=False)
+        training_metrics_df.loc[:, ["loss", "mlm_loss", "discriminator_loss"]].plot(subplots=True)
+        plt.savefig(save_path + "loss.png")
+        training_metrics_df.loc[:,
+        ["mlm_accuracy", "discriminator_accuracy", "discriminator_precision", "discriminator_recall"]].plot(
+            subplots=True)
+        plt.savefig(save_path + "accuracy.png")
+        self.generator.save_pretrained(save_path + "mlm_model")
+        self.discriminator.save_pretrained(save_path + "discriminator_model")
+        self.config.to_json(save_path + "model_config.json")
+
+        self.logger.info("Results and model are saved.")
 
