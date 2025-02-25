@@ -1735,7 +1735,7 @@ class PretrainElectraExtended(PretrainLM):
                     torch.nn.utils.clip_grad_norm_(self.model_parameters, max_norm=1.0)
 
                 # determine gradient norms, equal to one if use_gradient_clipping is set to True
-                grads = [p.grad.detach().flatten() for p in self.model_parameters]
+                grads = [p.grad.detach().flatten() for p in self.model_parameters if p.grad is not None]
                 grad_norm = torch.cat(grads).norm()
 
                 # update parameters
@@ -1809,7 +1809,7 @@ class PretrainElectraExtended(PretrainLM):
 
 
 
-##############################################DEPRECATED################################################################
+
 
 class PretrainMLMExtended(PretrainLM):
     """
