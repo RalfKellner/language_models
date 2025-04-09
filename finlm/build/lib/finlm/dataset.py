@@ -6,12 +6,13 @@ import datasets
 import torch
 from torch.utils.data import Dataset as TorchDataset
 from torch.utils.data import DataLoader
-from finlm.tokenizer import FinLMTokenizer, FinLMGptTokenizer
+from finlm.tokenizer import FinLMTokenizer
 from transformers import AutoTokenizer
 import numpy as np
 import logging
 
 datasets.disable_progress_bars()
+
 
 class FinLMDataset:
     """
@@ -20,8 +21,12 @@ class FinLMDataset:
 
         Attributes
         ----------
-        tokenizer_type: either FinLMTokenizer or FinLMGptTokenizer
-        tokenizer_path : path to pretrained tokenizer
+        tokenizer : FinLMTokenizer
+            The tokenizer used to tokenize text sequences.
+        mask_token_id : int
+            The ID of the mask token in the tokenizer.
+        special_token_ids : set
+            A set of IDs corresponding to all special tokens, excluding the mask token.
         max_sequence_length : int
             The maximum number of tokens allowed per sequence.
         db_name : str
@@ -36,7 +41,6 @@ class FinLMDataset:
 
     def __init__(
             self,
-            tokenizer_type: str,
             tokenizer_path: str,
             max_sequence_length: int,
             db_name: str,
@@ -62,12 +66,7 @@ class FinLMDataset:
         """
 
         self.logger = logging.getLogger(self.__class__.__name__)
-        if tokenizer_type == "FinLMTokenizer":
-            self.tokenizer = FinLMTokenizer(tokenizer_path)
-        elif tokenizer_type == "FinLMGptTokenizer":
-            self.tokenizer = FinLMGptTokenizer(tokenizer_path)
-        else:
-            raise ValueError("Tokenizer must be either FinLMTokenizer or FinLMGptTokenizer")
+        self.tokenizer = FinLMTokenizer(tokenizer_path)
         self.mask_token_id = self.tokenizer.mask_token_id
         self.special_token_ids = set(self.tokenizer.all_special_ids).difference(set([self.tokenizer.mask_token_id]))
         self.max_sequence_length = max_sequence_length
@@ -186,11 +185,7 @@ class FinLMDataset:
         self.logger.info("Starting to tokenize the sequences.")
         self.hf_dataset = self.hf_dataset.map(self._tokenization)
         self.logger.info("Tokenization is finished.")
-        try:
-            self.hf_dataset.set_format(type="torch", columns=["input_ids", "token_type_ids", "attention_mask"])
-        except:
-            self.logger.info("It seems you are training a generator and token_type_ids are not in the preprocessed tokens.")
-            self.hf_dataset.set_format(type="torch", columns=["input_ids", "attention_mask"])
+        self.hf_dataset.set_format(type="torch", columns=["input_ids", "token_type_ids", "attention_mask"])
         self.data_loader = DataLoader(self.hf_dataset, batch_size=self.batch_size, shuffle=False)
 
     @classmethod

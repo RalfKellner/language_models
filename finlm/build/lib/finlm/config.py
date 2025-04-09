@@ -33,7 +33,6 @@ class DatasetConfig:
         Creates an instance of DatasetConfig from a dictionary.
     """
 
-    tokenizer_type: str
     tokenizer_path: str 
     max_sequence_length: int 
     db_name: str 
@@ -248,87 +247,6 @@ class FintuningConfig:
     def to_dict(self):
         return asdict(self)
     
-    def to_json(self, file_path: str) -> None:
-
-        """
-        Saves the configuration as a JSON file.
-
-        Parameters
-        ----------
-        file_path : str
-            The path where the JSON file will be saved.
-        """
-
-        with open(file_path, 'w') as file:
-            json.dump(self.to_dict(), file, indent=4)
-
-
-
-@dataclass
-class GptModelConfig:
-    n_positions: int = 512
-    n_embed: int = 512
-    n_layer: int = 12
-    n_head: int = 8
-    n_ctx: int = 512
-
-@dataclass
-class FinLMGptConfig:
-    dataset_config: DatasetConfig
-    model_config: GptModelConfig
-    optimization_config: OptimizationConfig
-    save_models_and_results_to: str
-
-    @classmethod
-    def from_yaml(cls, config_file_path: str, save_root_path: str) -> 'FinLMConfig':
-
-        """
-        Loads the configuration from a YAML file.
-
-        Parameters
-        ----------
-        config_file_path : str
-            The path to the YAML file containing the configuration.
-        save_root_path : str
-            The root path where models and results will be saved.
-
-        Returns
-        -------
-        FinLMConfig
-            An instance of FinLMConfig initialized with the data from the YAML file.
-        """
-
-        with open(config_file_path, 'r') as file:
-            config_data = yaml.safe_load(file)
-
-        dataset_config = DatasetConfig(**config_data.get('dataset_config', {}))
-        model_config = GptModelConfig(**config_data.get('model_config', {}))
-        optimization_config = OptimizationConfig(**config_data.get('optimization_config', {}))
-
-        return cls(
-            dataset_config=dataset_config,
-            model_config=model_config,
-            optimization_config=optimization_config,
-            save_models_and_results_to = save_root_path
-        )
-    
-    def to_dict(self) -> Dict[str, Any]:
-
-        """
-        Converts the configuration to a dictionary.
-
-        Returns
-        -------
-        Dict[str, Any]
-            A dictionary representation of the FinLMConfig.
-        """
-
-        return {
-            'dataset_config': asdict(self.dataset_config),
-            'model_config': asdict(self.model_config),
-            'optimization_config': asdict(self.optimization_config)
-        }
-
     def to_json(self, file_path: str) -> None:
 
         """

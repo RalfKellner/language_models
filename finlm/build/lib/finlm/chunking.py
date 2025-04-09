@@ -543,50 +543,6 @@ class EsgReportChunker(Chunker):
         return filtered_sentences
 
 
-class SSRNChunker(Chunker):
-
-    def __init__(self, db_in: str, sheet_in: str, limit: int = None, offset: int = None) -> None:
-        
-        """
-        Initializes the SSRNChunker with database and table information.
-
-        Parameters
-        ----------
-        db_in : str
-            The path to the input SQLite database.
-        sheet_in : str
-            The name of the table in the database containing the 10-K forms.
-        limit : int, optional
-            The maximum number of documents to process (default is None).
-        offset : int, optional
-            The starting point from which to begin processing documents (default is None).
-        """
-
-        super().__init__(db_in, sheet_in, limit, offset)
-
-    # define the generator
-    def __iter__(self):
-        conn_in = sqlite3.connect(self.db_in)
-
-        sql_query = f"SELECT * FROM {self.sheet_in}"
-        if self.limit:
-            sql_query += f" LIMIT {self.limit}"
-        if self.offset:
-            sql_query += f" OFFSET {self.offset}"
-
-        res = conn_in.execute(sql_query)
-        
-        yield_ssrn = True
-        while yield_ssrn:
-            row = res.fetchone()
-            if row:
-                yield row[0]  
-            else:
-                yield_ssrn = False
-        conn_in.close()
-
-
-
 def rename_table(database, old_table_name, new_table_name, retries=5, delay=1):
 
     """

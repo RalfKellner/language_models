@@ -1,8 +1,9 @@
 dataset_config:
-  tokenizer_path: "/data/language_models/tokenizers/finlm-wordpiece-tokenizer.json"
-  max_sequence_length: 256
-  db_name: "/data/finlm_sequences/finlm_chunks_2.sqlite"
-  batch_size: 128
+  tokenizer_type: "FinLMTokenizer"
+  tokenizer_path: "/data/language_models/tokenizers/finlm-bpe-encoder-tokenizer.json"
+  max_sequence_length: 512
+  db_name: "/data/finlm_sequences/finlm_chunks_450.sqlite"
+  batch_size: 64
   database_retrieval:
     form_tenk:
       limit: 512
@@ -19,12 +20,16 @@ dataset_config:
     esg_reports:
       limit: 512
       offset: 0
+    ssrn_papers:
+      limit: 512
+      offset: 0
 model_config:
   embedding_size: 64
   hidden_size: 128
   num_hidden_layers: 6
   num_attention_heads: 4
   intermediate_size: 1024
+  max_position_embeddings: 512
   generator_size: 0.25
   generator_layer_size: 1.0
 optimization_config:
