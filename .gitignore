@@ -10,4 +10,5 @@ venv/
 lukas_test/
 wandb/
 test_*
-
+__pycache__/
+*.py[cod]
