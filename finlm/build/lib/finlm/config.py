@@ -33,7 +33,6 @@ class DatasetConfig:
         Creates an instance of DatasetConfig from a dictionary.
     """
 
-    tokenizer_type: str
     tokenizer_path: str 
     max_sequence_length: int 
     db_name: str 
@@ -66,24 +65,6 @@ class ModelConfig:
         Scaling factor for the generator size (default is 0.25).
     generator_layer_size : float, optional
         Scaling factor for the generator layer size (default is 1.0).
-    model_name : str, optional
-        Name of the model architecture (default is "electra").
-    attention_window: int, optional
-        Size of the attention window (default is 256). Only used for Longformer.
-    axial_pos_shape: tuple[int], optional
-        Shape of the axial position embeddings (default is (64, 64)). Only used for Reformer
-    axial_pos_embds: bool, optional
-        Whether to use axial position embeddings (default is True). Only used for Reformer
-    axial_pos_embds_dim: tuple[int], optional
-        Dimension of the axial position embeddings (default is (64, 292)). Only used for Reformer
-    attn_layers: list[str], optional
-        List of attention layers to use (default is ["local" if i % 2 == 0 else "lsh" for i in range(num_hidden_layers)]). Only used for Reformer
-    attention_type: str, optional
-        Type of attention to use (default is "block_sparse"). Only used for BigBird
-    num_random_blocks: int, optional
-        Number of random blocks to use (default is 3). Only used for BigBird
-    block_size: int, optional
-        Size of the blocks (default is 64). Only used for BigBird
 
     Methods
     -------
@@ -99,19 +80,6 @@ class ModelConfig:
     max_position_embeddings: int = 256
     generator_size: float = 0.25
     generator_layer_size: float = 1.0
-    model_name: str = "electra"
-    attention_window: int = 128
-    hidden_act: str = "gelu"
-    axial_pos_shape: tuple[int] = (64, 64)
-    axial_pos_embds: bool = True
-    axial_pos_embds_dim: tuple[int] = (64, 292)
-    attn_layers: list[str] = tuple(["local" if i % 2 == 0 else "lsh" for i in range(num_hidden_layers)])
-    block_sizes : tuple[int] = (4,4,4,4)
-    attention_type : str = "block_sparse"
-    num_random_blocks : int = 3
-    block_size : int = 64
-
-
 
 @dataclass
 class OptimizationConfig:
@@ -279,87 +247,6 @@ class FintuningConfig:
     def to_dict(self):
         return asdict(self)
     
-    def to_json(self, file_path: str) -> None:
-
-        """
-        Saves the configuration as a JSON file.
-
-        Parameters
-        ----------
-        file_path : str
-            The path where the JSON file will be saved.
-        """
-
-        with open(file_path, 'w') as file:
-            json.dump(self.to_dict(), file, indent=4)
-
-
-
-@dataclass
-class GptModelConfig:
-    n_positions: int = 512
-    n_embed: int = 512
-    n_layer: int = 12
-    n_head: int = 8
-    n_ctx: int = 512
-
-@dataclass
-class FinLMGptConfig:
-    dataset_config: DatasetConfig
-    model_config: GptModelConfig
-    optimization_config: OptimizationConfig
-    save_models_and_results_to: str
-
-    @classmethod
-    def from_yaml(cls, config_file_path: str, save_root_path: str) -> 'FinLMConfig':
-
-        """
-        Loads the configuration from a YAML file.
-
-        Parameters
-        ----------
-        config_file_path : str
-            The path to the YAML file containing the configuration.
-        save_root_path : str
-            The root path where models and results will be saved.
-
-        Returns
-        -------
-        FinLMConfig
-            An instance of FinLMConfig initialized with the data from the YAML file.
-        """
-
-        with open(config_file_path, 'r') as file:
-            config_data = yaml.safe_load(file)
-
-        dataset_config = DatasetConfig(**config_data.get('dataset_config', {}))
-        model_config = GptModelConfig(**config_data.get('model_config', {}))
-        optimization_config = OptimizationConfig(**config_data.get('optimization_config', {}))
-
-        return cls(
-            dataset_config=dataset_config,
-            model_config=model_config,
-            optimization_config=optimization_config,
-            save_models_and_results_to = save_root_path
-        )
-    
-    def to_dict(self) -> Dict[str, Any]:
-
-        """
-        Converts the configuration to a dictionary.
-
-        Returns
-        -------
-        Dict[str, Any]
-            A dictionary representation of the FinLMConfig.
-        """
-
-        return {
-            'dataset_config': asdict(self.dataset_config),
-            'model_config': asdict(self.model_config),
-            'optimization_config': asdict(self.optimization_config)
-        }
-
     def to_json(self, file_path: str) -> None:
 
         """
