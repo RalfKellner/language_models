@@ -14,7 +14,7 @@ from sklearn.metrics import accuracy_score
 from optuna.integration.wandb import WeightsAndBiasesCallback
 from dataclasses import dataclass
 from tqdm import tqdm
-from finlm.models import PretrainMLM
+from finlm.models import PretrainMLM, PretrainElectra
 from finlm.config import FinLMConfig
 from finlm.callbacks import MlMWandBTrackerCallback, CallbackTypes
 
@@ -77,6 +77,7 @@ class LearningRateHyperparam(AbstractHyperParameter):
 
     def handle_value_assignment(self, value: Any, trainer_config: FinLMConfig, trainer: PretrainMLM = None):
         trainer_config.optimization_config.learning_rate = value
+        trainer.load_optimization()
 
 
 class HiddenSizeHyperparam(AbstractHyperParameter):
@@ -142,6 +143,7 @@ class GradientClipping(AbstractHyperParameter):
 
     def handle_value_assignment(self, value: Any, trainer_config: FinLMConfig, trainer: PretrainMLM = None):
         trainer_config.optimization_config.gradient_clipping = value
+
 
 class AttentionHeads(AbstractHyperParameter):
     def handle_trial(self, trial):
@@ -334,14 +336,31 @@ class PretrainingHyperparamTuner:
     def train_model(self, steps: int):
         self.logger.info("Running one parameter setting...")
         info_step = 100  # TODO: make variable
-        training_metrics = {
+        if isinstance(self.trainer, PretrainMLM):
+            training_metrics = {
+                "loss": [],
+                "accuracy": [],
+                "gradient_norms": [],
+                "learning_rates": []
+            }
+        elif isinstance(self.trainer, PretrainElectra):
+            training_metrics = {
             "loss": [],
-            "accuracy": [],
-            "gradient_norms": [],
+            "generator_loss": [],
+            "discriminator_loss": [],
+            "generator_accuracy": [],
+            "discriminator_accuracy": [],
+            "discriminator_precision": [],
+            "discriminator_recall": [],
+            "gradient_norm": [],
             "learning_rates": []
         }
+        else:
+            raise ValueError("Trainer must be either PretrainMLM or PretrainElectra")
+
         iterator = tqdm(range(steps), desc="Training loop running...")
         self.trainer.train_epoch(0, training_metrics, info_step, steps, verbose=False, tqdm_iterator=iterator)
+
         return training_metrics
 
     def objective(self, trial: optuna.Trial):
@@ -351,12 +370,12 @@ class PretrainingHyperparamTuner:
             hyperparam.handle_value_assignment(value, self.trainer_config)
             log_dict[hyperparam.name] = value
 
+        self.trainer = PretrainMLM(self.trainer_config)
+
         for hyperparam in self.params_for_trainer:
             value = hyperparam.handle_trial(trial)
             hyperparam.handle_value_assignment(value, self.trainer_config, self.trainer)
             log_dict[hyperparam.name] = value
-
-        self.trainer = PretrainMLM(self.trainer_config)
 
         if self.use_wandb:
             cb = MlMWandBTrackerCallback(CallbackTypes.ON_BATCH_END, project_name=self.project_name,
@@ -481,31 +500,28 @@ class PretrainingHyperparamTuner:
 
     def optimize(self, n_trials: int = 100):
 
-        study = optuna.create_study(direction='minimize')
-        study.optimize(self.objective, n_trials=n_trials, catch=(RuntimeError, torch.OutOfMemoryError, TypeError),
-                    )
+        try:
 
-        self.logger.info(f"Best trial: {study.best_trial.params}")
+            study = optuna.create_study(direction='minimize')
+            study.optimize(self.objective, n_trials=n_trials, catch=(RuntimeError, torch.OutOfMemoryError, TypeError),
+                        )
 
-        summary = wandb.init(project="optuna",
-                             name="summary",
-                             job_type="logging")
+            self.logger.info(f"Best trial: {study.best_trial.params}")
 
-        trials = study.trials
+            summary = wandb.init(project="optuna",
+                                 name="summary",
+                                 job_type="logging")
 
-        """
-        for step, trial in enumerate(trials):
-            # Logging the loss.
-            summary.log({"run_objective": trial.value}, step=step)
+            trials = study.trials
 
-            # Logging the parameters.
-            for k, v in trial.params.items():
-                summary.log({k: v}, step=step)
-        """
 
-        self.logger.info(str(study.best_trial))
+            self.logger.info(str(study.best_trial))
+            return study.best_trial
 
-        return study.best_trial
+        except Exception as e:
+            self.logger.error(f"Error occurred during optimization: {e}")
+            raise e
+
 
     def evaluate_linear_separability(self, dataset: datasets.Dataset, num_classes: int, num_steps: int = 1000):
         """
